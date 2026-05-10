@@ -1,0 +1,415 @@
+{
+  "app": {
+    "name": "יומן הרצף",
+    "description": "עקוב אחר ההרגלים שלך ושפר את חייך"
+  },
+  "nav": {
+    "home": "בית",
+    "calendar": "יומן",
+    "about": "אודות",
+    "pricing": "תמחור",
+    "getStarted": "התחל עכשיו",
+    "app": {
+      "name": "יומן הרצף"
+    }
+  },
+  "home": {
+    "title": "עקוב אחר ההרגלים שלך,\nבנה שגרות טובות יותר",
+    "subtitle": "מעקב הרגלים פשוט וויזואלי שעוזר לך לבנות עקביות ולהשיג את המטרות שלך. אל תשבור את השרשרת וצפה בהתקדמות שלך.",
+    "getStarted": "התחל בחינם",
+    "goToCalendar": "עבור ליומן",
+    "learnMore": "למד עוד",
+    "hero": {
+      "title": "בנה הרגלים שנשארים עם יומן הרצף",
+      "subtitle": "כלי פרודוקטיביות פשוט ומעורר מוטיבציה שעוזר לך להשיג את המטרות שלך, יום אחר יום. 💪",
+      "features": {
+        "visualTracking": {
+          "title": "מעקב הרגלים ויזואלי",
+          "description": {
+            "part1": "סמן את ההישגים היומיים שלך עם",
+            "part2": "וצפה ברצף שלך גדל"
+          }
+        },
+        "multiHabit": {
+          "title": "תמיכה במספר הרגלים",
+          "description": "עקוב אחר מספר הרגלים ביומנים מותאמים אישית"
+        },
+        "yearlyGrid": {
+          "title": "רשת פעילות שנתית",
+          "description": "קבל תצוגה שנתית של ההתקדמות שלך, בהשראת GitHub"
+        },
+        "timedTasks": {
+          "title": "משימות מתוזמנות",
+          "description": "שמור על המיקוד עם טיימרים אופציונליים להרגלים שלך"
+        }
+      },
+      "motivation": "עוזר לאנשים בכל העולם לבנות הרגלים טובים יותר ולשמור על מוטיבציה בכל יום!"
+    }
+  },
+  "footer": {
+    "about": "אודות",
+    "privacy": "פרטיות",
+    "terms": "תנאים",
+    "github": "GitHub",
+    "copyright": "יומן הרצלים",
+    "madeWith": "נוצר עם",
+    "and": "ו-",
+    "by": "על ידי",
+    "love": "אהבה",
+    "changeLanguage": "שנה שפה"
+  },
+  "about": {
+    "title": "אודות יומן הרצף",
+    "intro": "בהשראת השיטה המפורסמת של ג׳רי סיינפלד \"אל תשבור את השרשרת\", יומן הרצף נוצר כדי לעזור לך לבנות הרגלים טובים יותר ולהתגבר על דחיינות. על ידי הפיכת העקביות למהנה ומתגמלת, הוא הופך את המעקב היומי אחר הרגלים לחוויה פשוטה ומעוררת מוטיבציה.",
+    "whatItIs": {
+      "title": "מה זה",
+      "description": "יומן הרצף הוא כלי פרודוקטיביות בקוד פתוח המשלב מעקב אחר הרגלים, מדידת זמן ויזואליזציה של התקדמות. הוא תומך במספר יומנים והרגלים, מאפשר לך להתאים אישית את הגישה שלך לצמיחה אישית. באמצעות רשת פעילות הדומה לעוקב התרומות של GitHub, הוא מציע תצוגה ברורה של ההישגים שלך לאורך זמן."
+    },
+    "features": {
+      "title": "תכונות",
+      "visualTracking": {
+        "title": "מעקב ויזואלי אחר הרגלים",
+        "description": "סמן הישגים יומיים עם X ושמור על הרצף שלך"
+      },
+      "multiHabit": {
+        "title": "תמיכה במספר הרגלים",
+        "description": "צור מספר יומנים והקצה הרגלים לכל אחד"
+      },
+      "customThemes": {
+        "title": "ערכות נושא מותאמות אישית",
+        "description": "התאם אישית כל יומן עם ערכת צבעים ייחודית"
+      },
+      "timedTasks": {
+        "title": "משימות מתוזמנות",
+        "description": "השתמש בטיימר המובנה למעקב אחר משך המשימות וסמן אותן כהושלמו"
+      },
+      "activityGrid": {
+        "title": "רשת פעילות",
+        "description": "צפה בהתקדמות השנתית שלך בתצוגת רשת בהשראת עוקב התרומות של GitHub"
+      },
+      "flexibleDuration": {
+        "title": "משך הרגלים גמיש",
+        "description": "הגדר משכי זמן מותאמים אישית להרגלים שיתאימו לצרכים שלך"
+      },
+      "responsiveDesign": {
+        "title": "עיצוב רספונסיבי",
+        "description": "ממשק משתמש מותאם במלואו שעובד בצורה חלקה בנייד, טאבלט ומחשב"
+      },
+      "themeSupport": {
+        "title": "מצב כהה/בהיר",
+        "description": "תמיכה מובנית בערכות נושא לצפייה נוחה בכל תאורה"
+      },
+      "i18nSupport": {
+        "title": "בינלאומיות",
+        "description": "תמיכה במספר שפות ואזורים"
+      },
+      "openSource": {
+        "title": "קוד פתוח",
+        "description": "כלי שנבנה על ידי הקהילה, עבור הקהילה"
+      }
+    },
+    "openSourceProject": {
+      "title": "פרויקט קוד פתוח",
+      "description": "יומן הרצף הוא בקוד פתוח כדי לעודד שקיפות ושיתוף פעולה. תרומות וחידושים ממשתמשים מתקבלים בברכה, ועוזרים לשפר את הכלי באופן מתמיד ולהפוך אותו ליעיל יותר עבור כולם.",
+      "creatorQuote": "היי, אני איליה אייזנברג, היוצר של יומן הרצף. פרויקט זה משלב את התשוקה שלי לפרודוקטיביות וטכנולוגיה כדי להציע כלי פשוט אך חזק לצמיחה אישית. אני מקווה שתמצאו אותו שימושי כמוני.",
+      "viewOnGithub": "צפה ב-GitHub"
+    },
+    "seinfeldStrategy": {
+      "title": "שיטת סיינפלד",
+      "description": "הסיפור מאחורי השיטה זו מגיע מברד אייזק, קומיקאי צעיר שפגש את ג׳רי סיינפלד מאחורי הקלעים וביקש עצה. סיינפלד אמר לו שכדי להיות קומיקאי טוב יותר, הוא צריך ליצור בדיחות טובות יותר - והדרך ליצור בדיחות טובות יותר היא לכתוב כל יום.",
+      "quote": "הוא אמר לי לקחת לוח שנה גדול שמציג שנה שלמה בדף אחד ולתלות אותו על קיר בולט. הצעד הבא היה לקחת טוש אדום גדול. הוא אמר שעבור כל יום שאני מבצע את משימת הכתיבה שלי, אני יכול לשים X אדום גדול על אותו יום. אחרי כמה ימים תהיה לך שרשרת. פשוט המשך בזה והשרשרת תגדל ארוכה יותר מדי יום. תאהב לראות את השרשרת הזו, במיוחד כשיש לך כמה שבועות מאחוריך. המשימה היחידה שלך היא לא לשבור את השרשרת.",
+      "whyItWorks": {
+        "title": "למה זה עובד",
+        "description": "שיטת סיינפלד עובדת כי היא מעבירה את המיקוד מביצועים אינדיבידואליים לתהליך עצמו. במקום לדאוג כמה אתה מרגיש מושרה או כמה מבריקה העבודה שלך באותו יום, אתה פשוט מתמקד בלהופיע ולא לשבור את השרשרת. זוהי העקביות שמבדילה בין המבצעים הטובים ביותר לבין כל השאר.",
+        "principles": {
+          "title": "עקרונות מפתח:",
+          "items": [
+            "בחר משימה יומית משמעותית אך בת-קיימא",
+            "התמקד בתהליך, לא בתוצאות",
+            "בנה את השרשרת יום אחר יום",
+            "לעולם אל תשבור את השרשרת"
+          ]
+        }
+      },
+      "attribution": "התוכן מעובד מתוך <link>המאמר של ג׳יימס קליר</link> על שיטת סיינפלד",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "התחל",
+    "goToCalendar": "עבור ליומן"
+  },
+  "pricing": {
+    "title": "שחרר את הפוטנציאל שלך",
+    "subtitle": "תוכניות גמישות שתוכננו לעזור לך להשיג את המטרות שלך.",
+    "billing": {
+      "monthly": "חודשי",
+      "yearly": "שנתי",
+      "savePercent": "חיסכון של 44%",
+      "perMonth": "${0} לחודש בחיוב שנתי"
+    },
+    "tiers": {
+      "free": {
+        "name": "חינם",
+        "description": "מושלם למשתמשים רגילים",
+        "features": ["עד 3 לוחות שנה", "עד 3 הרגלים לכל לוח שנה", "היסטוריה של 90 ימים"],
+        "cta": "הירשם בחינם",
+        "noCreditCard": "לא נדרש כרטיס אשראי"
+      },
+      "premium": {
+        "name": "פרימיום",
+        "description": "למשתמשים מתקדמים",
+        "features": ["לוחות שנה ללא הגבלה", "הרגלים ללא הגבלה", "היסטוריה ללא הגבלה", "תמיכה בעדיפות גבוהה"],
+        "cta": "בקרוב",
+        "comingSoonMessage": "תכונות הפרימיום יהיו זמינות בקרוב כדי לכסות עלויות אירוח ושירות. אתה יכול לארח בעצמך לגישה בלתי מוגבלת."
+      }
+    },
+    "comingSoon": "בקרוב",
+    "goToCalendar": "עבור ליומן"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "צור לוח שנה חדש",
+        "name": {
+          "label": "שם הלוח שנה",
+          "placeholder": "לדוגמה: עבודה, אישי, אחר..."
+        },
+        "color": {
+          "label": "ערכת צבעים"
+        },
+        "actions": {
+          "cancel": "ביטול",
+          "create": "צור לוח שנה"
+        }
+      },
+      "edit": {
+        "title": "ערוך לוח שנה",
+        "name": {
+          "label": "שם הלוח שנה"
+        },
+        "color": {
+          "label": "ערכת צבעים"
+        },
+        "actions": {
+          "cancel": "ביטול",
+          "delete": "מחק",
+          "save": "שמור שינויים",
+          "back": "חזור"
+        },
+        "deleteConfirm": {
+          "title": "האם אתה בטוח?",
+          "description": "פעולה זו תמחק לצמיתות את לוח השנה \"{name}\" וכל ההרגלים שלו. לא ניתן לבטל פעולה זו.",
+          "cancel": "ביטול",
+          "confirm": "מחק לוח שנה"
+        },
+        "position": {
+          "label": "סדר תצוגה",
+          "placeholder": "בחר מיקום"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "הוסף הרגל חדש",
+        "name": {
+          "label": "שם ההרגל",
+          "placeholder": "לדוגמה: התעמלות, מדיטציה, כתיבה..."
+        },
+        "timer": {
+          "label": "משך הטיימר",
+          "placeholder": "בחר משך זמן",
+          "noTimer": "ללא טיימר"
+        },
+        "actions": {
+          "cancel": "ביטול",
+          "create": "הוסף הרגל"
+        }
+      },
+      "edit": {
+        "title": "ערוך הרגל",
+        "name": {
+          "label": "שם"
+        },
+        "timer": {
+          "label": "משך הטיימר",
+          "placeholder": "בחר משך זמן (אופציונלי)",
+          "noTimer": "ללא טיימר"
+        },
+        "actions": {
+          "back": "חזור",
+          "save": "שמור שינויים",
+          "delete": "מחק"
+        },
+        "deleteConfirm": {
+          "title": "מחיקת הרגל",
+          "description": "האם אתה בטוח שברצונך למחוק את \"{name}\"? לא ניתן לבטל פעולה זו.",
+          "cancel": "ביטול",
+          "confirm": "מחק"
+        },
+        "calendar": {
+          "label": "לוח שנה",
+          "placeholder": "בחר לוח שנה"
+        },
+        "position": {
+          "label": "סדר תצוגה",
+          "placeholder": "בחר מיקום"
+        }
+      }
+    },
+    "colors": {
+      "red": "אדום",
+      "orange": "כתום",
+      "amber": "ענבר",
+      "yellow": "צהוב",
+      "lime": "ליים",
+      "green": "ירוק",
+      "emerald": "ברקת",
+      "teal": "טורקיז",
+      "cyan": "ציאן",
+      "sky": "שמיים",
+      "blue": "כחול",
+      "indigo": "אינדיגו",
+      "violet": "סגול",
+      "purple": "ארגמן",
+      "fuchsia": "פוקסיה",
+      "pink": "ורוד",
+      "rose": "ורד"
+    },
+    "timers": {
+      "1min": "דקה אחת",
+      "2min": "2 דקות",
+      "5min": "5 דקות",
+      "10min": "10 דקות",
+      "15min": "15 דקות",
+      "20min": "20 דקות",
+      "30min": "30 דקות",
+      "45min": "45 דקות",
+      "1hour": "שעה אחת",
+      "1_5hour": "שעה ו-30 דקות",
+      "2hour": "שעתיים"
+    },
+    "timer": {
+      "title": "טיימר ל-{duration} דקות",
+      "cancel": "בטל טיימר",
+      "confirmCancel": "הטיימר עדיין פועל. האם אתה בטוח שברצונך לבטל?"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "תצוגת לוח שנה",
+      "row": "תצוגת שורות"
+    },
+    "emptyState": {
+      "noHabits": "עדיין לא נוספו הרגלים. הוסף אחד כדי להתחיל לעקוב!"
+    },
+    "controls": {
+      "complete": "השלם",
+      "start": "התחל",
+      "timer": "טיימר",
+      "new": "חדש",
+      "addHabit": "הוסף הרגל"
+    },
+    "dateFormat": {
+      "short": "{day} ב{month}",
+      "long": "{weekday}, {day} ב{month}"
+    },
+    "completions": "{count, plural, =1 {{date}: השלמה {count}} =2 {{date}: {count} השלמות} many {{date}: {count} השלמות} other {{date}: {count} השלמות}}",
+    "yearlyOverview": {
+      "title": "סקירה שנתית:",
+      "thingsDone": "{count} דברים הושלמו בשנה שעברה",
+      "days": {
+        "mon": "שני",
+        "wed": "רבי",
+        "fri": "שיש"
+      },
+      "months": {
+        "jan": "ינו",
+        "feb": "פבר",
+        "mar": "מרץ",
+        "apr": "אפר",
+        "may": "מאי",
+        "jun": "יונ",
+        "jul": "יול",
+        "aug": "אוג",
+        "sep": "ספט",
+        "oct": "אוק",
+        "nov": "נוב",
+        "dec": "דצמ"
+      },
+      "tooltip": "{date}: {count} השלמות"
+    },
+    "weekDays": {
+      "sun": "א'",
+      "mon": "ב'",
+      "tue": "ג'",
+      "wed": "ד'",
+      "thu": "ה'",
+      "fri": "ו'",
+      "sat": "ש'"
+    },
+    "weekDaysShort": {
+      "sun": "א'",
+      "mon": "ב'",
+      "tue": "ג'",
+      "wed": "ד'",
+      "thu": "ה'",
+      "fri": "ו'",
+      "sat": "ש'"
+    },
+    "monthNames": {
+      "january": "ינואר",
+      "february": "פברואר",
+      "march": "מרץ",
+      "april": "אפריל",
+      "may": "מאי",
+      "june": "יוני",
+      "july": "יולי",
+      "august": "אוגוסט",
+      "september": "ספטמבר",
+      "october": "אוקטובר",
+      "november": "נובמבר",
+      "december": "דצמבר"
+    },
+    "importExport": {
+      "button": "ייבוא/ייצוא",
+      "title": "ייבוא/ייצוא",
+      "import": {
+        "button": "ייבוא",
+        "title": "ייבוא",
+        "description": "פעולה זו תייבא לוחות שנה, הרגלים והיסטוריית השלמות מהקובץ שנבחר.",
+        "cancel": "ביטול",
+        "continue": "המשך"
+      },
+      "export": {
+        "button": "ייצוא",
+        "title": "ייצוא",
+        "description": "פעולה זו תייצא את כל לוחות השנה, ההרגלים והיסטוריית ההשלמות שלך.",
+        "cancel": "ביטול",
+        "continue": "המשך"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "עדיין לא יצרת לוחות שנה.",
+        "createOne": "צצור אחד כדי להתחיל לעקוב אחר ההרגלים שלך!",
+        "createButton": "צור לוח שנה"
+      },
+      "addCalendar": "הוסף לוח שנה"
+    }
+  },
+  "auth": {
+    "signInPrompt": "אנא התחבר כדי לצפות בלוחות השנה שלך",
+    "signIn": "התחבר"
+  },
+  "toast": {
+    "calendar": {
+      "created": "הלוח נוצר בהצלחה",
+      "updated": "הלוח עודכן בהצלחה",
+      "deleted": "הלוח נמחק בהצלחה"
+    },
+    "habit": {
+      "created": "ההרגל נוצר בהצלחה",
+      "updated": "ההרגל עודכן בהצלחה",
+      "deleted": "ההרגל נמחק בהצלחה"
+    }
+  }
+}

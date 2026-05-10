@@ -1,0 +1,416 @@
+{
+  "app": {
+    "name": "Streak Calendar",
+    "description": "Track your habits and improve your life"
+  },
+  "nav": {
+    "home": "Home",
+    "calendar": "Calendar",
+    "about": "About",
+    "pricing": "Pricing",
+    "getStarted": "Get Started",
+    "app": {
+      "name": "Streak Calendar"
+    }
+  },
+  "home": {
+    "title": "Track your habits,\nbuild better routines",
+    "subtitle": "Simple and visual habit tracking that helps you build consistency and achieve your goals. Don't break the chain and watch your progress grow.",
+    "getStarted": "Get Started Free",
+    "goToCalendar": "Go to Calendar",
+    "learnMore": "Learn More",
+    "hero": {
+      "title": "Build Habits That Last with Streak Calendar",
+      "subtitle": "A simple, motivational productivity tool to help you achieve your goals, one day at a time. 💪",
+      "features": {
+        "visualTracking": {
+          "title": "Visual Habit Tracking",
+          "description": {
+            "part1": "Mark your daily accomplishments with an",
+            "part2": "and watch your streak grow"
+          }
+        },
+        "multiHabit": {
+          "title": "Multi-Habit Support",
+          "description": "Track multiple habits across customizable calendars"
+        },
+        "yearlyGrid": {
+          "title": "Yearly Activity Grid",
+          "description": "Get a yearly view of your progress, inspired by GitHub"
+        },
+        "timedTasks": {
+          "title": "Timed Tasks",
+          "description": "Stay focused with optional timers for your habits"
+        }
+      },
+      "motivation": "Helping individuals worldwide build better habits and stay motivated every day!"
+    }
+  },
+  "footer": {
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "github": "GitHub",
+    "copyright": "Streak Calendar",
+    "madeWith": "Made with",
+    "and": "and",
+    "by": "by",
+    "love": "Love",
+    "changeLanguage": "Change Language"
+  },
+  "about": {
+    "title": "About Streak Calendar",
+    "intro": "Inspired by Jerry Seinfeld's legendary \"Don't Break the Chain\" method, Streak Calendar is designed to help you build better habits and conquer procrastination. By making consistency fun and rewarding, it turns daily habit tracking into a simple, motivating experience.",
+    "whatItIs": {
+      "title": "What It Is",
+      "description": "Streak Calendar is an open source productivity tool that combines habit tracking, task timing, and progress visualization. It supports multiple calendars and habits, allowing you to customize your approach to personal growth. Featuring an activity grid similar to GitHub's contribution tracker, it offers a clear view of your achievements over time."
+    },
+    "features": {
+      "title": "Features",
+      "visualTracking": {
+        "title": "Visual Habit Tracking",
+        "description": "Mark daily accomplishments with X's and keep your streak alive"
+      },
+      "multiHabit": {
+        "title": "Multi-Habit Support",
+        "description": "Create multiple calendars and assign habits to each"
+      },
+      "customThemes": {
+        "title": "Customizable Themes",
+        "description": "Personalize each calendar with a unique color theme"
+      },
+      "timedTasks": {
+        "title": "Timed Tasks",
+        "description": "Use the built-in timer to track task durations and mark them complete"
+      },
+      "activityGrid": {
+        "title": "Activity Grid",
+        "description": "See your annual progress in a grid layout inspired by GitHub's contribution tracker"
+      },
+      "flexibleDuration": {
+        "title": "Flexible Habit Duration",
+        "description": "Set custom durations for habits to match your needs"
+      },
+      "responsiveDesign": {
+        "title": "Responsive Design",
+        "description": "Fully responsive UI that works seamlessly on mobile, tablet, and desktop"
+      },
+      "themeSupport": {
+        "title": "Dark/Light Mode",
+        "description": "Built-in theme support for comfortable viewing in any lighting"
+      },
+      "i18nSupport": {
+        "title": "Internationalization",
+        "description": "Support for multiple languages and locales"
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "A tool built for the community, by the community"
+      }
+    },
+    "openSourceProject": {
+      "title": "Open Source Project",
+      "description": "Streak Calendar is open source to encourage transparency and collaboration. Contributions and innovations from users are welcome, helping to continuously improve the tool and make it even more effective for everyone.",
+      "creatorQuote": "Hi, I'm Ilya Aizenberg, the creator of Streak Calendar. This project combines my passion for productivity and tech to offer a simple yet powerful tool for personal growth. I hope you find it as valuable as I do.",
+      "viewOnGithub": "View on GitHub"
+    },
+    "seinfeldStrategy": {
+      "title": "The Seinfeld Strategy",
+      "description": "The story behind this method comes from Brad Isaac, a young comedian who met Jerry Seinfeld backstage and asked for advice. Seinfeld told him that to be a better comic, he needed to create better jokes - and the way to create better jokes was to write every day.",
+      "quote": "He told me to get a big wall calendar that has a whole year on one page and hang it on a prominent wall. The next step was to get a big red magic marker. He said for each day that I do my task of writing, I get to put a big red X over that day. After a few days you'll have a chain. Just keep at it and the chain will grow longer every day. You'll like seeing that chain, especially when you get a few weeks under your belt. Your only job is to not break the chain.",
+      "whyItWorks": {
+        "title": "Why It Works",
+        "description": "The Seinfeld Strategy works because it shifts focus from individual performances to the process itself. Instead of worrying about how inspired you are or how brilliant your work is that day, you simply focus on showing up and not breaking the chain. This consistency is what separates top performers from everyone else.",
+        "principles": {
+          "title": "Key Principles:",
+          "items": [
+            "Choose a meaningful but sustainable daily task",
+            "Focus on the process, not the results",
+            "Build the chain one day at a time",
+            "Never break the chain"
+          ]
+        }
+      },
+      "attribution": "Content adapted from <link>James Clear's article</link> on the Seinfeld Strategy",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "Get Started",
+    "goToCalendar": "Go to Calendar"
+  },
+  "pricing": {
+    "title": "Unlock Your Potential",
+    "subtitle": "Flexible plans designed to help you achieve your goals.",
+    "billing": {
+      "monthly": "monthly",
+      "yearly": "yearly",
+      "savePercent": "Save 44%",
+      "perMonth": "${0} per month, billed annually"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "description": "Perfect for regular users",
+        "features": ["Up to 3 calendars", "Up to 3 habits per calendar", "90-day history"],
+        "cta": "Sign Up for Free",
+        "noCreditCard": "No credit card required"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "For power users",
+        "features": ["Unlimited calendars", "Unlimited habits per calendar", "Unlimited history", "Priority support"],
+        "cta": "Coming Soon",
+        "comingSoonMessage": "Premium features will be available soon to help cover hosting and service costs. Feel free to self-host for unlimited access."
+      }
+    },
+    "comingSoon": "Coming Soon",
+    "goToCalendar": "Go to Calendar"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "Create New Calendar",
+        "name": {
+          "label": "Calendar Name",
+          "placeholder": "e.g., Work, Personal, Other..."
+        },
+        "color": {
+          "label": "Color Theme"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Calendar"
+        }
+      },
+      "edit": {
+        "title": "Edit Calendar",
+        "name": {
+          "label": "Calendar Name"
+        },
+        "color": {
+          "label": "Color Theme"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "back": "Go Back",
+          "cancel": "Cancel",
+          "delete": "Delete",
+          "save": "Save Changes"
+        },
+        "deleteConfirm": {
+          "title": "Are you sure?",
+          "description": "This will permanently delete the calendar \"{name}\" and all its habits. This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete Calendar"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "Add New Habit",
+        "name": {
+          "label": "Habit Name",
+          "placeholder": "e.g., Exercise, Meditate, Write..."
+        },
+        "timer": {
+          "label": "Timer Duration",
+          "placeholder": "Select duration (optional)",
+          "noTimer": "No Timer"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Add Habit"
+        }
+      },
+      "edit": {
+        "title": "Edit Habit",
+        "name": {
+          "label": "Name"
+        },
+        "calendar": {
+          "label": "Calendar",
+          "placeholder": "Select calendar"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "timer": {
+          "label": "Timer Duration",
+          "placeholder": "Select duration",
+          "noTimer": "No Timer"
+        },
+        "actions": {
+          "back": "Go Back",
+          "save": "Save Changes",
+          "delete": "Delete"
+        },
+        "deleteConfirm": {
+          "title": "Delete Habit",
+          "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete"
+        }
+      }
+    },
+    "colors": {
+      "red": "Red",
+      "orange": "Orange",
+      "amber": "Amber",
+      "yellow": "Yellow",
+      "lime": "Lime",
+      "green": "Green",
+      "emerald": "Emerald",
+      "teal": "Teal",
+      "cyan": "Cyan",
+      "sky": "Sky",
+      "blue": "Blue",
+      "indigo": "Indigo",
+      "violet": "Violet",
+      "purple": "Purple",
+      "fuchsia": "Fuchsia",
+      "pink": "Pink",
+      "rose": "Rose"
+    },
+    "timers": {
+      "1min": "1 minute",
+      "2min": "2 minutes",
+      "5min": "5 minutes",
+      "10min": "10 minutes",
+      "15min": "15 minutes",
+      "20min": "20 minutes",
+      "30min": "30 minutes",
+      "45min": "45 minutes",
+      "1hour": "1 hour",
+      "1_5hour": "1 hour 30 minutes",
+      "2hour": "2 hours"
+    },
+    "timer": {
+      "title": "{duration} Minute Timer",
+      "cancel": "Cancel Timer",
+      "confirmCancel": "Timer is still running. Are you sure you want to cancel?"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "Calendar View",
+      "row": "Row View"
+    },
+    "emptyState": {
+      "noHabits": "No habits added yet. Add one to start tracking!"
+    },
+    "controls": {
+      "complete": "Complete",
+      "start": "Start",
+      "timer": "Timer",
+      "new": "New",
+      "addHabit": "Add Habit",
+      "scheduling": "Starting..."
+    },
+    "dateFormat": {
+      "short": "{month} {day}",
+      "long": "{weekday}, {month} {day}"
+    },
+    "completions": "{count, plural, =1 {{date}: {count} completion} other {{date}: {count} completions}}",
+    "yearlyOverview": {
+      "title": "Yearly Overview:",
+      "thingsDone": "{count} things done last year",
+      "days": {
+        "mon": "Mon",
+        "wed": "Wed",
+        "fri": "Fri"
+      },
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      },
+      "tooltip": "{date}: {count} completions"
+    },
+    "weekDays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "weekDaysShort": {
+      "sun": "Su",
+      "mon": "Mo",
+      "tue": "Tu",
+      "wed": "We",
+      "thu": "Th",
+      "fri": "Fr",
+      "sat": "Sa"
+    },
+    "monthNames": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "importExport": {
+      "button": "Import/Export",
+      "title": "Import/Export",
+      "import": {
+        "button": "Import",
+        "title": "Import",
+        "description": "This will import calendars, habits, and completion history from the selected file.",
+        "cancel": "Cancel",
+        "continue": "Continue"
+      },
+      "export": {
+        "button": "Export",
+        "title": "Export",
+        "description": "This will export all your calendars, habits, and completion history.",
+        "cancel": "Cancel",
+        "continue": "Continue"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "You haven't created any calendars yet.",
+        "createOne": "Create one to start tracking your habits!",
+        "createButton": "Create Calendar"
+      },
+      "addCalendar": "Add Calendar"
+    }
+  },
+  "auth": {
+    "signInPrompt": "Please sign in to view your calendars",
+    "signIn": "Sign In"
+  },
+  "toast": {
+    "calendar": {
+      "created": "Calendar created successfully",
+      "updated": "Calendar updated successfully",
+      "deleted": "Calendar deleted successfully"
+    },
+    "habit": {
+      "created": "Habit created successfully",
+      "updated": "Habit updated successfully",
+      "deleted": "Habit deleted successfully"
+    }
+  }
+}

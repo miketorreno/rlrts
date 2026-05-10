@@ -1,0 +1,421 @@
+{
+  "app": {
+    "name": "Calendrier de Suivi",
+    "description": "Suivez vos habitudes et améliorez votre vie"
+  },
+  "nav": {
+    "home": "Accueil",
+    "calendar": "Calendrier",
+    "about": "À propos",
+    "pricing": "Tarifs",
+    "getStarted": "Commencer",
+    "app": {
+      "name": "Calendrier de Suivi"
+    }
+  },
+  "home": {
+    "title": "Suivez vos habitudes,\nconstruisez de meilleures routines",
+    "subtitle": "Un suivi d'habitudes simple et visuel qui vous aide à développer la constance et à atteindre vos objectifs. Ne brisez pas la chaîne et regardez vos progrès grandir.",
+    "getStarted": "Commencer Gratuitement",
+    "goToCalendar": "Aller au Calendrier",
+    "learnMore": "En savoir plus",
+    "hero": {
+      "title": "Construisez des Habitudes Durables avec le Calendrier de Suivi",
+      "subtitle": "Un outil de productivité simple et motivant pour vous aider à atteindre vos objectifs, jour après jour. 💪",
+      "features": {
+        "visualTracking": {
+          "title": "Suivi Visuel des Habitudes",
+          "description": {
+            "part1": "Marquez vos réalisations quotidiennes avec un",
+            "part2": "et regardez votre série s'allonger"
+          }
+        },
+        "multiHabit": {
+          "title": "Support Multi-Habitudes",
+          "description": "Suivez plusieurs habitudes à travers des calendriers personnalisables"
+        },
+        "yearlyGrid": {
+          "title": "Grille d'Activité Annuelle",
+          "description": "Obtenez une vue annuelle de vos progrès, inspirée par GitHub"
+        },
+        "timedTasks": {
+          "title": "Tâches Chronométrées",
+          "description": "Restez concentré avec des minuteurs optionnels pour vos habitudes"
+        }
+      },
+      "motivation": "Aidant les individus du monde entier à construire de meilleures habitudes et à rester motivés chaque jour !"
+    }
+  },
+  "footer": {
+    "about": "À propos",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "github": "GitHub",
+    "copyright": "Calendrier de Suivi",
+    "madeWith": "Fait avec",
+    "and": "et",
+    "by": "par",
+    "love": "amour",
+    "changeLanguage": "Changer de langue"
+  },
+  "about": {
+    "title": "À propos du Calendrier de Suivi",
+    "intro": "Inspiré par la méthode légendaire de Jerry Seinfeld \"Ne brisez pas la chaîne\", le Calendrier de Suivi est conçu pour vous aider à construire de meilleures habitudes et à vaincre la procrastination. En rendant la constance amusante et gratifiante, il transforme le suivi quotidien des habitudes en une expérience simple et motivante.",
+    "whatItIs": {
+      "title": "Ce que c'est",
+      "description": "Le Calendrier de Suivi est un outil de productivité open source qui combine le suivi des habitudes, le chronométrage des tâches et la visualisation des progrès. Il prend en charge plusieurs calendriers et habitudes, vous permettant de personnaliser votre approche du développement personnel. Avec une grille d'activité similaire au suivi des contributions GitHub, il offre une vue claire de vos réalisations dans le temps."
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "visualTracking": {
+        "title": "Suivi Visuel des Habitudes",
+        "description": "Marquez les réalisations quotidiennes avec des X et maintenez votre série"
+      },
+      "multiHabit": {
+        "title": "Support Multi-Habitudes",
+        "description": "Créez plusieurs calendriers et assignez des habitudes à chacun"
+      },
+      "customThemes": {
+        "title": "Thèmes Personnalisables",
+        "description": "Personnalisez chaque calendrier avec un thème de couleur unique"
+      },
+      "timedTasks": {
+        "title": "Tâches Chronométrées",
+        "description": "Utilisez le minuteur intégré pour suivre la durée des tâches et les marquer comme terminées"
+      },
+      "activityGrid": {
+        "title": "Grille d'Activité",
+        "description": "Visualisez vos progrès annuels dans une disposition en grille inspirée du suivi des contributions GitHub"
+      },
+      "flexibleDuration": {
+        "title": "Durée Flexible des Habitudes",
+        "description": "Définissez des durées personnalisées pour les habitudes selon vos besoins"
+      },
+      "responsiveDesign": {
+        "title": "Design Responsive",
+        "description": "Interface utilisateur entièrement responsive qui fonctionne parfaitement sur mobile, tablette et ordinateur"
+      },
+      "themeSupport": {
+        "title": "Mode Sombre/Clair",
+        "description": "Support intégré des thèmes pour une visualisation confortable sous tout éclairage"
+      },
+      "i18nSupport": {
+        "title": "Internationalisation",
+        "description": "Support de plusieurs langues et régions"
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Un outil construit pour la communauté, par la communauté"
+      }
+    },
+    "openSourceProject": {
+      "title": "Projet Open Source",
+      "description": "Le Calendrier de Suivi est open source pour encourager la transparence et la collaboration. Les contributions et innovations des utilisateurs sont les bienvenues, aidant à améliorer continuellement l'outil et à le rendre encore plus efficace pour tous.",
+      "creatorQuote": "Salut, je suis Ilya Aizenberg, le créateur du Calendrier de Suivi. Ce projet combine ma passion pour la productivité et la technologie pour offrir un outil simple mais puissant pour le développement personnel. J'espère que vous le trouverez aussi utile que moi.",
+      "viewOnGithub": "Voir sur GitHub"
+    },
+    "seinfeldStrategy": {
+      "title": "La Stratégie Seinfeld",
+      "description": "L'histoire derrière cette méthode vient de Brad Isaac, un jeune comédien qui a rencontré Jerry Seinfeld en coulisses et lui a demandé conseil. Seinfeld lui a dit que pour être un meilleur comique, il devait créer de meilleures blagues - et la façon de créer de meilleures blagues était d'écrire chaque jour.",
+      "quote": "Il m'a dit de prendre un grand calendrier mural qui montre toute l'année sur une page et de l'accrocher sur un mur bien visible. L'étape suivante était de prendre un gros marqueur rouge. Il a dit que pour chaque jour où j'écris, je peux mettre une grosse croix rouge sur ce jour. Après quelques jours, vous aurez une chaîne. Continuez simplement et la chaîne s'allongera chaque jour. Vous aimerez voir cette chaîne, surtout quand vous aurez quelques semaines derrière vous. Votre seul travail est de ne pas briser la chaîne.",
+      "whyItWorks": {
+        "title": "Pourquoi ça marche",
+        "description": "La Stratégie Seinfeld fonctionne car elle déplace l'attention des performances individuelles vers le processus lui-même. Au lieu de vous inquiéter de votre niveau d'inspiration ou de la qualité de votre travail ce jour-là, vous vous concentrez simplement sur le fait d'être présent et de ne pas briser la chaîne. Cette constance est ce qui distingue les meilleurs performeurs des autres.",
+        "principles": {
+          "title": "Principes Clés :",
+          "items": [
+            "Choisissez une tâche quotidienne significative mais durable",
+            "Concentrez-vous sur le processus, pas sur les résultats",
+            "Construisez la chaîne un jour à la fois",
+            "Ne brisez jamais la chaîne"
+          ]
+        }
+      },
+      "attribution": "Contenu adapté de <link>l'article de James Clear</link> sur la Stratégie Seinfeld",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "Commencer",
+    "goToCalendar": "Aller au Calendrier"
+  },
+  "pricing": {
+    "title": "Libérez votre potentiel",
+    "subtitle": "Des plans flexibles conçus pour vous aider à atteindre vos objectifs.",
+    "billing": {
+      "monthly": "mensuel",
+      "yearly": "annuel",
+      "savePercent": "Économisez 44%",
+      "perMonth": "${0} par mois, facturé annuellement"
+    },
+    "tiers": {
+      "free": {
+        "name": "Gratuit",
+        "description": "Parfait pour les utilisateurs réguliers",
+        "features": ["Jusqu'à 3 calendriers", "Jusqu'à 3 habitudes par calendrier", "Historique de 90 jours"],
+        "cta": "S'inscrire Gratuitement",
+        "noCreditCard": "Aucune carte de crédit requise"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Pour les utilisateurs avancés",
+        "features": [
+          "Calendriers illimités",
+          "Habitudes illimitées par calendrier",
+          "Historique illimité",
+          "Support prioritaire"
+        ],
+        "cta": "Bientôt Disponible",
+        "comingSoonMessage": "Les fonctionnalités premium seront bientôt disponibles pour aider à couvrir les coûts d'hébergement et de service. N'hésitez pas à auto-héberger pour un accès illimité."
+      }
+    },
+    "comingSoon": "Bientôt disponible",
+    "goToCalendar": "Aller au Calendrier"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "Créer un Nouveau Calendrier",
+        "name": {
+          "label": "Nom du Calendrier",
+          "placeholder": "ex: Travail, Personnel, Autre..."
+        },
+        "color": {
+          "label": "Thème de Couleur"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer le Calendrier"
+        }
+      },
+      "edit": {
+        "title": "Modifier le Calendrier",
+        "name": {
+          "label": "Nom du Calendrier"
+        },
+        "color": {
+          "label": "Thème de Couleur"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "delete": "Supprimer",
+          "save": "Enregistrer les Modifications",
+          "back": "Retour"
+        },
+        "deleteConfirm": {
+          "title": "Êtes-vous sûr ?",
+          "description": "Cela supprimera définitivement le calendrier \"{name}\" et toutes ses habitudes. Cette action ne peut pas être annulée.",
+          "cancel": "Annuler",
+          "confirm": "Supprimer le Calendrier"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "Ajouter une Nouvelle Habitude",
+        "name": {
+          "label": "Nom de l'Habitude",
+          "placeholder": "ex: Exercice, Méditation, Écriture..."
+        },
+        "timer": {
+          "label": "Durée du minuteur",
+          "placeholder": "Sélectionner la durée",
+          "noTimer": "Pas de minuteur"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Ajouter l'Habitude"
+        }
+      },
+      "edit": {
+        "title": "Modifier l'Habitude",
+        "name": {
+          "label": "Nom de l'Habitude"
+        },
+        "timer": {
+          "label": "Durée du minuteur",
+          "placeholder": "Sélectionner la durée",
+          "noTimer": "Pas de minuteur"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "delete": "Supprimer",
+          "save": "Enregistrer les Modifications",
+          "back": "Retour"
+        },
+        "deleteConfirm": {
+          "title": "Êtes-vous sûr ?",
+          "description": "Cela supprimera définitivement l'habitude \"{name}\". Cette action ne peut pas être annulée.",
+          "cancel": "Annuler",
+          "confirm": "Supprimer l'Habitude"
+        },
+        "calendar": {
+          "label": "Calendrier",
+          "placeholder": "Sélectionner le calendrier"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        }
+      }
+    },
+    "colors": {
+      "red": "Rouge",
+      "orange": "Orange",
+      "amber": "Ambre",
+      "yellow": "Jaune",
+      "lime": "Citron Vert",
+      "green": "Vert",
+      "emerald": "Émeraude",
+      "teal": "Bleu Sarcelle",
+      "cyan": "Cyan",
+      "sky": "Ciel",
+      "blue": "Bleu",
+      "indigo": "Indigo",
+      "violet": "Violet",
+      "purple": "Pourpre",
+      "fuchsia": "Fuchsia",
+      "pink": "Rose",
+      "rose": "Rose"
+    },
+    "timers": {
+      "1min": "1 minute",
+      "2min": "2 minutes",
+      "5min": "5 minutes",
+      "10min": "10 minutes",
+      "15min": "15 minutes",
+      "20min": "20 minutes",
+      "30min": "30 minutes",
+      "45min": "45 minutes",
+      "1hour": "1 heure",
+      "1_5hour": "1 heure 30 minutes",
+      "2hour": "2 heures"
+    },
+    "timer": {
+      "title": "Minuteur de {duration} minutes",
+      "cancel": "Annuler le Minuteur",
+      "confirmCancel": "Le minuteur est toujours en cours. Êtes-vous sûr de vouloir annuler ?"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "Vue Calendrier",
+      "row": "Vue Liste"
+    },
+    "emptyState": {
+      "noHabits": "Aucune habitude ajoutée. Ajoutez-en une pour commencer le suivi !"
+    },
+    "controls": {
+      "complete": "Terminer",
+      "start": "Démarrer",
+      "timer": "Minuteur",
+      "new": "Nouveau",
+      "addHabit": "Ajouter une Habitude"
+    },
+    "dateFormat": {
+      "short": "{day} {month}",
+      "long": "{weekday} {day} {month}"
+    },
+    "completions": "{count, plural, =0 {{date}: aucune réalisation} =1 {{date}: {count} réalisation} other {{date}: {count} réalisations}}",
+    "yearlyOverview": {
+      "title": "Aperçu Annuel:",
+      "thingsDone": "{count} choses accomplies l'année dernière",
+      "days": {
+        "mon": "Lun",
+        "wed": "Mer",
+        "fri": "Ven"
+      },
+      "months": {
+        "jan": "Jan",
+        "feb": "Fév",
+        "mar": "Mar",
+        "apr": "Avr",
+        "may": "Mai",
+        "jun": "Juin",
+        "jul": "Juil",
+        "aug": "Août",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Déc"
+      },
+      "tooltip": "{date}: {count} réalisations"
+    },
+    "weekDays": {
+      "sun": "Dim",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam"
+    },
+    "weekDaysShort": {
+      "sun": "Di",
+      "mon": "Lu",
+      "tue": "Ma",
+      "wed": "Me",
+      "thu": "Je",
+      "fri": "Ve",
+      "sat": "Sa"
+    },
+    "monthNames": {
+      "january": "Janvier",
+      "february": "Février",
+      "march": "Mars",
+      "april": "Avril",
+      "may": "Mai",
+      "june": "Juin",
+      "july": "Juillet",
+      "august": "Août",
+      "september": "Septembre",
+      "october": "Octobre",
+      "november": "Novembre",
+      "december": "Décembre"
+    },
+    "importExport": {
+      "button": "Importer/Exporter",
+      "title": "Importer/Exporter",
+      "import": {
+        "button": "Importer",
+        "title": "Importer",
+        "description": "Cela importera les calendriers, habitudes et historique des réalisations depuis le fichier sélectionné.",
+        "cancel": "Annuler",
+        "continue": "Continuer"
+      },
+      "export": {
+        "button": "Exporter",
+        "title": "Exporter",
+        "description": "Cela exportera tous vos calendriers, habitudes et historique des réalisations.",
+        "cancel": "Annuler",
+        "continue": "Continuer"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "Vous n'avez pas encore créé de calendriers.",
+        "createOne": "Créez-en un pour commencer à suivre vos habitudes !",
+        "createButton": "Créer un Calendrier"
+      },
+      "addCalendar": "Ajouter un Calendrier"
+    }
+  },
+  "auth": {
+    "signInPrompt": "Veuillez vous connecter pour voir vos calendriers",
+    "signIn": "Se Connecter"
+  },
+  "toast": {
+    "calendar": {
+      "created": "Calendrier créé avec succès",
+      "updated": "Calendrier mis à jour avec succès",
+      "deleted": "Calendrier supprimé avec succès"
+    },
+    "habit": {
+      "created": "Habitude créée avec succès",
+      "updated": "Habitude mise à jour avec succès",
+      "deleted": "Habitude supprimée avec succès"
+    }
+  }
+}

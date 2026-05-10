@@ -1,0 +1,415 @@
+{
+  "app": {
+    "name": "习惯追踪日历",
+    "description": "追踪你的习惯，改善你的生活"
+  },
+  "nav": {
+    "home": "首页",
+    "calendar": "日历",
+    "about": "关于",
+    "pricing": "价格",
+    "getStarted": "开始使用",
+    "app": {
+      "name": "习惯追踪日历"
+    }
+  },
+  "home": {
+    "title": "追踪你的习惯，建立更好的日常",
+    "subtitle": "简单直观的习惯追踪，帮助你建立持续性并实现目标。不要打破链条，看着你的进步不断增长。",
+    "getStarted": "免费开始",
+    "goToCalendar": "前往日历",
+    "learnMore": "了解更多",
+    "hero": {
+      "title": "用习惯追踪日历培养持久习惯",
+      "subtitle": "一个简单、激励人心的生产力工具，帮助你一天一天实现目标。💪",
+      "features": {
+        "visualTracking": {
+          "title": "可视化习惯追踪",
+          "description": {
+            "part1": "用一个",
+            "part2": "标记你的每日成就，看着你的连续记录增长"
+          }
+        },
+        "multiHabit": {
+          "title": "多习惯支持",
+          "description": "在可定制的日历中追踪多个习惯"
+        },
+        "yearlyGrid": {
+          "title": "年度活动网格",
+          "description": "获取受GitHub启发的年度进度视图"
+        },
+        "timedTasks": {
+          "title": "定时任务",
+          "description": "为你的习惯设置可选计时器，保持专注"
+        }
+      },
+      "motivation": "帮助全世界的个人建立更好的习惯，每天保持动力！"
+    }
+  },
+  "footer": {
+    "about": "关于",
+    "privacy": "隐私",
+    "terms": "条款",
+    "github": "GitHub",
+    "copyright": "习惯追踪日历",
+    "madeWith": "由",
+    "and": "和",
+    "by": "制作，来自",
+    "love": "爱",
+    "changeLanguage": "更改语言"
+  },
+  "about": {
+    "title": "关于习惯追踪日历",
+    "intro": "受杰瑞·宋飞的传奇\"不要打破链条\"方法的启发，习惯追踪日历旨在帮助你建立更好的习惯并克服拖延。通过让持续性变得有趣和有回报，它将每日习惯追踪转变为一种简单、激励人心的体验。",
+    "whatItIs": {
+      "title": "这是什么",
+      "description": "习惯追踪日历是一个开源的生产力工具，结合了习惯追踪、任务计时和进度可视化。它支持多个日历和习惯，让你能够定制你的个人成长方式。通过类似于GitHub贡献追踪器的活动网格，它提供了你随时间推移的成就的清晰视图。"
+    },
+    "features": {
+      "title": "功能特点",
+      "visualTracking": {
+        "title": "可视化习惯追踪",
+        "description": "用X标记每日成就，保持你的连续记录"
+      },
+      "multiHabit": {
+        "title": "多习惯支持",
+        "description": "创建多个日历并为每个日历分配习惯"
+      },
+      "customThemes": {
+        "title": "自定义主题",
+        "description": "为每个日历设置独特的颜色主题"
+      },
+      "timedTasks": {
+        "title": "定时任务",
+        "description": "使用内置计时器追踪任务时长并标记完成"
+      },
+      "activityGrid": {
+        "title": "活动网格",
+        "description": "在受GitHub贡献追踪器启发的网格布局中查看你的年度进度"
+      },
+      "flexibleDuration": {
+        "title": "灵活的习惯时长",
+        "description": "为习惯设置自定义时长以满足你的需求"
+      },
+      "responsiveDesign": {
+        "title": "响应式设计",
+        "description": "完全响应式的用户界面，在手机、平板和电脑上都能完美运行"
+      },
+      "themeSupport": {
+        "title": "深色/浅色模式",
+        "description": "内置主题支持，在任何光线下都能舒适查看"
+      },
+      "i18nSupport": {
+        "title": "国际化",
+        "description": "支持多种语言和地区"
+      },
+      "openSource": {
+        "title": "开源",
+        "description": "由社区为社区打造的工具"
+      }
+    },
+    "openSourceProject": {
+      "title": "开源项目",
+      "description": "习惯追踪日历是开源的，以鼓励透明度和协作。欢迎用户的贡献和创新，帮助持续改进工具，使其对每个人都更加有效。",
+      "creatorQuote": "你好，我是Ilya Aizenberg，习惯追踪日历的创建者。这个项目结合了我对生产力和技术的热情，提供一个简单但强大的个人成长工具。我希望你能像我一样发现它的价值。",
+      "viewOnGithub": "在GitHub上查看"
+    },
+    "seinfeldStrategy": {
+      "title": "宋飞策略",
+      "description": "这个方法的故事来自Brad Isaac，一位年轻的喜剧演员，他在后台遇到了杰瑞·宋飞并请教建议。宋飞告诉他，要成为更好的喜剧演员，他需要创作更好的笑话——而创作更好笑话的方法就是每天写作。",
+      "quote": "他告诉我要拿一个大的墙历，上面显示整年，挂在显眼的墙上。下一步是拿一个大红色记号笔。他说每天我完成写作任务，就可以在那天画一个大红叉。几天后你就会有一个链条。只要继续下去，链条每天都会变长。你会喜欢看到那个链条，尤其是当你已经坚持了几周。你唯一的工作就是不要打破链条。",
+      "whyItWorks": {
+        "title": "为什么有效",
+        "description": "宋飞策略之所以有效，是因为它将注意力从个人表现转移到过程本身。与其担心你当天的灵感程度或工作有多出色，你只需专注于出现并不打破链条。这种持续性是区分顶尖表现者和其他人的关键。",
+        "principles": {
+          "title": "关键原则：",
+          "items": [
+            "选择一个有意义但可持续的每日任务",
+            "专注于过程，而不是结果",
+            "一天一天地建立链条",
+            "永远不要打破链条"
+          ]
+        }
+      },
+      "attribution": "内容改编自James Clear关于<link>宋飞策略的文章</link>",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "开始使用",
+    "goToCalendar": "前往日历"
+  },
+  "pricing": {
+    "title": "释放你的潜力",
+    "subtitle": "灵活的计划，旨在帮助你实现目标。",
+    "billing": {
+      "monthly": "月付",
+      "yearly": "年付",
+      "savePercent": "节省44%",
+      "perMonth": "每月${0}，年付"
+    },
+    "tiers": {
+      "free": {
+        "name": "免费",
+        "description": "适合普通用户",
+        "features": ["最多3个日历", "每个日历最多3个习惯", "90天历史记录"],
+        "cta": "免费注册",
+        "noCreditCard": "无需信用卡"
+      },
+      "premium": {
+        "name": "高级版",
+        "description": "适合进阶用户",
+        "features": ["无限日历", "每个日历无限习惯", "无限历史记录", "优先支持"],
+        "cta": "即将推出",
+        "comingSoonMessage": "高级功能即将推出，以帮助支付托管和服务成本。您可以自行托管以获得无限制访问。"
+      }
+    },
+    "comingSoon": "即将推出",
+    "goToCalendar": "前往日历"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "创建新日历",
+        "name": {
+          "label": "日历名称",
+          "placeholder": "例如：工作、个人、其他..."
+        },
+        "color": {
+          "label": "颜色主题"
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建日历"
+        }
+      },
+      "edit": {
+        "title": "编辑日历",
+        "name": {
+          "label": "日历名称"
+        },
+        "color": {
+          "label": "颜色主题"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "delete": "删除",
+          "save": "保存更改",
+          "back": "返回"
+        },
+        "deleteConfirm": {
+          "title": "确定吗？",
+          "description": "这将永久删除日历\"{name}\"及其所有习惯。此操作无法撤消。",
+          "cancel": "取消",
+          "confirm": "删除日历"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "添加新习惯",
+        "name": {
+          "label": "习惯名称",
+          "placeholder": "例如：锻炼、冥想、写作..."
+        },
+        "timer": {
+          "label": "计时器时长",
+          "placeholder": "选择时长（可选）",
+          "noTimer": "无计时器"
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "添加习惯"
+        }
+      },
+      "edit": {
+        "title": "编辑习惯",
+        "name": {
+          "label": "名称"
+        },
+        "timer": {
+          "label": "计时器时长",
+          "placeholder": "选择时长",
+          "noTimer": "无计时器"
+        },
+        "actions": {
+          "back": "返回",
+          "save": "保存更改",
+          "delete": "删除"
+        },
+        "deleteConfirm": {
+          "title": "删除习惯",
+          "description": "确定要删除\"{name}\"吗？此操作无法撤消。",
+          "cancel": "取消",
+          "confirm": "删除"
+        },
+        "calendar": {
+          "label": "日历",
+          "placeholder": "选择日历"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        }
+      }
+    },
+    "colors": {
+      "red": "红色",
+      "orange": "橙色",
+      "amber": "琥珀色",
+      "yellow": "黄色",
+      "lime": "青柠色",
+      "green": "绿色",
+      "emerald": "祖母绿",
+      "teal": "青色",
+      "cyan": "蓝绿色",
+      "sky": "天蓝色",
+      "blue": "蓝色",
+      "indigo": "靛蓝色",
+      "violet": "紫罗兰色",
+      "purple": "紫色",
+      "fuchsia": "紫红色",
+      "pink": "粉色",
+      "rose": "玫瑰色"
+    },
+    "timers": {
+      "1min": "1分钟",
+      "2min": "2分钟",
+      "5min": "5分钟",
+      "10min": "10分钟",
+      "15min": "15分钟",
+      "20min": "20分钟",
+      "30min": "30分钟",
+      "45min": "45分钟",
+      "1hour": "1小时",
+      "1_5hour": "1小时30分钟",
+      "2hour": "2小时"
+    },
+    "timer": {
+      "title": "{duration}分钟计时器",
+      "cancel": "取消计时器",
+      "confirmCancel": "计时器仍在运行。确定要取消吗？"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "日历视图",
+      "row": "列表视图"
+    },
+    "emptyState": {
+      "noHabits": "还没有添加习惯。添加一个开始追踪！"
+    },
+    "controls": {
+      "complete": "完成",
+      "start": "开始",
+      "timer": "计时器",
+      "new": "新建",
+      "addHabit": "添加习惯"
+    },
+    "dateFormat": {
+      "short": "{month}{day}日",
+      "long": "{month}{day}日 {weekday}"
+    },
+    "completions": "{count, plural, =0 {{date}：无完成} =1 {{date}：{count}次完成} other {{date}：{count}次完成}}",
+    "yearlyOverview": {
+      "title": "年度概览:",
+      "thingsDone": "去年完成{count}项",
+      "days": {
+        "mon": "周一",
+        "wed": "周三",
+        "fri": "周五"
+      },
+      "months": {
+        "jan": "1月",
+        "feb": "2月",
+        "mar": "3月",
+        "apr": "4月",
+        "may": "5月",
+        "jun": "6月",
+        "jul": "7月",
+        "aug": "8月",
+        "sep": "9月",
+        "oct": "10月",
+        "nov": "11月",
+        "dec": "12月"
+      },
+      "tooltip": "{date}：{count}次完成"
+    },
+    "weekDays": {
+      "sun": "周日",
+      "mon": "周一",
+      "tue": "周二",
+      "wed": "周三",
+      "thu": "周四",
+      "fri": "周五",
+      "sat": "周六"
+    },
+    "weekDaysShort": {
+      "sun": "日",
+      "mon": "一",
+      "tue": "二",
+      "wed": "三",
+      "thu": "四",
+      "fri": "五",
+      "sat": "六"
+    },
+    "monthNames": {
+      "january": "一月",
+      "february": "二月",
+      "march": "三月",
+      "april": "四月",
+      "may": "五月",
+      "june": "六月",
+      "july": "七月",
+      "august": "八月",
+      "september": "九月",
+      "october": "十月",
+      "november": "十一月",
+      "december": "十二月"
+    },
+    "importExport": {
+      "button": "导入/导出",
+      "title": "导入/导出",
+      "import": {
+        "button": "导入",
+        "title": "导入",
+        "description": "这将从选定的文件导入日历、习惯和完成历史记录。",
+        "cancel": "取消",
+        "continue": "继续"
+      },
+      "export": {
+        "button": "导出",
+        "title": "导出",
+        "description": "这将导出所有日历、习惯和完成历史记录。",
+        "cancel": "取消",
+        "continue": "继续"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "你还没有创建任何日历。",
+        "createOne": "创建一个开始追踪你的习惯！",
+        "createButton": "创建日历"
+      },
+      "addCalendar": "添加日历"
+    }
+  },
+  "auth": {
+    "signInPrompt": "请登录查看你的日历",
+    "signIn": "登录"
+  },
+  "toast": {
+    "calendar": {
+      "created": "日历创建成功",
+      "updated": "日历更新成功",
+      "deleted": "日历删除成功"
+    },
+    "habit": {
+      "created": "习惯创建成功",
+      "updated": "习惯更新成功",
+      "deleted": "习惯删除成功"
+    }
+  }
+}

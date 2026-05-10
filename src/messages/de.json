@@ -1,0 +1,421 @@
+{
+  "app": {
+    "name": "Gewohnheits-Kalender",
+    "description": "Verfolge deine Gewohnheiten und verbessere dein Leben"
+  },
+  "nav": {
+    "home": "Startseite",
+    "calendar": "Kalender",
+    "about": "Über uns",
+    "pricing": "Preise",
+    "getStarted": "Loslegen",
+    "app": {
+      "name": "Gewohnheits-Kalender"
+    }
+  },
+  "home": {
+    "title": "Verfolge deine Gewohnheiten,\nbaue bessere Routinen auf",
+    "subtitle": "Einfaches und visuelles Gewohnheits-Tracking, das dir hilft, Konsistenz aufzubauen und deine Ziele zu erreichen. Unterbreche nicht die Kette und beobachte deinen Fortschritt.",
+    "getStarted": "Kostenlos Starten",
+    "goToCalendar": "Zum Kalender",
+    "learnMore": "Mehr erfahren",
+    "hero": {
+      "title": "Baue dauerhafte Gewohnheiten mit Streak Calendar auf",
+      "subtitle": "Ein einfaches, motivierendes Produktivitätstool, das dir hilft, deine Ziele Tag für Tag zu erreichen. 💪",
+      "features": {
+        "visualTracking": {
+          "title": "Visuelles Gewohnheits-Tracking",
+          "description": {
+            "part1": "Markiere deine täglichen Erfolge mit einem",
+            "part2": "und beobachte, wie deine Serie wächst"
+          }
+        },
+        "multiHabit": {
+          "title": "Mehrfach-Gewohnheiten",
+          "description": "Verfolge mehrere Gewohnheiten in anpassbaren Kalendern"
+        },
+        "yearlyGrid": {
+          "title": "Jahresübersicht",
+          "description": "Erhalte eine Jahresansicht deines Fortschritts, inspiriert von GitHub"
+        },
+        "timedTasks": {
+          "title": "Zeitgesteuerte Aufgaben",
+          "description": "Bleibe fokussiert mit optionalen Timern für deine Gewohnheiten"
+        }
+      },
+      "motivation": "Hilft Menschen weltweit, bessere Gewohnheiten aufzubauen und täglich motiviert zu bleiben!"
+    }
+  },
+  "footer": {
+    "about": "Über",
+    "privacy": "Datenschutz",
+    "terms": "Bedingungen",
+    "github": "GitHub",
+    "copyright": "Streak Kalender",
+    "madeWith": "Erstellt mit",
+    "and": "und",
+    "by": "von",
+    "love": "Liebe",
+    "changeLanguage": "Sprache ändern"
+  },
+  "about": {
+    "title": "Über Streak Calendar",
+    "intro": "Inspiriert von Jerry Seinfelds legendärer \"Don't Break the Chain\"-Methode wurde Streak Calendar entwickelt, um dir zu helfen, bessere Gewohnheiten aufzubauen und Prokrastination zu überwinden. Durch die Verwandlung von Konsistenz in eine unterhaltsame und lohnende Erfahrung macht es das tägliche Gewohnheits-Tracking einfach und motivierend.",
+    "whatItIs": {
+      "title": "Was es ist",
+      "description": "Streak Calendar ist ein Open-Source-Produktivitätstool, das Gewohnheits-Tracking, Zeiterfassung und Fortschrittsvisualisierung kombiniert. Es unterstützt mehrere Kalender und Gewohnheiten und ermöglicht dir, deinen Ansatz zur persönlichen Entwicklung anzupassen. Mit einem Aktivitätsraster ähnlich dem GitHub-Beitragsverfolger bietet es einen klaren Überblick über deine Erfolge im Laufe der Zeit."
+    },
+    "features": {
+      "title": "Funktionen",
+      "visualTracking": {
+        "title": "Visuelles Gewohnheits-Tracking",
+        "description": "Markiere tägliche Erfolge mit X und halte deine Serie am Leben"
+      },
+      "multiHabit": {
+        "title": "Mehrfach-Gewohnheiten",
+        "description": "Erstelle mehrere Kalender und weise ihnen Gewohnheiten zu"
+      },
+      "customThemes": {
+        "title": "Anpassbare Designs",
+        "description": "Personalisiere jeden Kalender mit einem einzigartigen Farbschema"
+      },
+      "timedTasks": {
+        "title": "Zeitgesteuerte Aufgaben",
+        "description": "Nutze den eingebauten Timer, um Aufgabendauer zu verfolgen"
+      },
+      "activityGrid": {
+        "title": "Aktivitätsraster",
+        "description": "Siehe deinen Jahresfortschritt in einem von GitHub inspirierten Rasterlayout"
+      },
+      "flexibleDuration": {
+        "title": "Flexible Gewohnheitsdauer",
+        "description": "Lege benutzerdefinierte Dauern für Gewohnheiten fest"
+      },
+      "responsiveDesign": {
+        "title": "Responsives Design",
+        "description": "Vollständig responsive Benutzeroberfläche, die nahtlos auf Mobilgeräten, Tablets und Desktop funktioniert"
+      },
+      "themeSupport": {
+        "title": "Hell/Dunkel-Modus",
+        "description": "Integrierte Theme-Unterstützung für angenehmes Betrachten bei jeder Beleuchtung"
+      },
+      "i18nSupport": {
+        "title": "Internationalisierung",
+        "description": "Unterstützung für mehrere Sprachen und Regionen"
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Ein Tool von der Community für die Community"
+      }
+    },
+    "openSourceProject": {
+      "title": "Open Source Projekt",
+      "description": "Streak Calendar ist Open Source, um Transparenz und Zusammenarbeit zu fördern. Beiträge und Innovationen von Nutzern sind willkommen und helfen dabei, das Tool kontinuierlich zu verbessern und für alle noch effektiver zu machen.",
+      "creatorQuote": "Hallo, ich bin Ilya Aizenberg, der Entwickler von Streak Calendar. Dieses Projekt verbindet meine Leidenschaft für Produktivität und Technologie, um ein einfaches, aber leistungsstarkes Tool für persönliches Wachstum anzubieten. Ich hoffe, Sie finden es genauso wertvoll wie ich.",
+      "viewOnGithub": "Auf GitHub ansehen"
+    },
+    "seinfeldStrategy": {
+      "title": "Die Seinfeld-Strategie",
+      "description": "Die Geschichte dieser Methode stammt von Brad Isaac, einem jungen Comedian, der Jerry Seinfeld hinter der Bühne traf und um Rat fragte. Seinfeld sagte ihm, dass er, um ein besserer Comedian zu werden, bessere Witze schreiben müsse - und der Weg zu besseren Witzen sei es, jeden Tag zu schreiben.",
+      "quote": "Er sagte mir, ich solle einen großen Wandkalender nehmen, der ein ganzes Jahr auf einer Seite zeigt, und ihn an eine auffällige Wand hängen. Der nächste Schritt war, einen großen roten Marker zu besorgen. Er sagte, für jeden Tag, an dem ich meine Schreibaufgabe erledige, dürfe ich ein großes rotes X über diesen Tag setzen. Nach ein paar Tagen hat man eine Kette. Bleib einfach dran, und die Kette wird jeden Tag länger. Du wirst diese Kette mögen, besonders wenn du ein paar Wochen geschafft hast. Deine einzige Aufgabe ist es, die Kette nicht zu unterbrechen.",
+      "whyItWorks": {
+        "title": "Warum es funktioniert",
+        "description": "Die Seinfeld-Strategie funktioniert, weil sie den Fokus von einzelnen Leistungen auf den Prozess selbst verlagert. Anstatt sich Sorgen zu machen, wie inspiriert man ist oder wie brillant die Arbeit an diesem Tag ist, konzentriert man sich einfach darauf, präsent zu sein und die Kette nicht zu unterbrechen. Diese Beständigkeit ist es, die Spitzenleister von allen anderen unterscheidet.",
+        "principles": {
+          "title": "Kernprinzipien:",
+          "items": [
+            "Wähle eine bedeutsame, aber nachhaltige tägliche Aufgabe",
+            "Konzentriere dich auf den Prozess, nicht auf die Ergebnisse",
+            "Baue die Kette Tag für Tag auf",
+            "Unterbreche niemals die Kette"
+          ]
+        }
+      },
+      "attribution": "Inhalt adaptiert von <link>James Clears Artikel</link> über die Seinfeld-Strategie",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "Jetzt Starten",
+    "goToCalendar": "Zu den Kalendern"
+  },
+  "pricing": {
+    "title": "Entfesseln Sie Ihr Potenzial",
+    "subtitle": "Flexible Pläne, die Ihnen helfen, Ihre Ziele zu erreichen.",
+    "billing": {
+      "monthly": "monatlich",
+      "yearly": "jährlich",
+      "savePercent": "44% sparen",
+      "perMonth": "${0} pro Monat, jährlich abgerechnet"
+    },
+    "tiers": {
+      "free": {
+        "name": "Kostenlos",
+        "description": "Perfekt für regelmäßige Nutzer",
+        "features": ["Bis zu 3 Kalender", "Bis zu 3 Gewohnheiten pro Kalender", "90-Tage-Verlauf"],
+        "cta": "Kostenlos registrieren",
+        "noCreditCard": "Keine Kreditkarte erforderlich"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Für Power-User",
+        "features": [
+          "Unbegrenzte Kalender",
+          "Unbegrenzte Gewohnheiten pro Kalender",
+          "Unbegrenzter Verlauf",
+          "Prioritäts-Support"
+        ],
+        "cta": "Demnächst verfügbar",
+        "comingSoonMessage": "Premium-Funktionen werden bald verfügbar sein, um die Hosting- und Servicekosten zu decken. Sie können auch selbst hosten für unbegrenzten Zugriff."
+      }
+    },
+    "comingSoon": "Demnächst verfügbar",
+    "goToCalendar": "Zum Kalender"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "Neuen Kalender erstellen",
+        "name": {
+          "label": "Kalendername",
+          "placeholder": "z.B. Arbeit, Privat, Sonstiges..."
+        },
+        "color": {
+          "label": "Farbthema"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "create": "Kalender erstellen"
+        }
+      },
+      "edit": {
+        "title": "Kalender bearbeiten",
+        "name": {
+          "label": "Kalendername"
+        },
+        "color": {
+          "label": "Farbthema"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "delete": "Löschen",
+          "save": "Änderungen speichern",
+          "back": "Zurück"
+        },
+        "deleteConfirm": {
+          "title": "Bist du sicher?",
+          "description": "Dies wird den Kalender \"{name}\" und alle seine Gewohnheiten dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+          "cancel": "Abbrechen",
+          "confirm": "Kalender löschen"
+        },
+        "position": {
+          "label": "Anzeigereihenfolge",
+          "placeholder": "Position auswählen"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "Neue Gewohnheit hinzufügen",
+        "name": {
+          "label": "Name der Gewohnheit",
+          "placeholder": "z.B. Sport, Meditation, Schreiben..."
+        },
+        "timer": {
+          "label": "Timer-Dauer",
+          "placeholder": "Dauer auswählen (optional)",
+          "noTimer": "Kein Timer"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "create": "Gewohnheit hinzufügen"
+        }
+      },
+      "edit": {
+        "title": "Gewohnheit Bearbeiten",
+        "name": {
+          "label": "Name der Gewohnheit"
+        },
+        "timer": {
+          "label": "Timer-Dauer",
+          "placeholder": "Dauer auswählen (optional)",
+          "noTimer": "Kein Timer"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "delete": "Löschen",
+          "save": "Änderungen speichern",
+          "back": "Zurück"
+        },
+        "deleteConfirm": {
+          "title": "Bist du sicher?",
+          "description": "Dies wird die Gewohnheit \"{name}\" dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+          "cancel": "Abbrechen",
+          "confirm": "Gewohnheit löschen"
+        },
+        "calendar": {
+          "label": "Kalender",
+          "placeholder": "Kalender auswählen"
+        },
+        "position": {
+          "label": "Anzeigereihenfolge",
+          "placeholder": "Position auswählen"
+        }
+      }
+    },
+    "colors": {
+      "red": "Rot",
+      "orange": "Orange",
+      "amber": "Bernstein",
+      "yellow": "Gelb",
+      "lime": "Limette",
+      "green": "Grün",
+      "emerald": "Smaragd",
+      "teal": "Blaugrün",
+      "cyan": "Cyan",
+      "sky": "Himmelblau",
+      "blue": "Blau",
+      "indigo": "Indigo",
+      "violet": "Violett",
+      "purple": "Lila",
+      "fuchsia": "Fuchsie",
+      "pink": "Rosa",
+      "rose": "Rose"
+    },
+    "timers": {
+      "1min": "1 Minute",
+      "2min": "2 Minuten",
+      "5min": "5 Minuten",
+      "10min": "10 Minuten",
+      "15min": "15 Minuten",
+      "20min": "20 Minuten",
+      "30min": "30 Minuten",
+      "45min": "45 Minuten",
+      "1hour": "1 Stunde",
+      "1_5hour": "1 Stunde 30 Minuten",
+      "2hour": "2 Stunden"
+    },
+    "timer": {
+      "title": "{duration} Minuten Timer",
+      "cancel": "Timer abbrechen",
+      "confirmCancel": "Timer läuft noch. Sind Sie sicher, dass Sie abbrechen möchten?"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "Kalenderansicht",
+      "row": "Zeilenansicht"
+    },
+    "emptyState": {
+      "noHabits": "Noch keine Gewohnheiten hinzugefügt. Füge eine hinzu, um mit dem Tracking zu beginnen!"
+    },
+    "controls": {
+      "complete": "Erledigt",
+      "start": "Start",
+      "timer": "Timer",
+      "new": "Neu",
+      "addHabit": "Gewohnheit hinzufügen"
+    },
+    "dateFormat": {
+      "short": "{day}. {month}",
+      "long": "{weekday}, {day}. {month}"
+    },
+    "completions": "{count, plural, =1 {{date}: {count} Erledigung} other {{date}: {count} Erledigungen}}",
+    "yearlyOverview": {
+      "title": "Jahresübersicht:",
+      "thingsDone": "{count} Dinge im letzten Jahr erledigt",
+      "days": {
+        "mon": "Mo",
+        "wed": "Mi",
+        "fri": "Fr"
+      },
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mär",
+        "apr": "Apr",
+        "may": "Mai",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Okt",
+        "nov": "Nov",
+        "dec": "Dez"
+      },
+      "tooltip": "{date}: {count} Erledigungen"
+    },
+    "weekDays": {
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa"
+    },
+    "weekDaysShort": {
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa"
+    },
+    "monthNames": {
+      "january": "Januar",
+      "february": "Februar",
+      "march": "März",
+      "april": "April",
+      "may": "Mai",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "August",
+      "september": "September",
+      "october": "Oktober",
+      "november": "November",
+      "december": "Dezember"
+    },
+    "importExport": {
+      "button": "Import/Export",
+      "title": "Import/Export",
+      "import": {
+        "button": "Import",
+        "title": "Import",
+        "description": "Dies importiert Kalender, Gewohnheiten und den Verlauf aus der ausgewählten Datei.",
+        "cancel": "Abbrechen",
+        "continue": "Fortfahren"
+      },
+      "export": {
+        "button": "Export",
+        "title": "Export",
+        "description": "Dies exportiert alle deine Kalender, Gewohnheiten und den Verlauf.",
+        "cancel": "Abbrechen",
+        "continue": "Fortfahren"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "Du hast noch keine Kalender erstellt.",
+        "createOne": "Erstelle einen, um deine Gewohnheiten zu verfolgen!",
+        "createButton": "Kalender erstellen"
+      },
+      "addCalendar": "Kalender hinzufügen"
+    }
+  },
+  "auth": {
+    "signInPrompt": "Bitte melden Sie sich an, um Ihre Kalender anzuzeigen",
+    "signIn": "Anmelden"
+  },
+  "toast": {
+    "calendar": {
+      "created": "Kalender erfolgreich erstellt",
+      "updated": "Kalender erfolgreich aktualisiert",
+      "deleted": "Kalender erfolgreich gelöscht"
+    },
+    "habit": {
+      "created": "Gewohnheit erfolgreich erstellt",
+      "updated": "Gewohnheit erfolgreich aktualisiert",
+      "deleted": "Gewohnheit erfolgreich gelöscht"
+    }
+  }
+}

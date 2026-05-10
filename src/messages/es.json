@@ -1,0 +1,420 @@
+{
+  "app": {
+    "name": "Calendario de Hábitos",
+    "description": "Rastrea tus hábitos, mejora tu vida"
+  },
+  "nav": {
+    "home": "Inicio",
+    "calendar": "Calendario",
+    "about": "Acerca de",
+    "pricing": "Precios",
+    "getStarted": "Comenzar",
+    "app": {
+      "name": "Calendario de Hábitos"
+    }
+  },
+  "home": {
+    "title": "Rastrea tus hábitos, construye una mejor rutina",
+    "subtitle": "Seguimiento de hábitos simple e intuitivo que te ayuda a construir consistencia y alcanzar tus metas. No rompas la cadena y observa cómo crece tu progreso.",
+    "getStarted": "Comenzar gratis",
+    "goToCalendar": "Ir al calendario",
+    "learnMore": "Saber más",
+    "hero": {
+      "title": "Desarrolla hábitos duraderos con el Calendario de Hábitos",
+      "subtitle": "Una herramienta de productividad simple e inspiradora que te ayuda a alcanzar tus metas día a día. 💪",
+      "features": {
+        "visualTracking": {
+          "title": "Seguimiento visual",
+          "description": {
+            "part1": "Marca con una",
+            "part2": "tus logros diarios y observa cómo crece tu racha"
+          }
+        },
+        "multiHabit": {
+          "title": "Múltiples hábitos",
+          "description": "Rastrea varios hábitos en calendarios personalizables"
+        },
+        "yearlyGrid": {
+          "title": "Cuadrícula anual",
+          "description": "Obtén una vista de progreso anual inspirada en GitHub"
+        },
+        "timedTasks": {
+          "title": "Tareas cronometradas",
+          "description": "Establece temporizadores opcionales para tus hábitos y mantén el enfoque"
+        }
+      },
+      "motivation": "¡Ayudando a personas de todo el mundo a construir mejores hábitos, un día a la vez!"
+    }
+  },
+  "footer": {
+    "about": "Acerca de",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "github": "GitHub",
+    "copyright": "Calendario de Hábitos",
+    "madeWith": "Hecho con",
+    "and": "y",
+    "by": "por",
+    "love": "amor",
+    "changeLanguage": "Cambiar idioma"
+  },
+  "about": {
+    "title": "Acerca del Calendario de Hábitos",
+    "intro": "Inspirado en el legendario método 'No rompas la cadena' de Jerry Seinfeld, el Calendario de Hábitos está diseñado para ayudarte a construir mejores hábitos y superar la procrastinación. Al hacer que la consistencia sea divertida y gratificante, transforma el seguimiento diario de hábitos en una experiencia simple e inspiradora.",
+    "whatItIs": {
+      "title": "Qué es",
+      "description": "El Calendario de Hábitos es una herramienta de productividad de código abierto que combina seguimiento de hábitos, cronometraje de tareas y visualización de progreso. Admite múltiples calendarios y hábitos, permitiéndote personalizar tu camino de crecimiento personal. A través de una cuadrícula de actividad similar al rastreador de contribuciones de GitHub, proporciona una clara vista de tus logros a lo largo del tiempo."
+    },
+    "features": {
+      "title": "Características",
+      "visualTracking": {
+        "title": "Seguimiento visual",
+        "description": "Marca con X tus logros diarios y mantén tu racha"
+      },
+      "multiHabit": {
+        "title": "Múltiples hábitos",
+        "description": "Crea varios calendarios y asigna hábitos a cada uno"
+      },
+      "customThemes": {
+        "title": "Temas personalizados",
+        "description": "Establece un tema de color único para cada calendario"
+      },
+      "timedTasks": {
+        "title": "Tareas cronometradas",
+        "description": "Usa el temporizador incorporado para rastrear la duración y marcar como completado"
+      },
+      "activityGrid": {
+        "title": "Cuadrícula de actividad",
+        "description": "Ve tu progreso anual en una cuadrícula inspirada en el rastreador de contribuciones de GitHub"
+      },
+      "flexibleDuration": {
+        "title": "Duración flexible",
+        "description": "Establece duraciones personalizadas para los hábitos según tus necesidades"
+      },
+      "responsiveDesign": {
+        "title": "Diseño responsivo",
+        "description": "Interfaz completamente responsiva que funciona perfectamente en teléfonos, tablets y computadoras"
+      },
+      "themeSupport": {
+        "title": "Modo claro/oscuro",
+        "description": "Soporte de tema incorporado para una visualización cómoda en cualquier iluminación"
+      },
+      "i18nSupport": {
+        "title": "Internacionalización",
+        "description": "Soporte para múltiples idiomas y regiones"
+      },
+      "openSource": {
+        "title": "Código abierto",
+        "description": "Construido por la comunidad para la comunidad"
+      }
+    },
+    "openSourceProject": {
+      "title": "Proyecto de código abierto",
+      "description": "El Calendario de Hábitos es de código abierto para fomentar la transparencia y la colaboración. Las contribuciones e innovaciones de los usuarios son bienvenidas, ayudando a mejorar continuamente la herramienta para que sea más efectiva para todos.",
+      "creatorQuote": "Hola, soy Ilya Aizenberg, el creador del Calendario de Hábitos. Este proyecto combina mi pasión por la productividad y la tecnología, proporcionando una herramienta simple pero poderosa para el crecimiento personal. Espero que encuentres tanto valor en ella como yo.",
+      "viewOnGithub": "Ver en GitHub"
+    },
+    "seinfeldStrategy": {
+      "title": "La estrategia Seinfeld",
+      "description": "La historia de este método proviene de Brad Isaac, un joven comediante que se encontró con Jerry Seinfeld entre bastidores y le pidió consejo. Seinfeld le dijo que para ser un mejor comediante, necesitaba escribir mejores chistes, y la forma de escribir mejores chistes era escribir todos los días.",
+      "quote": "Me dijo que consiguiera un calendario de pared grande que mostrara todo el año y lo colgara en un lugar visible. El siguiente paso era conseguir un marcador rojo grande. Me dijo que por cada día que complete la tarea de escribir, puedo poner una gran X roja sobre ese día. Después de unos días, tendrás una cadena. Sigue con esto y la cadena crecerá más larga cada día. Te gustará ver esa cadena, especialmente cuando hayas mantenido una por unas semanas. Tu único trabajo es no romper la cadena.",
+      "whyItWorks": {
+        "title": "Por qué funciona",
+        "description": "La estrategia Seinfeld funciona porque desvía la atención del rendimiento individual al proceso en sí. En lugar de preocuparte por lo inspirado que te sientes o lo bien que está saliendo tu trabajo, solo necesitas enfocarte en aparecer y no romper la cadena. Esta consistencia es lo que separa a los mejores artistas del resto.",
+        "principles": {
+          "title": "Principios clave:",
+          "items": [
+            "Elige una tarea diaria significativa pero sostenible",
+            "Concéntrate en el proceso, no en el resultado",
+            "Construye la cadena un día a la vez",
+            "Nunca rompas la cadena"
+          ]
+        }
+      },
+      "attribution": "Contenido adaptado del artículo de James Clear sobre la <link>estrategia Seinfeld</link>",
+      "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
+    },
+    "getStarted": "Comenzar",
+    "goToCalendar": "Ir al calendario"
+  },
+  "pricing": {
+    "title": "Libera tu potencial",
+    "subtitle": "Planes flexibles diseñados para ayudarte a alcanzar tus objetivos.",
+    "billing": {
+      "monthly": "Mensual",
+      "yearly": "Anual",
+      "savePercent": "Ahorra 44%",
+      "perMonth": "${0}/mes facturado anualmente"
+    },
+    "tiers": {
+      "free": {
+        "name": "Gratis",
+        "description": "Para usuarios casuales",
+        "features": ["Hasta 3 calendarios", "Hasta 3 hábitos por calendario", "Historial de 90 días"],
+        "cta": "Registrarse gratis",
+        "noCreditCard": "No se requiere tarjeta de crédito"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Para usuarios avanzados",
+        "features": [
+          "Calendarios ilimitados",
+          "Hábitos ilimitados por calendario",
+          "Historial ilimitado",
+          "Soporte prioritario"
+        ],
+        "cta": "Próximamente",
+        "comingSoonMessage": "Las funciones premium estarán disponibles pronto para ayudar a cubrir los costos de alojamiento y servicio. Siéntete libre de autoalojar para acceso ilimitado."
+      }
+    },
+    "comingSoon": "Próximamente",
+    "goToCalendar": "Ir al calendario"
+  },
+  "dialogs": {
+    "calendar": {
+      "new": {
+        "title": "Crear nuevo calendario",
+        "name": {
+          "label": "Nombre del calendario",
+          "placeholder": "Ej: Trabajo, Personal, Otros..."
+        },
+        "color": {
+          "label": "Tema de color"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear calendario"
+        }
+      },
+      "edit": {
+        "title": "Editar calendario",
+        "name": {
+          "label": "Nombre del calendario"
+        },
+        "color": {
+          "label": "Tema de color"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "delete": "Eliminar",
+          "save": "Guardar cambios",
+          "back": "Volver"
+        },
+        "deleteConfirm": {
+          "title": "¿Estás seguro?",
+          "description": "Esto eliminará permanentemente el calendario \"{name}\" y todos sus hábitos. Esta acción no se puede deshacer.",
+          "cancel": "Cancelar",
+          "confirm": "Eliminar calendario"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        }
+      }
+    },
+    "habit": {
+      "new": {
+        "title": "Agregar nuevo hábito",
+        "name": {
+          "label": "Nombre del hábito",
+          "placeholder": "Ej: Ejercicio, Meditación, Escritura..."
+        },
+        "timer": {
+          "label": "Duración del temporizador",
+          "placeholder": "Seleccionar duración",
+          "noTimer": "Sin temporizador"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Agregar hábito"
+        }
+      },
+      "edit": {
+        "title": "Editar Hábito",
+        "name": {
+          "label": "Nombre"
+        },
+        "timer": {
+          "label": "Duración del Temporizador",
+          "placeholder": "Seleccionar duración (opcional)",
+          "noTimer": "Sin temporizador"
+        },
+        "actions": {
+          "back": "Volver",
+          "save": "Guardar Cambios",
+          "delete": "Eliminar"
+        },
+        "deleteConfirm": {
+          "title": "Eliminar Hábito",
+          "description": "¿Estás seguro de que quieres eliminar \"{name}\"? Esta acción no se puede deshacer.",
+          "cancel": "Cancelar",
+          "confirm": "Eliminar"
+        },
+        "calendar": {
+          "label": "Calendario",
+          "placeholder": "Seleccionar calendario"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        }
+      }
+    },
+    "colors": {
+      "red": "Rojo",
+      "orange": "Naranja",
+      "amber": "Ámbar",
+      "yellow": "Amarillo",
+      "lime": "Lima",
+      "green": "Verde",
+      "emerald": "Esmeralda",
+      "teal": "Verde azulado",
+      "cyan": "Cian",
+      "sky": "Cielo",
+      "blue": "Azul",
+      "indigo": "Índigo",
+      "violet": "Violeta",
+      "purple": "Púrpura",
+      "fuchsia": "Fucsia",
+      "pink": "Rosa",
+      "rose": "Rosa fuerte"
+    },
+    "timers": {
+      "1min": "1 minuto",
+      "2min": "2 minutos",
+      "5min": "5 minutos",
+      "10min": "10 minutos",
+      "15min": "15 minutos",
+      "20min": "20 minutos",
+      "30min": "30 minutos",
+      "45min": "45 minutos",
+      "1hour": "1 hora",
+      "1_5hour": "1 hora 30 minutos",
+      "2hour": "2 horas"
+    },
+    "timer": {
+      "title": "Temporizador de {duration} minutos",
+      "cancel": "Cancelar temporizador",
+      "confirmCancel": "El temporizador aún está en marcha. ¿Seguro que quieres cancelar?"
+    }
+  },
+  "calendar": {
+    "views": {
+      "calendar": "Vista de calendario",
+      "row": "Vista de lista"
+    },
+    "emptyState": {
+      "noHabits": "Aún no hay hábitos. ¡Agrega uno para empezar a rastrear!"
+    },
+    "controls": {
+      "complete": "Completar",
+      "start": "Iniciar",
+      "timer": "Temporizador",
+      "new": "Nuevo",
+      "addHabit": "Agregar hábito"
+    },
+    "dateFormat": {
+      "short": "{day} de {month}",
+      "long": "{day} de {month}, {weekday}"
+    },
+    "completions": "{count, plural, =0 {{date}: Sin completar} =1 {{date}: {count} completado} other {{date}: {count} completados}}",
+    "yearlyOverview": {
+      "title": "Resumen anual:",
+      "thingsDone": "{count} cosas completadas el año pasado",
+      "days": {
+        "mon": "Lun",
+        "wed": "Mié",
+        "fri": "Vie"
+      },
+      "months": {
+        "jan": "Ene",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Abr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Ago",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dic"
+      },
+      "tooltip": "{date}: {count} completados"
+    },
+    "weekDays": {
+      "sun": "Domingo",
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado"
+    },
+    "weekDaysShort": {
+      "sun": "Do",
+      "mon": "Lu",
+      "tue": "Ma",
+      "wed": "Mi",
+      "thu": "Ju",
+      "fri": "Vi",
+      "sat": "Sa"
+    },
+    "monthNames": {
+      "january": "Enero",
+      "february": "Febrero",
+      "march": "Marzo",
+      "april": "Abril",
+      "may": "Mayo",
+      "june": "Junio",
+      "july": "Julio",
+      "august": "Agosto",
+      "september": "Septiembre",
+      "october": "Octubre",
+      "november": "Noviembre",
+      "december": "Diciembre"
+    },
+    "importExport": {
+      "button": "Importar/Exportar",
+      "title": "Importar/Exportar",
+      "import": {
+        "button": "Importar",
+        "title": "Importar",
+        "description": "Esto importará calendarios, hábitos e historial de completados desde el archivo seleccionado.",
+        "cancel": "Cancelar",
+        "continue": "Continuar"
+      },
+      "export": {
+        "button": "Exportar",
+        "title": "Exportar",
+        "description": "Esto exportará todos tus calendarios, hábitos e historial de completados.",
+        "cancel": "Cancelar",
+        "continue": "Continuar"
+      }
+    },
+    "container": {
+      "emptyState": {
+        "noCalendars": "Aún no tienes calendarios.",
+        "createOne": "¡Crea uno para empezar a rastrear tus hábitos!",
+        "createButton": "Crear calendario"
+      },
+      "addCalendar": "Agregar calendario"
+    }
+  },
+  "auth": {
+    "signInPrompt": "Por favor, inicia sesión para ver tus calendarios",
+    "signIn": "Iniciar sesión"
+  },
+  "toast": {
+    "calendar": {
+      "created": "Calendario creado",
+      "updated": "Calendario actualizado",
+      "deleted": "Calendario eliminado"
+    },
+    "habit": {
+      "created": "Hábito creado",
+      "updated": "Hábito actualizado",
+      "deleted": "Hábito eliminado"
+    }
+  }
+}
