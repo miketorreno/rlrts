@@ -23,7 +23,7 @@ import { CalendarSkeletons } from "./calendar-skeletons";
  * Handles calendar/habit CRUD operations and view switching between month row and grid layouts.
  */
 
-const MotionCard = motion.create(Card);
+const MotionCard = motion(Card);
 
 /**
  * Type for calendar view modes - either month row or month grid layout

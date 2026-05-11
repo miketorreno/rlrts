@@ -111,7 +111,7 @@
     "openSourceProject": {
       "title": "Proyecto de código abierto",
       "description": "El Calendario de Hábitos es de código abierto para fomentar la transparencia y la colaboración. Las contribuciones e innovaciones de los usuarios son bienvenidas, ayudando a mejorar continuamente la herramienta para que sea más efectiva para todos.",
-      "creatorQuote": "Hola, soy Ilya Aizenberg, el creador del Calendario de Hábitos. Este proyecto combina mi pasión por la productividad y la tecnología, proporcionando una herramienta simple pero poderosa para el crecimiento personal. Espero que encuentres tanto valor en ella como yo.",
+      "creatorQuote": "Hola, soy Mike, el creador del Calendario de Hábitos. Este proyecto combina mi pasión por la productividad y la tecnología, proporcionando una herramienta simple pero poderosa para el crecimiento personal. Espero que encuentres tanto valor en ella como yo.",
       "viewOnGithub": "Ver en GitHub"
     },
     "seinfeldStrategy": {
@@ -150,7 +150,11 @@
       "free": {
         "name": "Gratis",
         "description": "Para usuarios casuales",
-        "features": ["Hasta 3 calendarios", "Hasta 3 hábitos por calendario", "Historial de 90 días"],
+        "features": [
+          "Hasta 3 calendarios",
+          "Hasta 3 hábitos por calendario",
+          "Historial de 90 días"
+        ],
         "cta": "Registrarse gratis",
         "noCreditCard": "No se requiere tarjeta de crédito"
       },

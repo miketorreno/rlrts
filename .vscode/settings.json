@@ -1,4 +1,4 @@
 {
   "codeium.enableCodeLens": false,
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "off"
 }

@@ -14,7 +14,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import NextLink from "next/link";
 
-// About page component that provides information about the Streak Calendar application
+// About page component that provides information about the Goal Streak application
 // Includes sections for app description, features, project info, and the Seinfeld Strategy
 
 export default function AboutPage() {
@@ -25,7 +25,7 @@ export default function AboutPage() {
   return (
     // Main container with responsive width and vertical spacing
     <div className="container mx-auto w-full max-w-3xl space-y-8 py-16">
-      {/* Introduction Card: Overview of Streak Calendar */}
+      {/* Introduction Card: Overview of Goal Streak */}
       <Card className="p-4 shadow">
         <CardHeader>
           <h1 className="font-heading text-4xl font-bold">{t("title")}</h1>
@@ -148,7 +148,7 @@ export default function AboutPage() {
       </Card>
 
       {/* Open Source Card: Project information and creator introduction */}
-      <Card className="p-4 shadow">
+      {/* <Card className="p-4 shadow">
         <CardHeader>
           <h2 className="font-heading text-2xl font-bold">
             {t("openSourceProject.title")}
@@ -203,7 +203,7 @@ export default function AboutPage() {
             </NextLink>
           </Button>
         </CardFooter>
-      </Card>
+      </Card> */}
 
       {/* Seinfeld Strategy Card: Explanation of the methodology */}
       <Card className="p-4 shadow">

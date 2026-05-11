@@ -111,7 +111,7 @@
     "openSourceProject": {
       "title": "Projet Open Source",
       "description": "Le Calendrier de Suivi est open source pour encourager la transparence et la collaboration. Les contributions et innovations des utilisateurs sont les bienvenues, aidant à améliorer continuellement l'outil et à le rendre encore plus efficace pour tous.",
-      "creatorQuote": "Salut, je suis Ilya Aizenberg, le créateur du Calendrier de Suivi. Ce projet combine ma passion pour la productivité et la technologie pour offrir un outil simple mais puissant pour le développement personnel. J'espère que vous le trouverez aussi utile que moi.",
+      "creatorQuote": "Salut, je suis Mike, le créateur du Calendrier de Suivi. Ce projet combine ma passion pour la productivité et la technologie pour offrir un outil simple mais puissant pour le développement personnel. J'espère que vous le trouverez aussi utile que moi.",
       "viewOnGithub": "Voir sur GitHub"
     },
     "seinfeldStrategy": {
@@ -150,7 +150,11 @@
       "free": {
         "name": "Gratuit",
         "description": "Parfait pour les utilisateurs réguliers",
-        "features": ["Jusqu'à 3 calendriers", "Jusqu'à 3 habitudes par calendrier", "Historique de 90 jours"],
+        "features": [
+          "Jusqu'à 3 calendriers",
+          "Jusqu'à 3 habitudes par calendrier",
+          "Historique de 90 jours"
+        ],
         "cta": "S'inscrire Gratuitement",
         "noCreditCard": "Aucune carte de crédit requise"
       },

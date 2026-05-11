@@ -4,10 +4,10 @@ const config = {
     //   domain: "official.domain.com",
     //   applicationID: "convex",
     // },
-    {
-      domain: "happy-ram-32.clerk.accounts.dev",
-      applicationID: "convex",
-    },
+    // {
+    //   domain: "happy-ram-32.clerk.accounts.dev",
+    //   applicationID: "convex",
+    // },
   ],
 };
 

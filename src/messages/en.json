@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Streak Calendar",
+    "name": "Goal Streak",
     "description": "Track your habits and improve your life"
   },
   "nav": {
@@ -10,7 +10,7 @@
     "pricing": "Pricing",
     "getStarted": "Get Started",
     "app": {
-      "name": "Streak Calendar"
+      "name": "Goal Streak"
     }
   },
   "home": {
@@ -20,7 +20,7 @@
     "goToCalendar": "Go to Calendar",
     "learnMore": "Learn More",
     "hero": {
-      "title": "Build Habits That Last with Streak Calendar",
+      "title": "Build Habits That Last with Goal Streak",
       "subtitle": "A simple, motivational productivity tool to help you achieve your goals, one day at a time. 💪",
       "features": {
         "visualTracking": {
@@ -51,7 +51,7 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "github": "GitHub",
-    "copyright": "Streak Calendar",
+    "copyright": "Goal Streak",
     "madeWith": "Made with",
     "and": "and",
     "by": "by",
@@ -59,11 +59,11 @@
     "changeLanguage": "Change Language"
   },
   "about": {
-    "title": "About Streak Calendar",
-    "intro": "Inspired by Jerry Seinfeld's legendary \"Don't Break the Chain\" method, Streak Calendar is designed to help you build better habits and conquer procrastination. By making consistency fun and rewarding, it turns daily habit tracking into a simple, motivating experience.",
+    "title": "About Goal Streak",
+    "intro": "Inspired by Jerry Seinfeld's legendary \"Don't Break the Chain\" method, Goal Streak is designed to help you build better habits and conquer procrastination. By making consistency fun and rewarding, it turns daily habit tracking into a simple, motivating experience.",
     "whatItIs": {
       "title": "What It Is",
-      "description": "Streak Calendar is an open source productivity tool that combines habit tracking, task timing, and progress visualization. It supports multiple calendars and habits, allowing you to customize your approach to personal growth. Featuring an activity grid similar to GitHub's contribution tracker, it offers a clear view of your achievements over time."
+      "description": "Goal Streak is an open source productivity tool that combines habit tracking, task timing, and progress visualization. It supports multiple calendars and habits, allowing you to customize your approach to personal growth. Featuring an activity grid similar to GitHub's contribution tracker, it offers a clear view of your achievements over time."
     },
     "features": {
       "title": "Features",
@@ -110,8 +110,8 @@
     },
     "openSourceProject": {
       "title": "Open Source Project",
-      "description": "Streak Calendar is open source to encourage transparency and collaboration. Contributions and innovations from users are welcome, helping to continuously improve the tool and make it even more effective for everyone.",
-      "creatorQuote": "Hi, I'm Ilya Aizenberg, the creator of Streak Calendar. This project combines my passion for productivity and tech to offer a simple yet powerful tool for personal growth. I hope you find it as valuable as I do.",
+      "description": "Goal Streak is open source to encourage transparency and collaboration. Contributions and innovations from users are welcome, helping to continuously improve the tool and make it even more effective for everyone.",
+      "creatorQuote": "Hi, I'm Mike, the creator of Goal Streak. This project combines my passion for productivity and tech to offer a simple yet powerful tool for personal growth. I hope you find it as valuable as I do.",
       "viewOnGithub": "View on GitHub"
     },
     "seinfeldStrategy": {
@@ -150,14 +150,23 @@
       "free": {
         "name": "Free",
         "description": "Perfect for regular users",
-        "features": ["Up to 3 calendars", "Up to 3 habits per calendar", "90-day history"],
+        "features": [
+          "Up to 3 calendars",
+          "Up to 3 habits per calendar",
+          "90-day history"
+        ],
         "cta": "Sign Up for Free",
         "noCreditCard": "No credit card required"
       },
       "premium": {
         "name": "Premium",
         "description": "For power users",
-        "features": ["Unlimited calendars", "Unlimited habits per calendar", "Unlimited history", "Priority support"],
+        "features": [
+          "Unlimited calendars",
+          "Unlimited habits per calendar",
+          "Unlimited history",
+          "Priority support"
+        ],
         "cta": "Coming Soon",
         "comingSoonMessage": "Premium features will be available soon to help cover hosting and service costs. Feel free to self-host for unlimited access."
       }

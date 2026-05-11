@@ -20,7 +20,7 @@
     "goToCalendar": "Zum Kalender",
     "learnMore": "Mehr erfahren",
     "hero": {
-      "title": "Baue dauerhafte Gewohnheiten mit Streak Calendar auf",
+      "title": "Baue dauerhafte Gewohnheiten mit Goal Streak auf",
       "subtitle": "Ein einfaches, motivierendes Produktivitätstool, das dir hilft, deine Ziele Tag für Tag zu erreichen. 💪",
       "features": {
         "visualTracking": {
@@ -59,11 +59,11 @@
     "changeLanguage": "Sprache ändern"
   },
   "about": {
-    "title": "Über Streak Calendar",
-    "intro": "Inspiriert von Jerry Seinfelds legendärer \"Don't Break the Chain\"-Methode wurde Streak Calendar entwickelt, um dir zu helfen, bessere Gewohnheiten aufzubauen und Prokrastination zu überwinden. Durch die Verwandlung von Konsistenz in eine unterhaltsame und lohnende Erfahrung macht es das tägliche Gewohnheits-Tracking einfach und motivierend.",
+    "title": "Über Goal Streak",
+    "intro": "Inspiriert von Jerry Seinfelds legendärer \"Don't Break the Chain\"-Methode wurde Goal Streak entwickelt, um dir zu helfen, bessere Gewohnheiten aufzubauen und Prokrastination zu überwinden. Durch die Verwandlung von Konsistenz in eine unterhaltsame und lohnende Erfahrung macht es das tägliche Gewohnheits-Tracking einfach und motivierend.",
     "whatItIs": {
       "title": "Was es ist",
-      "description": "Streak Calendar ist ein Open-Source-Produktivitätstool, das Gewohnheits-Tracking, Zeiterfassung und Fortschrittsvisualisierung kombiniert. Es unterstützt mehrere Kalender und Gewohnheiten und ermöglicht dir, deinen Ansatz zur persönlichen Entwicklung anzupassen. Mit einem Aktivitätsraster ähnlich dem GitHub-Beitragsverfolger bietet es einen klaren Überblick über deine Erfolge im Laufe der Zeit."
+      "description": "Goal Streak ist ein Open-Source-Produktivitätstool, das Gewohnheits-Tracking, Zeiterfassung und Fortschrittsvisualisierung kombiniert. Es unterstützt mehrere Kalender und Gewohnheiten und ermöglicht dir, deinen Ansatz zur persönlichen Entwicklung anzupassen. Mit einem Aktivitätsraster ähnlich dem GitHub-Beitragsverfolger bietet es einen klaren Überblick über deine Erfolge im Laufe der Zeit."
     },
     "features": {
       "title": "Funktionen",
@@ -110,8 +110,8 @@
     },
     "openSourceProject": {
       "title": "Open Source Projekt",
-      "description": "Streak Calendar ist Open Source, um Transparenz und Zusammenarbeit zu fördern. Beiträge und Innovationen von Nutzern sind willkommen und helfen dabei, das Tool kontinuierlich zu verbessern und für alle noch effektiver zu machen.",
-      "creatorQuote": "Hallo, ich bin Ilya Aizenberg, der Entwickler von Streak Calendar. Dieses Projekt verbindet meine Leidenschaft für Produktivität und Technologie, um ein einfaches, aber leistungsstarkes Tool für persönliches Wachstum anzubieten. Ich hoffe, Sie finden es genauso wertvoll wie ich.",
+      "description": "Goal Streak ist Open Source, um Transparenz und Zusammenarbeit zu fördern. Beiträge und Innovationen von Nutzern sind willkommen und helfen dabei, das Tool kontinuierlich zu verbessern und für alle noch effektiver zu machen.",
+      "creatorQuote": "Hallo, ich bin Mike, der Entwickler von Goal Streak. Dieses Projekt verbindet meine Leidenschaft für Produktivität und Technologie, um ein einfaches, aber leistungsstarkes Tool für persönliches Wachstum anzubieten. Ich hoffe, Sie finden es genauso wertvoll wie ich.",
       "viewOnGithub": "Auf GitHub ansehen"
     },
     "seinfeldStrategy": {
@@ -150,7 +150,11 @@
       "free": {
         "name": "Kostenlos",
         "description": "Perfekt für regelmäßige Nutzer",
-        "features": ["Bis zu 3 Kalender", "Bis zu 3 Gewohnheiten pro Kalender", "90-Tage-Verlauf"],
+        "features": [
+          "Bis zu 3 Kalender",
+          "Bis zu 3 Gewohnheiten pro Kalender",
+          "90-Tage-Verlauf"
+        ],
         "cta": "Kostenlos registrieren",
         "noCreditCard": "Keine Kreditkarte erforderlich"
       },

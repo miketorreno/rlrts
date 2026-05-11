@@ -68,7 +68,8 @@ export function AppFooter() {
       <TooltipProvider delayDuration={200}>
         <div className="container relative mx-auto flex min-h-16 flex-col items-center gap-4 px-3 py-4 md:h-16 md:flex-row md:justify-between md:gap-0 md:px-4 md:py-0">
           {/* Credits section with Cursor logo and author link */}
-          <div className="text-center text-xs text-muted-foreground md:text-left md:text-sm">
+          <div></div>
+          {/* <div className="text-center text-xs text-muted-foreground md:text-left md:text-sm">
             {t("madeWith")}{" "}
             <Tooltip>
               <TooltipTrigger asChild>
@@ -102,14 +103,14 @@ export function AppFooter() {
             >
               @ilyaizen
             </a>
-          </div>
+          </div> */}
 
           {/* Social links and language switcher */}
           <div className="flex items-center">
             {/* Social media links with icons */}
             <div className="flex items-center gap-3 rtl:flex-row-reverse">
               {/* GitHub link */}
-              <Tooltip>
+              {/* <Tooltip>
                 <TooltipTrigger asChild>
                   <a
                     className="inline-flex p-1 text-muted-foreground hover:text-foreground md:p-1.5"
@@ -129,9 +130,9 @@ export function AppFooter() {
                   </a>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={5}>GitHub</TooltipContent>
-              </Tooltip>
+              </Tooltip> */}
               {/* X (Twitter) link */}
-              <Tooltip>
+              {/* <Tooltip>
                 <TooltipTrigger asChild>
                   <a
                     className="inline-flex p-1 text-muted-foreground hover:text-foreground md:p-1.5"
@@ -151,7 +152,7 @@ export function AppFooter() {
                   </a>
                 </TooltipTrigger>
                 <TooltipContent sideOffset={5}>X (Twitter)</TooltipContent>
-              </Tooltip>
+              </Tooltip> */}
             </div>
             {/* Divider between social links and language switcher */}
             <div className="mx-3 h-4 w-px bg-border md:h-6" />
