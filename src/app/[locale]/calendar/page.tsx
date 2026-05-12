@@ -64,6 +64,7 @@ export default function CalendarPage() {
             calendars={memoizedData.calendars}
             isLoading={isLoading}
           /> */}
+
           {/* Main calendar container with month/year view toggle */}
           <MemoizedCalendarContainer
             calendarView={view}
@@ -76,6 +77,7 @@ export default function CalendarPage() {
             view={view}
             isLoading={isLoading}
           />
+
           {/* Import/Export functionality for calendar data */}
           <div className="mx-4 my-8 justify-center">
             <ImportExport />

@@ -25,7 +25,6 @@ export function CalendarDetails({ calendarId }: CalendarDetailsProps) {
 
   // Fetch calendar and associated data
   const calendars = useQuery(api.calendars.list);
-  console.log("LOGGING...", calendars);
   const calendar = calendars?.find((c) => c._id === calendarId);
   const habits = useQuery(api.habits.list, { calendarId });
 

@@ -111,13 +111,13 @@ export default async function LocaleLayout({
     >
       {/* <ThirdPartyScripts /> */}
       {/* NoScript fallback for users with JavaScript disabled */}
-      <noscript>
+      {/* <noscript>
         <div className="fixed inset-0 z-9999 flex items-center justify-center bg-background">
           <p className="rounded border bg-card px-6 py-4 text-center shadow-lg">
             Please enable JavaScript to use this app.
           </p>
         </div>
-      </noscript>
+      </noscript> */}
 
       {/* Background gradient overlay */}
       <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent" />
