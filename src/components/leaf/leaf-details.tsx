@@ -1,11 +1,11 @@
 "use client";
 
-import { LeafActivityCalendar } from "@/components/leaf/details/leaf-activity-calendar";
+import { LeafActivityTwig } from "@/components/leaf/details/leaf-activity-twig";
 import { LeafBackNavigation } from "@/components/leaf/details/leaf-back-navigation";
 import { LeafDeleteDialog } from "@/components/leaf/details/leaf-delete-dialog";
 import { LeafEditForm } from "@/components/leaf/details/leaf-edit-form";
 import { LeafStatistics } from "@/components/leaf/details/leaf-statistics";
-import { SingleMonthCalendar } from "@/components/leaf/details/single-month-calendar";
+import { SingleMonthTwig } from "@/components/leaf/details/single-month-twig";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
@@ -19,7 +19,7 @@ import { api } from "../../../convex/_generated/api";
 /**
  * LeafDetails Component
  * A comprehensive view for managing and displaying leaf details including:
- * - Activity calendar visualization
+ * - Activity twig visualization
  * - Monthly statistics
  * - Leaf editing capabilities
  * - Deletion functionality
@@ -28,7 +28,7 @@ import { api } from "../../../convex/_generated/api";
 /**
  * Props interface for the LeafDetails component
  * @property leaf - The leaf object containing core leaf data
- * @property calendar - The calendar object this leaf belongs to
+ * @property twig - The twig object this leaf belongs to
  * @property onDelete - Callback function triggered after successful leaf deletion
  */
 interface LeafDetailsProps {
@@ -36,11 +36,11 @@ interface LeafDetailsProps {
     _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
-    calendarId: Id<"calendars">;
+    twigId: Id<"twigs">;
     position?: number;
   };
-  calendar: {
-    _id: Id<"calendars">;
+  twig: {
+    _id: Id<"twigs">;
     name: string;
     colorTheme: string;
   };
@@ -48,11 +48,11 @@ interface LeafDetailsProps {
 }
 
 /**
- * Determines calendar visualization properties based on screen size
+ * Determines twig visualization properties based on screen size
  * Uses window.matchMedia for responsive design
  * @returns Object containing blockSize, blockMargin, and showLabels settings
  */
-function getCalendarSize() {
+function getTwigSize() {
   if (typeof window === "undefined")
     return {
       blockSize: 8,
@@ -68,7 +68,7 @@ function getCalendarSize() {
   return { blockSize: 8, blockMargin: 1, showLabels: false };
 }
 
-export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
+export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
   // Core hooks and state management
   const router = useRouter();
   const { toast } = useToast();
@@ -77,26 +77,26 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
   const [timerDuration, setTimerDuration] = useState<number | undefined>(
     leaf.timerDuration,
   );
-  const [selectedCalendarId, setSelectedCalendarId] = useState<Id<"calendars">>(
-    leaf.calendarId,
+  const [selectedTwigId, setSelectedTwigId] = useState<Id<"twigs">>(
+    leaf.twigId,
   );
   const [position, setPosition] = useState<number>(leaf.position ?? 1);
-  const [calendarSize, setCalendarSize] = useState(getCalendarSize());
+  const [twigSize, setTwigSize] = useState(getTwigSize());
 
   // Convex API mutations and queries
   const updateLeaf = useMutation(api.leaves.update);
   const deleteLeaf = useMutation(api.leaves.remove);
   const markComplete = useMutation(api.leaves.markComplete);
-  const calendars = useQuery(api.calendars.list);
-  const leaves = useQuery(api.leaves.list, { calendarId: selectedCalendarId });
+  const twigs = useQuery(api.twigs.list);
+  const leaves = useQuery(api.leaves.list, { twigId: selectedTwigId });
 
   /**
-   * Window resize handler to update calendar visualization
+   * Window resize handler to update twig visualization
    * Ensures responsive design across different screen sizes
    */
   useEffect(() => {
     function handleResize() {
-      setCalendarSize(getCalendarSize());
+      setTwigSize(getTwigSize());
     }
 
     window.addEventListener("resize", handleResize);
@@ -130,10 +130,10 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
   const completions = useQuery(api.leaves.getCompletions, dateRange);
 
   /**
-   * Processes completion data into a format suitable for calendar visualization
+   * Processes completion data into a format suitable for twig visualization
    * Maps dates to completion counts and assigns level (0-4) based on completion frequency
    */
-  const calendarData = useMemo(() => {
+  const twigData = useMemo(() => {
     if (!completions?.completions) return [];
 
     const dates = new Map();
@@ -182,11 +182,11 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
         id: leaf._id,
         name,
         timerDuration,
-        calendarId: selectedCalendarId,
+        twigId: selectedTwigId,
         position,
       });
       toast({ description: "Leaf updated successfully" });
-      router.push("/calendar");
+      router.push("/twig");
     } catch (error) {
       toast({
         description: `Failed to update leaf: ${error instanceof Error ? error.message : "Unknown error"}`,
@@ -202,7 +202,7 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
   const handleDelete = async () => {
     try {
       setShowDeleteAlert(false);
-      router.replace("/calendar");
+      router.replace("/twig");
       await new Promise((resolve) => setTimeout(resolve, 0));
       await deleteLeaf({ id: leaf._id });
       toast({ description: "Leaf deleted", variant: "destructive" });
@@ -232,11 +232,11 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
 
       {/* Main content layout with responsive grid */}
       <div className="mx-auto max-w-[7xl] space-y-8 md:space-y-6 lg:flex lg:items-start lg:justify-center lg:space-x-6 lg:space-y-0">
-        {/* Single month calendar view */}
+        {/* Single month twig view */}
         <div className="mx-auto w-full max-w-[300px] lg:mx-0 lg:w-[300px]">
-          <SingleMonthCalendar
+          <SingleMonthTwig
             leaf={leaf}
-            colorTheme={calendar.colorTheme}
+            colorTheme={twig.colorTheme}
             completions={completions?.completions ?? []}
             onToggle={async (leafId, date, count) => {
               try {
@@ -252,18 +252,18 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
           />
         </div>
 
-        {/* Activity calendar and statistics section */}
+        {/* Activity twig and statistics section */}
         <div className="space-y-4">
-          <LeafActivityCalendar
-            calendarData={calendarData}
+          <LeafActivityTwig
+            twigData={twigData}
             completions={completions?.completions}
-            calendarSize={calendarSize}
-            colorTheme={calendar.colorTheme}
+            twigSize={twigSize}
+            colorTheme={twig.colorTheme}
           />
 
           <LeafStatistics
             leafId={leaf._id}
-            colorTheme={calendar.colorTheme}
+            colorTheme={twig.colorTheme}
             completions={completions?.completions}
           />
         </div>
@@ -275,11 +275,11 @@ export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
         onNameChange={setName}
         timerDuration={timerDuration}
         onTimerDurationChange={setTimerDuration}
-        selectedCalendarId={selectedCalendarId}
-        onCalendarChange={setSelectedCalendarId}
+        selectedTwigId={selectedTwigId}
+        onTwigChange={setSelectedTwigId}
         position={position}
         onPositionChange={setPosition}
-        calendars={calendars}
+        twigs={twigs}
         leaves={leaves}
         onSave={handleSave}
         onDelete={() => setShowDeleteAlert(true)}

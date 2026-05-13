@@ -1,6 +1,6 @@
 "use client";
 
-import { DayCell } from "@/components/calendar/day-cell";
+import { DayCell } from "@/components/twig/day-cell";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getBackgroundColorClass } from "@/lib/colors";
@@ -13,7 +13,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * SingleMonthCalendar - A calendar component that displays and tracks leaf completions for a single month
+ * SingleMonthTwig - A twig component that displays and tracks leaf completions for a single month
  * Features:
  * - Month navigation
  * - Grid layout with day cells
@@ -21,7 +21,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
  * - Optimistic UI updates with loading states
  */
 
-interface SingleMonthCalendarProps {
+interface SingleMonthTwigProps {
   leaf: {
     _id: Id<"leaves">;
     name: string;
@@ -37,14 +37,14 @@ interface SingleMonthCalendarProps {
   initialDate?: Date; // Optional starting date, defaults to current date
 }
 
-export function SingleMonthCalendar({
+export function SingleMonthTwig({
   leaf,
   colorTheme,
   completions,
   onToggle,
   initialDate = new Date(),
-}: SingleMonthCalendarProps) {
-  const t = useTranslations("calendar");
+}: SingleMonthTwigProps) {
+  const t = useTranslations("twig");
   const [currentDate, setCurrentDate] = useState(initialDate);
   // Track which dates are currently being updated for loading states
   const [updatingDates, setUpdatingDates] = useState<Set<string>>(new Set());
@@ -125,7 +125,7 @@ export function SingleMonthCalendar({
   const year = format(firstDay, "yyyy");
 
   return (
-    <Card className="min-w-[300px] border p-4 shadow-md">
+    <Card className="min-w-75 border p-4 shadow-md">
       {/* Month navigation header */}
       <div className="mb-4 flex items-center justify-between">
         <Button
@@ -163,7 +163,7 @@ export function SingleMonthCalendar({
               <div className="h-full w-full" />
             </div>
           ))}
-          {/* Calendar day cells */}
+          {/* Twig day cells */}
           {monthDays.map((dateStr) => {
             const isInRange = days.includes(dateStr);
             const count = getCompletionCount(dateStr, leaf._id, completions);

@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getActivityCalendarTheme } from "@/lib/colors";
+import { getActivityTwigTheme } from "@/lib/colors";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { ActivityCalendar } from "react-activity-calendar";
@@ -11,13 +11,13 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * A client-side component that renders a GitHub-style activity calendar for leaf tracking.
- * Uses react-activity-calendar under the hood with custom styling and animations.
+ * A client-side component that renders a GitHub-style activity twig for leaf tracking.
+ * Uses react-activity-twig under the hood with custom styling and animations.
  */
 
-interface LeafActivityCalendarProps {
+interface LeafActivityTwigProps {
   /** Array of daily activity data with date, count, and intensity level */
-  calendarData: Array<{
+  twigData: Array<{
     date: string;
     count: number;
     level: number;
@@ -29,34 +29,34 @@ interface LeafActivityCalendarProps {
         completedAt: number;
       }>
     | undefined;
-  /** Visual customization options for the calendar grid */
-  calendarSize: {
+  /** Visual customization options for the twig grid */
+  twigSize: {
     blockSize: number;
     blockMargin: number;
     showLabels: boolean;
   };
-  /** Theme color key for the calendar's color scheme */
+  /** Theme color key for the twig's color scheme */
   colorTheme: string;
 }
 
-export function LeafActivityCalendar({
-  calendarData,
+export function LeafActivityTwig({
+  twigData,
   completions,
-  calendarSize,
+  twigSize,
   colorTheme,
-}: LeafActivityCalendarProps) {
+}: LeafActivityTwigProps) {
   // Reference to the scrollable container for auto-scrolling to latest entries
   const containerRef = useRef<HTMLDivElement>(null);
   // Get color theme based on the provided theme key
-  const theme = getActivityCalendarTheme(colorTheme);
+  const theme = getActivityTwigTheme(colorTheme);
 
   // Show loading skeleton while completions are being fetched
   if (!completions) {
     return <Skeleton className="h-37.5 w-full" />;
   }
 
-  // Hide calendar completely if no data is available
-  if (calendarData.length === 0) {
+  // Hide twig completely if no data is available
+  if (twigData.length === 0) {
     return null;
   }
 
@@ -77,18 +77,18 @@ export function LeafActivityCalendar({
           }
         }}
       >
-        {/* Horizontally scrollable container for the calendar */}
+        {/* Horizontally scrollable container for the twig */}
         <div className="overflow-x-auto" ref={containerRef}>
           <div className="inline-block">
             <ActivityCalendar
-              data={calendarData}
+              data={twigData}
               showWeekdayLabels={true}
               blockRadius={20}
               hideColorLegend={true}
               hideTotalCount={true}
               weekStart={0} // Start week on Sunday
-              blockSize={calendarSize.blockSize}
-              blockMargin={calendarSize.blockMargin}
+              blockSize={twigSize.blockSize}
+              blockMargin={twigSize.blockMargin}
               fontSize={10}
               maxLevel={4} // Maximum intensity level for activity blocks
               theme={theme}

@@ -4,33 +4,39 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { COLOR_VALUES } from "@/lib/colors";
 import { useTranslations } from "next-intl";
 
-interface CalendarEditFormProps {
+interface TwigEditFormProps {
   name: string;
   onNameChange: (name: string) => void;
   colorTheme: string;
   onColorThemeChange: (color: string) => void;
   position: number;
   onPositionChange: (position: number) => void;
-  totalCalendars: number;
+  totalTwigs: number;
   onSave: () => void;
   onDelete: () => void;
 }
 
-export function CalendarEditForm({
+export function TwigEditForm({
   name,
   onNameChange,
   colorTheme,
   onColorThemeChange,
   position,
   onPositionChange,
-  totalCalendars,
+  totalTwigs,
   onSave,
   onDelete,
-}: CalendarEditFormProps) {
+}: TwigEditFormProps) {
   const t = useTranslations("dialogs");
   const tColors = useTranslations("dialogs.colors");
 
@@ -42,19 +48,23 @@ export function CalendarEditForm({
   return (
     <Card className="mx-auto my-8 max-w-xl border p-2 shadow-md">
       <div className="p-4">
-        <h2 className="mb-6 text-lg font-semibold">{t("calendar.edit.title")}</h2>
+        <h2 className="mb-6 text-lg font-semibold">{t("twig.edit.title")}</h2>
         <div className="space-y-4">
-          {/* Calendar name input field */}
+          {/* Twig name input field */}
           <div>
-            <Label htmlFor="edit-calendar-name">{t("calendar.edit.name.label")}</Label>
-            <Input id="edit-calendar-name" value={name} onChange={(e) => onNameChange(e.target.value)} />
+            <Label htmlFor="edit-twig-name">{t("twig.edit.name.label")}</Label>
+            <Input
+              id="edit-twig-name"
+              value={name}
+              onChange={(e) => onNameChange(e.target.value)}
+            />
           </div>
           {/* Color theme selection */}
           <div>
-            <Label>{t("calendar.edit.color.label")}</Label>
+            <Label>{t("twig.edit.color.label")}</Label>
             <Select value={colorTheme} onValueChange={onColorThemeChange}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("calendar.edit.color.label")}>
+                <SelectValue placeholder={t("twig.edit.color.label")}>
                   <div className="flex items-center gap-2">
                     <div className={`h-4 w-4 rounded-full ${colorTheme}`} />
                     {colors.find((c) => c.value === colorTheme)?.name}
@@ -75,13 +85,18 @@ export function CalendarEditForm({
           </div>
           {/* Position selection */}
           <div>
-            <Label>{t("calendar.edit.position.label")}</Label>
-            <Select value={position.toString()} onValueChange={(value) => onPositionChange(parseInt(value))}>
+            <Label>{t("twig.edit.position.label")}</Label>
+            <Select
+              value={position.toString()}
+              onValueChange={(value) => onPositionChange(parseInt(value))}
+            >
               <SelectTrigger>
-                <SelectValue placeholder={t("calendar.edit.position.placeholder")} />
+                <SelectValue
+                  placeholder={t("twig.edit.position.placeholder")}
+                />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: totalCalendars }, (_, index) => (
+                {Array.from({ length: totalTwigs }, (_, index) => (
                   <SelectItem key={index + 1} value={(index + 1).toString()}>
                     {index + 1}
                   </SelectItem>
@@ -92,10 +107,10 @@ export function CalendarEditForm({
           {/* Action buttons */}
           <div className="flex gap-2 pt-4">
             <Button variant="destructive" onClick={onDelete}>
-              {t("calendar.edit.actions.delete")}
+              {t("twig.edit.actions.delete")}
             </Button>
             <Button onClick={onSave} className="flex-1">
-              {t("calendar.edit.actions.save")}
+              {t("twig.edit.actions.save")}
             </Button>
           </div>
         </div>

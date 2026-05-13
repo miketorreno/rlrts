@@ -1,26 +1,26 @@
 "use client";
 
 import { AuthenticationWrapper } from "@/components/authentication-wrapper";
-import { CalendarContainer } from "@/components/calendar/calendar-container";
-import { ImportExport } from "@/components/calendar/import-export";
+import { TwigContainer } from "@/components/twig/twig-container";
+import { ImportExport } from "@/components/twig/import-export";
 // DEPRECATED
-// import { YearlyOverview } from "@/components/calendar/yearly-overview";
-import { useCalendarData } from "@/hooks/use-calendar-data";
+// import { YearlyOverview } from "@/components/twig/yearly-overview";
+import { useTwigData } from "@/hooks/use-twig-data";
 import { useDateRange } from "@/hooks/use-date-range";
 import { useViewState } from "@/hooks/use-view-state";
 import { memo, useMemo } from "react";
 
 /**
- * Calendar Page Component
- * Renders the main calendar interface with support for month and year views.
+ * Twig Page Component
+ * Renders the main twig interface with support for month and year views.
  * Handles data fetching, view state management, and memoization for performance.
  */
 
 // Memoize components to prevent unnecessary re-renders
-const MemoizedCalendarContainer = memo(CalendarContainer);
+const MemoizedTwigContainer = memo(TwigContainer);
 // const MemoizedYearlyOverview = memo(YearlyOverview);
 
-export default function CalendarPage() {
+export default function TwigPage() {
   // Manage view state (monthRow/year) using custom hook
   const { view, setView } = useViewState();
   const isMonthView = view === "monthRow";
@@ -30,28 +30,26 @@ export default function CalendarPage() {
   const monthData = useDateRange(40);
   const yearData = useDateRange(365);
 
-  // Fetch calendar data (leaves, completions) for both views
-  const monthViewData = useCalendarData(monthData.startDate, monthData.today);
-  // const yearViewData = useCalendarData(yearData.startDate, yearData.today);
+  // Fetch twig data (leaves, completions) for both views
+  const monthViewData = useTwigData(monthData.startDate, monthData.today);
+  // const yearViewData = useTwigData(yearData.startDate, yearData.today);
 
   // Select appropriate days range based on current view
   const days = isMonthView ? monthData.days : yearData.days;
 
-  // Memoize calendar data to prevent unnecessary re-renders
+  // Memoize twig data to prevent unnecessary re-renders
   const memoizedData = useMemo(
     () => ({
-      calendars: monthViewData.calendars || [],
+      twigs: monthViewData.twigs || [],
       leaves: monthViewData.leaves || [],
       completions: monthViewData.completions || [],
     }),
-    [monthViewData.calendars, monthViewData.leaves, monthViewData.completions],
+    [monthViewData.twigs, monthViewData.leaves, monthViewData.completions],
   );
 
   // Show loading state only during initial data fetch
   const isLoading =
-    !monthViewData.calendars ||
-    !monthViewData.leaves ||
-    !monthViewData.completions;
+    !monthViewData.twigs || !monthViewData.leaves || !monthViewData.completions;
 
   return (
     <div className="container mx-auto max-w-7xl pt-16">
@@ -61,14 +59,14 @@ export default function CalendarPage() {
           {/* <MemoizedYearlyOverview
             completions={yearViewData.completions || []}
             leaves={memoizedData.leaves}
-            calendars={memoizedData.calendars}
+            twigs={memoizedData.twigs}
             isLoading={isLoading}
           /> */}
 
-          {/* Main calendar container with month/year view toggle */}
-          <MemoizedCalendarContainer
-            calendarView={view}
-            calendars={memoizedData.calendars}
+          {/* Main twig container with month/year view toggle */}
+          <MemoizedTwigContainer
+            twigView={view}
+            twigs={memoizedData.twigs}
             completions={memoizedData.completions}
             days={days}
             leaves={memoizedData.leaves}
@@ -78,7 +76,7 @@ export default function CalendarPage() {
             isLoading={isLoading}
           />
 
-          {/* Import/Export functionality for calendar data */}
+          {/* Import/Export functionality for twig data */}
           <div className="mx-4 my-8 justify-center">
             <ImportExport />
           </div>

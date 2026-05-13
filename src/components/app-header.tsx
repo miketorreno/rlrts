@@ -52,10 +52,10 @@ export function AppHeader() {
               {t("about")}
             </Link>
             <Link
-              href="/calendar"
+              href="/twig"
               className="text-xs font-medium hover:text-muted-foreground md:text-sm"
             >
-              {t("calendar")}
+              {t("twig")}
             </Link>
             <Link
               href="/pricing"
@@ -123,11 +123,11 @@ export function AppHeader() {
                 {t("about")}
               </Link>
               <Link
-                href="/calendar"
+                href="/twig"
                 className="font-medium hover:text-muted-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t("calendar")}
+                {t("twig")}
               </Link>
               <Link
                 href="/pricing"

@@ -5,10 +5,10 @@ export function useToastMessages() {
   const t = useTranslations("toast");
 
   return {
-    calendar: {
-      created: () => toast.success(t("calendar.created")),
-      updated: () => toast.success(t("calendar.updated")),
-      deleted: () => toast.success(t("calendar.deleted")),
+    twig: {
+      created: () => toast.success(t("twig.created")),
+      updated: () => toast.success(t("twig.updated")),
+      deleted: () => toast.success(t("twig.deleted")),
     },
     leaf: {
       created: () => toast.success(t("leaf.created")),

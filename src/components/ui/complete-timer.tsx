@@ -55,7 +55,7 @@ export function CompleteTimer({
   const hasCompletedRef = useRef(false);
 
   // Translations and API mutations
-  const t = useTranslations("calendar.controls");
+  const t = useTranslations("twig.controls");
   const schedule = useMutation(api.leaves.scheduleLeafIncrement);
   const cancelSchedule = useMutation(api.leaves.cancelScheduledIncrement);
   const leaf = useQuery(api.leaves.get, leafId ? { id: leafId } : "skip");

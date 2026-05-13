@@ -17,13 +17,13 @@ import {
 import { useTranslations } from "next-intl";
 
 /**
- * This module contains dialog components for managing calendars and leaves.
- * It provides interfaces for creating both calendars and leaves.
+ * This module contains dialog components for managing twigs and leaves.
+ * It provides interfaces for creating both twigs and leaves.
  * All dialogs use shadcn/ui components for consistent styling and behavior.
  */
 
 /**
- * Available color themes for calendars using Tailwind's color system.
+ * Available color themes for twigs using Tailwind's color system.
  * Each color is defined with a human-readable name and corresponding Tailwind class.
  * All colors use the 500 shade for consistency in the UI.
  */
@@ -83,13 +83,13 @@ function useTimerDurations() {
 }
 
 /**
- * Dialog component for creating a new calendar.
+ * Dialog component for creating a new twig.
  * Provides form fields for:
- * - Calendar name input
+ * - Twig name input
  * - Color theme selection from predefined options
  * - Submit and cancel actions
  */
-interface NewCalendarDialogProps {
+interface NewTwigDialogProps {
   color: string;
   isOpen: boolean;
   name: string;
@@ -99,7 +99,7 @@ interface NewCalendarDialogProps {
   onSubmit: () => void;
 }
 
-export const NewCalendarDialog = ({
+export const NewTwigDialog = ({
   color,
   isOpen,
   name,
@@ -107,7 +107,7 @@ export const NewCalendarDialog = ({
   onNameChange,
   onOpenChange,
   onSubmit,
-}: NewCalendarDialogProps) => {
+}: NewTwigDialogProps) => {
   const t = useTranslations("dialogs");
   const colors = useColors();
 
@@ -115,25 +115,23 @@ export const NewCalendarDialog = ({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t("calendar.new.title")}</DialogTitle>
+          <DialogTitle>{t("twig.new.title")}</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4">
           <div>
-            <Label htmlFor="calendar-name">
-              {t("calendar.new.name.label")}
-            </Label>
+            <Label htmlFor="twig-name">{t("twig.new.name.label")}</Label>
             <Input
-              id="calendar-name"
+              id="twig-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
-              placeholder={t("calendar.new.name.placeholder")}
+              placeholder={t("twig.new.name.placeholder")}
             />
           </div>
           <div>
-            <Label>{t("calendar.new.color.label")}</Label>
+            <Label>{t("twig.new.color.label")}</Label>
             <Select value={color} onValueChange={onColorChange}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("calendar.new.color.label")}>
+                <SelectValue placeholder={t("twig.new.color.label")}>
                   <div className="flex items-center gap-2">
                     <div className={`h-4 w-4 rounded-full ${color}`} />
                     {colors.find((c) => c.value === color)?.name}
@@ -158,10 +156,10 @@ export const NewCalendarDialog = ({
               onClick={() => onOpenChange(false)}
               className="flex-1"
             >
-              {t("calendar.new.actions.cancel")}
+              {t("twig.new.actions.cancel")}
             </Button>
             <Button onClick={onSubmit} className="flex-1">
-              {t("calendar.new.actions.create")}
+              {t("twig.new.actions.create")}
             </Button>
           </div>
         </div>
@@ -171,7 +169,7 @@ export const NewCalendarDialog = ({
 };
 
 /**
- * Dialog component for creating a new leaf within a calendar.
+ * Dialog component for creating a new leaf within a twig.
  * Provides form fields for:
  * - Leaf name input
  * - Optional timer duration in minutes (1-120 range)

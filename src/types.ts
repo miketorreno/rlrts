@@ -5,15 +5,15 @@
  * type safety for strings that should not be mixed up.
  *
  * Example:
- * - Id<"leaves"> and Id<"calendars"> are different types
- * - This prevents accidentally using a leaf ID where a calendar ID is expected
+ * - Id<"leaves"> and Id<"twigs"> are different types
+ * - This prevents accidentally using a leaf ID where a twig ID is expected
  *
  * @template T - The table/entity name this ID belongs to
  */
 export type Id<T extends string> = string & { __tableName: T };
 
-export interface Calendar {
-  _id: Id<"calendars">;
+export interface Twig {
+  _id: Id<"twigs">;
   _creationTime: number;
   name: string;
   colorTheme: string;
@@ -25,7 +25,7 @@ export interface Leaf {
   _id: Id<"leaves">;
   _creationTime: number;
   name: string;
-  calendarId: Id<"calendars">;
+  twigId: Id<"twigs">;
   userId: string;
 }
 
@@ -39,8 +39,8 @@ export interface Completion {
 
 export type Day = string;
 
-export type EditingCalendar = Pick<
-  Calendar,
+export type EditingTwig = Pick<
+  Twig,
   "_id" | "name" | "colorTheme" | "position"
 >;
 export type EditingLeaf = Pick<Leaf, "_id" | "name">;

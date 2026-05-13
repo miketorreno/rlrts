@@ -1,6 +1,6 @@
 /**
  * Migration to add position fields to existing leaves.
- * This ensures proper ordering of leaves within each calendar
+ * This ensures proper ordering of leaves within each twig
  * for features like drag-and-drop reordering.
  */
 import { mutation } from "./_generated/server";
@@ -14,25 +14,25 @@ export const addPositionsToLeaves = mutation({
       .filter((q) => q.eq(q.field("position"), undefined))
       .collect();
 
-    // Organize leaves by their calendar ID for batch processing
-    // This ensures position numbers are sequential within each calendar
-    const leavesByCalendar = leaves.reduce(
+    // Organize leaves by their twig ID for batch processing
+    // This ensures position numbers are sequential within each twig
+    const leavesByTwig = leaves.reduce(
       (acc, leaf) => {
-        const calendarId = leaf.calendarId;
-        if (!acc[calendarId]) {
-          acc[calendarId] = [];
+        const twigId = leaf.twigId;
+        if (!acc[twigId]) {
+          acc[twigId] = [];
         }
-        acc[calendarId].push(leaf);
+        acc[twigId].push(leaf);
         return acc;
       },
       {} as Record<string, typeof leaves>,
     );
 
-    // Iterate through each calendar's leaves and assign sequential positions
-    // Starting from 1, increment position for each leaf in the calendar
-    for (const calendarLeaves of Object.values(leavesByCalendar)) {
-      for (let i = 0; i < calendarLeaves.length; i++) {
-        await ctx.db.patch(calendarLeaves[i]._id, {
+    // Iterate through each twig's leaves and assign sequential positions
+    // Starting from 1, increment position for each leaf in the twig
+    for (const twigLeaves of Object.values(leavesByTwig)) {
+      for (let i = 0; i < twigLeaves.length; i++) {
+        await ctx.db.patch(twigLeaves[i]._id, {
           position: i + 1,
         });
       }

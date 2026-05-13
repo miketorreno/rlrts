@@ -49,7 +49,7 @@ export function CompleteControls({
   disabled = false,
   leafId,
 }: CompleteControlsProps) {
-  const t = useTranslations("calendar.controls");
+  const t = useTranslations("twig.controls");
   const confettiShape = useMemo(() => confettiLib.shapeFromPath(xIconPath), []);
 
   const handleIncrement = useCallback(async () => {

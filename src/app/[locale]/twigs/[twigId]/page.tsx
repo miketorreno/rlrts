@@ -1,12 +1,12 @@
 /**
- * Dynamic calendar details page that displays information for a specific calendar.
- * Route: /[locale]/calendars/[calendarId]
+ * Dynamic twig details page that displays information for a specific twig.
+ * Route: /[locale]/twigs/[twigId]
  *
  * This page uses dynamic routing with two parameters:
  * - locale: For internationalization support
- * - calendarId: Unique identifier for the calendar from Convex DB
+ * - twigId: Unique identifier for the twig from Convex DB
  */
-import { CalendarDetails } from "@/components/calendar/calendar-details";
+import { TwigDetails } from "@/components/twig/twig-details";
 import { Id } from "../../../../../convex/_generated/dataModel";
 
 // import { Id } from "@server/convex/_generated/dataModel";
@@ -15,17 +15,17 @@ import { Id } from "../../../../../convex/_generated/dataModel";
 interface PageProps {
   params: Promise<{
     locale: string;
-    calendarId: Id<"calendars">; // Strongly typed Convex document ID
+    twigId: Id<"twigs">; // Strongly typed Convex document ID
   }>;
 }
 
 /**
- * Calendar page component that renders details for a specific calendar.
+ * Twig page component that renders details for a specific twig.
  * Awaits the resolution of dynamic route parameters before rendering.
  */
-export default async function CalendarPage({ params }: PageProps) {
+export default async function TwigPage({ params }: PageProps) {
   const resolvedParams = await params;
-  return <CalendarDetails calendarId={resolvedParams.calendarId} />;
+  return <TwigDetails twigId={resolvedParams.twigId} />;
 }
 
 // Disable static optimization to ensure fresh data on each request

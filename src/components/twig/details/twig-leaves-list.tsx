@@ -7,7 +7,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 
 // import { Id } from "@server/convex/_generated/dataModel";
 
-interface CalendarLeavesListProps {
+interface TwigLeavesListProps {
   leaves:
     | Array<{
         _id: Id<"leaves">;
@@ -16,7 +16,7 @@ interface CalendarLeavesListProps {
     | undefined;
 }
 
-export function CalendarLeavesList({ leaves }: CalendarLeavesListProps) {
+export function TwigLeavesList({ leaves }: TwigLeavesListProps) {
   const router = useRouter();
 
   return (
@@ -41,7 +41,7 @@ export function CalendarLeavesList({ leaves }: CalendarLeavesListProps) {
           ))}
           {leaves?.length === 0 && (
             <p className="text-center text-sm text-muted-foreground">
-              No leaves in this calendar yet.
+              No leaves in this twig yet.
             </p>
           )}
         </div>

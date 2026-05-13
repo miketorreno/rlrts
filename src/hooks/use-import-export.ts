@@ -7,7 +7,7 @@ import { api } from "../../convex/_generated/api";
 // import { api } from "@server/convex/_generated/api";
 
 /**
- * Custom hook for handling calendar data import/export functionality.
+ * Custom hook for handling twig data import/export functionality.
  * Manages dialog states and provides methods for importing/exporting JSON data.
  */
 
@@ -22,12 +22,12 @@ export function useImportExport() {
   const [importFile, setImportFile] = useState<File | null>(null);
 
   // Fetch data when authenticated
-  const calendarsAndLeaves = useQuery(
-    api.calendar_sync.exportCalendarsAndLeaves,
+  const twigsAndLeaves = useQuery(
+    api.twig_sync.exportTwigsAndLeaves,
     isAuthenticated ? undefined : "skip",
   );
   const completions = useQuery(
-    api.calendar_sync.exportCompletions,
+    api.twig_sync.exportCompletions,
     isAuthenticated ? undefined : "skip",
   );
 
@@ -36,8 +36,8 @@ export function useImportExport() {
 
     try {
       console.log("Starting export with:", {
-        hasCalendars: !!calendarsAndLeaves?.calendars,
-        numCalendars: calendarsAndLeaves?.calendars?.length,
+        hasTwigs: !!twigsAndLeaves?.twigs,
+        numTwigs: twigsAndLeaves?.twigs?.length,
         hasCompletions: !!completions?.completionsByLeaf,
         completionsKeys: completions?.completionsByLeaf
           ? Object.keys(completions.completionsByLeaf)
@@ -51,24 +51,24 @@ export function useImportExport() {
           if (attempts > 80) {
             reject(
               new Error(
-                !calendarsAndLeaves?.calendars
-                  ? "Failed to fetch calendars"
+                !twigsAndLeaves?.twigs
+                  ? "Failed to fetch twigs"
                   : "Failed to fetch completions",
               ),
             );
             return;
           }
 
-          if (calendarsAndLeaves?.calendars && completions?.completionsByLeaf) {
-            if (!calendarsAndLeaves.calendars.length) {
-              reject(new Error("No calendars found to export"));
+          if (twigsAndLeaves?.twigs && completions?.completionsByLeaf) {
+            if (!twigsAndLeaves.twigs.length) {
+              reject(new Error("No twigs found to export"));
               return;
             }
 
             resolve({
-              calendars: calendarsAndLeaves.calendars.map((calendar) => ({
-                ...calendar,
-                leaves: calendar.leaves.map((leaf) => ({
+              twigs: twigsAndLeaves.twigs.map((twig) => ({
+                ...twig,
+                leaves: twig.leaves.map((leaf) => ({
                   name: leaf.name,
                   position: leaf.position,
                   timerDuration: leaf.timerDuration,
@@ -93,7 +93,7 @@ export function useImportExport() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `streak-calendar-export-${format(new Date(), "yyyy-MM-dd")}.json`;
+      a.download = `streak-twig-export-${format(new Date(), "yyyy-MM-dd")}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -150,7 +150,7 @@ export function useImportExport() {
     setShowImportDialog(false);
   };
 
-  const importData = useMutation(api.calendar_sync.importData);
+  const importData = useMutation(api.twig_sync.importData);
 
   return {
     // Dialog visibility controls

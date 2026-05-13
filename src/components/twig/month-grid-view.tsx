@@ -13,7 +13,7 @@ import { DayCell } from "./day-cell";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Grid view component for displaying leaves in a traditional calendar layout.
+ * Grid view component for displaying leaves in a traditional twig layout.
  * Shows multiple months with day cells arranged in a 7-column grid.
  * Supports leaf completion tracking and mobile-responsive layout.
  */
@@ -22,14 +22,14 @@ import { Id } from "../../../convex/_generated/dataModel";
  * Props interface for the MonthGridView component
  */
 interface MonthGridViewProps {
-  /** Primary leaf for the calendar */
+  /** Primary leaf for the twig */
   leaf: {
     _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
   };
-  /** Color theme for the calendar */
+  /** Color theme for the twig */
   color: string;
   /** Array of dates to display */
   days: string[];
@@ -50,7 +50,7 @@ interface MonthGridViewProps {
     name: string;
     timerDuration?: number;
   }) => void;
-  /** Array of all leaves in the calendar */
+  /** Array of all leaves in the twig */
   leaves: Array<{
     _id: Id<"leaves">;
     name: string;
@@ -70,7 +70,7 @@ export function MonthGridView({
   leaves,
   onAddLeaf,
 }: MonthGridViewProps) {
-  const t = useTranslations("calendar");
+  const t = useTranslations("twig");
   const [loadingState, setLoadingState] = useState<{
     leafId: Id<"leaves">;
     date: string;
@@ -147,8 +147,8 @@ export function MonthGridView({
                   disabled={loadingState?.leafId === leaf._id}
                 />
               </div>
-              {/* Monthly calendar grid */}
-              <MonthGridCalendar
+              {/* Monthly twig grid */}
+              <MonthGridTwig
                 leaf={leaf}
                 color={color}
                 days={days}
@@ -171,16 +171,16 @@ export function MonthGridView({
 }
 
 /**
- * Props interface for the MonthGridCalendar subcomponent
+ * Props interface for the MonthGridTwig subcomponent
  */
-interface MonthGridCalendarProps {
-  /** Leaf to display in the calendar */
+interface MonthGridTwigProps {
+  /** Leaf to display in the twig */
   leaf: {
     _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   };
-  /** Color theme for the calendar */
+  /** Color theme for the twig */
   color: string;
   /** Array of dates to display */
   days: string[];
@@ -199,19 +199,19 @@ interface MonthGridCalendarProps {
 }
 
 /**
- * Subcomponent that renders the actual calendar grid for a leaf
+ * Subcomponent that renders the actual twig grid for a leaf
  * Handles month calculation, day padding, and responsive layout
  */
-function MonthGridCalendar({
+function MonthGridTwig({
   leaf,
   color,
   days,
   completions,
   onToggle,
   loadingState,
-}: MonthGridCalendarProps) {
+}: MonthGridTwigProps) {
   const isMobile = useMobile();
-  const t = useTranslations("calendar");
+  const t = useTranslations("twig");
 
   // Calculate months to display based on the most recent date
   const mostRecentDate = new Date(
@@ -276,8 +276,8 @@ function MonthGridCalendar({
           <div key={monthKey} className="mx-auto w-fit space-y-4">
             {/* Month and year header */}
             <h3 className="font-medium">{`${monthName} ${year}`}</h3>
-            {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-[1px]">
+            {/* Twig grid */}
+            <div className="grid grid-cols-7 gap-px">
               {/* Day name labels */}
               {dayLabels.map((label) => (
                 <div

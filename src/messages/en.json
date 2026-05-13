@@ -5,7 +5,7 @@
   },
   "nav": {
     "home": "Home",
-    "calendar": "Calendar",
+    "twig": "Twig",
     "about": "About",
     "pricing": "Pricing",
     "getStarted": "Get Started",
@@ -17,7 +17,7 @@
     "title": "Track your habits,\nbuild better routines",
     "subtitle": "Simple and visual habit tracking that helps you build consistency and achieve your goals. Don't break the chain and watch your progress grow.",
     "getStarted": "Get Started Free",
-    "goToCalendar": "Go to Calendar",
+    "goToTwig": "Go to Twig",
     "learnMore": "Learn More",
     "hero": {
       "title": "Build Habits That Last with Goal Streak",
@@ -40,7 +40,7 @@
         },
         "timedTasks": {
           "title": "Timed Tasks",
-          "description": "Stay focused with optional timers for your habits"
+          "description": "Stay focused with optional timers for your leaves"
         }
       },
       "motivation": "Helping individuals worldwide build better habits and stay motivated every day!"
@@ -89,7 +89,7 @@
       },
       "flexibleDuration": {
         "title": "Flexible Habit Duration",
-        "description": "Set custom durations for habits to match your needs"
+        "description": "Set custom durations for leaves to match your needs"
       },
       "responsiveDesign": {
         "title": "Responsive Design",
@@ -135,7 +135,7 @@
       "articleUrl": "https://jamesclear.com/stop-procrastinating-seinfeld-strategy"
     },
     "getStarted": "Get Started",
-    "goToCalendar": "Go to Calendar"
+    "goToTwig": "Go to Twig"
   },
   "pricing": {
     "title": "Unlock Your Potential",
@@ -172,14 +172,14 @@
       }
     },
     "comingSoon": "Coming Soon",
-    "goToCalendar": "Go to Calendar"
+    "goToTwig": "Go to Twig"
   },
   "dialogs": {
-    "calendar": {
+    "twig": {
       "new": {
-        "title": "Create New Calendar",
+        "title": "Create New Twig",
         "name": {
-          "label": "Calendar Name",
+          "label": "Twig Name",
           "placeholder": "e.g., Work, Personal, Other..."
         },
         "color": {
@@ -187,13 +187,13 @@
         },
         "actions": {
           "cancel": "Cancel",
-          "create": "Create Calendar"
+          "create": "Create Twig"
         }
       },
       "edit": {
-        "title": "Edit Calendar",
+        "title": "Edit Twig",
         "name": {
-          "label": "Calendar Name"
+          "label": "Twig Name"
         },
         "color": {
           "label": "Color Theme"
@@ -210,9 +210,9 @@
         },
         "deleteConfirm": {
           "title": "Are you sure?",
-          "description": "This will permanently delete the calendar \"{name}\" and all its habits. This action cannot be undone.",
+          "description": "This will permanently delete the twig \"{name}\" and all its leaves. This action cannot be undone.",
           "cancel": "Cancel",
-          "confirm": "Delete Calendar"
+          "confirm": "Delete Twig"
         }
       }
     },
@@ -238,9 +238,9 @@
         "name": {
           "label": "Name"
         },
-        "calendar": {
-          "label": "Calendar",
-          "placeholder": "Select calendar"
+        "twig": {
+          "label": "Twig",
+          "placeholder": "Select twig"
         },
         "position": {
           "label": "Display Order",
@@ -302,13 +302,13 @@
       "confirmCancel": "Timer is still running. Are you sure you want to cancel?"
     }
   },
-  "calendar": {
+  "twig": {
     "views": {
-      "calendar": "Calendar View",
+      "twig": "Calendar View",
       "row": "Row View"
     },
     "emptyState": {
-      "noLeaves": "No habits added yet. Add one to start tracking!"
+      "noLeaves": "No leaves added yet. Add one to start tracking!"
     },
     "controls": {
       "complete": "Complete",
@@ -385,36 +385,36 @@
       "import": {
         "button": "Import",
         "title": "Import",
-        "description": "This will import calendars, habits, and completion history from the selected file.",
+        "description": "This will import twigs, leaves, and completion history from the selected file.",
         "cancel": "Cancel",
         "continue": "Continue"
       },
       "export": {
         "button": "Export",
         "title": "Export",
-        "description": "This will export all your calendars, habits, and completion history.",
+        "description": "This will export all your twigs, leaves, and completion history.",
         "cancel": "Cancel",
         "continue": "Continue"
       }
     },
     "container": {
       "emptyState": {
-        "noCalendars": "You haven't created any calendars yet.",
-        "createOne": "Create one to start tracking your habits!",
-        "createButton": "Create Calendar"
+        "noTwigs": "You haven't created any twigs yet.",
+        "createOne": "Create one to start tracking your leaves!",
+        "createButton": "Create Twig"
       },
-      "addCalendar": "Add Calendar"
+      "addTwig": "Add Twig"
     }
   },
   "auth": {
-    "signInPrompt": "Please sign in to view your calendars",
+    "signInPrompt": "Please sign in to view your twigs",
     "signIn": "Sign In"
   },
   "toast": {
-    "calendar": {
-      "created": "Calendar created successfully",
-      "updated": "Calendar updated successfully",
-      "deleted": "Calendar deleted successfully"
+    "twig": {
+      "created": "Twig created successfully",
+      "updated": "Twig updated successfully",
+      "deleted": "Twig deleted successfully"
     },
     "leaf": {
       "created": "Leaf created successfully",

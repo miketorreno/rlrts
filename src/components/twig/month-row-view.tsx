@@ -11,7 +11,7 @@ import { DayCell } from "./day-cell";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Row view component for displaying leaves in a horizontal calendar layout.
+ * Row view component for displaying leaves in a horizontal twig layout.
  * Shows days in a continuous row with leaf completion tracking.
  * Supports RTL languages and includes gradient fade effects for better UX.
  */
@@ -20,14 +20,14 @@ import { Id } from "../../../convex/_generated/dataModel";
  * Props interface for the MonthRowView component
  */
 interface MonthRowViewProps {
-  /** Primary leaf for the calendar */
+  /** Primary leaf for the twig */
   leaf: {
     _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
   };
-  /** Color theme for the calendar */
+  /** Color theme for the twig */
   color: string;
   /** Array of dates to display */
   days: string[];
@@ -48,7 +48,7 @@ interface MonthRowViewProps {
     name: string;
     timerDuration?: number;
   }) => void;
-  /** Array of all leaves in the calendar */
+  /** Array of all leaves in the twig */
   leaves: Array<{
     _id: Id<"leaves">;
     name: string;
@@ -60,7 +60,7 @@ interface MonthRowViewProps {
 }
 
 /**
- * Component that renders leaves in a horizontal calendar layout
+ * Component that renders leaves in a horizontal twig layout
  * Supports RTL languages and includes gradient fade effects
  */
 export function MonthRowView({
@@ -73,7 +73,7 @@ export function MonthRowView({
   onAddLeaf,
 }: MonthRowViewProps) {
   const locale = useLocale();
-  const t = useTranslations("calendar");
+  const t = useTranslations("twig");
   const [loadingState, setLoadingState] = useState<{
     leafId: Id<"leaves">;
     date: string;
@@ -163,7 +163,7 @@ export function MonthRowView({
                 <div className="flex-1">
                   <div className="flex justify-end">
                     <div
-                      className={`flex gap-px ${isRTL ? "pl-[104px] md:pl-28" : "pr-[104px] md:pr-28"}`}
+                      className={`flex gap-px ${isRTL ? "pl-26 md:pl-28" : "pr-26 md:pr-28"}`}
                     >
                       {days.map((date) => (
                         <DayCell

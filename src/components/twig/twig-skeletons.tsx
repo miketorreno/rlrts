@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface CalendarSkeletonsProps {
+interface TwigSkeletonsProps {
   view?: "monthRow" | "monthGrid";
 }
 
@@ -23,12 +23,12 @@ export function YearlyOverviewSkeleton() {
 function MonthGridSkeleton() {
   return (
     <div className="space-y-6">
-      {/* Calendar Title */}
+      {/* Twig Title */}
       <div className="flex justify-center">
         <Skeleton className="h-12 w-64" />
       </div>
 
-      {/* Calendar Grid */}
+      {/* Twig Grid */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3].map((j) => (
           <div key={j} className="space-y-4">
@@ -98,9 +98,7 @@ function MonthRowSkeleton() {
   );
 }
 
-export function CalendarSkeletons({
-  view = "monthGrid",
-}: CalendarSkeletonsProps) {
+export function TwigSkeletons({ view = "monthGrid" }: TwigSkeletonsProps) {
   return (
     <Card className="space-y-8 border p-2 shadow-md">
       {/* View Controls Skeleton */}
@@ -109,7 +107,7 @@ export function CalendarSkeletons({
       </div>
 
       <div className="flex w-full flex-col gap-8 md:px-8">
-        {/* Calendar Skeletons */}
+        {/* Twig Skeletons */}
         {[1, 2].map((i) => (
           <div key={i}>
             {view === "monthGrid" ? (
@@ -121,7 +119,7 @@ export function CalendarSkeletons({
         ))}
       </div>
 
-      {/* Add Calendar Button Skeleton */}
+      {/* Add Twig Button Skeleton */}
       <div className="flex justify-center pb-4">
         <Skeleton className="h-10 w-32" />
       </div>

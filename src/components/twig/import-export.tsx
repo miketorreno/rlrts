@@ -22,14 +22,14 @@ import { useTranslations } from "next-intl";
 
 /**
  * ImportExport Component
- * Provides UI and functionality for importing and exporting calendar data
+ * Provides UI and functionality for importing and exporting twig data
  * Uses a multi-dialog approach:
  * 1. Main dialog for choosing between import/export
  * 2. Confirmation dialogs for both import and export actions
  */
 
 export function ImportExport() {
-  const t = useTranslations("calendar.importExport");
+  const t = useTranslations("twig.importExport");
   // Custom hook managing all import/export state and handlers
   const {
     handleExportConfirm, // Handles the actual export operation

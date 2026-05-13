@@ -4,15 +4,15 @@ import { mutation, query } from "./_generated/server";
 /**
  *
  * Key features:
- * - Position-based ordering of calendars
- * - Cascading deletions (calendar -> leaves -> completions)
- * - User-specific calendar management
+ * - Position-based ordering of twigs
+ * - Cascading deletions (twig -> leaves -> completions)
+ * - User-specific twig management
  * - Authentication checks on all operations
  */
 
 /**
  * @throws {Error} If user is not authenticated
- * @returns {Promise<Calendar[]>} List of calendars owned by the user
+ * @returns {Promise<Twig[]>} List of twigs owned by the user
  */
 export const list = query({
   handler: async (ctx) => {
@@ -20,7 +20,7 @@ export const list = query({
     if (!identity) throw new Error("Not authenticated");
 
     return await ctx.db
-      .query("calendars")
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .order("asc")
       .collect();
@@ -28,10 +28,10 @@ export const list = query({
 });
 
 /**
- * @param {string} name - Display name for the calendar
+ * @param {string} name - Display name for the twig
  * @param {string} colorTheme - Color theme identifier for UI customization
  * @throws {Error} If user is not authenticated
- * @returns {Promise<Id<"calendars">>} ID of the newly created calendar
+ * @returns {Promise<Id<"twigs">>} ID of the newly created twig
  */
 export const create = mutation({
   args: {
@@ -42,48 +42,48 @@ export const create = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    // Position is 1-based and determined by number of existing calendars
-    const existingCalendars = await ctx.db
-      .query("calendars")
+    // Position is 1-based and determined by number of existing twigs
+    const existingTwigs = await ctx.db
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
-    return await ctx.db.insert("calendars", {
+    return await ctx.db.insert("twigs", {
       name: args.name,
       userId: identity.subject,
       colorTheme: args.colorTheme,
-      position: existingCalendars.length + 1,
+      position: existingTwigs.length + 1,
     });
   },
 });
 
 /**
  * Performs cascading deletion in this order:
- * 1. Deletes all completions for each leaf in the calendar
- * 2. Deletes all leaves belonging to the calendar
- * 3. Updates positions of remaining calendars to maintain order
- * 4. Deletes the calendar itself
+ * 1. Deletes all completions for each leaf in the twig
+ * 2. Deletes all leaves belonging to the twig
+ * 3. Updates positions of remaining twigs to maintain order
+ * 4. Deletes the twig itself
  *
- * @param {Id<"calendars">} id - ID of calendar to delete
- * @throws {Error} If user is not authenticated or calendar not found/owned by user
+ * @param {Id<"twigs">} id - ID of twig to delete
+ * @throws {Error} If user is not authenticated or twig not found/owned by user
  */
 export const remove = mutation({
   args: {
-    id: v.id("calendars"),
+    id: v.id("twigs"),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    const calendar = await ctx.db.get(args.id);
-    if (!calendar || calendar.userId !== identity.subject) {
-      throw new Error("Calendar not found");
+    const twig = await ctx.db.get(args.id);
+    if (!twig || twig.userId !== identity.subject) {
+      throw new Error("Twig not found");
     }
 
     // Step 1 & 2: Delete leaves and their completions
     const leaves = await ctx.db
       .query("leaves")
-      .filter((q) => q.eq(q.field("calendarId"), args.id))
+      .filter((q) => q.eq(q.field("twigId"), args.id))
       .collect();
 
     for (const leaf of leaves) {
@@ -102,45 +102,45 @@ export const remove = mutation({
       await ctx.db.delete(leaf._id);
     }
 
-    // Step 3: Update positions of remaining calendars
-    const allCalendars = await ctx.db
-      .query("calendars")
+    // Step 3: Update positions of remaining twigs
+    const allTwigs = await ctx.db
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
-    const deletedPosition = calendar.position ?? allCalendars.length;
+    const deletedPosition = twig.position ?? allTwigs.length;
 
-    // Decrement position of all calendars that were after the deleted one
-    for (const otherCalendar of allCalendars) {
-      if (otherCalendar._id === args.id) continue;
+    // Decrement position of all twigs that were after the deleted one
+    for (const otherTwig of allTwigs) {
+      if (otherTwig._id === args.id) continue;
 
-      const currentPosition = otherCalendar.position ?? allCalendars.length;
+      const currentPosition = otherTwig.position ?? allTwigs.length;
       if (currentPosition > deletedPosition) {
-        await ctx.db.patch(otherCalendar._id, {
+        await ctx.db.patch(otherTwig._id, {
           position: currentPosition - 1,
         });
       }
     }
 
-    // Step 4: Delete the calendar
+    // Step 4: Delete the twig
     await ctx.db.delete(args.id);
   },
 });
 
 /**
  * Position update logic:
- * - Moving down: Decrement positions of calendars between old and new position
- * - Moving up: Increment positions of calendars between new and old position
+ * - Moving down: Decrement positions of twigs between old and new position
+ * - Moving up: Increment positions of twigs between new and old position
  *
- * @param {Id<"calendars">} id - Calendar ID to update
- * @param {string} name - New calendar name
+ * @param {Id<"twigs">} id - Twig ID to update
+ * @param {string} name - New twig name
  * @param {string} colorTheme - New color theme
  * @param {number} position - New position in the list
- * @throws {Error} If user is not authenticated or calendar not found/owned by user
+ * @throws {Error} If user is not authenticated or twig not found/owned by user
  */
 export const update = mutation({
   args: {
-    id: v.id("calendars"),
+    id: v.id("twigs"),
     name: v.string(),
     colorTheme: v.string(),
     position: v.number(),
@@ -149,36 +149,36 @@ export const update = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthenticated");
 
-    const calendar = await ctx.db.get(args.id);
-    if (!calendar || calendar.userId !== identity.subject) {
+    const twig = await ctx.db.get(args.id);
+    if (!twig || twig.userId !== identity.subject) {
       throw new Error("Not authorized");
     }
 
-    const allCalendars = await ctx.db
-      .query("calendars")
+    const allTwigs = await ctx.db
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
     // Handle position updates if position changed
-    if (calendar.position !== args.position) {
-      const oldPosition = calendar.position ?? allCalendars.length;
+    if (twig.position !== args.position) {
+      const oldPosition = twig.position ?? allTwigs.length;
       const newPosition = args.position;
 
-      for (const otherCalendar of allCalendars) {
-        if (otherCalendar._id === args.id) continue;
+      for (const otherTwig of allTwigs) {
+        if (otherTwig._id === args.id) continue;
 
-        const currentPosition = otherCalendar.position ?? allCalendars.length;
+        const currentPosition = otherTwig.position ?? allTwigs.length;
         if (oldPosition < newPosition) {
-          // Moving down: shift affected calendars up
+          // Moving down: shift affected twigs up
           if (currentPosition > oldPosition && currentPosition <= newPosition) {
-            await ctx.db.patch(otherCalendar._id, {
+            await ctx.db.patch(otherTwig._id, {
               position: currentPosition - 1,
             });
           }
         } else {
-          // Moving up: shift affected calendars down
+          // Moving up: shift affected twigs down
           if (currentPosition >= newPosition && currentPosition < oldPosition) {
-            await ctx.db.patch(otherCalendar._id, {
+            await ctx.db.patch(otherTwig._id, {
               position: currentPosition + 1,
             });
           }
@@ -186,7 +186,7 @@ export const update = mutation({
       }
     }
 
-    // Update the calendar's properties
+    // Update the twig's properties
     await ctx.db.patch(args.id, {
       name: args.name,
       colorTheme: args.colorTheme,
@@ -196,15 +196,15 @@ export const update = mutation({
 });
 
 /**
- * @param {Id<"calendars">} id - Calendar ID to retrieve
- * @throws {Error} If calendar not found
- * @returns {Promise<Calendar>} The requested calendar
+ * @param {Id<"twigs">} id - Twig ID to retrieve
+ * @throws {Error} If twig not found
+ * @returns {Promise<Twig>} The requested twig
  */
 export const get = query({
-  args: { id: v.id("calendars") },
+  args: { id: v.id("twigs") },
   handler: async (ctx, args) => {
-    const calendar = await ctx.db.get(args.id);
-    if (!calendar) throw new Error("Calendar not found");
-    return calendar;
+    const twig = await ctx.db.get(args.id);
+    if (!twig) throw new Error("Twig not found");
+    return twig;
   },
 });

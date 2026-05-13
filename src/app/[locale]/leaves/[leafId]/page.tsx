@@ -18,9 +18,9 @@ import { api } from "../../../../../convex/_generated/api";
  * Uses dynamic routing to fetch leaf data based on the leafId parameter.
  *
  * Key features:
- * - Fetches leaf and associated calendar data
+ * - Fetches leaf and associated twig data
  * - Handles loading states with skeleton UI
- * - Redirects to calendar if leaf not found
+ * - Redirects to twig if leaf not found
  * - Renders LeafDetails component with edit/delete capabilities
  */
 export default function LeafPage() {
@@ -31,17 +31,14 @@ export default function LeafPage() {
 
   // Always call hooks unconditionally
   const leaf = useQuery(api.leaves.get, { id: leafId });
-  const calendar = useQuery(
-    api.calendars.get,
-    leaf ? { id: leaf.calendarId } : "skip",
-  );
+  const twig = useQuery(api.twigs.get, leaf ? { id: leaf.twigId } : "skip");
 
   // Handle redirects in useEffect
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.replace("/");
     } else if (leaf === null) {
-      router.replace("/calendar");
+      router.replace("/twig");
     }
   }, [isLoading, isAuthenticated, leaf, router]);
 
@@ -52,12 +49,12 @@ export default function LeafPage() {
 
   return (
     <div className="container mx-auto max-w-7xl">
-      {leaf && calendar ? (
+      {leaf && twig ? (
         // Render leaf details when data is available
         <LeafDetails
           leaf={leaf}
-          calendar={calendar}
-          onDelete={() => router.replace("/calendar")}
+          twig={twig}
+          onDelete={() => router.replace("/twig")}
         />
       ) : (
         // Show skeleton loading state while data is being fetched

@@ -1,23 +1,23 @@
 /**
  * Custom hook for managing dialog states in the application.
- * Handles state for both calendar and leaf dialogs including:
+ * Handles state for both twig and leaf dialogs including:
  * - New/Edit modal visibility
  * - Form data (name, color, duration)
  * - Selected/Editing items
  */
-import { Calendar, EditingCalendar } from "@/types";
+import { Twig, EditingTwig } from "@/types";
 import { useCallback, useState } from "react";
 
 /**
  * Interface defining the structure of dialog states
- * Includes separate states for calendar and leaf dialogs
+ * Includes separate states for twig and leaf dialogs
  */
-interface CalendarState {
+interface TwigState {
   isNewOpen: boolean;
   isEditOpen: boolean;
   name: string;
   color: string;
-  editingCalendar: EditingCalendar | null;
+  editingTwig: EditingTwig | null;
   position: number;
 }
 
@@ -25,28 +25,28 @@ interface LeafState {
   isNewOpen: boolean;
   name: string;
   timerDuration?: number;
-  selectedCalendar: Calendar | null;
+  selectedTwig: Twig | null;
 }
 
 interface DialogState {
-  calendar: CalendarState;
+  twig: TwigState;
   leaf: LeafState;
 }
 
 const initialState: DialogState = {
-  calendar: {
+  twig: {
     isNewOpen: false,
     isEditOpen: false,
     name: "",
     color: "bg-red-500",
-    editingCalendar: null,
+    editingTwig: null,
     position: 1,
   },
   leaf: {
     isNewOpen: false,
     name: "",
     timerDuration: undefined,
-    selectedCalendar: null,
+    selectedTwig: null,
   },
 };
 
@@ -58,13 +58,13 @@ export function useDialogState() {
   const [state, setState] = useState<DialogState>(initialState);
 
   /**
-   * Resets calendar dialog state to initial values
+   * Resets twig dialog state to initial values
    */
-  const resetCalendarState = useCallback(() => {
+  const resetTwigState = useCallback(() => {
     setState((prev) => ({
       ...prev,
-      calendar: {
-        ...initialState.calendar,
+      twig: {
+        ...initialState.twig,
       },
     }));
   }, []);
@@ -82,73 +82,73 @@ export function useDialogState() {
   }, []);
 
   /**
-   * Opens the new calendar dialog
+   * Opens the new twig dialog
    */
-  const openNewCalendar = useCallback(() => {
+  const openNewTwig = useCallback(() => {
     setState((prev) => ({
       ...prev,
-      calendar: { ...prev.calendar, isNewOpen: true },
+      twig: { ...prev.twig, isNewOpen: true },
     }));
   }, []);
 
   /**
-   * Opens the edit calendar dialog with existing calendar data
+   * Opens the edit twig dialog with existing twig data
    */
-  const openEditCalendar = useCallback((calendar: EditingCalendar) => {
+  const openEditTwig = useCallback((twig: EditingTwig) => {
     setState((prev) => ({
       ...prev,
-      calendar: {
-        ...prev.calendar,
+      twig: {
+        ...prev.twig,
         isEditOpen: true,
-        editingCalendar: calendar,
-        name: calendar.name,
-        color: calendar.colorTheme,
-        position: calendar.position ?? 1,
+        editingTwig: twig,
+        name: twig.name,
+        color: twig.colorTheme,
+        position: twig.position ?? 1,
       },
     }));
   }, []);
 
   /**
-   * Opens the new leaf dialog with selected calendar
+   * Opens the new leaf dialog with selected twig
    */
-  const openNewLeaf = useCallback((calendar: Calendar) => {
+  const openNewLeaf = useCallback((twig: Twig) => {
     setState((prev) => ({
       ...prev,
       leaf: {
         ...prev.leaf,
         isNewOpen: true,
-        selectedCalendar: calendar,
+        selectedTwig: twig,
       },
     }));
   }, []);
 
   /**
-   * Updates calendar name in state
+   * Updates twig name in state
    */
-  const updateCalendarName = useCallback((name: string) => {
+  const updateTwigName = useCallback((name: string) => {
     setState((prev) => ({
       ...prev,
-      calendar: { ...prev.calendar, name },
+      twig: { ...prev.twig, name },
     }));
   }, []);
 
   /**
-   * Updates calendar color theme in state
+   * Updates twig color theme in state
    */
-  const updateCalendarColor = useCallback((color: string) => {
+  const updateTwigColor = useCallback((color: string) => {
     setState((prev) => ({
       ...prev,
-      calendar: { ...prev.calendar, color },
+      twig: { ...prev.twig, color },
     }));
   }, []);
 
   /**
-   * Updates calendar position in state
+   * Updates twig position in state
    */
-  const updateCalendarPosition = useCallback((position: number) => {
+  const updateTwigPosition = useCallback((position: number) => {
     setState((prev) => ({
       ...prev,
-      calendar: { ...prev.calendar, position },
+      twig: { ...prev.twig, position },
     }));
   }, []);
 
@@ -174,15 +174,15 @@ export function useDialogState() {
 
   return {
     state,
-    openNewCalendar,
-    openEditCalendar,
+    openNewTwig,
+    openEditTwig,
     openNewLeaf,
-    updateCalendarName,
-    updateCalendarColor,
-    updateCalendarPosition,
+    updateTwigName,
+    updateTwigColor,
+    updateTwigPosition,
     updateLeafName,
     updateLeafTimer,
-    resetCalendarState,
+    resetTwigState,
     resetLeafState,
   };
 }

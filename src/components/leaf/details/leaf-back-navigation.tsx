@@ -13,7 +13,7 @@ export function LeafBackNavigation() {
     <div className="flex items-center gap-2 p-2">
       <Button
         variant="ghost"
-        onClick={() => router.push("/calendar")}
+        onClick={() => router.push("/twig")}
         className="gap-2"
       >
         <ArrowLeft className="h-4 w-4" />

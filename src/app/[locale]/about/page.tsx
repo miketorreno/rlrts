@@ -285,15 +285,15 @@ export default function AboutPage() {
       <div className="flex justify-center">
         <Show when="signed-in">
           <Button asChild size="lg">
-            <Link href="/calendar" locale={locale}>
-              {t("goToCalendar")}
+            <Link href="/twig" locale={locale}>
+              {t("goToTwig")}
             </Link>
           </Button>
         </Show>
         {/* <SignedIn>
           <Button asChild size="lg">
-            <Link href="/calendar" locale={locale}>
-              {t("goToCalendar")}
+            <Link href="/twig" locale={locale}>
+              {t("goToTwig")}
             </Link>
           </Button>
         </SignedIn> */}

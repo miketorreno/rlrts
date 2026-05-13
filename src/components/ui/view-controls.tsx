@@ -4,55 +4,55 @@ import { useTranslations } from "next-intl";
 import { memo } from "react";
 
 /**
- * View controls component for switching between different calendar layouts.
+ * View controls component for switching between different twig layouts.
  * Provides a tabbed interface to toggle between month grid and row views.
  * Uses Shadcn UI tabs with custom icons and internationalization.
  */
 
 /**
- * Type defining the available calendar view modes
+ * Type defining the available twig view modes
  * monthRow: Horizontal layout with leaves in rows
- * monthGrid: Traditional calendar grid layout
+ * monthGrid: Traditional twig grid layout
  */
-export type CalendarView = "monthRow" | "monthGrid";
+export type TwigView = "monthRow" | "monthGrid";
 
 /**
  * Props interface for the ViewControls component
  */
 interface ViewControlsProps {
   /** Current active view mode */
-  calendarView: CalendarView;
+  twigView: TwigView;
   /** Callback for handling view mode changes */
-  onViewChange: (view: CalendarView) => void;
+  onViewChange: (view: TwigView) => void;
 }
 
 /**
- * Memoized component for switching between calendar view modes.
+ * Memoized component for switching between twig view modes.
  * Uses tabs for intuitive switching between grid and row layouts.
  * Includes icons for better visual representation of each view.
  */
 export const ViewControls = memo(
-  ({ calendarView, onViewChange }: ViewControlsProps) => {
-    const t = useTranslations("calendar.views");
+  ({ twigView, onViewChange }: ViewControlsProps) => {
+    const t = useTranslations("twig.views");
 
     /**
      * Handles tab value changes and triggers the view change callback
-     * Casts the string value to CalendarView type
+     * Casts the string value to TwigView type
      */
     const handleValueChange = (value: string) => {
-      onViewChange(value as CalendarView);
+      onViewChange(value as TwigView);
     };
 
     return (
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Tabs value={calendarView} onValueChange={handleValueChange}>
+          <Tabs value={twigView} onValueChange={handleValueChange}>
             <TabsList>
-              {/* Grid view tab with calendar icon */}
+              {/* Grid view tab with twig icon */}
               <TabsTrigger asChild value="monthGrid">
                 <button className="flex items-center">
                   <CalendarDays className="mr-2 h-4 w-4" />
-                  {t("calendar")}
+                  {t("twig")}
                 </button>
               </TabsTrigger>
               {/* Row view tab with horizontal grip icon */}

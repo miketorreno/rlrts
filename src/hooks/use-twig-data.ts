@@ -7,12 +7,12 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
 // import { Doc, Id } from "@server/convex/_generated/dataModel";
 
 /**
- * Custom hook for managing calendar-related data and operations in a leaf tracking application.
- * Centralizes all calendar, leaf, and completion data access and mutations in one place.
+ * Custom hook for managing twig-related data and operations in a leaf tracking application.
+ * Centralizes all twig, leaf, and completion data access and mutations in one place.
  *
  * Key features:
  * - Handles authentication state and skips queries when not authenticated
- * - Provides CRUD operations for calendars and leaves
+ * - Provides CRUD operations for twigs and leaves
  * - Manages leaf completion tracking with support for multiple completions per day
  * - Handles date range-based queries for completion history
  *
@@ -21,7 +21,7 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
  *
  * Note: All database operations are authenticated and will fail if user is not logged in
  */
-export function useCalendarData(startDate: Date, endDate: Date) {
+export function useTwigData(startDate: Date, endDate: Date) {
   const { isAuthenticated } = useConvexAuth();
   const [allCompletions, setAllCompletions] = useState<Doc<"completions">[]>(
     [],
@@ -31,23 +31,20 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   // --- Database Queries ---
 
   /**
-   * Fetches all calendars owned by the authenticated user
-   * Returns undefined if not authenticated, empty array if no calendars exist
-   * Calendars are ordered by their position field
+   * Fetches all twigs owned by the authenticated user
+   * Returns undefined if not authenticated, empty array if no twigs exist
+   * Twigs are ordered by their position field
    */
-  const calendarsQuery = useQuery(
-    api.calendars.list,
-    isAuthenticated ? {} : "skip",
-  );
+  const twigsQuery = useQuery(api.twigs.list, isAuthenticated ? {} : "skip");
 
   /**
-   * Fetches all leaves across all calendars for the authenticated user
-   * Setting calendarId to undefined retrieves leaves from all calendars
-   * Leaves are ordered by their position within each calendar
+   * Fetches all leaves across all twigs for the authenticated user
+   * Setting twigId to undefined retrieves leaves from all twigs
+   * Leaves are ordered by their position within each twig
    */
   const leavesQuery = useQuery(
     api.leaves.list,
-    isAuthenticated ? { calendarId: undefined } : "skip",
+    isAuthenticated ? { twigId: undefined } : "skip",
   );
 
   /**
@@ -102,71 +99,71 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   // --- Database Mutations ---
   // Initialize mutation functions for CRUD operations
   // Each mutation is authenticated and optimistically updates the UI
-  const createCalendar = useMutation(api.calendars.create);
+  const createTwig = useMutation(api.twigs.create);
   const createLeaf = useMutation(api.leaves.create);
   const markComplete = useMutation(api.leaves.markComplete);
-  const updateCalendar = useMutation(api.calendars.update);
+  const updateTwig = useMutation(api.twigs.update);
   const updateLeaf = useMutation(api.leaves.update);
-  const deleteCalendar = useMutation(api.calendars.remove);
+  const deleteTwig = useMutation(api.twigs.remove);
   const deleteLeaf = useMutation(api.leaves.remove);
 
   /**
-   * Creates a new calendar for the authenticated user
-   * Validates input and prevents empty calendar names
-   * Position is automatically assigned based on existing calendars
+   * Creates a new twig for the authenticated user
+   * Validates input and prevents empty twig names
+   * Position is automatically assigned based on existing twigs
    *
-   * @param name - Display name for the calendar (must be non-empty)
+   * @param name - Display name for the twig (must be non-empty)
    * @param colorTheme - Theme identifier for styling (e.g., "bg-red-500")
    */
-  const handleAddCalendar = async (name: string, colorTheme: string) => {
+  const handleAddTwig = async (name: string, colorTheme: string) => {
     if (!name.trim()) return;
-    await createCalendar({
+    await createTwig({
       name,
       colorTheme,
     });
   };
 
   /**
-   * Creates a new leaf within a specified calendar
+   * Creates a new leaf within a specified twig
    * Validates input and prevents empty leaf names
    * Supports optional timer duration for timed leaves
-   * Position is automatically assigned within the calendar
+   * Position is automatically assigned within the twig
    *
    * @param name - Display name for the leaf (must be non-empty)
-   * @param calendarId - Parent calendar ID
+   * @param twigId - Parent twig ID
    * @param timerDuration - Optional duration in minutes for timed leaves
    */
   const handleAddLeaf = async (
     name: string,
-    calendarId: Id<"calendars">,
+    twigId: Id<"twigs">,
     timerDuration?: number,
   ) => {
     if (!name.trim()) return;
     await createLeaf({
       name,
-      calendarId,
+      twigId,
       timerDuration,
     });
   };
 
   /**
-   * Updates an existing calendar's properties
-   * Validates input and prevents empty calendar names
-   * Updates position and maintains order of other calendars
+   * Updates an existing twig's properties
+   * Validates input and prevents empty twig names
+   * Updates position and maintains order of other twigs
    *
-   * @param id - Calendar ID to update
+   * @param id - Twig ID to update
    * @param name - New display name (must be non-empty)
    * @param colorTheme - New theme identifier
-   * @param position - New position in the calendar list
+   * @param position - New position in the twig list
    */
-  const handleEditCalendar = async (
-    id: Id<"calendars">,
+  const handleEditTwig = async (
+    id: Id<"twigs">,
     name: string,
     colorTheme: string,
     position: number,
   ) => {
     if (!name.trim()) return;
-    await updateCalendar({
+    await updateTwig({
       id,
       name,
       colorTheme,
@@ -177,7 +174,7 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   /**
    * Updates an existing leaf's properties
    * Validates input and prevents empty leaf names
-   * Maintains the leaf's calendar association
+   * Maintains the leaf's twig association
    *
    * @param id - Leaf ID to update
    * @param name - New display name (must be non-empty)
@@ -196,23 +193,23 @@ export function useCalendarData(startDate: Date, endDate: Date) {
       id,
       name,
       timerDuration,
-      calendarId: leaf.calendarId,
+      twigId: leaf.twigId,
     });
   };
 
   /**
-   * Deletes a calendar and cascades deletion to all associated leaves
+   * Deletes a twig and cascades deletion to all associated leaves
    * Also removes all completion records for the deleted leaves
    *
-   * @param id - Calendar ID to delete
+   * @param id - Twig ID to delete
    */
-  const handleDeleteCalendar = async (id: Id<"calendars">) => {
-    await deleteCalendar({ id });
+  const handleDeleteTwig = async (id: Id<"twigs">) => {
+    await deleteTwig({ id });
   };
 
   /**
    * Deletes a specific leaf and all its completion records
-   * Updates positions of remaining leaves in the calendar
+   * Updates positions of remaining leaves in the twig
    *
    * @param id - Leaf ID to delete
    */
@@ -251,7 +248,7 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   // Loading state indicates if any required data is still being fetched
   // This helps prevent UI flicker and incomplete data display
   const isLoading =
-    calendarsQuery === undefined ||
+    twigsQuery === undefined ||
     leavesQuery === undefined ||
     completionsQuery === undefined;
 
@@ -259,16 +256,16 @@ export function useCalendarData(startDate: Date, endDate: Date) {
     isAuthenticated,
     isLoading,
     isLoadingMore,
-    calendars: calendarsQuery,
+    twigs: twigsQuery,
     leaves: leavesQuery,
     completions: allCompletions,
     hasMoreCompletions: completionsQuery?.hasMore ?? false,
     loadMoreCompletions,
-    handleAddCalendar,
+    handleAddTwig,
     handleAddLeaf,
-    handleEditCalendar,
+    handleEditTwig,
     handleEditLeaf,
-    handleDeleteCalendar,
+    handleDeleteTwig,
     handleDeleteLeaf,
     handleToggleLeaf,
   };

@@ -144,7 +144,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const meta = i18nMetadata[locale] ?? i18nMetadata.en;
 
   return {
-    metadataBase: new URL("https://www.streakcalendar.com"),
+    metadataBase: new URL("https://www.official.domain.com"),
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
@@ -154,7 +154,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: ["/og-image.png"],
       type: "website",
       siteName: meta.title.split(" - ")[0],
-      url: `https://www.streakcalendar.com/${locale}`,
+      url: `https://www.official.domain.com/${locale}`,
     },
     twitter: {
       card: "summary_large_image",

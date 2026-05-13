@@ -5,20 +5,20 @@ import { internalMutation, mutation, query } from "./_generated/server";
 
 /**
  * Key features:
- * - Position-based ordering within calendars
+ * - Position-based ordering within twigs
  * - Multiple completion tracking per day
  * - Cascading deletions (leaf -> completions)
  * - Timer duration support for timed leaves
  */
 
 /**
- * @param {Id<"calendars">} [calendarId] - Optional calendar ID to filter leaves
+ * @param {Id<"twigs">} [twigId] - Optional twig ID to filter leaves
  * @throws {Error} If user is not authenticated
  * @returns {Promise<Doc<"leaves">[]>} List of leaves, sorted by position
  */
 export const list = query({
   args: {
-    calendarId: v.optional(v.id("calendars")),
+    twigId: v.optional(v.id("twigs")),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -28,8 +28,8 @@ export const list = query({
       .query("leaves")
       .filter((q) => q.eq(q.field("userId"), identity.subject));
 
-    if (args.calendarId) {
-      q = q.filter((q) => q.eq(q.field("calendarId"), args.calendarId));
+    if (args.twigId) {
+      q = q.filter((q) => q.eq(q.field("twigId"), args.twigId));
     }
 
     const leaves = await q.collect();
@@ -41,31 +41,31 @@ export const list = query({
 
 /**
  * @param {string} name - Display name for the leaf
- * @param {Id<"calendars">} calendarId - Calendar to create leaf in
+ * @param {Id<"twigs">} twigId - Twig to create leaf in
  * @param {number} [timerDuration] - Optional duration in milliseconds for timed leaves
- * @throws {Error} If user is not authenticated or calendar not found/owned by user
+ * @throws {Error} If user is not authenticated or twig not found/owned by user
  * @returns {Promise<Id<"leaves">>} ID of the newly created leaf
  */
 export const create = mutation({
   args: {
     name: v.string(),
-    calendarId: v.id("calendars"),
+    twigId: v.id("twigs"),
     timerDuration: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    // Verify calendar belongs to user
-    const calendar = await ctx.db.get(args.calendarId);
-    if (!calendar || calendar.userId !== identity.subject) {
-      throw new Error("Calendar not found");
+    // Verify twig belongs to user
+    const twig = await ctx.db.get(args.twigId);
+    if (!twig || twig.userId !== identity.subject) {
+      throw new Error("Twig not found");
     }
 
-    // Get max position for this calendar
+    // Get max position for this twig
     const leaves = await ctx.db
       .query("leaves")
-      .filter((q) => q.eq(q.field("calendarId"), args.calendarId))
+      .filter((q) => q.eq(q.field("twigId"), args.twigId))
       .collect();
 
     const maxPosition = leaves.reduce(
@@ -76,7 +76,7 @@ export const create = mutation({
     return await ctx.db.insert("leaves", {
       name: args.name,
       userId: identity.subject,
-      calendarId: args.calendarId,
+      twigId: args.twigId,
       timerDuration: args.timerDuration,
       position: maxPosition + 1,
     });
@@ -222,23 +222,23 @@ export const getCompletions = query({
 
 /**
  * Position update scenarios:
- * 1. Moving to different calendar: Place at end of target calendar
- * 2. Moving within same calendar: Adjust positions of leaves in between
+ * 1. Moving to different twig: Place at end of target twig
+ * 2. Moving within same twig: Adjust positions of leaves in between
  * 3. No position change: Update other properties only
  *
  * @param {Id<"leaves">} id - Leaf ID to update
  * @param {string} name - New leaf name
  * @param {number} [timerDuration] - Optional new timer duration
- * @param {Id<"calendars">} calendarId - Calendar to move/keep leaf in
- * @param {number} [position] - Optional new position in calendar
- * @throws {Error} If user not authenticated, leaf/calendar not found, or invalid position
+ * @param {Id<"twigs">} twigId - Twig to move/keep leaf in
+ * @param {number} [position] - Optional new position in twig
+ * @throws {Error} If user not authenticated, leaf/twig not found, or invalid position
  */
 export const update = mutation({
   args: {
     id: v.id("leaves"),
     name: v.string(),
     timerDuration: v.optional(v.number()),
-    calendarId: v.id("calendars"),
+    twigId: v.id("twigs"),
     position: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
@@ -250,29 +250,29 @@ export const update = mutation({
       throw new Error("Not authorized");
     }
 
-    // Verify calendar belongs to user
-    const calendar = await ctx.db.get(args.calendarId);
-    if (!calendar || calendar.userId !== identity.subject) {
-      throw new Error("Calendar not found");
+    // Verify twig belongs to user
+    const twig = await ctx.db.get(args.twigId);
+    if (!twig || twig.userId !== identity.subject) {
+      throw new Error("Twig not found");
     }
 
-    // Handle position update if provided or if calendar changed
-    if (args.position !== undefined || args.calendarId !== leaf.calendarId) {
+    // Handle position update if provided or if twig changed
+    if (args.position !== undefined || args.twigId !== leaf.twigId) {
       const leaves = await ctx.db
         .query("leaves")
-        .filter((q) => q.eq(q.field("calendarId"), args.calendarId))
+        .filter((q) => q.eq(q.field("twigId"), args.twigId))
         .collect();
 
       // Calculate new position based on scenario
       let newPosition: number;
-      if (args.calendarId !== leaf.calendarId) {
-        // Moving to different calendar - put at end
+      if (args.twigId !== leaf.twigId) {
+        // Moving to different twig - put at end
         newPosition = leaves.length + 1;
       } else if (args.position !== undefined) {
-        // Staying in same calendar with specified position
+        // Staying in same twig with specified position
         newPosition = args.position;
       } else {
-        // Staying in same calendar without position - keep current
+        // Staying in same twig without position - keep current
         newPosition = leaf.position ?? leaves.length + 1;
       }
 
@@ -284,7 +284,7 @@ export const update = mutation({
       // Update positions of other leaves if needed
       const oldPosition = leaf.position ?? 0;
 
-      if (args.calendarId === leaf.calendarId && oldPosition !== newPosition) {
+      if (args.twigId === leaf.twigId && oldPosition !== newPosition) {
         if (oldPosition < newPosition) {
           // Moving down: decrease positions of leaves in between
           for (const l of leaves) {
@@ -308,7 +308,7 @@ export const update = mutation({
       await ctx.db.patch(args.id, {
         name: args.name,
         timerDuration: args.timerDuration,
-        calendarId: args.calendarId,
+        twigId: args.twigId,
         position: newPosition,
       });
       return;
@@ -318,7 +318,7 @@ export const update = mutation({
     await ctx.db.patch(args.id, {
       name: args.name,
       timerDuration: args.timerDuration,
-      calendarId: args.calendarId,
+      twigId: args.twigId,
       ...(args.position !== undefined && { position: args.position }),
     });
   },

@@ -8,10 +8,10 @@
  * @module
  */
 
-import type * as calendar_sync from "../calendar_sync.js";
-import type * as calendars from "../calendars.js";
 import type * as leaves from "../leaves.js";
 import type * as migrations from "../migrations.js";
+import type * as twig_sync from "../twig_sync.js";
+import type * as twigs from "../twigs.js";
 
 import type {
   ApiFromModules,
@@ -20,10 +20,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  calendar_sync: typeof calendar_sync;
-  calendars: typeof calendars;
   leaves: typeof leaves;
   migrations: typeof migrations;
+  twig_sync: typeof twig_sync;
+  twigs: typeof twigs;
 }>;
 
 /**

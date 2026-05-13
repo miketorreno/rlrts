@@ -2,8 +2,8 @@
  * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
  * - Leaf name
- * - Associated calendar
- * - Position within calendar
+ * - Associated twig
+ * - Position within twig
  * - Timer duration for leaf tracking
  */
 "use client";
@@ -28,8 +28,8 @@ import { Id } from "../../../../convex/_generated/dataModel";
  * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
  * - Leaf name
- * - Associated calendar
- * - Position within calendar
+ * - Associated twig
+ * - Position within twig
  * - Timer duration for leaf tracking
  */
 
@@ -37,8 +37,8 @@ import { Id } from "../../../../convex/_generated/dataModel";
  * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
  * - Leaf name
- * - Associated calendar
- * - Position within calendar
+ * - Associated twig
+ * - Position within twig
  * - Timer duration for leaf tracking
  */
 
@@ -64,12 +64,12 @@ const TIMER_VALUES = [
  * @property onNameChange - Callback for leaf name updates
  * @property timerDuration - Optional timer duration in minutes
  * @property onTimerDurationChange - Callback for timer duration updates
- * @property selectedCalendarId - ID of currently selected calendar
- * @property onCalendarChange - Callback for calendar selection changes
- * @property position - Leaf's position in the calendar
+ * @property selectedTwigId - ID of currently selected twig
+ * @property onTwigChange - Callback for twig selection changes
+ * @property position - Leaf's position in the twig
  * @property onPositionChange - Callback for position updates
- * @property calendars - Available calendars list
- * @property leaves - Leaves in current calendar
+ * @property twigs - Available twigs list
+ * @property leaves - Leaves in current twig
  * @property onSave - Save changes callback
  * @property onDelete - Delete leaf callback
  */
@@ -78,13 +78,13 @@ interface LeafEditFormProps {
   onNameChange: (name: string) => void;
   timerDuration: number | undefined;
   onTimerDurationChange: (duration: number | undefined) => void;
-  selectedCalendarId: Id<"calendars">;
-  onCalendarChange: (calendarId: Id<"calendars">) => void;
+  selectedTwigId: Id<"twigs">;
+  onTwigChange: (twigId: Id<"twigs">) => void;
   position: number;
   onPositionChange: (position: number) => void;
-  calendars:
+  twigs:
     | Array<{
-        _id: Id<"calendars">;
+        _id: Id<"twigs">;
         name: string;
       }>
     | undefined;
@@ -103,11 +103,11 @@ export function LeafEditForm({
   onNameChange,
   timerDuration,
   onTimerDurationChange,
-  selectedCalendarId,
-  onCalendarChange,
+  selectedTwigId,
+  onTwigChange,
   position,
   onPositionChange,
-  calendars,
+  twigs,
   leaves,
   onSave,
   onDelete,
@@ -129,25 +129,23 @@ export function LeafEditForm({
             />
           </div>
 
-          {/* Calendar selection with automatic position adjustment */}
+          {/* Twig selection with automatic position adjustment */}
           <div>
-            <Label>{t("leaf.edit.calendar.label")}</Label>
+            <Label>{t("leaf.edit.twig.label")}</Label>
             <Select
-              value={selectedCalendarId}
+              value={selectedTwigId}
               onValueChange={(value) => {
-                onCalendarChange(value as Id<"calendars">);
-                // When calendar changes, move leaf to end of new calendar
-                const calendarLeaves = leaves?.length ?? 0;
-                onPositionChange(calendarLeaves + 1);
+                onTwigChange(value as Id<"twigs">);
+                // When twig changes, move leaf to end of new twig
+                const twigLeaves = leaves?.length ?? 0;
+                onPositionChange(twigLeaves + 1);
               }}
             >
               <SelectTrigger>
-                <SelectValue
-                  placeholder={t("leaf.edit.calendar.placeholder")}
-                />
+                <SelectValue placeholder={t("leaf.edit.twig.placeholder")} />
               </SelectTrigger>
               <SelectContent>
-                {calendars?.map((cal) => (
+                {twigs?.map((cal) => (
                   <SelectItem key={cal._id} value={cal._id}>
                     {cal.name}
                   </SelectItem>

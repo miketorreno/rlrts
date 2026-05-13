@@ -24,7 +24,7 @@ import { Id } from "../../../convex/_generated/dataModel";
 
 /**
  * DayCell Component
- * Renders an interactive cell representing a single day in a leaf tracking calendar.
+ * Renders an interactive cell representing a single day in a leaf tracking twig.
  * Features a popover menu for updating completion counts and visual feedback for completion status.
  */
 
@@ -72,7 +72,7 @@ export const DayCell = memo(
     leafId,
   }: DayCellProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const t = useTranslations("calendar");
+    const t = useTranslations("twig");
 
     // Extract color name from class and determine fill color based on completion count
     const colorMatch = colorClass.match(/bg-(\w+)-500/);

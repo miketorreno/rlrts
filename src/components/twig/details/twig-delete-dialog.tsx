@@ -12,32 +12,41 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useTranslations } from "next-intl";
 
-interface CalendarDeleteDialogProps {
+interface TwigDeleteDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
-  calendarName: string;
+  twigName: string;
 }
 
-export function CalendarDeleteDialog({ open, onOpenChange, onConfirm, calendarName }: CalendarDeleteDialogProps) {
+export function TwigDeleteDialog({
+  open,
+  onOpenChange,
+  onConfirm,
+  twigName,
+}: TwigDeleteDialogProps) {
   const t = useTranslations("dialogs");
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t("calendar.edit.deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogTitle>
+            {t("twig.edit.deleteConfirm.title")}
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            {t("calendar.edit.deleteConfirm.description", { name: calendarName })}
+            {t("twig.edit.deleteConfirm.description", { name: twigName })}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t("calendar.edit.deleteConfirm.cancel")}</AlertDialogCancel>
+          <AlertDialogCancel>
+            {t("twig.edit.deleteConfirm.cancel")}
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            {t("calendar.edit.deleteConfirm.confirm")}
+            {t("twig.edit.deleteConfirm.confirm")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

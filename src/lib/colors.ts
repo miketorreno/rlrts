@@ -1,5 +1,5 @@
 /**
- * Available color themes for calendars and habits.
+ * Available color themes for twigs and leaves.
  * Each color has a key for translation and a Tailwind background class.
  */
 export const COLOR_VALUES = [
@@ -23,7 +23,7 @@ export const COLOR_VALUES = [
 ] as const;
 
 /**
- * Color system for habit completion visualization.
+ * Color system for leaf completion visualization.
  * Each color has 3 intensity levels using opacity.
  * The intensity increases with the completion count:
  * - Level 1 (count = 1): 50% opacity
@@ -132,7 +132,10 @@ const COLOR_LEVELS = {
  * - count = 2 -> "fill-{color}-500/75" (75% opacity)
  * - count ≥ 3 -> "fill-{color}-500" (100% opacity)
  */
-export function getCompletionColorClass(colorTheme: string, count: number): string {
+export function getCompletionColorClass(
+  colorTheme: string,
+  count: number,
+): string {
   if (count === 0) return "";
 
   // Extract color name from theme (e.g., "bg-red-500" -> "red")
@@ -162,10 +165,13 @@ export function getCompletionColorClass(colorTheme: string, count: number): stri
 }
 
 /**
- * Gets the background color class for calendar cells based on completion count.
+ * Gets the background color class for twig cells based on completion count.
  * Similar to getCompletionColorClass but for background colors instead of SVG fills.
  */
-export function getBackgroundColorClass(colorTheme: string, count: number): string {
+export function getBackgroundColorClass(
+  colorTheme: string,
+  count: number,
+): string {
   if (count === 0) return "";
 
   const colorMatch = colorTheme.match(/bg-(\w+)-\d+/);
@@ -296,16 +302,22 @@ export const RGB_SHADES = {
  * @param shade - The color shade (300-600)
  * @returns RGB values string (e.g., "239 68 68")
  */
-export function getChartRGBValues(colorTheme: string, shade: 300 | 400 | 500 | 600 = 500): string {
+export function getChartRGBValues(
+  colorTheme: string,
+  shade: 300 | 400 | 500 | 600 = 500,
+): string {
   const colorMatch = colorTheme.match(/bg-(\w+)-\d+/);
   const colorName = colorMatch ? colorMatch[1] : "purple";
   return RGB_SHADES[colorName as keyof typeof RGB_SHADES][shade];
 }
 
 /**
- * Generates RGB color values with opacity levels for activity calendar
+ * Generates RGB color values with opacity levels for activity twig
  */
-export function getActivityCalendarTheme(colorTheme: string): { light: string[]; dark: string[] } {
+export function getActivityTwigTheme(colorTheme: string): {
+  light: string[];
+  dark: string[];
+} {
   const colorMatch = colorTheme.match(/bg-(\w+)-\d+/);
   if (!colorMatch) {
     console.warn("Invalid color theme format:", colorTheme);

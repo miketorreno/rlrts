@@ -4,44 +4,44 @@ import { useTranslations } from "next-intl";
 
 // import { Id } from "@server/convex/_generated/dataModel";
 
-import { MonthGridView } from "./month-grid-view";
-import { MonthRowView } from "./month-row-view";
+import { MonthGridView } from "../twig/month-grid-view";
+import { MonthRowView } from "../twig/month-row-view";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Individual calendar component that displays a single calendar's leaves in either grid or row view.
- * Handles the display of calendar name, leaves, and their completion states.
+ * Individual twig component that displays a single twig's leaves in either grid or row view.
+ * Handles the display of twig name, leaves, and their completion states.
  */
 
 /**
- * Type defining the available view modes for calendar display
+ * Type defining the available view modes for twig display
  */
-type CalendarViewType = "monthRow" | "monthGrid";
+type TwigViewType = "monthRow" | "monthGrid";
 
 /**
- * Props interface for the CalendarItem component
+ * Props interface for the TwigItem component
  */
-interface CalendarItemProps {
-  /** Calendar object containing basic calendar information */
-  calendar: {
-    _id: Id<"calendars">;
+interface TwigItemProps {
+  /** Twig object containing basic twig information */
+  twig: {
+    _id: Id<"twigs">;
     name: string;
     colorTheme: string;
   };
-  /** Array of leaves associated with this calendar */
+  /** Array of leaves associated with this twig */
   leaves: Array<{
     _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   }>;
-  /** Array of dates to display in the calendar */
+  /** Array of dates to display in the twig */
   days: string[];
   /** Array of leaf completion records */
   completions: Array<{
     leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  /** Callback to add a new leaf to this calendar */
+  /** Callback to add a new leaf to this twig */
   onAddLeaf: () => void;
   /** Callback to edit a specific leaf's properties */
   onEditLeaf: (leaf: {
@@ -55,16 +55,16 @@ interface CalendarItemProps {
     date: string,
     count: number,
   ) => Promise<void>;
-  /** Current view mode of the calendar */
-  view: CalendarViewType;
+  /** Current view mode of the twig */
+  view: TwigViewType;
 }
 
 /**
- * Component that renders an individual calendar with its leaves
+ * Component that renders an individual twig with its leaves
  * Supports two view modes: month row and month grid
  */
-export const CalendarItem = ({
-  calendar,
+export const TwigItem = ({
+  twig,
   leaves,
   days,
   completions,
@@ -72,22 +72,22 @@ export const CalendarItem = ({
   onEditLeaf,
   onToggleLeaf,
   view,
-}: CalendarItemProps) => {
-  const t = useTranslations("calendar");
+}: TwigItemProps) => {
+  const t = useTranslations("twig");
   const router = useRouter();
 
   // Ensure color theme has proper Tailwind prefix
-  const colorTheme = calendar.colorTheme.startsWith("bg-")
-    ? calendar.colorTheme
-    : `bg-${calendar.colorTheme}-500`;
+  const colorTheme = twig.colorTheme.startsWith("bg-")
+    ? twig.colorTheme
+    : `bg-${twig.colorTheme}-500`;
 
   return (
     <div className="space-y-8">
-      {/* Calendar Header - Displays calendar name with themed underline decoration */}
+      {/* Twig Header - Displays twig name with themed underline decoration */}
       <div className="flex justify-center">
         <div
           className="cursor-pointer pt-4"
-          onClick={() => router.push(`/calendars/${calendar._id}`)}
+          onClick={() => router.push(`/twigs/${twig._id}`)}
         >
           <h2
             className={`select-none text-4xl font-semibold underline decoration-wavy decoration-2 ${colorTheme.replace(
@@ -95,12 +95,12 @@ export const CalendarItem = ({
               "decoration-",
             )}/30 hover:text-muted-foreground hover:no-underline`}
           >
-            {calendar.name}
+            {twig.name}
           </h2>
         </div>
       </div>
 
-      {/* Calendar Content - Shows empty state or leaves based on view mode */}
+      {/* Twig Content - Shows empty state or leaves based on view mode */}
       {leaves.length === 0 ? (
         // Empty state when no leaves exist
         <div className="flex w-full flex-col items-center justify-center space-y-8 pb-16">

@@ -4,10 +4,10 @@ import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 
 /**
- * Exports all user's calendars with their leaves and completions.
+ * Exports all user's twigs with their leaves and completions.
  * Structure:
  * {
- *   calendars: [{
+ *   twigs: [{
  *     name: string,
  *     colorTheme: string,
  *     leaves: [{
@@ -18,13 +18,13 @@ import { mutation, query } from "./_generated/server";
  * }
  */
 
-export const exportCalendarsAndLeaves = query({
+export const exportTwigsAndLeaves = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) return null;
 
-    const calendars = await ctx.db
-      .query("calendars")
+    const twigs = await ctx.db
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
@@ -34,11 +34,9 @@ export const exportCalendarsAndLeaves = query({
       .collect();
 
     // Build the export structure without _id fields
-    const exportedCalendars = calendars.map((calendar) => {
-      const calendarLeaves = allLeaves.filter(
-        (l) => l.calendarId === calendar._id,
-      );
-      const exportedLeaves = calendarLeaves.map((leaf) => ({
+    const exportedTwigs = twigs.map((twig) => {
+      const twigLeaves = allLeaves.filter((l) => l.twigId === twig._id);
+      const exportedLeaves = twigLeaves.map((leaf) => ({
         name: leaf.name,
         position: leaf.position,
         timerDuration: leaf.timerDuration,
@@ -46,14 +44,14 @@ export const exportCalendarsAndLeaves = query({
       }));
 
       return {
-        name: calendar.name,
-        colorTheme: calendar.colorTheme,
-        position: calendar.position,
+        name: twig.name,
+        colorTheme: twig.colorTheme,
+        position: twig.position,
         leaves: exportedLeaves,
       };
     });
 
-    return { calendars: exportedCalendars };
+    return { twigs: exportedTwigs };
   },
 });
 
@@ -98,19 +96,19 @@ export const exportCompletions = query({
 });
 
 /**
- * Imports calendar data with leaves and completions.
- * For existing calendars (matched by name):
- * - Updates the calendar's color theme
+ * Imports twig data with leaves and completions.
+ * For existing twigs (matched by name):
+ * - Updates the twig's color theme
  * - Adds new leaves or updates existing ones
  * - Adds only new completions (avoids duplicates)
  *
- * For new calendars:
- * - Creates the calendar with all leaves and completions
+ * For new twigs:
+ * - Creates the twig with all leaves and completions
  */
 export const importData = mutation({
   args: {
     data: v.object({
-      calendars: v.array(
+      twigs: v.array(
         v.object({
           name: v.string(),
           colorTheme: v.string(),
@@ -137,9 +135,9 @@ export const importData = mutation({
     if (!identity) throw new Error("Not authenticated");
 
     // Clean the input data to only use fields we need
-    const cleanedCalendars = args.data.calendars.map((calendar) => ({
-      ...calendar,
-      leaves: calendar.leaves.map((leaf) => ({
+    const cleanedTwigs = args.data.twigs.map((twig) => ({
+      ...twig,
+      leaves: twig.leaves.map((leaf) => ({
         name: leaf.name,
         timerDuration: "timerDuration" in leaf ? leaf.timerDuration : undefined,
         position: "position" in leaf ? leaf.position : undefined,
@@ -147,35 +145,35 @@ export const importData = mutation({
       })),
     }));
 
-    const existingCalendars = await ctx.db
-      .query("calendars")
+    const existingTwigs = await ctx.db
+      .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
-    // Continue with the rest of the import using cleanedCalendars
-    const sortedCalendars = [...cleanedCalendars].sort(
+    // Continue with the rest of the import using cleanedTwigs
+    const sortedTwigs = [...cleanedTwigs].sort(
       (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
     );
 
-    for (const calendarData of sortedCalendars) {
-      const existingCalendar = existingCalendars.find(
-        (cal) => cal.name === calendarData.name,
+    for (const twigData of sortedTwigs) {
+      const existingTwig = existingTwigs.find(
+        (cal) => cal.name === twigData.name,
       );
-      const calendarId = existingCalendar?._id;
+      const twigId = existingTwig?._id;
 
-      if (calendarId) {
-        // Update existing calendar
-        await ctx.db.patch(calendarId, {
-          colorTheme: calendarData.colorTheme,
-          position: calendarData.position,
+      if (twigId) {
+        // Update existing twig
+        await ctx.db.patch(twigId, {
+          colorTheme: twigData.colorTheme,
+          position: twigData.position,
         });
 
         const existingLeaves = await ctx.db
           .query("leaves")
-          .filter((q) => q.eq(q.field("calendarId"), calendarId))
+          .filter((q) => q.eq(q.field("twigId"), twigId))
           .collect();
 
-        const sortedLeaves = [...calendarData.leaves].sort(
+        const sortedLeaves = [...twigData.leaves].sort(
           (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
         );
 
@@ -195,7 +193,7 @@ export const importData = mutation({
             leafId = await ctx.db.insert("leaves", {
               name,
               userId: identity.subject,
-              calendarId,
+              twigId,
               timerDuration,
               position: position ?? existingLeaves.length + 1,
             });
@@ -233,15 +231,15 @@ export const importData = mutation({
           }
         }
       } else {
-        // Create new calendar
-        const newCalendarId = await ctx.db.insert("calendars", {
-          name: calendarData.name,
+        // Create new twig
+        const newTwigId = await ctx.db.insert("twigs", {
+          name: twigData.name,
           userId: identity.subject,
-          colorTheme: calendarData.colorTheme,
-          position: calendarData.position ?? existingCalendars.length + 1,
+          colorTheme: twigData.colorTheme,
+          position: twigData.position ?? existingTwigs.length + 1,
         });
 
-        const sortedLeaves = [...calendarData.leaves].sort(
+        const sortedLeaves = [...twigData.leaves].sort(
           (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
         );
 
@@ -251,9 +249,9 @@ export const importData = mutation({
           const leafId = await ctx.db.insert("leaves", {
             name,
             userId: identity.subject,
-            calendarId: newCalendarId,
+            twigId: newTwigId,
             timerDuration,
-            position: position ?? calendarData.leaves.indexOf(leafData) + 1,
+            position: position ?? twigData.leaves.indexOf(leafData) + 1,
           });
 
           // Process completions in batches of 100
