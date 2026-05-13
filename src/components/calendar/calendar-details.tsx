@@ -3,7 +3,7 @@
 import { CalendarBackNavigation } from "@/components/calendar/details/calendar-back-navigation";
 import { CalendarDeleteDialog } from "@/components/calendar/details/calendar-delete-dialog";
 import { CalendarEditForm } from "@/components/calendar/details/calendar-edit-form";
-import { CalendarHabitsList } from "@/components/calendar/details/calendar-habits-list";
+import { CalendarLeavesList } from "@/components/calendar/details/calendar-leaves-list";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
@@ -26,7 +26,7 @@ export function CalendarDetails({ calendarId }: CalendarDetailsProps) {
   // Fetch calendar and associated data
   const calendars = useQuery(api.calendars.list);
   const calendar = calendars?.find((c) => c._id === calendarId);
-  const habits = useQuery(api.habits.list, { calendarId });
+  const leaves = useQuery(api.leaves.list, { calendarId });
 
   // State for form fields
   const [name, setName] = useState(calendar?.name ?? "");
@@ -97,7 +97,7 @@ export function CalendarDetails({ calendarId }: CalendarDetailsProps) {
         <h1 className="mb-8 text-2xl font-bold">{name}</h1>
       </div>
 
-      <CalendarHabitsList habits={habits} />
+      <CalendarLeavesList leaves={leaves} />
 
       <CalendarEditForm
         name={name}

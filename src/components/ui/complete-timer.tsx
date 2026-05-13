@@ -15,11 +15,11 @@ import { Id } from "../../../convex/_generated/dataModel";
 
 /**
  * Props for the CompleteTimer component
- * @param count Current completion count for the habit
+ * @param count Current completion count for the leaf
  * @param timerDuration Duration in minutes for the timer
  * @param onComplete Callback function to execute when timer completes
  * @param disabled Optional flag to disable the timer button
- * @param habitId Unique identifier for the habit
+ * @param leafId Unique identifier for the leaf
  * @param variant Optional UI variant for the button styling
  */
 interface CompleteTimerProps {
@@ -27,12 +27,12 @@ interface CompleteTimerProps {
   timerDuration: number;
   onComplete: () => Promise<void>;
   disabled?: boolean;
-  habitId: Id<"habits">;
+  leafId: Id<"leaves">;
   variant?: "default" | "ghost";
 }
 
 /**
- * CompleteTimer - A component that manages a countdown timer for habit completion
+ * CompleteTimer - A component that manages a countdown timer for leaf completion
  *
  * This component provides a button that can:
  * 1. Start a timer for a specified duration
@@ -44,7 +44,7 @@ export function CompleteTimer({
   count,
   timerDuration,
   disabled = false,
-  habitId,
+  leafId,
   variant = "default",
 }: CompleteTimerProps) {
   // State for managing scheduling status and remaining time
@@ -56,30 +56,30 @@ export function CompleteTimer({
 
   // Translations and API mutations
   const t = useTranslations("calendar.controls");
-  const schedule = useMutation(api.habits.scheduleHabitIncrement);
-  const cancelSchedule = useMutation(api.habits.cancelScheduledIncrement);
-  const habit = useQuery(api.habits.get, habitId ? { id: habitId } : "skip");
+  const schedule = useMutation(api.leaves.scheduleLeafIncrement);
+  const cancelSchedule = useMutation(api.leaves.cancelScheduledIncrement);
+  const leaf = useQuery(api.leaves.get, leafId ? { id: leafId } : "skip");
 
   // Inside the component, add confetti shape memoization
   const confettiShape = useMemo(() => confettiLib.shapeFromPath(xIconPath), []);
 
   /**
-   * Starts the timer by scheduling a habit increment
+   * Starts the timer by scheduling a leaf increment
    * Cancels any existing timer before starting a new one
    */
   const handleStartTimer = useCallback(
     async (durationMs: number) => {
-      if (!habitId) return;
+      if (!leafId) return;
 
       setIsScheduling(true);
       try {
         // Cancel existing timer if present
-        if (habit?.scheduledTimer) {
-          await cancelSchedule({ habitId });
+        if (leaf?.scheduledTimer) {
+          await cancelSchedule({ leafId });
         }
         // Schedule new timer
         await schedule({
-          habitId,
+          leafId,
           durationMs,
           clientNow: Date.now(),
         });
@@ -89,21 +89,21 @@ export function CompleteTimer({
         setIsScheduling(false);
       }
     },
-    [habitId, schedule, cancelSchedule, habit],
+    [leafId, schedule, cancelSchedule, leaf],
   );
 
   /**
    * Cancels the current timer and resets the UI state
    */
   const handleStopTimer = useCallback(async () => {
-    if (!habitId) return;
+    if (!leafId) return;
     try {
-      await cancelSchedule({ habitId });
+      await cancelSchedule({ leafId });
       setTimeLeft(null);
     } catch (error) {
       console.error("Failed to cancel schedule:", error);
     }
-  }, [habitId, cancelSchedule]);
+  }, [leafId, cancelSchedule]);
 
   /**
    * Effect to manage the countdown timer and completion
@@ -111,14 +111,14 @@ export function CompleteTimer({
    */
   useEffect(() => {
     // Reset timer state if no timer end is set
-    if (!habit?.timerEnd) {
+    if (!leaf?.timerEnd) {
       setTimeLeft(null);
       hasCompletedRef.current = false;
       return;
     }
 
     const updateTime = () => {
-      const remaining = habit.timerEnd! - Date.now();
+      const remaining = leaf.timerEnd! - Date.now();
       if (remaining <= 0) {
         if (!hasCompletedRef.current) {
           hasCompletedRef.current = true;
@@ -156,7 +156,7 @@ export function CompleteTimer({
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
-  }, [habit?.timerEnd, confettiShape]);
+  }, [leaf?.timerEnd, confettiShape]);
 
   // Render button with dynamic content based on timer state
   return (

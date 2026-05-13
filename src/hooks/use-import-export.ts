@@ -22,8 +22,8 @@ export function useImportExport() {
   const [importFile, setImportFile] = useState<File | null>(null);
 
   // Fetch data when authenticated
-  const calendarsAndHabits = useQuery(
-    api.calendar_sync.exportCalendarsAndHabits,
+  const calendarsAndLeaves = useQuery(
+    api.calendar_sync.exportCalendarsAndLeaves,
     isAuthenticated ? undefined : "skip",
   );
   const completions = useQuery(
@@ -36,11 +36,11 @@ export function useImportExport() {
 
     try {
       console.log("Starting export with:", {
-        hasCalendars: !!calendarsAndHabits?.calendars,
-        numCalendars: calendarsAndHabits?.calendars?.length,
-        hasCompletions: !!completions?.completionsByHabit,
-        completionsKeys: completions?.completionsByHabit
-          ? Object.keys(completions.completionsByHabit)
+        hasCalendars: !!calendarsAndLeaves?.calendars,
+        numCalendars: calendarsAndLeaves?.calendars?.length,
+        hasCompletions: !!completions?.completionsByLeaf,
+        completionsKeys: completions?.completionsByLeaf
+          ? Object.keys(completions.completionsByLeaf)
           : [],
       });
 
@@ -51,7 +51,7 @@ export function useImportExport() {
           if (attempts > 80) {
             reject(
               new Error(
-                !calendarsAndHabits?.calendars
+                !calendarsAndLeaves?.calendars
                   ? "Failed to fetch calendars"
                   : "Failed to fetch completions",
               ),
@@ -59,25 +59,22 @@ export function useImportExport() {
             return;
           }
 
-          if (
-            calendarsAndHabits?.calendars &&
-            completions?.completionsByHabit
-          ) {
-            if (!calendarsAndHabits.calendars.length) {
+          if (calendarsAndLeaves?.calendars && completions?.completionsByLeaf) {
+            if (!calendarsAndLeaves.calendars.length) {
               reject(new Error("No calendars found to export"));
               return;
             }
 
             resolve({
-              calendars: calendarsAndHabits.calendars.map((calendar) => ({
+              calendars: calendarsAndLeaves.calendars.map((calendar) => ({
                 ...calendar,
-                habits: calendar.habits.map((habit) => ({
-                  name: habit.name,
-                  position: habit.position,
-                  timerDuration: habit.timerDuration,
+                leaves: calendar.leaves.map((leaf) => ({
+                  name: leaf.name,
+                  position: leaf.position,
+                  timerDuration: leaf.timerDuration,
                   completions:
-                    completions.completionsByHabit[
-                      encodeURIComponent(habit.name)
+                    completions.completionsByLeaf[
+                      encodeURIComponent(leaf.name)
                     ] || [],
                 })),
               })),

@@ -10,7 +10,7 @@
 
 import type * as calendar_sync from "../calendar_sync.js";
 import type * as calendars from "../calendars.js";
-import type * as habits from "../habits.js";
+import type * as leaves from "../leaves.js";
 import type * as migrations from "../migrations.js";
 
 import type {
@@ -22,7 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   calendar_sync: typeof calendar_sync;
   calendars: typeof calendars;
-  habits: typeof habits;
+  leaves: typeof leaves;
   migrations: typeof migrations;
 }>;
 

@@ -5,7 +5,7 @@ import { mutation, query } from "./_generated/server";
  *
  * Key features:
  * - Position-based ordering of calendars
- * - Cascading deletions (calendar -> habits -> completions)
+ * - Cascading deletions (calendar -> leaves -> completions)
  * - User-specific calendar management
  * - Authentication checks on all operations
  */
@@ -59,8 +59,8 @@ export const create = mutation({
 
 /**
  * Performs cascading deletion in this order:
- * 1. Deletes all completions for each habit in the calendar
- * 2. Deletes all habits belonging to the calendar
+ * 1. Deletes all completions for each leaf in the calendar
+ * 2. Deletes all leaves belonging to the calendar
  * 3. Updates positions of remaining calendars to maintain order
  * 4. Deletes the calendar itself
  *
@@ -80,17 +80,17 @@ export const remove = mutation({
       throw new Error("Calendar not found");
     }
 
-    // Step 1 & 2: Delete habits and their completions
-    const habits = await ctx.db
-      .query("habits")
+    // Step 1 & 2: Delete leaves and their completions
+    const leaves = await ctx.db
+      .query("leaves")
       .filter((q) => q.eq(q.field("calendarId"), args.id))
       .collect();
 
-    for (const habit of habits) {
-      // Delete all completions for this habit first
+    for (const leaf of leaves) {
+      // Delete all completions for this leaf first
       await ctx.db
         .query("completions")
-        .filter((q) => q.eq(q.field("habitId"), habit._id))
+        .filter((q) => q.eq(q.field("leafId"), leaf._id))
         .collect()
         .then((completions) => {
           return Promise.all(
@@ -98,8 +98,8 @@ export const remove = mutation({
           );
         });
 
-      // Then delete the habit itself
-      await ctx.db.delete(habit._id);
+      // Then delete the leaf itself
+      await ctx.db.delete(leaf._id);
     }
 
     // Step 3: Update positions of remaining calendars

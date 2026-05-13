@@ -31,12 +31,12 @@ interface CompleteControlsProps {
   timerDuration?: number;
   /** Callback triggered on completion (increment/decrement/timer finish) */
   onComplete?: () => void;
-  /** Name of the habit */
-  habitName?: string;
+  /** Name of the leaf */
+  leafName?: string;
   /** Whether the controls are disabled */
   disabled?: boolean;
-  /** Habit ID */
-  habitId: Id<"habits">;
+  /** Leaf ID */
+  leafId: Id<"leaves">;
 }
 
 export function CompleteControls({
@@ -47,7 +47,7 @@ export function CompleteControls({
   timerDuration,
   onComplete,
   disabled = false,
-  habitId,
+  leafId,
 }: CompleteControlsProps) {
   const t = useTranslations("calendar.controls");
   const confettiShape = useMemo(() => confettiLib.shapeFromPath(xIconPath), []);
@@ -88,8 +88,8 @@ export function CompleteControls({
     [confettiShape],
   );
 
-  if (!habitId) {
-    console.error("CompleteControls requires habitId");
+  if (!leafId) {
+    console.error("CompleteControls requires leafId");
     return null;
   }
 
@@ -103,7 +103,7 @@ export function CompleteControls({
             timerDuration={timerDuration}
             onComplete={handleIncrement}
             disabled={disabled}
-            habitId={habitId}
+            leafId={leafId}
             variant={variant}
           />
         </div>
@@ -131,7 +131,7 @@ export function CompleteControls({
             timerDuration={timerDuration}
             onComplete={handleIncrement}
             disabled={disabled}
-            habitId={habitId}
+            leafId={leafId}
             variant={variant}
           />
         </div>

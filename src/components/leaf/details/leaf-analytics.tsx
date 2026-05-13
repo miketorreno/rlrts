@@ -21,9 +21,9 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * HabitAnalytics Component
- * A comprehensive analytics dashboard that visualizes habit tracking data through various charts.
- * Uses Chart.js for rendering different visualizations of habit completion patterns.
+ * LeafAnalytics Component
+ * A comprehensive analytics dashboard that visualizes leaf tracking data through various charts.
+ * Uses Chart.js for rendering different visualizations of leaf completion patterns.
  */
 
 // Register required Chart.js components
@@ -96,27 +96,24 @@ const chartOptions = {
   },
 };
 
-interface HabitAnalyticsProps {
+interface LeafAnalyticsProps {
   colorTheme: string; // Theme color for chart styling
   completions:
     | Array<{
-        habitId: Id<"habits">;
+        leafId: Id<"leaves">;
         completedAt: number; // Unix timestamp of completion
       }>
     | undefined;
 }
 
-export function HabitAnalytics({
-  colorTheme,
-  completions,
-}: HabitAnalyticsProps) {
+export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
   /**
    * Calculates streak history including both active streaks and off periods
-   * @param completions - Array of habit completion records
+   * @param completions - Array of leaf completion records
    * @returns Object containing labels and data for active/off streaks
    */
   function calculateStreakHistory(
-    completions: HabitAnalyticsProps["completions"],
+    completions: LeafAnalyticsProps["completions"],
   ) {
     if (!completions) return { labels: [], activeData: [], offData: [] };
 
@@ -222,11 +219,11 @@ export function HabitAnalytics({
 
   /**
    * Analyzes completion patterns by day of week
-   * @param completions - Array of habit completion records
+   * @param completions - Array of leaf completion records
    * @returns Object containing labels and completion counts for each day
    */
   function calculateWeeklyPattern(
-    completions: HabitAnalyticsProps["completions"],
+    completions: LeafAnalyticsProps["completions"],
   ) {
     if (!completions) return { labels: [], data: [] };
 
@@ -257,11 +254,11 @@ export function HabitAnalytics({
 
   /**
    * Aggregates completions by month to show long-term progress
-   * @param completions - Array of habit completion records
+   * @param completions - Array of leaf completion records
    * @returns Object containing labels and monthly completion counts
    */
   function calculateMonthlyProgress(
-    completions: HabitAnalyticsProps["completions"],
+    completions: LeafAnalyticsProps["completions"],
   ) {
     if (!completions) return { labels: [], data: [] };
 
@@ -297,10 +294,10 @@ export function HabitAnalytics({
    * Analyzes completion patterns by time of day
    * Categorizes completions into Morning (6am-12pm), Afternoon (12pm-6pm),
    * Evening (6pm-12am), and Night (12am-6am)
-   * @param completions - Array of habit completion records
+   * @param completions - Array of leaf completion records
    * @returns Object containing labels and completion counts for each time period
    */
-  function calculateTimeOfDay(completions: HabitAnalyticsProps["completions"]) {
+  function calculateTimeOfDay(completions: LeafAnalyticsProps["completions"]) {
     if (!completions) return { labels: [], data: [] };
 
     const timeSlots = {

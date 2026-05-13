@@ -9,8 +9,8 @@ import { MonthRowView } from "./month-row-view";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Individual calendar component that displays a single calendar's habits in either grid or row view.
- * Handles the display of calendar name, habits, and their completion states.
+ * Individual calendar component that displays a single calendar's leaves in either grid or row view.
+ * Handles the display of calendar name, leaves, and their completion states.
  */
 
 /**
@@ -28,30 +28,30 @@ interface CalendarItemProps {
     name: string;
     colorTheme: string;
   };
-  /** Array of habits associated with this calendar */
-  habits: Array<{
-    _id: Id<"habits">;
+  /** Array of leaves associated with this calendar */
+  leaves: Array<{
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   }>;
   /** Array of dates to display in the calendar */
   days: string[];
-  /** Array of habit completion records */
+  /** Array of leaf completion records */
   completions: Array<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  /** Callback to add a new habit to this calendar */
-  onAddHabit: () => void;
-  /** Callback to edit a specific habit's properties */
-  onEditHabit: (habit: {
-    _id: Id<"habits">;
+  /** Callback to add a new leaf to this calendar */
+  onAddLeaf: () => void;
+  /** Callback to edit a specific leaf's properties */
+  onEditLeaf: (leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   }) => void;
-  /** Callback to toggle habit completion for a specific date */
-  onToggleHabit: (
-    habitId: Id<"habits">,
+  /** Callback to toggle leaf completion for a specific date */
+  onToggleLeaf: (
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => Promise<void>;
@@ -60,17 +60,17 @@ interface CalendarItemProps {
 }
 
 /**
- * Component that renders an individual calendar with its habits
+ * Component that renders an individual calendar with its leaves
  * Supports two view modes: month row and month grid
  */
 export const CalendarItem = ({
   calendar,
-  habits,
+  leaves,
   days,
   completions,
-  onAddHabit,
-  onEditHabit,
-  onToggleHabit,
+  onAddLeaf,
+  onEditLeaf,
+  onToggleLeaf,
   view,
 }: CalendarItemProps) => {
   const t = useTranslations("calendar");
@@ -100,40 +100,40 @@ export const CalendarItem = ({
         </div>
       </div>
 
-      {/* Calendar Content - Shows empty state or habits based on view mode */}
-      {habits.length === 0 ? (
-        // Empty state when no habits exist
+      {/* Calendar Content - Shows empty state or leaves based on view mode */}
+      {leaves.length === 0 ? (
+        // Empty state when no leaves exist
         <div className="flex w-full flex-col items-center justify-center space-y-8 pb-16">
           <p className="text-sm text-muted-foreground">
-            {t("emptyState.noHabits")}
+            {t("emptyState.noLeaves")}
           </p>
-          <Button size="sm" onClick={onAddHabit}>
-            {t("controls.addHabit")}
+          <Button size="sm" onClick={onAddLeaf}>
+            {t("controls.addLeaf")}
           </Button>
         </div>
       ) : view === "monthRow" ? (
-        // Month Row View - Displays habits in a horizontal layout
+        // Month Row View - Displays leaves in a horizontal layout
         <MonthRowView
-          habit={habits[0]}
-          habits={habits}
+          leaf={leaves[0]}
+          leaves={leaves}
           color={colorTheme}
           days={days}
           completions={completions}
-          onToggle={onToggleHabit}
-          onEditHabit={onEditHabit}
-          onAddHabit={onAddHabit}
+          onToggle={onToggleLeaf}
+          onEditLeaf={onEditLeaf}
+          onAddLeaf={onAddLeaf}
         />
       ) : (
-        // Month Grid View - Displays habits in a grid layout
+        // Month Grid View - Displays leaves in a grid layout
         <MonthGridView
-          habit={habits[0]}
-          habits={habits}
+          leaf={leaves[0]}
+          leaves={leaves}
           color={colorTheme}
           days={days}
           completions={completions}
-          onToggle={onToggleHabit}
-          onEditHabit={onEditHabit}
-          onAddHabit={onAddHabit}
+          onToggle={onToggleLeaf}
+          onEditLeaf={onEditLeaf}
+          onAddLeaf={onAddLeaf}
         />
       )}
     </div>

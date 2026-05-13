@@ -1,6 +1,6 @@
 import {
   NewCalendarDialog,
-  NewHabitDialog,
+  NewLeafDialog,
 } from "@/components/calendar/calendar-dialogs";
 import { CalendarItem } from "@/components/calendar/calendar-item";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { ViewControls } from "@/components/ui/view-controls";
 import { useDialogState } from "@/hooks/use-dialog-state";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useRouter } from "@/i18n/routing";
-import { Calendar, Completion, Day, Habit, Id } from "@/types";
+import { Calendar, Completion, Day, Leaf, Id } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { PlusCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -19,8 +19,8 @@ import { toast } from "react-hot-toast";
 import { CalendarSkeletons } from "./calendar-skeletons";
 
 /**
- * Main calendar container component that manages the display and interaction of calendars and habits.
- * Handles calendar/habit CRUD operations and view switching between month row and grid layouts.
+ * Main calendar container component that manages the display and interaction of calendars and leaves.
+ * Handles calendar/leaf CRUD operations and view switching between month row and grid layouts.
  */
 
 const MotionCard = motion.create(Card);
@@ -32,17 +32,17 @@ type CalendarView = "monthRow" | "monthGrid";
 
 /**
  * Interface defining all calendar-related data operations
- * Includes CRUD operations for calendars and habits, plus habit completion toggling
+ * Includes CRUD operations for calendars and leaves, plus leaf completion toggling
  */
 interface CalendarData {
   handleAddCalendar: (name: string, color: string) => Promise<void>;
-  handleAddHabit: (
+  handleAddLeaf: (
     name: string,
     calendarId: Id<"calendars">,
     timerDuration?: number,
   ) => Promise<void>;
-  handleToggleHabit: (
-    habitId: Id<"habits">,
+  handleToggleLeaf: (
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => Promise<void>;
@@ -57,7 +57,7 @@ interface CalendarContainerProps {
   calendars: Calendar[];
   completions: Completion[];
   days: Day[];
-  habits: Habit[];
+  leaves: Leaf[];
   monthViewData: CalendarData;
   view: CalendarView;
   onViewChange: (view: CalendarView) => void;
@@ -111,14 +111,14 @@ function EmptyState({ monthViewData }: { monthViewData: CalendarData }) {
 
 /**
  * Main calendar container component that orchestrates the display and interaction
- * of calendars, habits, and their associated dialogs
+ * of calendars, leaves, and their associated dialogs
  */
 export function CalendarContainer({
   calendarView,
   calendars,
   completions,
   days,
-  habits,
+  leaves,
   monthViewData,
   view,
   onViewChange,
@@ -128,17 +128,17 @@ export function CalendarContainer({
   const toastMessages = useToastMessages();
   const router = useRouter();
 
-  // Dialog state management for calendar and habit operations
+  // Dialog state management for calendar and leaf operations
   const {
     state,
     openNewCalendar,
-    openNewHabit,
+    openNewLeaf,
     updateCalendarName,
     updateCalendarColor,
-    updateHabitName,
-    updateHabitTimer,
+    updateLeafName,
+    updateLeafTimer,
     resetCalendarState,
-    resetHabitState,
+    resetLeafState,
   } = useDialogState();
 
   /**
@@ -155,34 +155,34 @@ export function CalendarContainer({
   }, [monthViewData, state.calendar, toastMessages, resetCalendarState]);
 
   /**
-   * Handles creation of a new habit within a calendar
+   * Handles creation of a new leaf within a calendar
    * Validates name and selected calendar, includes error handling
    */
-  const handleAddHabit = useCallback(async () => {
-    const { name, timerDuration, selectedCalendar } = state.habit;
+  const handleAddLeaf = useCallback(async () => {
+    const { name, timerDuration, selectedCalendar } = state.leaf;
     if (!name.trim() || !selectedCalendar) return;
 
     try {
-      await monthViewData.handleAddHabit(
+      await monthViewData.handleAddLeaf(
         name,
         selectedCalendar._id,
         timerDuration,
       );
-      toastMessages.habit.created();
-      resetHabitState();
+      toastMessages.leaf.created();
+      resetLeafState();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to add habit");
+      toast.error("Failed to add leaf");
     }
-  }, [monthViewData, state.habit, toastMessages, resetHabitState]);
+  }, [monthViewData, state.leaf, toastMessages, resetLeafState]);
 
   /**
-   * Handles toggling habit completion for a specific date
+   * Handles toggling leaf completion for a specific date
    * Updates completion count in the database
    */
-  const handleToggleHabit = useCallback(
-    async (habitId: Id<"habits">, date: string, count: number) => {
-      await monthViewData.handleToggleHabit(habitId, date, count);
+  const handleToggleLeaf = useCallback(
+    async (leafId: Id<"leaves">, date: string, count: number) => {
+      await monthViewData.handleToggleLeaf(leafId, date, count);
     },
     [monthViewData],
   );
@@ -224,21 +224,19 @@ export function CalendarContainer({
                   (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
                 )
                 .map((calendar) => {
-                  const calendarHabits = habits.filter(
-                    (h) => h.calendarId === calendar._id,
+                  const calendarLeafs = leaves.filter(
+                    (l) => l.calendarId === calendar._id,
                   );
                   return (
                     <CalendarItem
                       calendar={calendar}
                       completions={completions}
                       days={days}
-                      habits={calendarHabits}
+                      leaves={calendarLeafs}
                       key={calendar._id}
-                      onAddHabit={() => openNewHabit(calendar)}
-                      onEditHabit={(habit) =>
-                        router.push(`/habits/${habit._id}`)
-                      }
-                      onToggleHabit={handleToggleHabit}
+                      onAddLeaf={() => openNewLeaf(calendar)}
+                      onEditLeaf={(leaf) => router.push(`/leaves/${leaf._id}`)}
+                      onToggleLeaf={handleToggleLeaf}
                       view={view}
                     />
                   );
@@ -256,7 +254,7 @@ export function CalendarContainer({
         </MotionCard>
       </AnimatePresence>
 
-      {/* Dialog components for creating calendars and habits */}
+      {/* Dialog components for creating calendars and leaves */}
       <NewCalendarDialog
         isOpen={state.calendar.isNewOpen}
         onOpenChange={() => resetCalendarState()}
@@ -266,14 +264,14 @@ export function CalendarContainer({
         onColorChange={updateCalendarColor}
         onSubmit={handleAddCalendar}
       />
-      <NewHabitDialog
-        isOpen={state.habit.isNewOpen}
-        onOpenChange={() => resetHabitState()}
-        name={state.habit.name}
-        onNameChange={updateHabitName}
-        timerDuration={state.habit.timerDuration}
-        onTimerDurationChange={updateHabitTimer}
-        onSubmit={handleAddHabit}
+      <NewLeafDialog
+        isOpen={state.leaf.isNewOpen}
+        onOpenChange={() => resetLeafState()}
+        name={state.leaf.name}
+        onNameChange={updateLeafName}
+        timerDuration={state.leaf.timerDuration}
+        onTimerDurationChange={updateLeafTimer}
+        onSubmit={handleAddLeaf}
       />
     </>
   );

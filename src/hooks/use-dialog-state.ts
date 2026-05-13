@@ -1,6 +1,6 @@
 /**
  * Custom hook for managing dialog states in the application.
- * Handles state for both calendar and habit dialogs including:
+ * Handles state for both calendar and leaf dialogs including:
  * - New/Edit modal visibility
  * - Form data (name, color, duration)
  * - Selected/Editing items
@@ -10,7 +10,7 @@ import { useCallback, useState } from "react";
 
 /**
  * Interface defining the structure of dialog states
- * Includes separate states for calendar and habit dialogs
+ * Includes separate states for calendar and leaf dialogs
  */
 interface CalendarState {
   isNewOpen: boolean;
@@ -21,7 +21,7 @@ interface CalendarState {
   position: number;
 }
 
-interface HabitState {
+interface LeafState {
   isNewOpen: boolean;
   name: string;
   timerDuration?: number;
@@ -30,7 +30,7 @@ interface HabitState {
 
 interface DialogState {
   calendar: CalendarState;
-  habit: HabitState;
+  leaf: LeafState;
 }
 
 const initialState: DialogState = {
@@ -42,7 +42,7 @@ const initialState: DialogState = {
     editingCalendar: null,
     position: 1,
   },
-  habit: {
+  leaf: {
     isNewOpen: false,
     name: "",
     timerDuration: undefined,
@@ -70,13 +70,13 @@ export function useDialogState() {
   }, []);
 
   /**
-   * Resets habit dialog state to initial values
+   * Resets leaf dialog state to initial values
    */
-  const resetHabitState = useCallback(() => {
+  const resetLeafState = useCallback(() => {
     setState((prev) => ({
       ...prev,
-      habit: {
-        ...initialState.habit,
+      leaf: {
+        ...initialState.leaf,
       },
     }));
   }, []);
@@ -109,13 +109,13 @@ export function useDialogState() {
   }, []);
 
   /**
-   * Opens the new habit dialog with selected calendar
+   * Opens the new leaf dialog with selected calendar
    */
-  const openNewHabit = useCallback((calendar: Calendar) => {
+  const openNewLeaf = useCallback((calendar: Calendar) => {
     setState((prev) => ({
       ...prev,
-      habit: {
-        ...prev.habit,
+      leaf: {
+        ...prev.leaf,
         isNewOpen: true,
         selectedCalendar: calendar,
       },
@@ -153,22 +153,22 @@ export function useDialogState() {
   }, []);
 
   /**
-   * Updates habit name in state
+   * Updates leaf name in state
    */
-  const updateHabitName = useCallback((name: string) => {
+  const updateLeafName = useCallback((name: string) => {
     setState((prev) => ({
       ...prev,
-      habit: { ...prev.habit, name },
+      leaf: { ...prev.leaf, name },
     }));
   }, []);
 
   /**
-   * Updates habit timer duration in state
+   * Updates leaf timer duration in state
    */
-  const updateHabitTimer = useCallback((timerDuration: number | undefined) => {
+  const updateLeafTimer = useCallback((timerDuration: number | undefined) => {
     setState((prev) => ({
       ...prev,
-      habit: { ...prev.habit, timerDuration },
+      leaf: { ...prev.leaf, timerDuration },
     }));
   }, []);
 
@@ -176,13 +176,13 @@ export function useDialogState() {
     state,
     openNewCalendar,
     openEditCalendar,
-    openNewHabit,
+    openNewLeaf,
     updateCalendarName,
     updateCalendarColor,
     updateCalendarPosition,
-    updateHabitName,
-    updateHabitTimer,
+    updateLeafName,
+    updateLeafTimer,
     resetCalendarState,
-    resetHabitState,
+    resetLeafState,
   };
 }

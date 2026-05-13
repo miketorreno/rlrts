@@ -4,13 +4,13 @@ import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 
 /**
- * Exports all user's calendars with their habits and completions.
+ * Exports all user's calendars with their leaves and completions.
  * Structure:
  * {
  *   calendars: [{
  *     name: string,
  *     colorTheme: string,
- *     habits: [{
+ *     leaves: [{
  *       name: string,
  *       completions: [{ completedAt: number }]
  *     }]
@@ -18,7 +18,7 @@ import { mutation, query } from "./_generated/server";
  * }
  */
 
-export const exportCalendarsAndHabits = query({
+export const exportCalendarsAndLeaves = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) return null;
@@ -28,20 +28,20 @@ export const exportCalendarsAndHabits = query({
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
-    const allHabits = await ctx.db
-      .query("habits")
+    const allLeaves = await ctx.db
+      .query("leaves")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
 
     // Build the export structure without _id fields
     const exportedCalendars = calendars.map((calendar) => {
-      const calendarHabits = allHabits.filter(
-        (h) => h.calendarId === calendar._id,
+      const calendarLeaves = allLeaves.filter(
+        (l) => l.calendarId === calendar._id,
       );
-      const exportedHabits = calendarHabits.map((habit) => ({
-        name: habit.name,
-        position: habit.position,
-        timerDuration: habit.timerDuration,
+      const exportedLeaves = calendarLeaves.map((leaf) => ({
+        name: leaf.name,
+        position: leaf.position,
+        timerDuration: leaf.timerDuration,
         completions: [], // Will be filled by exportCompletions
       }));
 
@@ -49,7 +49,7 @@ export const exportCalendarsAndHabits = query({
         name: calendar.name,
         colorTheme: calendar.colorTheme,
         position: calendar.position,
-        habits: exportedHabits,
+        leaves: exportedLeaves,
       };
     });
 
@@ -60,16 +60,16 @@ export const exportCalendarsAndHabits = query({
 export const exportCompletions = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return { completionsByHabit: {} };
+    if (!identity) return { completionsByLeaf: {} };
 
     try {
-      // Get all habits first to map IDs to names
-      const habits = await ctx.db
-        .query("habits")
+      // Get all leaves first to map IDs to names
+      const leaves = await ctx.db
+        .query("leaves")
         .filter((q) => q.eq(q.field("userId"), identity.subject))
         .collect();
 
-      const habitIdToName = new Map(habits.map((h) => [h._id, h.name]));
+      const leafIdToName = new Map(leaves.map((l) => [l._id, l.name]));
 
       // Get all completions
       const completions = await ctx.db
@@ -77,35 +77,35 @@ export const exportCompletions = query({
         .withIndex("by_user_and_date", (q) => q.eq("userId", identity.subject))
         .collect();
 
-      // Group completions by habit name
-      const completionsByHabit = new Map();
+      // Group completions by leaf name
+      const completionsByLeaf = new Map();
       for (const completion of completions) {
-        const habitName = habitIdToName.get(completion.habitId);
-        if (!habitName) continue;
+        const leafName = leafIdToName.get(completion.leafId);
+        if (!leafName) continue;
 
-        const encodedName = encodeURIComponent(habitName);
-        const habitCompletions = completionsByHabit.get(encodedName) || [];
-        habitCompletions.push({ completedAt: completion.completedAt });
-        completionsByHabit.set(encodedName, habitCompletions);
+        const encodedName = encodeURIComponent(leafName);
+        const leafCompletions = completionsByLeaf.get(encodedName) || [];
+        leafCompletions.push({ completedAt: completion.completedAt });
+        completionsByLeaf.set(encodedName, leafCompletions);
       }
 
-      return { completionsByHabit: Object.fromEntries(completionsByHabit) };
+      return { completionsByLeaf: Object.fromEntries(completionsByLeaf) };
     } catch (error) {
       console.error("Error in exportCompletions:", error);
-      return { completionsByHabit: {} };
+      return { completionsByLeaf: {} };
     }
   },
 });
 
 /**
- * Imports calendar data with habits and completions.
+ * Imports calendar data with leaves and completions.
  * For existing calendars (matched by name):
  * - Updates the calendar's color theme
- * - Adds new habits or updates existing ones
+ * - Adds new leaves or updates existing ones
  * - Adds only new completions (avoids duplicates)
  *
  * For new calendars:
- * - Creates the calendar with all habits and completions
+ * - Creates the calendar with all leaves and completions
  */
 export const importData = mutation({
   args: {
@@ -115,7 +115,7 @@ export const importData = mutation({
           name: v.string(),
           colorTheme: v.string(),
           position: v.optional(v.number()),
-          habits: v.array(
+          leaves: v.array(
             v.union(
               v.object({
                 name: v.string(),
@@ -139,12 +139,11 @@ export const importData = mutation({
     // Clean the input data to only use fields we need
     const cleanedCalendars = args.data.calendars.map((calendar) => ({
       ...calendar,
-      habits: calendar.habits.map((habit) => ({
-        name: habit.name,
-        timerDuration:
-          "timerDuration" in habit ? habit.timerDuration : undefined,
-        position: "position" in habit ? habit.position : undefined,
-        completions: "completions" in habit ? habit.completions : [],
+      leaves: calendar.leaves.map((leaf) => ({
+        name: leaf.name,
+        timerDuration: "timerDuration" in leaf ? leaf.timerDuration : undefined,
+        position: "position" in leaf ? leaf.position : undefined,
+        completions: "completions" in leaf ? leaf.completions : [],
       })),
     }));
 
@@ -171,41 +170,41 @@ export const importData = mutation({
           position: calendarData.position,
         });
 
-        const existingHabits = await ctx.db
-          .query("habits")
+        const existingLeaves = await ctx.db
+          .query("leaves")
           .filter((q) => q.eq(q.field("calendarId"), calendarId))
           .collect();
 
-        const sortedHabits = [...calendarData.habits].sort(
+        const sortedLeaves = [...calendarData.leaves].sort(
           (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
         );
 
-        for (const habitData of sortedHabits) {
-          const { name, completions, timerDuration, position } = habitData;
+        for (const leafData of sortedLeaves) {
+          const { name, completions, timerDuration, position } = leafData;
 
-          const existingHabit = existingHabits.find((h) => h.name === name);
-          let habitId: Id<"habits">;
+          const existingLeaf = existingLeaves.find((l) => l.name === name);
+          let leafId: Id<"leaves">;
 
-          if (existingHabit) {
-            habitId = existingHabit._id;
-            await ctx.db.patch(habitId, {
-              position: position ?? existingHabits.indexOf(existingHabit) + 1,
+          if (existingLeaf) {
+            leafId = existingLeaf._id;
+            await ctx.db.patch(leafId, {
+              position: position ?? existingLeaves.indexOf(existingLeaf) + 1,
               timerDuration,
             });
           } else {
-            habitId = await ctx.db.insert("habits", {
+            leafId = await ctx.db.insert("leaves", {
               name,
               userId: identity.subject,
               calendarId,
               timerDuration,
-              position: position ?? existingHabits.length + 1,
+              position: position ?? existingLeaves.length + 1,
             });
           }
 
           // Process completions in batches of 100
           const existingCompletions = await ctx.db
             .query("completions")
-            .filter((q) => q.eq(q.field("habitId"), habitId))
+            .filter((q) => q.eq(q.field("leafId"), leafId))
             .collect();
 
           const existingCompletionTimes = new Set(
@@ -224,7 +223,7 @@ export const importData = mutation({
               await Promise.all(
                 newCompletions.map((completion: { completedAt: number }) =>
                   ctx.db.insert("completions", {
-                    habitId,
+                    leafId,
                     userId: identity.subject,
                     completedAt: completion.completedAt,
                   }),
@@ -242,19 +241,19 @@ export const importData = mutation({
           position: calendarData.position ?? existingCalendars.length + 1,
         });
 
-        const sortedHabits = [...calendarData.habits].sort(
+        const sortedLeaves = [...calendarData.leaves].sort(
           (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
         );
 
-        for (const habitData of sortedHabits) {
-          const { name, completions, timerDuration, position } = habitData;
+        for (const leafData of sortedLeaves) {
+          const { name, completions, timerDuration, position } = leafData;
 
-          const habitId = await ctx.db.insert("habits", {
+          const leafId = await ctx.db.insert("leaves", {
             name,
             userId: identity.subject,
             calendarId: newCalendarId,
             timerDuration,
-            position: position ?? calendarData.habits.indexOf(habitData) + 1,
+            position: position ?? calendarData.leaves.indexOf(leafData) + 1,
           });
 
           // Process completions in batches of 100
@@ -263,7 +262,7 @@ export const importData = mutation({
             await Promise.all(
               batch.map((completion: { completedAt: number }) =>
                 ctx.db.insert("completions", {
-                  habitId,
+                  leafId,
                   userId: identity.subject,
                   completedAt: completion.completedAt,
                 }),

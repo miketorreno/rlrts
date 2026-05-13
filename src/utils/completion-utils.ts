@@ -2,26 +2,26 @@
 import { Id } from "../../convex/_generated/dataModel";
 
 /**
- * Utility functions for handling habit completion calculations.
- * Provides date-based filtering and counting of habit completions.
+ * Utility functions for handling leaf completion calculations.
+ * Provides date-based filtering and counting of leaf completions.
  */
 
 /**
- * Calculates the number of times a habit was completed on a specific date.
+ * Calculates the number of times a leaf was completed on a specific date.
  *
  * @param date - The date to check completions for (in ISO string format)
- * @param habitId - The ID of the habit to check
- * @param completions - Array of completion records with habit IDs and timestamps
- * @returns Number of times the habit was completed on the specified date
+ * @param leafId - The ID of the leaf to check
+ * @param completions - Array of completion records with leaf IDs and timestamps
+ * @returns Number of times the leaf was completed on the specified date
  *
  * Note: Uses local timezone for date boundaries (midnight to midnight)
  */
 export function getCompletionCount(
   date: string,
-  habitId: Id<"habits">,
+  leafId: Id<"leaves">,
   completions:
     | Array<{
-        habitId: Id<"habits">;
+        leafId: Id<"leaves">;
         completedAt: number;
       }>
     | null
@@ -42,11 +42,11 @@ export function getCompletionCount(
   const dayEndTime = dayEnd.getTime();
 
   // Filter and count completions that match:
-  // 1. The specified habit ID
+  // 1. The specified leaf ID
   // 2. Timestamp falls within the day's boundaries
   return completions.filter(
     (completion) =>
-      completion.habitId === habitId &&
+      completion.leafId === leafId &&
       completion.completedAt >= dayStartTime &&
       completion.completedAt <= dayEndTime,
   ).length;

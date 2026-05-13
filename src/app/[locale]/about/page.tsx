@@ -217,6 +217,7 @@ export default function AboutPage() {
           <div className="relative aspect-video w-full md:w-2/3">
             <Image
               src="/never-miss-twice.jpg"
+              sizes=""
               alt="Never miss twice calendar visualization"
               fill
               className="rounded object-cover"

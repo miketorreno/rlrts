@@ -13,18 +13,18 @@ import { DayCell } from "./day-cell";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Grid view component for displaying habits in a traditional calendar layout.
+ * Grid view component for displaying leaves in a traditional calendar layout.
  * Shows multiple months with day cells arranged in a 7-column grid.
- * Supports habit completion tracking and mobile-responsive layout.
+ * Supports leaf completion tracking and mobile-responsive layout.
  */
 
 /**
  * Props interface for the MonthGridView component
  */
 interface MonthGridViewProps {
-  /** Primary habit for the calendar */
-  habit: {
-    _id: Id<"habits">;
+  /** Primary leaf for the calendar */
+  leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
@@ -33,32 +33,32 @@ interface MonthGridViewProps {
   color: string;
   /** Array of dates to display */
   days: string[];
-  /** Array of habit completion records */
+  /** Array of leaf completion records */
   completions: Array<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  /** Callback for toggling habit completion */
+  /** Callback for toggling leaf completion */
   onToggle: (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => Promise<void>;
-  /** Callback for editing habit properties */
-  onEditHabit: (habit: {
-    _id: Id<"habits">;
+  /** Callback for editing leaf properties */
+  onEditLeaf: (leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   }) => void;
-  /** Array of all habits in the calendar */
-  habits: Array<{
-    _id: Id<"habits">;
+  /** Array of all leaves in the calendar */
+  leaves: Array<{
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
   }>;
-  /** Callback for adding a new habit */
-  onAddHabit: () => void;
+  /** Callback for adding a new leaf */
+  onAddLeaf: () => void;
 }
 
 export function MonthGridView({
@@ -66,24 +66,24 @@ export function MonthGridView({
   days,
   completions,
   onToggle,
-  onEditHabit,
-  habits,
-  onAddHabit,
+  onEditLeaf,
+  leaves,
+  onAddLeaf,
 }: MonthGridViewProps) {
   const t = useTranslations("calendar");
   const [loadingState, setLoadingState] = useState<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     date: string;
   } | null>(null);
 
   const handleToggle = async (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => {
-    setLoadingState({ habitId, date });
+    setLoadingState({ leafId, date });
     try {
-      await onToggle(habitId, date, count);
+      await onToggle(leafId, date, count);
     } finally {
       setLoadingState(null);
     }
@@ -91,28 +91,28 @@ export function MonthGridView({
 
   return (
     <div className="space-y-4">
-      {[...habits]
+      {[...leaves]
         .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
-        .map((habit) => {
-          // Calculate today's completion count for the habit
+        .map((leaf) => {
+          // Calculate today's completion count for the leaf
           const today = new Date().toISOString().split("T")[0];
           const todayCount = Array.isArray(completions)
             ? completions.filter(
                 (c) =>
-                  c.habitId === habit._id &&
+                  c.leafId === leaf._id &&
                   new Date(c.completedAt).toISOString().split("T")[0] === today,
               ).length
             : 0;
 
           return (
             // TODO: 2025-01-07 - empty classes are unacceptable
-            <div key={habit._id} className="">
-              {/* Habit header with name and timer duration */}
+            <div key={leaf._id} className="">
+              {/* Leaf header with name and timer duration */}
               <div className="flex justify-center pt-8">
                 <div className="flex items-baseline pb-2">
                   <div
                     className="cursor-pointer"
-                    onClick={() => onEditHabit(habit)}
+                    onClick={() => onEditLeaf(leaf)}
                   >
                     <h3
                       className={`select-none text-2xl font-medium underline decoration-wavy decoration-2 ${color.replace(
@@ -120,12 +120,12 @@ export function MonthGridView({
                         "decoration-",
                       )}/30 hover:text-muted-foreground hover:no-underline`}
                     >
-                      {habit.name}
+                      {leaf.name}
                     </h3>
                   </div>
-                  {habit.timerDuration && (
+                  {leaf.timerDuration && (
                     <span className="ml-1 text-sm text-muted-foreground">
-                      ({habit.timerDuration}m)
+                      ({leaf.timerDuration}m)
                     </span>
                   )}
                 </div>
@@ -135,21 +135,21 @@ export function MonthGridView({
                 <CompleteControls
                   count={todayCount}
                   onIncrement={() =>
-                    handleToggle(habit._id, today, todayCount + 1)
+                    handleToggle(leaf._id, today, todayCount + 1)
                   }
                   onDecrement={() =>
-                    handleToggle(habit._id, today, todayCount - 1)
+                    handleToggle(leaf._id, today, todayCount - 1)
                   }
-                  habitId={habit._id}
+                  leafId={leaf._id}
                   variant="default"
-                  timerDuration={habit.timerDuration}
-                  habitName={habit.name}
-                  disabled={loadingState?.habitId === habit._id}
+                  timerDuration={leaf.timerDuration}
+                  leafName={leaf.name}
+                  disabled={loadingState?.leafId === leaf._id}
                 />
               </div>
               {/* Monthly calendar grid */}
               <MonthGridCalendar
-                habit={habit}
+                leaf={leaf}
                 color={color}
                 days={days}
                 completions={completions}
@@ -159,11 +159,11 @@ export function MonthGridView({
             </div>
           );
         })}
-      {/* Add habit button */}
+      {/* Add leaf button */}
       <div className="flex justify-center pb-8">
-        <Button variant="outline" size="sm" onClick={onAddHabit}>
+        <Button variant="outline" size="sm" onClick={onAddLeaf}>
           <PlusCircle className="h-4 w-4" />
-          {t("controls.addHabit")}
+          {t("controls.addLeaf")}
         </Button>
       </div>
     </div>
@@ -174,9 +174,9 @@ export function MonthGridView({
  * Props interface for the MonthGridCalendar subcomponent
  */
 interface MonthGridCalendarProps {
-  /** Habit to display in the calendar */
-  habit: {
-    _id: Id<"habits">;
+  /** Leaf to display in the calendar */
+  leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   };
@@ -184,26 +184,26 @@ interface MonthGridCalendarProps {
   color: string;
   /** Array of dates to display */
   days: string[];
-  /** Array of habit completion records */
+  /** Array of leaf completion records */
   completions: Array<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  /** Callback for toggling habit completion */
+  /** Callback for toggling leaf completion */
   onToggle: (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => Promise<void>;
-  loadingState: { habitId: Id<"habits">; date: string } | null;
+  loadingState: { leafId: Id<"leaves">; date: string } | null;
 }
 
 /**
- * Subcomponent that renders the actual calendar grid for a habit
+ * Subcomponent that renders the actual calendar grid for a leaf
  * Handles month calculation, day padding, and responsive layout
  */
 function MonthGridCalendar({
-  habit,
+  leaf,
   color,
   days,
   completions,
@@ -251,7 +251,7 @@ function MonthGridCalendar({
 
   return (
     <div
-      data-habit-id={habit._id}
+      data-leaf-id={leaf._id}
       className="w-full space-y-8 md:grid md:grid-cols-2 md:gap-8 md:space-y-0 lg:grid-cols-3"
     >
       {sortedMonths.map(([monthKey, monthDays]) => {
@@ -300,24 +300,24 @@ function MonthGridCalendar({
               {monthDays.map((dateStr) => {
                 const isInRange = days.includes(dateStr);
                 const count = isInRange
-                  ? getCompletionCount(dateStr, habit._id, completions)
+                  ? getCompletionCount(dateStr, leaf._id, completions)
                   : 0;
 
                 return (
                   <div key={dateStr} className="h-[48px] w-[48px] p-0">
                     <div className="h-full w-full">
                       <DayCell
-                        habitId={habit._id}
+                        leafId={leaf._id}
                         date={dateStr}
                         count={count}
                         onCountChange={(newCount) =>
-                          onToggle(habit._id, dateStr, newCount)
+                          onToggle(leaf._id, dateStr, newCount)
                         }
                         colorClass={color}
                         size="large"
                         disabled={!isInRange}
                         isUpdating={
-                          loadingState?.habitId === habit._id &&
+                          loadingState?.leafId === leaf._id &&
                           loadingState?.date === dateStr
                         }
                       />

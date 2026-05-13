@@ -1,11 +1,11 @@
 "use client";
 
-import { HabitActivityCalendar } from "@/components/habit/details/habit-activity-calendar";
-import { HabitBackNavigation } from "@/components/habit/details/habit-back-navigation";
-import { HabitDeleteDialog } from "@/components/habit/details/habit-delete-dialog";
-import { HabitEditForm } from "@/components/habit/details/habit-edit-form";
-import { HabitStatistics } from "@/components/habit/details/habit-statistics";
-import { SingleMonthCalendar } from "@/components/habit/details/single-month-calendar";
+import { LeafActivityCalendar } from "@/components/leaf/details/leaf-activity-calendar";
+import { LeafBackNavigation } from "@/components/leaf/details/leaf-back-navigation";
+import { LeafDeleteDialog } from "@/components/leaf/details/leaf-delete-dialog";
+import { LeafEditForm } from "@/components/leaf/details/leaf-edit-form";
+import { LeafStatistics } from "@/components/leaf/details/leaf-statistics";
+import { SingleMonthCalendar } from "@/components/leaf/details/single-month-calendar";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
@@ -17,23 +17,23 @@ import { api } from "../../../convex/_generated/api";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * HabitDetails Component
- * A comprehensive view for managing and displaying habit details including:
+ * LeafDetails Component
+ * A comprehensive view for managing and displaying leaf details including:
  * - Activity calendar visualization
  * - Monthly statistics
- * - Habit editing capabilities
+ * - Leaf editing capabilities
  * - Deletion functionality
  */
 
 /**
- * Props interface for the HabitDetails component
- * @property habit - The habit object containing core habit data
- * @property calendar - The calendar object this habit belongs to
- * @property onDelete - Callback function triggered after successful habit deletion
+ * Props interface for the LeafDetails component
+ * @property leaf - The leaf object containing core leaf data
+ * @property calendar - The calendar object this leaf belongs to
+ * @property onDelete - Callback function triggered after successful leaf deletion
  */
-interface HabitDetailsProps {
-  habit: {
-    _id: Id<"habits">;
+interface LeafDetailsProps {
+  leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     calendarId: Id<"calendars">;
@@ -68,27 +68,27 @@ function getCalendarSize() {
   return { blockSize: 8, blockMargin: 1, showLabels: false };
 }
 
-export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
+export function LeafDetails({ leaf, calendar }: LeafDetailsProps) {
   // Core hooks and state management
   const router = useRouter();
   const { toast } = useToast();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [name, setName] = useState(habit.name);
+  const [name, setName] = useState(leaf.name);
   const [timerDuration, setTimerDuration] = useState<number | undefined>(
-    habit.timerDuration,
+    leaf.timerDuration,
   );
   const [selectedCalendarId, setSelectedCalendarId] = useState<Id<"calendars">>(
-    habit.calendarId,
+    leaf.calendarId,
   );
-  const [position, setPosition] = useState<number>(habit.position ?? 1);
+  const [position, setPosition] = useState<number>(leaf.position ?? 1);
   const [calendarSize, setCalendarSize] = useState(getCalendarSize());
 
   // Convex API mutations and queries
-  const updateHabit = useMutation(api.habits.update);
-  const deleteHabit = useMutation(api.habits.remove);
-  const markComplete = useMutation(api.habits.markComplete);
+  const updateLeaf = useMutation(api.leaves.update);
+  const deleteLeaf = useMutation(api.leaves.remove);
+  const markComplete = useMutation(api.leaves.markComplete);
   const calendars = useQuery(api.calendars.list);
-  const habits = useQuery(api.habits.list, { calendarId: selectedCalendarId });
+  const leaves = useQuery(api.leaves.list, { calendarId: selectedCalendarId });
 
   /**
    * Window resize handler to update calendar visualization
@@ -104,7 +104,7 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
   }, []);
 
   /**
-   * Calculate the date range for habit completions
+   * Calculate the date range for leaf completions
    * Shows data for the last year up to current date
    */
   const dateRange = useMemo(() => {
@@ -127,7 +127,7 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
     };
   }, []);
 
-  const completions = useQuery(api.habits.getCompletions, dateRange);
+  const completions = useQuery(api.leaves.getCompletions, dateRange);
 
   /**
    * Processes completion data into a format suitable for calendar visualization
@@ -145,7 +145,7 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
     }
 
     completions.completions
-      .filter((completion) => completion.habitId === habit._id)
+      .filter((completion) => completion.leafId === leaf._id)
       .forEach((completion) => {
         const date = new Date(completion.completedAt)
           .toISOString()
@@ -169,34 +169,34 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
         level,
       };
     });
-  }, [completions, habit._id, dateRange]);
+  }, [completions, leaf._id, dateRange]);
 
   /**
-   * Handles habit updates
+   * Handles leaf updates
    * Validates input and shows success/error toasts
    */
   const handleSave = async () => {
     if (!name.trim()) return;
     try {
-      await updateHabit({
-        id: habit._id,
+      await updateLeaf({
+        id: leaf._id,
         name,
         timerDuration,
         calendarId: selectedCalendarId,
         position,
       });
-      toast({ description: "Habit updated successfully" });
+      toast({ description: "Leaf updated successfully" });
       router.push("/calendar");
     } catch (error) {
       toast({
-        description: `Failed to update habit: ${error instanceof Error ? error.message : "Unknown error"}`,
+        description: `Failed to update leaf: ${error instanceof Error ? error.message : "Unknown error"}`,
         variant: "destructive",
       });
     }
   };
 
   /**
-   * Handles habit deletion
+   * Handles leaf deletion
    * Includes navigation and cleanup with error handling
    */
   const handleDelete = async () => {
@@ -204,11 +204,11 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
       setShowDeleteAlert(false);
       router.replace("/calendar");
       await new Promise((resolve) => setTimeout(resolve, 0));
-      await deleteHabit({ id: habit._id });
-      toast({ description: "Habit deleted", variant: "destructive" });
+      await deleteLeaf({ id: leaf._id });
+      toast({ description: "Leaf deleted", variant: "destructive" });
     } catch (error) {
       toast({
-        description: `Failed to delete habit: ${error instanceof Error ? error.message : "Unknown error"}`,
+        description: `Failed to delete leaf: ${error instanceof Error ? error.message : "Unknown error"}`,
         variant: "destructive",
       });
     }
@@ -216,9 +216,9 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
 
   return (
     <>
-      <HabitBackNavigation />
+      <LeafBackNavigation />
 
-      {/* Habit header with name and timer duration */}
+      {/* Leaf header with name and timer duration */}
       <div className="text-center">
         <h1 className="mb-8 text-2xl font-bold">
           {name}
@@ -235,13 +235,13 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
         {/* Single month calendar view */}
         <div className="mx-auto w-full max-w-[300px] lg:mx-0 lg:w-[300px]">
           <SingleMonthCalendar
-            habit={habit}
+            leaf={leaf}
             colorTheme={calendar.colorTheme}
             completions={completions?.completions ?? []}
-            onToggle={async (habitId, date, count) => {
+            onToggle={async (leafId, date, count) => {
               try {
                 const completedAt = new Date(date).getTime();
-                await markComplete({ habitId, completedAt, count });
+                await markComplete({ leafId, completedAt, count });
               } catch (error) {
                 toast({
                   description: `Failed to update completion: ${error instanceof Error ? error.message : "Unknown error"}`,
@@ -254,23 +254,23 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
 
         {/* Activity calendar and statistics section */}
         <div className="space-y-4">
-          <HabitActivityCalendar
+          <LeafActivityCalendar
             calendarData={calendarData}
             completions={completions?.completions}
             calendarSize={calendarSize}
             colorTheme={calendar.colorTheme}
           />
 
-          <HabitStatistics
-            habitId={habit._id}
+          <LeafStatistics
+            leafId={leaf._id}
             colorTheme={calendar.colorTheme}
             completions={completions?.completions}
           />
         </div>
       </div>
 
-      {/* Habit management forms and dialogs */}
-      <HabitEditForm
+      {/* Leaf management forms and dialogs */}
+      <LeafEditForm
         name={name}
         onNameChange={setName}
         timerDuration={timerDuration}
@@ -280,16 +280,16 @@ export function HabitDetails({ habit, calendar }: HabitDetailsProps) {
         position={position}
         onPositionChange={setPosition}
         calendars={calendars}
-        habits={habits}
+        leaves={leaves}
         onSave={handleSave}
         onDelete={() => setShowDeleteAlert(true)}
       />
 
-      <HabitDeleteDialog
+      <LeafDeleteDialog
         open={showDeleteAlert}
         onOpenChange={setShowDeleteAlert}
         onConfirm={handleDelete}
-        habitName={name}
+        leafName={name}
       />
     </>
   );

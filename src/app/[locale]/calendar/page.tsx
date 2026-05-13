@@ -30,7 +30,7 @@ export default function CalendarPage() {
   const monthData = useDateRange(40);
   const yearData = useDateRange(365);
 
-  // Fetch calendar data (habits, completions) for both views
+  // Fetch calendar data (leaves, completions) for both views
   const monthViewData = useCalendarData(monthData.startDate, monthData.today);
   // const yearViewData = useCalendarData(yearData.startDate, yearData.today);
 
@@ -41,26 +41,26 @@ export default function CalendarPage() {
   const memoizedData = useMemo(
     () => ({
       calendars: monthViewData.calendars || [],
-      habits: monthViewData.habits || [],
+      leaves: monthViewData.leaves || [],
       completions: monthViewData.completions || [],
     }),
-    [monthViewData.calendars, monthViewData.habits, monthViewData.completions],
+    [monthViewData.calendars, monthViewData.leaves, monthViewData.completions],
   );
 
   // Show loading state only during initial data fetch
   const isLoading =
     !monthViewData.calendars ||
-    !monthViewData.habits ||
+    !monthViewData.leaves ||
     !monthViewData.completions;
 
   return (
     <div className="container mx-auto max-w-7xl pt-16">
       <AuthenticationWrapper>
         <>
-          {/* Yearly overview component showing habit completion heatmap */}
+          {/* Yearly overview component showing leaf completion heatmap */}
           {/* <MemoizedYearlyOverview
             completions={yearViewData.completions || []}
-            habits={memoizedData.habits}
+            leaves={memoizedData.leaves}
             calendars={memoizedData.calendars}
             isLoading={isLoading}
           /> */}
@@ -71,7 +71,7 @@ export default function CalendarPage() {
             calendars={memoizedData.calendars}
             completions={memoizedData.completions}
             days={days}
-            habits={memoizedData.habits}
+            leaves={memoizedData.leaves}
             monthViewData={monthViewData}
             onViewChange={setView}
             view={view}

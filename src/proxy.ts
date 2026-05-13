@@ -11,7 +11,7 @@ const intlMiddleware = createMiddleware({
 });
 
 // Define protected routes
-const isProtectedRoute = createRouteMatcher(["/calendar(.*)", "/habits(.*)"]);
+const isProtectedRoute = createRouteMatcher(["/calendar(.*)", "/leaves(.*)"]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { pathname } = req.nextUrl;

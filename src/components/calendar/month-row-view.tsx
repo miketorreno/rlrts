@@ -11,8 +11,8 @@ import { DayCell } from "./day-cell";
 import { Id } from "../../../convex/_generated/dataModel";
 
 /**
- * Row view component for displaying habits in a horizontal calendar layout.
- * Shows days in a continuous row with habit completion tracking.
+ * Row view component for displaying leaves in a horizontal calendar layout.
+ * Shows days in a continuous row with leaf completion tracking.
  * Supports RTL languages and includes gradient fade effects for better UX.
  */
 
@@ -20,9 +20,9 @@ import { Id } from "../../../convex/_generated/dataModel";
  * Props interface for the MonthRowView component
  */
 interface MonthRowViewProps {
-  /** Primary habit for the calendar */
-  habit: {
-    _id: Id<"habits">;
+  /** Primary leaf for the calendar */
+  leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
@@ -31,36 +31,36 @@ interface MonthRowViewProps {
   color: string;
   /** Array of dates to display */
   days: string[];
-  /** Array of habit completion records */
+  /** Array of leaf completion records */
   completions: Array<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  /** Callback for toggling habit completion */
+  /** Callback for toggling leaf completion */
   onToggle: (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => Promise<void>;
-  /** Callback for editing habit properties */
-  onEditHabit: (habit: {
-    _id: Id<"habits">;
+  /** Callback for editing leaf properties */
+  onEditLeaf: (leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   }) => void;
-  /** Array of all habits in the calendar */
-  habits: Array<{
-    _id: Id<"habits">;
+  /** Array of all leaves in the calendar */
+  leaves: Array<{
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
     position?: number;
   }>;
-  /** Callback for adding a new habit */
-  onAddHabit: () => void;
+  /** Callback for adding a new leaf */
+  onAddLeaf: () => void;
 }
 
 /**
- * Component that renders habits in a horizontal calendar layout
+ * Component that renders leaves in a horizontal calendar layout
  * Supports RTL languages and includes gradient fade effects
  */
 export function MonthRowView({
@@ -68,27 +68,27 @@ export function MonthRowView({
   days,
   completions,
   onToggle,
-  onEditHabit,
-  habits,
-  onAddHabit,
+  onEditLeaf,
+  leaves,
+  onAddLeaf,
 }: MonthRowViewProps) {
   const locale = useLocale();
   const t = useTranslations("calendar");
   const [loadingState, setLoadingState] = useState<{
-    habitId: Id<"habits">;
+    leafId: Id<"leaves">;
     date: string;
   } | null>(null);
   // Check if current locale is RTL (Hebrew or Arabic)
   const isRTL = ["he", "ar"].includes(locale);
 
   const handleToggle = async (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => {
-    setLoadingState({ habitId, date });
+    setLoadingState({ leafId, date });
     try {
-      await onToggle(habitId, date, count);
+      await onToggle(leafId, date, count);
     } finally {
       setLoadingState(null);
     }
@@ -141,25 +141,25 @@ export function MonthRowView({
         </div>
       </div>
 
-      {/* Habit Rows Section */}
+      {/* Leaf Rows Section */}
       <div className="relative space-y-px overflow-hidden">
-        {[...habits]
+        {[...leaves]
           .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
-          .map((habit) => {
-            // Calculate today's completion count for the habit
+          .map((leaf) => {
+            // Calculate today's completion count for the leaf
             const today = new Date().toISOString().split("T")[0];
             const todayCount = Array.isArray(completions)
               ? completions.filter(
                   (c) =>
-                    c.habitId === habit._id &&
+                    c.leafId === leaf._id &&
                     new Date(c.completedAt).toISOString().split("T")[0] ===
                       today,
                 ).length
               : 0;
 
             return (
-              <div key={habit._id} className="relative flex justify-end">
-                {/* Calendar view grid for the habit */}
+              <div key={leaf._id} className="relative flex justify-end">
+                {/* Calendar view grid for the leaf */}
                 <div className="flex-1">
                   <div className="flex justify-end">
                     <div
@@ -168,20 +168,20 @@ export function MonthRowView({
                       {days.map((date) => (
                         <DayCell
                           key={date}
-                          habitId={habit._id}
+                          leafId={leaf._id}
                           date={date}
                           count={getCompletionCount(
                             date,
-                            habit._id,
+                            leaf._id,
                             completions,
                           )}
                           onCountChange={(newCount) =>
-                            handleToggle(habit._id, date, newCount)
+                            handleToggle(leaf._id, date, newCount)
                           }
                           colorClass={color}
                           size="small"
                           isUpdating={
-                            loadingState?.habitId === habit._id &&
+                            loadingState?.leafId === leaf._id &&
                             loadingState?.date === date
                           }
                         />
@@ -189,10 +189,10 @@ export function MonthRowView({
                     </div>
                   </div>
                 </div>
-                {/* Editable habit name with hover effects - direction aware */}
+                {/* Editable leaf name with hover effects - direction aware */}
                 <div
                   className={`absolute flex w-24 cursor-pointer select-none items-start md:w-48 ${isRTL ? "right-0" : "left-0"}`}
-                  onClick={() => onEditHabit(habit)}
+                  onClick={() => onEditLeaf(leaf)}
                 >
                   <div className="relative flex items-center">
                     <div className="flex items-baseline bg-card">
@@ -201,54 +201,50 @@ export function MonthRowView({
                           "bg-",
                           "decoration-",
                         )}/30 hover:text-muted-foreground hover:no-underline`}
-                        onClick={() => onEditHabit(habit)}
+                        onClick={() => onEditLeaf(leaf)}
                       >
                         <span className="cursor-pointer truncate">
-                          {habit.name}
+                          {leaf.name}
                         </span>
                       </h3>
-                      {habit.timerDuration && (
+                      {leaf.timerDuration && (
                         <span
                           className={`${isRTL ? "mx-1" : "ml-1"} text-sm text-muted-foreground/50`}
                         >
-                          ({habit.timerDuration}m)
+                          ({leaf.timerDuration}m)
                         </span>
                       )}
                     </div>
-                    {/* Gradient fade effect for habit name */}
+                    {/* Gradient fade effect for leaf name */}
                     <div
                       className={`h-6 w-12 ${isRTL ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-card to-transparent`}
                     />
                   </div>
                 </div>
-                {/* Habit completion controls for today */}
+                {/* Leaf completion controls for today */}
                 <div className={`absolute ${isRTL ? "left-0" : "right-0"}`}>
                   <CompleteControls
                     count={todayCount}
                     onIncrement={() =>
-                      handleToggle(habit._id, today, todayCount + 1)
+                      handleToggle(leaf._id, today, todayCount + 1)
                     }
                     onDecrement={() =>
-                      handleToggle(habit._id, today, todayCount - 1)
+                      handleToggle(leaf._id, today, todayCount - 1)
                     }
                     variant="default"
-                    habitId={habit._id}
-                    timerDuration={habit.timerDuration}
-                    habitName={habit.name}
-                    disabled={loadingState?.habitId === habit._id}
+                    leafId={leaf._id}
+                    timerDuration={leaf.timerDuration}
+                    leafName={leaf.name}
+                    disabled={loadingState?.leafId === leaf._id}
                   />
                 </div>
               </div>
             );
           })}
       </div>
-      {/* Add new habit button */}
+      {/* Add new leaf button */}
       <div className={`mt-px flex ${isRTL ? "justify-end" : "justify-end"}`}>
-        <Button
-          className="h-[24px] w-24 text-xs"
-          size="sm"
-          onClick={onAddHabit}
-        >
+        <Button className="h-[24px] w-24 text-xs" size="sm" onClick={onAddLeaf}>
           {t("controls.new")}
         </Button>
       </div>

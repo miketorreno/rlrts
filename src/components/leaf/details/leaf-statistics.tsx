@@ -6,38 +6,38 @@ import { motion } from "framer-motion";
 
 // import { Id } from "@server/convex/_generated/dataModel";
 
-import { HabitAnalytics } from "./habit-analytics";
+import { LeafAnalytics } from "./leaf-analytics";
 import { Id } from "../../../../convex/_generated/dataModel";
 
 /**
- * HabitStatistics Component
- * Displays statistical information about a habit's completion patterns including:
+ * LeafStatistics Component
+ * Displays statistical information about a leaf's completion patterns including:
  * - Current streak
  * - Days since last completion (off streak)
  * - Monthly completions
  * - Total completions
- * Also renders a visual analytics component for the habit data
+ * Also renders a visual analytics component for the leaf data
  */
 
-interface HabitStatisticsProps {
-  habitId: Id<"habits">;
+interface LeafStatisticsProps {
+  leafId: Id<"leaves">;
   colorTheme: string;
   completions:
     | Array<{
-        habitId: Id<"habits">;
+        leafId: Id<"leaves">;
         completedAt: number;
       }>
     | undefined;
 }
 
-export function HabitStatistics({
-  habitId,
+export function LeafStatistics({
+  leafId,
   colorTheme,
   completions,
-}: HabitStatisticsProps) {
-  // Calculate total number of times this habit was completed
+}: LeafStatisticsProps) {
+  // Calculate total number of times this leaf was completed
   const totalCompletions =
-    completions?.filter((c) => c.habitId === habitId).length ?? 0;
+    completions?.filter((c) => c.leafId === leafId).length ?? 0;
 
   // Calculate completions for the current month only
   const thisMonthCompletions =
@@ -45,14 +45,14 @@ export function HabitStatistics({
       const date = new Date(c.completedAt);
       const now = new Date();
       return (
-        c.habitId === habitId &&
+        c.leafId === leafId &&
         date.getMonth() === now.getMonth() &&
         date.getFullYear() === now.getFullYear()
       );
     }).length ?? 0;
 
   /**
-   * Calculates the current streak of consecutive days the habit was completed
+   * Calculates the current streak of consecutive days the leaf was completed
    * A streak is broken if:
    * 1. No completions exist
    * 2. Neither today nor yesterday has a completion
@@ -63,7 +63,7 @@ export function HabitStatistics({
 
     // Convert completion timestamps to date strings (YYYY-MM-DD format) and sort
     const dates = completions
-      .filter((c) => c.habitId === habitId)
+      .filter((c) => c.leafId === leafId)
       .map((c) => new Date(c.completedAt).toISOString().split("T")[0])
       .sort();
 
@@ -104,14 +104,14 @@ export function HabitStatistics({
   })();
 
   /**
-   * Calculates the number of days since the last habit completion
+   * Calculates the number of days since the last leaf completion
    * If there's a current streak or no completions, starts counting from the beginning of the month
    */
   const offStreak = (() => {
     if (!completions || currentStreak > 0) return 0;
 
     const dates = completions
-      .filter((c) => c.habitId === habitId)
+      .filter((c) => c.leafId === leafId)
       .map((c) => new Date(c.completedAt).toISOString().split("T")[0])
       .sort();
 
@@ -168,9 +168,9 @@ export function HabitStatistics({
 
             {/* Visual analytics section */}
 
-            <HabitAnalytics
+            <LeafAnalytics
               colorTheme={colorTheme}
-              completions={completions?.filter((c) => c.habitId === habitId)}
+              completions={completions?.filter((c) => c.leafId === leafId)}
             />
           </div>
         </Card>

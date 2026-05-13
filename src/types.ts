@@ -5,8 +5,8 @@
  * type safety for strings that should not be mixed up.
  *
  * Example:
- * - Id<"habits"> and Id<"calendars"> are different types
- * - This prevents accidentally using a habit ID where a calendar ID is expected
+ * - Id<"leaves"> and Id<"calendars"> are different types
+ * - This prevents accidentally using a leaf ID where a calendar ID is expected
  *
  * @template T - The table/entity name this ID belongs to
  */
@@ -21,8 +21,8 @@ export interface Calendar {
   position?: number;
 }
 
-export interface Habit {
-  _id: Id<"habits">;
+export interface Leaf {
+  _id: Id<"leaves">;
   _creationTime: number;
   name: string;
   calendarId: Id<"calendars">;
@@ -32,12 +32,15 @@ export interface Habit {
 export interface Completion {
   _id: Id<"completions">;
   _creationTime: number;
-  habitId: Id<"habits">;
+  leafId: Id<"leaves">;
   completedAt: number;
   userId: string;
 }
 
 export type Day = string;
 
-export type EditingCalendar = Pick<Calendar, "_id" | "name" | "colorTheme" | "position">;
-export type EditingHabit = Pick<Habit, "_id" | "name">;
+export type EditingCalendar = Pick<
+  Calendar,
+  "_id" | "name" | "colorTheme" | "position"
+>;
+export type EditingLeaf = Pick<Leaf, "_id" | "name">;

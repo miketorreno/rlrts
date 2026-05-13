@@ -12,32 +12,41 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useTranslations } from "next-intl";
 
-interface HabitDeleteDialogProps {
+interface LeafDeleteDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
-  habitName: string;
+  leafName: string;
 }
 
-export function HabitDeleteDialog({ open, onOpenChange, onConfirm, habitName }: HabitDeleteDialogProps) {
+export function LeafDeleteDialog({
+  open,
+  onOpenChange,
+  onConfirm,
+  leafName,
+}: LeafDeleteDialogProps) {
   const t = useTranslations("dialogs");
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t("habit.edit.deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogTitle>
+            {t("leaf.edit.deleteConfirm.title")}
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            {t("habit.edit.deleteConfirm.description", { name: habitName })}
+            {t("leaf.edit.deleteConfirm.description", { name: leafName })}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t("habit.edit.deleteConfirm.cancel")}</AlertDialogCancel>
+          <AlertDialogCancel>
+            {t("leaf.edit.deleteConfirm.cancel")}
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            {t("habit.edit.deleteConfirm.confirm")}
+            {t("leaf.edit.deleteConfirm.confirm")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

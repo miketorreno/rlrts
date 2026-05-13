@@ -1,10 +1,10 @@
 /**
- * HabitEditForm - A client-side form component for editing habit properties
+ * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
- * - Habit name
+ * - Leaf name
  * - Associated calendar
  * - Position within calendar
- * - Timer duration for habit tracking
+ * - Timer duration for leaf tracking
  */
 "use client";
 
@@ -25,21 +25,21 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * HabitEditForm - A client-side form component for editing habit properties
+ * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
- * - Habit name
+ * - Leaf name
  * - Associated calendar
  * - Position within calendar
- * - Timer duration for habit tracking
+ * - Timer duration for leaf tracking
  */
 
 /**
- * HabitEditForm - A client-side form component for editing habit properties
+ * LeafEditForm - A client-side form component for editing leaf properties
  * Provides functionality to modify:
- * - Habit name
+ * - Leaf name
  * - Associated calendar
  * - Position within calendar
- * - Timer duration for habit tracking
+ * - Timer duration for leaf tracking
  */
 
 // Predefined timer duration options in minutes
@@ -59,21 +59,21 @@ const TIMER_VALUES = [
 ];
 
 /**
- * Props interface for HabitEditForm
- * @property name - Current habit name
- * @property onNameChange - Callback for habit name updates
+ * Props interface for LeafEditForm
+ * @property name - Current leaf name
+ * @property onNameChange - Callback for leaf name updates
  * @property timerDuration - Optional timer duration in minutes
  * @property onTimerDurationChange - Callback for timer duration updates
  * @property selectedCalendarId - ID of currently selected calendar
  * @property onCalendarChange - Callback for calendar selection changes
- * @property position - Habit's position in the calendar
+ * @property position - Leaf's position in the calendar
  * @property onPositionChange - Callback for position updates
  * @property calendars - Available calendars list
- * @property habits - Habits in current calendar
+ * @property leaves - Leaves in current calendar
  * @property onSave - Save changes callback
- * @property onDelete - Delete habit callback
+ * @property onDelete - Delete leaf callback
  */
-interface HabitEditFormProps {
+interface LeafEditFormProps {
   name: string;
   onNameChange: (name: string) => void;
   timerDuration: number | undefined;
@@ -88,9 +88,9 @@ interface HabitEditFormProps {
         name: string;
       }>
     | undefined;
-  habits:
+  leaves:
     | Array<{
-        _id: Id<"habits">;
+        _id: Id<"leaves">;
         name: string;
       }>
     | undefined;
@@ -98,7 +98,7 @@ interface HabitEditFormProps {
   onDelete: () => void;
 }
 
-export function HabitEditForm({
+export function LeafEditForm({
   name,
   onNameChange,
   timerDuration,
@@ -108,24 +108,22 @@ export function HabitEditForm({
   position,
   onPositionChange,
   calendars,
-  habits,
+  leaves,
   onSave,
   onDelete,
-}: HabitEditFormProps) {
+}: LeafEditFormProps) {
   const t = useTranslations("dialogs");
 
   return (
     <Card className="mx-auto my-8 max-w-xl border p-2 shadow-md">
       <div className="p-4">
-        <h2 className="mb-6 text-lg font-semibold">{t("habit.edit.title")}</h2>
+        <h2 className="mb-6 text-lg font-semibold">{t("leaf.edit.title")}</h2>
         <div className="space-y-4">
-          {/* Name input field for habit */}
+          {/* Name input field for leaf */}
           <div>
-            <Label htmlFor="edit-habit-name">
-              {t("habit.edit.name.label")}
-            </Label>
+            <Label htmlFor="edit-leaf-name">{t("leaf.edit.name.label")}</Label>
             <Input
-              id="edit-habit-name"
+              id="edit-leaf-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
@@ -133,19 +131,19 @@ export function HabitEditForm({
 
           {/* Calendar selection with automatic position adjustment */}
           <div>
-            <Label>{t("habit.edit.calendar.label")}</Label>
+            <Label>{t("leaf.edit.calendar.label")}</Label>
             <Select
               value={selectedCalendarId}
               onValueChange={(value) => {
                 onCalendarChange(value as Id<"calendars">);
-                // When calendar changes, move habit to end of new calendar
-                const calendarHabits = habits?.length ?? 0;
-                onPositionChange(calendarHabits + 1);
+                // When calendar changes, move leaf to end of new calendar
+                const calendarLeaves = leaves?.length ?? 0;
+                onPositionChange(calendarLeaves + 1);
               }}
             >
               <SelectTrigger>
                 <SelectValue
-                  placeholder={t("habit.edit.calendar.placeholder")}
+                  placeholder={t("leaf.edit.calendar.placeholder")}
                 />
               </SelectTrigger>
               <SelectContent>
@@ -158,20 +156,20 @@ export function HabitEditForm({
             </Select>
           </div>
 
-          {/* Position selector - dynamically updates based on habits count */}
+          {/* Position selector - dynamically updates based on leaves count */}
           <div>
-            <Label>{t("habit.edit.position.label")}</Label>
+            <Label>{t("leaf.edit.position.label")}</Label>
             <Select
               value={position.toString()}
               onValueChange={(value) => onPositionChange(parseInt(value))}
             >
               <SelectTrigger>
                 <SelectValue
-                  placeholder={t("habit.edit.position.placeholder")}
+                  placeholder={t("leaf.edit.position.placeholder")}
                 />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: (habits?.length ?? 0) + 1 }, (_, i) => (
+                {Array.from({ length: (leaves?.length ?? 0) + 1 }, (_, i) => (
                   <SelectItem key={i + 1} value={(i + 1).toString()}>
                     {i + 1}
                   </SelectItem>
@@ -182,7 +180,7 @@ export function HabitEditForm({
 
           {/* Timer duration selector with predefined options */}
           <div>
-            <Label>{t("habit.edit.timer.label")}</Label>
+            <Label>{t("leaf.edit.timer.label")}</Label>
             <Select
               value={timerDuration?.toString() ?? "none"}
               onValueChange={(value) =>
@@ -192,11 +190,11 @@ export function HabitEditForm({
               }
             >
               <SelectTrigger>
-                <SelectValue placeholder={t("habit.edit.timer.placeholder")} />
+                <SelectValue placeholder={t("leaf.edit.timer.placeholder")} />
               </SelectTrigger>
               <SelectContent className="max-h-40">
                 <SelectItem value="none">
-                  {t("habit.edit.timer.noTimer")}
+                  {t("leaf.edit.timer.noTimer")}
                 </SelectItem>
                 {TIMER_VALUES.map((duration) => (
                   <SelectItem
@@ -210,13 +208,13 @@ export function HabitEditForm({
             </Select>
           </div>
 
-          {/* Action buttons for saving or deleting the habit */}
+          {/* Action buttons for saving or deleting the leaf */}
           <div className="flex gap-2 pt-4">
             <Button variant="destructive" onClick={onDelete}>
-              {t("habit.edit.actions.delete")}
+              {t("leaf.edit.actions.delete")}
             </Button>
             <Button onClick={onSave} className="flex-1">
-              {t("habit.edit.actions.save")}
+              {t("leaf.edit.actions.save")}
             </Button>
           </div>
         </div>

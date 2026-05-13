@@ -9,7 +9,7 @@ export default defineSchema({
     position: v.optional(v.number()),
   }).index("by_user", ["userId"]),
 
-  habits: defineTable({
+  leaves: defineTable({
     name: v.string(),
     userId: v.string(),
     calendarId: v.id("calendars"),
@@ -22,10 +22,10 @@ export default defineSchema({
     .index("scheduledTimer", ["scheduledTimer"]),
 
   completions: defineTable({
-    habitId: v.id("habits"),
+    leafId: v.id("leaves"),
     userId: v.string(),
     completedAt: v.number(),
   })
-    .index("by_habit", ["habitId"])
+    .index("by_leaf", ["leafId"])
     .index("by_user_and_date", ["userId", "completedAt"]),
 });

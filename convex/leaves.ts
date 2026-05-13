@@ -7,14 +7,14 @@ import { internalMutation, mutation, query } from "./_generated/server";
  * Key features:
  * - Position-based ordering within calendars
  * - Multiple completion tracking per day
- * - Cascading deletions (habit -> completions)
- * - Timer duration support for timed habits
+ * - Cascading deletions (leaf -> completions)
+ * - Timer duration support for timed leaves
  */
 
 /**
- * @param {Id<"calendars">} [calendarId] - Optional calendar ID to filter habits
+ * @param {Id<"calendars">} [calendarId] - Optional calendar ID to filter leaves
  * @throws {Error} If user is not authenticated
- * @returns {Promise<Doc<"habits">[]>} List of habits, sorted by position
+ * @returns {Promise<Doc<"leaves">[]>} List of leaves, sorted by position
  */
 export const list = query({
   args: {
@@ -25,26 +25,26 @@ export const list = query({
     if (!identity) throw new Error("Not authenticated");
 
     let q = ctx.db
-      .query("habits")
+      .query("leaves")
       .filter((q) => q.eq(q.field("userId"), identity.subject));
 
     if (args.calendarId) {
       q = q.filter((q) => q.eq(q.field("calendarId"), args.calendarId));
     }
 
-    const habits = await q.collect();
-    return habits.sort(
+    const leaves = await q.collect();
+    return leaves.sort(
       (a, b) => (a.position ?? Infinity) - (b.position ?? Infinity),
     );
   },
 });
 
 /**
- * @param {string} name - Display name for the habit
- * @param {Id<"calendars">} calendarId - Calendar to create habit in
- * @param {number} [timerDuration] - Optional duration in milliseconds for timed habits
+ * @param {string} name - Display name for the leaf
+ * @param {Id<"calendars">} calendarId - Calendar to create leaf in
+ * @param {number} [timerDuration] - Optional duration in milliseconds for timed leaves
  * @throws {Error} If user is not authenticated or calendar not found/owned by user
- * @returns {Promise<Id<"habits">>} ID of the newly created habit
+ * @returns {Promise<Id<"leaves">>} ID of the newly created leaf
  */
 export const create = mutation({
   args: {
@@ -63,17 +63,17 @@ export const create = mutation({
     }
 
     // Get max position for this calendar
-    const habits = await ctx.db
-      .query("habits")
+    const leaves = await ctx.db
+      .query("leaves")
       .filter((q) => q.eq(q.field("calendarId"), args.calendarId))
       .collect();
 
-    const maxPosition = habits.reduce(
-      (max, habit) => Math.max(max, habit.position || 0),
+    const maxPosition = leaves.reduce(
+      (max, leaf) => Math.max(max, leaf.position || 0),
       0,
     );
 
-    return await ctx.db.insert("habits", {
+    return await ctx.db.insert("leaves", {
       name: args.name,
       userId: identity.subject,
       calendarId: args.calendarId,
@@ -84,14 +84,14 @@ export const create = mutation({
 });
 
 /**
- * @param {Id<"habits">} habitId - Habit to mark complete
+ * @param {Id<"leaves">} leafId - Leaf to mark complete
  * @param {number} completedAt - Timestamp for the completion
  * @param {number} [count] - Optional target completion count, if not provided increments by 1
- * @throws {Error} If user is not authenticated or habit not found/owned by user
+ * @throws {Error} If user is not authenticated or leaf not found/owned by user
  */
 export const markComplete = mutation({
   args: {
-    habitId: v.id("habits"),
+    leafId: v.id("leaves"),
     completedAt: v.number(),
     count: v.optional(v.number()),
   },
@@ -99,13 +99,13 @@ export const markComplete = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    // Verify habit belongs to user
-    const habit = await ctx.db.get(args.habitId);
-    if (!habit || habit.userId !== identity.subject) {
-      throw new Error("Habit not found");
+    // Verify leaf belongs to user
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf || leaf.userId !== identity.subject) {
+      throw new Error("Leaf not found");
     }
 
-    // Get all completions for this habit on this date
+    // Get all completions for this leaf on this date
     const date = new Date(args.completedAt);
     date.setHours(0, 0, 0, 0);
     const startOfDay = date.getTime();
@@ -114,7 +114,7 @@ export const markComplete = mutation({
 
     const existingCompletions = await ctx.db
       .query("completions")
-      .filter((q) => q.eq(q.field("habitId"), args.habitId))
+      .filter((q) => q.eq(q.field("leafId"), args.leafId))
       .filter((q) =>
         q.and(
           q.gte(q.field("completedAt"), startOfDay),
@@ -146,7 +146,7 @@ export const markComplete = mutation({
       const newCompletions = Array.from(
         { length: targetCount - currentCount },
         (_, index) => ({
-          habitId: args.habitId,
+          leafId: args.leafId,
           userId: identity.subject,
           completedAt: baseTimestamp + index * 1000, // Add 1 second between each completion if multiple
         }),
@@ -223,19 +223,19 @@ export const getCompletions = query({
 /**
  * Position update scenarios:
  * 1. Moving to different calendar: Place at end of target calendar
- * 2. Moving within same calendar: Adjust positions of habits in between
+ * 2. Moving within same calendar: Adjust positions of leaves in between
  * 3. No position change: Update other properties only
  *
- * @param {Id<"habits">} id - Habit ID to update
- * @param {string} name - New habit name
+ * @param {Id<"leaves">} id - Leaf ID to update
+ * @param {string} name - New leaf name
  * @param {number} [timerDuration] - Optional new timer duration
- * @param {Id<"calendars">} calendarId - Calendar to move/keep habit in
+ * @param {Id<"calendars">} calendarId - Calendar to move/keep leaf in
  * @param {number} [position] - Optional new position in calendar
- * @throws {Error} If user not authenticated, habit/calendar not found, or invalid position
+ * @throws {Error} If user not authenticated, leaf/calendar not found, or invalid position
  */
 export const update = mutation({
   args: {
-    id: v.id("habits"),
+    id: v.id("leaves"),
     name: v.string(),
     timerDuration: v.optional(v.number()),
     calendarId: v.id("calendars"),
@@ -245,8 +245,8 @@ export const update = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthenticated");
 
-    const habit = await ctx.db.get(args.id);
-    if (!habit || habit.userId !== identity.subject) {
+    const leaf = await ctx.db.get(args.id);
+    if (!leaf || leaf.userId !== identity.subject) {
       throw new Error("Not authorized");
     }
 
@@ -257,54 +257,54 @@ export const update = mutation({
     }
 
     // Handle position update if provided or if calendar changed
-    if (args.position !== undefined || args.calendarId !== habit.calendarId) {
-      const habits = await ctx.db
-        .query("habits")
+    if (args.position !== undefined || args.calendarId !== leaf.calendarId) {
+      const leaves = await ctx.db
+        .query("leaves")
         .filter((q) => q.eq(q.field("calendarId"), args.calendarId))
         .collect();
 
       // Calculate new position based on scenario
       let newPosition: number;
-      if (args.calendarId !== habit.calendarId) {
+      if (args.calendarId !== leaf.calendarId) {
         // Moving to different calendar - put at end
-        newPosition = habits.length + 1;
+        newPosition = leaves.length + 1;
       } else if (args.position !== undefined) {
         // Staying in same calendar with specified position
         newPosition = args.position;
       } else {
         // Staying in same calendar without position - keep current
-        newPosition = habit.position ?? habits.length + 1;
+        newPosition = leaf.position ?? leaves.length + 1;
       }
 
       // Validate position
-      if (newPosition < 1 || newPosition > habits.length + 1) {
+      if (newPosition < 1 || newPosition > leaves.length + 1) {
         throw new Error("Invalid position");
       }
 
-      // Update positions of other habits if needed
-      const oldPosition = habit.position ?? 0;
+      // Update positions of other leaves if needed
+      const oldPosition = leaf.position ?? 0;
 
-      if (args.calendarId === habit.calendarId && oldPosition !== newPosition) {
+      if (args.calendarId === leaf.calendarId && oldPosition !== newPosition) {
         if (oldPosition < newPosition) {
-          // Moving down: decrease positions of habits in between
-          for (const h of habits) {
-            const hPos = h.position ?? 0;
+          // Moving down: decrease positions of leaves in between
+          for (const l of leaves) {
+            const hPos = l.position ?? 0;
             if (hPos > oldPosition && hPos <= newPosition) {
-              await ctx.db.patch(h._id, { position: hPos - 1 });
+              await ctx.db.patch(l._id, { position: hPos - 1 });
             }
           }
         } else {
-          // Moving up: increase positions of habits in between
-          for (const h of habits) {
-            const hPos = h.position ?? 0;
+          // Moving up: increase positions of leaves in between
+          for (const l of leaves) {
+            const hPos = l.position ?? 0;
             if (hPos >= newPosition && hPos < oldPosition) {
-              await ctx.db.patch(h._id, { position: hPos + 1 });
+              await ctx.db.patch(l._id, { position: hPos + 1 });
             }
           }
         }
       }
 
-      // Update the habit with new position
+      // Update the leaf with new position
       await ctx.db.patch(args.id, {
         name: args.name,
         timerDuration: args.timerDuration,
@@ -314,7 +314,7 @@ export const update = mutation({
       return;
     }
 
-    // Update the habit's properties without position change
+    // Update the leaf's properties without position change
     await ctx.db.patch(args.id, {
       name: args.name,
       timerDuration: args.timerDuration,
@@ -326,68 +326,68 @@ export const update = mutation({
 
 /**
  * Performs cascading deletion in this order:
- * 1. Delete all completions for the habit
- * 2. Delete the habit itself
+ * 1. Delete all completions for the leaf
+ * 2. Delete the leaf itself
  *
- * @param {Id<"habits">} id - Habit ID to delete
- * @throws {Error} If user not authenticated or habit not found/owned by user
+ * @param {Id<"leaves">} id - Leaf ID to delete
+ * @throws {Error} If user not authenticated or leaf not found/owned by user
  */
 export const remove = mutation({
-  args: { id: v.id("habits") },
+  args: { id: v.id("leaves") },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthenticated");
 
-    const habit = await ctx.db.get(args.id);
-    if (!habit || habit.userId !== identity.subject) {
+    const leaf = await ctx.db.get(args.id);
+    if (!leaf || leaf.userId !== identity.subject) {
       throw new Error("Not authorized");
     }
 
-    // Delete all completions for this habit
+    // Delete all completions for this leaf
     const completions = await ctx.db
       .query("completions")
-      .filter((q) => q.eq(q.field("habitId"), args.id))
+      .filter((q) => q.eq(q.field("leafId"), args.id))
       .collect();
 
     await Promise.all(
       completions.map((completion) => ctx.db.delete(completion._id)),
     );
 
-    // Delete the habit
+    // Delete the leaf
     await ctx.db.delete(args.id);
   },
 });
 
 /**
- * @param {Id<"habits">} id - Habit ID to retrieve
- * @throws {Error} If habit not found
- * @returns {Promise<Doc<"habits">>} The requested habit
+ * @param {Id<"leaves">} id - Leaf ID to retrieve
+ * @throws {Error} If leaf not found
+ * @returns {Promise<Doc<"leaves">>} The requested leaf
  */
 export const get = query({
-  args: { id: v.id("habits") },
+  args: { id: v.id("leaves") },
   handler: async (ctx, args) => {
-    const habit = await ctx.db.get(args.id);
-    if (!habit) throw new Error("Habit not found");
-    return habit;
+    const leaf = await ctx.db.get(args.id);
+    if (!leaf) throw new Error("Leaf not found");
+    return leaf;
   },
 });
 
-export const scheduleHabitIncrement = mutation({
+export const scheduleLeafIncrement = mutation({
   args: {
-    habitId: v.id("habits"),
+    leafId: v.id("leaves"),
     durationMs: v.number(),
     clientNow: v.number(),
   },
   handler: async (ctx, args): Promise<Id<"_scheduled_functions">> => {
-    console.log("Starting schedule mutation for habit:", args.habitId);
+    console.log("Starting schedule mutation for leaf:", args.leafId);
 
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    const habit = await ctx.db.get(args.habitId);
-    if (!habit || habit.userId !== identity.subject) {
-      console.error("Habit not found or unauthorized:", args.habitId);
-      throw new Error("Habit not found or unauthorized");
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf || leaf.userId !== identity.subject) {
+      console.error("Leaf not found or unauthorized:", args.leafId);
+      throw new Error("Leaf not found or unauthorized");
     }
 
     const serverNow = Date.now();
@@ -401,27 +401,27 @@ export const scheduleHabitIncrement = mutation({
       completionTime,
     });
 
-    if (habit.scheduledTimer) {
-      console.log("Cancelling existing timer:", habit.scheduledTimer);
-      await ctx.scheduler.cancel(habit.scheduledTimer);
+    if (leaf.scheduledTimer) {
+      console.log("Cancelling existing timer:", leaf.scheduledTimer);
+      await ctx.scheduler.cancel(leaf.scheduledTimer);
     }
 
     try {
       const scheduledId = await ctx.scheduler.runAfter(
         args.durationMs - timeDrift,
-        internal.habits.incrementHabitCount,
+        internal.leaves.incrementLeafCount,
         {
-          habitId: args.habitId,
+          leafId: args.leafId,
           completionTime,
         },
       );
       console.log("Scheduled successfully with ID:", scheduledId);
 
-      await ctx.db.patch(args.habitId, {
+      await ctx.db.patch(args.leafId, {
         scheduledTimer: scheduledId,
         timerEnd: completionTime,
       });
-      console.log("Updated habit with scheduled timer");
+      console.log("Updated leaf with scheduled timer");
 
       return scheduledId;
     } catch {
@@ -431,39 +431,39 @@ export const scheduleHabitIncrement = mutation({
 });
 
 export const cancelScheduledIncrement = mutation({
-  args: { habitId: v.id("habits") },
-  handler: async (ctx, { habitId }) => {
-    const habit = await ctx.db.get(habitId);
-    if (!habit || !habit.scheduledTimer) return;
+  args: { leafId: v.id("leaves") },
+  handler: async (ctx, { leafId }) => {
+    const leaf = await ctx.db.get(leafId);
+    if (!leaf || !leaf.scheduledTimer) return;
 
     // Cancel the scheduled job
-    await ctx.scheduler.cancel(habit.scheduledTimer);
+    await ctx.scheduler.cancel(leaf.scheduledTimer);
 
-    // Update the habit document
-    await ctx.db.patch(habitId, {
+    // Update the leaf document
+    await ctx.db.patch(leafId, {
       scheduledTimer: undefined,
       timerEnd: undefined,
     });
   },
 });
 
-export const incrementHabitCount = internalMutation({
+export const incrementLeafCount = internalMutation({
   args: {
-    habitId: v.id("habits"),
+    leafId: v.id("leaves"),
     completionTime: v.number(),
   },
-  handler: async (ctx, { habitId, completionTime }) => {
-    const habit = await ctx.db.get(habitId);
-    if (!habit) throw new Error("Habit not found");
+  handler: async (ctx, { leafId, completionTime }) => {
+    const leaf = await ctx.db.get(leafId);
+    if (!leaf) throw new Error("Leaf not found");
 
     // Use the pre-calculated completion time
     await ctx.db.insert("completions", {
-      habitId,
-      userId: habit.userId,
+      leafId,
+      userId: leaf.userId,
       completedAt: completionTime,
     });
 
-    await ctx.db.patch(habitId, {
+    await ctx.db.patch(leafId, {
       scheduledTimer: undefined,
       timerEnd: undefined,
     });

@@ -11,11 +11,11 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * A client-side component that renders a GitHub-style activity calendar for habit tracking.
+ * A client-side component that renders a GitHub-style activity calendar for leaf tracking.
  * Uses react-activity-calendar under the hood with custom styling and animations.
  */
 
-interface HabitActivityCalendarProps {
+interface LeafActivityCalendarProps {
   /** Array of daily activity data with date, count, and intensity level */
   calendarData: Array<{
     date: string;
@@ -25,7 +25,7 @@ interface HabitActivityCalendarProps {
   /** Raw completion data from the database, used for loading state */
   completions:
     | Array<{
-        habitId: Id<"habits">;
+        leafId: Id<"leaves">;
         completedAt: number;
       }>
     | undefined;
@@ -39,12 +39,12 @@ interface HabitActivityCalendarProps {
   colorTheme: string;
 }
 
-export function HabitActivityCalendar({
+export function LeafActivityCalendar({
   calendarData,
   completions,
   calendarSize,
   colorTheme,
-}: HabitActivityCalendarProps) {
+}: LeafActivityCalendarProps) {
   // Reference to the scrollable container for auto-scrolling to latest entries
   const containerRef = useRef<HTMLDivElement>(null);
   // Get color theme based on the provided theme key
@@ -52,7 +52,7 @@ export function HabitActivityCalendar({
 
   // Show loading skeleton while completions are being fetched
   if (!completions) {
-    return <Skeleton className="h-[150px] w-full" />;
+    return <Skeleton className="h-37.5 w-full" />;
   }
 
   // Hide calendar completely if no data is available

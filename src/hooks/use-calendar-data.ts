@@ -7,13 +7,13 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
 // import { Doc, Id } from "@server/convex/_generated/dataModel";
 
 /**
- * Custom hook for managing calendar-related data and operations in a habit tracking application.
- * Centralizes all calendar, habit, and completion data access and mutations in one place.
+ * Custom hook for managing calendar-related data and operations in a leaf tracking application.
+ * Centralizes all calendar, leaf, and completion data access and mutations in one place.
  *
  * Key features:
  * - Handles authentication state and skips queries when not authenticated
- * - Provides CRUD operations for calendars and habits
- * - Manages habit completion tracking with support for multiple completions per day
+ * - Provides CRUD operations for calendars and leaves
+ * - Manages leaf completion tracking with support for multiple completions per day
  * - Handles date range-based queries for completion history
  *
  * @param startDate - Beginning of the date range for fetching completions
@@ -41,22 +41,22 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   );
 
   /**
-   * Fetches all habits across all calendars for the authenticated user
-   * Setting calendarId to undefined retrieves habits from all calendars
-   * Habits are ordered by their position within each calendar
+   * Fetches all leaves across all calendars for the authenticated user
+   * Setting calendarId to undefined retrieves leaves from all calendars
+   * Leaves are ordered by their position within each calendar
    */
-  const habitsQuery = useQuery(
-    api.habits.list,
+  const leavesQuery = useQuery(
+    api.leaves.list,
     isAuthenticated ? { calendarId: undefined } : "skip",
   );
 
   /**
-   * Fetches paginated habit completion records within the specified date range
+   * Fetches paginated leaf completion records within the specified date range
    * Converts JavaScript Date objects to Unix timestamps for the database query
    * Returns a paginated response with completions array and pagination metadata
    */
   const completionsQuery = useQuery(
-    api.habits.getCompletions,
+    api.leaves.getCompletions,
     isAuthenticated
       ? {
           startDate: startDate.getTime(),
@@ -75,7 +75,7 @@ export function useCalendarData(startDate: Date, endDate: Date) {
 
   // Load more completions when available
   const nextPageQuery = useQuery(
-    api.habits.getCompletions,
+    api.leaves.getCompletions,
     isAuthenticated && completionsQuery?.hasMore && !isLoadingMore
       ? {
           startDate: startDate.getTime(),
@@ -103,12 +103,12 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   // Initialize mutation functions for CRUD operations
   // Each mutation is authenticated and optimistically updates the UI
   const createCalendar = useMutation(api.calendars.create);
-  const createHabit = useMutation(api.habits.create);
-  const markComplete = useMutation(api.habits.markComplete);
+  const createLeaf = useMutation(api.leaves.create);
+  const markComplete = useMutation(api.leaves.markComplete);
   const updateCalendar = useMutation(api.calendars.update);
-  const updateHabit = useMutation(api.habits.update);
+  const updateLeaf = useMutation(api.leaves.update);
   const deleteCalendar = useMutation(api.calendars.remove);
-  const deleteHabit = useMutation(api.habits.remove);
+  const deleteLeaf = useMutation(api.leaves.remove);
 
   /**
    * Creates a new calendar for the authenticated user
@@ -127,22 +127,22 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   };
 
   /**
-   * Creates a new habit within a specified calendar
-   * Validates input and prevents empty habit names
-   * Supports optional timer duration for timed habits
+   * Creates a new leaf within a specified calendar
+   * Validates input and prevents empty leaf names
+   * Supports optional timer duration for timed leaves
    * Position is automatically assigned within the calendar
    *
-   * @param name - Display name for the habit (must be non-empty)
+   * @param name - Display name for the leaf (must be non-empty)
    * @param calendarId - Parent calendar ID
-   * @param timerDuration - Optional duration in minutes for timed habits
+   * @param timerDuration - Optional duration in minutes for timed leaves
    */
-  const handleAddHabit = async (
+  const handleAddLeaf = async (
     name: string,
     calendarId: Id<"calendars">,
     timerDuration?: number,
   ) => {
     if (!name.trim()) return;
-    await createHabit({
+    await createLeaf({
       name,
       calendarId,
       timerDuration,
@@ -175,34 +175,34 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   };
 
   /**
-   * Updates an existing habit's properties
-   * Validates input and prevents empty habit names
-   * Maintains the habit's calendar association
+   * Updates an existing leaf's properties
+   * Validates input and prevents empty leaf names
+   * Maintains the leaf's calendar association
    *
-   * @param id - Habit ID to update
+   * @param id - Leaf ID to update
    * @param name - New display name (must be non-empty)
    * @param timerDuration - New timer duration in minutes (optional)
    */
-  const handleEditHabit = async (
-    id: Id<"habits">,
+  const handleEditLeaf = async (
+    id: Id<"leaves">,
     name: string,
     timerDuration?: number,
   ) => {
     if (!name.trim()) return;
-    const habit = habitsQuery?.find((h) => h._id === id);
-    if (!habit) return;
+    const leaf = leavesQuery?.find((l) => l._id === id);
+    if (!leaf) return;
 
-    await updateHabit({
+    await updateLeaf({
       id,
       name,
       timerDuration,
-      calendarId: habit.calendarId,
+      calendarId: leaf.calendarId,
     });
   };
 
   /**
-   * Deletes a calendar and cascades deletion to all associated habits
-   * Also removes all completion records for the deleted habits
+   * Deletes a calendar and cascades deletion to all associated leaves
+   * Also removes all completion records for the deleted leaves
    *
    * @param id - Calendar ID to delete
    */
@@ -211,26 +211,26 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   };
 
   /**
-   * Deletes a specific habit and all its completion records
-   * Updates positions of remaining habits in the calendar
+   * Deletes a specific leaf and all its completion records
+   * Updates positions of remaining leaves in the calendar
    *
-   * @param id - Habit ID to delete
+   * @param id - Leaf ID to delete
    */
-  const handleDeleteHabit = async (id: Id<"habits">) => {
-    await deleteHabit({ id });
+  const handleDeleteLeaf = async (id: Id<"leaves">) => {
+    await deleteLeaf({ id });
   };
 
   /**
-   * Toggles habit completion status for a specific date
+   * Toggles leaf completion status for a specific date
    * Supports multiple completions per day with count parameter
    * Automatically handles adding/removing completion records
    *
-   * @param habitId - Habit to toggle completion for
+   * @param leafId - Leaf to toggle completion for
    * @param date - ISO date string (YYYY-MM-DD) for the completion
    * @param count - Target number of completions (0 removes all completions)
    */
-  const handleToggleHabit = async (
-    habitId: Id<"habits">,
+  const handleToggleLeaf = async (
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => {
@@ -242,7 +242,7 @@ export function useCalendarData(startDate: Date, endDate: Date) {
     const timestamp = isToday ? Date.now() : new Date(date).getTime();
 
     await markComplete({
-      habitId,
+      leafId,
       completedAt: timestamp,
       count,
     });
@@ -252,7 +252,7 @@ export function useCalendarData(startDate: Date, endDate: Date) {
   // This helps prevent UI flicker and incomplete data display
   const isLoading =
     calendarsQuery === undefined ||
-    habitsQuery === undefined ||
+    leavesQuery === undefined ||
     completionsQuery === undefined;
 
   return {
@@ -260,16 +260,16 @@ export function useCalendarData(startDate: Date, endDate: Date) {
     isLoading,
     isLoadingMore,
     calendars: calendarsQuery,
-    habits: habitsQuery,
+    leaves: leavesQuery,
     completions: allCompletions,
     hasMoreCompletions: completionsQuery?.hasMore ?? false,
     loadMoreCompletions,
     handleAddCalendar,
-    handleAddHabit,
+    handleAddLeaf,
     handleEditCalendar,
-    handleEditHabit,
+    handleEditLeaf,
     handleDeleteCalendar,
-    handleDeleteHabit,
-    handleToggleHabit,
+    handleDeleteLeaf,
+    handleToggleLeaf,
   };
 }

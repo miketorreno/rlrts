@@ -13,32 +13,32 @@ import { Id } from "../../../../convex/_generated/dataModel";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * SingleMonthCalendar - A calendar component that displays and tracks habit completions for a single month
+ * SingleMonthCalendar - A calendar component that displays and tracks leaf completions for a single month
  * Features:
  * - Month navigation
  * - Grid layout with day cells
- * - Habit completion tracking
+ * - Leaf completion tracking
  * - Optimistic UI updates with loading states
  */
 
 interface SingleMonthCalendarProps {
-  habit: {
-    _id: Id<"habits">;
+  leaf: {
+    _id: Id<"leaves">;
     name: string;
     timerDuration?: number;
   };
   colorTheme: string; // Theme color for completion indicators
   completions: Array<{
-    // Array of habit completion records
-    habitId: Id<"habits">;
+    // Array of leaf completion records
+    leafId: Id<"leaves">;
     completedAt: number;
   }>;
-  onToggle: (habitId: Id<"habits">, date: string, count: number) => void; // Callback for toggling completion state
+  onToggle: (leafId: Id<"leaves">, date: string, count: number) => void; // Callback for toggling completion state
   initialDate?: Date; // Optional starting date, defaults to current date
 }
 
 export function SingleMonthCalendar({
-  habit,
+  leaf,
   colorTheme,
   completions,
   onToggle,
@@ -54,13 +54,13 @@ export function SingleMonthCalendar({
 
   // Handle completion toggle with optimistic updates and loading states
   const handleToggle = async (
-    habitId: Id<"habits">,
+    leafId: Id<"leaves">,
     date: string,
     count: number,
   ) => {
     setUpdatingDates((prev) => new Set(prev).add(date));
     try {
-      await onToggle(habitId, date, count);
+      await onToggle(leafId, date, count);
     } finally {
       setUpdatingDates((prev) => {
         const next = new Set(prev);
@@ -166,15 +166,15 @@ export function SingleMonthCalendar({
           {/* Calendar day cells */}
           {monthDays.map((dateStr) => {
             const isInRange = days.includes(dateStr);
-            const count = getCompletionCount(dateStr, habit._id, completions);
+            const count = getCompletionCount(dateStr, leaf._id, completions);
             return (
               <div key={dateStr} className="h-9 w-9">
                 <DayCell
-                  habitId={habit._id}
+                  leafId={leaf._id}
                   date={dateStr}
                   count={count}
                   onCountChange={async (newCount) =>
-                    handleToggle(habit._id, dateStr, newCount)
+                    handleToggle(leaf._id, dateStr, newCount)
                   }
                   colorClass={getBackgroundColorClass(colorTheme, count)}
                   size="medium"
@@ -197,17 +197,17 @@ export function SingleMonthCalendar({
 }
 
 /**
- * Calculate the number of times a habit was completed on a specific date
+ * Calculate the number of times a leaf was completed on a specific date
  * @param date - The date to check in YYYY-MM-DD format
- * @param habitId - The ID of the habit to check
- * @param completions - Array of all habit completion records
- * @returns The number of times the habit was completed on the given date
+ * @param leafId - The ID of the leaf to check
+ * @param completions - Array of all leaf completion records
+ * @returns The number of times the leaf was completed on the given date
  */
 function getCompletionCount(
   date: string,
-  habitId: Id<"habits">,
+  leafId: Id<"leaves">,
   completions:
-    | Array<{ habitId: Id<"habits">; completedAt: number }>
+    | Array<{ leafId: Id<"leaves">; completedAt: number }>
     | null
     | undefined,
 ): number {
@@ -217,6 +217,6 @@ function getCompletionCount(
     const completionDate = new Date(completion.completedAt)
       .toISOString()
       .split("T")[0];
-    return completion.habitId === habitId && completionDate === date;
+    return completion.leafId === leafId && completionDate === date;
   }).length;
 }

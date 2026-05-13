@@ -216,11 +216,11 @@
         }
       }
     },
-    "habit": {
+    "leaf": {
       "new": {
-        "title": "Add New Habit",
+        "title": "Add New Leaf",
         "name": {
-          "label": "Habit Name",
+          "label": "Leaf Name",
           "placeholder": "e.g., Exercise, Meditate, Write..."
         },
         "timer": {
@@ -230,11 +230,11 @@
         },
         "actions": {
           "cancel": "Cancel",
-          "create": "Add Habit"
+          "create": "Add Leaf"
         }
       },
       "edit": {
-        "title": "Edit Habit",
+        "title": "Edit Leaf",
         "name": {
           "label": "Name"
         },
@@ -257,7 +257,7 @@
           "delete": "Delete"
         },
         "deleteConfirm": {
-          "title": "Delete Habit",
+          "title": "Delete Leaf",
           "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
           "cancel": "Cancel",
           "confirm": "Delete"
@@ -308,14 +308,14 @@
       "row": "Row View"
     },
     "emptyState": {
-      "noHabits": "No habits added yet. Add one to start tracking!"
+      "noLeaves": "No habits added yet. Add one to start tracking!"
     },
     "controls": {
       "complete": "Complete",
       "start": "Start",
       "timer": "Timer",
       "new": "New",
-      "addHabit": "Add Habit",
+      "addLeaf": "Add Leaf",
       "scheduling": "Starting..."
     },
     "dateFormat": {
@@ -416,10 +416,10 @@
       "updated": "Calendar updated successfully",
       "deleted": "Calendar deleted successfully"
     },
-    "habit": {
-      "created": "Habit created successfully",
-      "updated": "Habit updated successfully",
-      "deleted": "Habit deleted successfully"
+    "leaf": {
+      "created": "Leaf created successfully",
+      "updated": "Leaf updated successfully",
+      "deleted": "Leaf deleted successfully"
     }
   }
 }

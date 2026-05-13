@@ -10,10 +10,10 @@ export function useToastMessages() {
       updated: () => toast.success(t("calendar.updated")),
       deleted: () => toast.success(t("calendar.deleted")),
     },
-    habit: {
-      created: () => toast.success(t("habit.created")),
-      updated: () => toast.success(t("habit.updated")),
-      deleted: () => toast.success(t("habit.deleted")),
+    leaf: {
+      created: () => toast.success(t("leaf.created")),
+      updated: () => toast.success(t("leaf.updated")),
+      deleted: () => toast.success(t("leaf.deleted")),
     },
   };
 }

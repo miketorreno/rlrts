@@ -1,6 +1,6 @@
 "use client";
 
-import { HabitDetails } from "@/components/habit/habit-details";
+import { LeafDetails } from "@/components/leaf/leaf-details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useConvexAuth, useQuery } from "convex/react";
 import { useParams, useRouter } from "next/navigation";
@@ -12,38 +12,38 @@ import { api } from "../../../../../convex/_generated/api";
 // import { Id } from "@server/convex/_generated/dataModel";
 
 /**
- * Habit Details Page
+ * Leaf Details Page
  *
- * Client component that displays detailed information for a specific habit.
- * Uses dynamic routing to fetch habit data based on the habitId parameter.
+ * Client component that displays detailed information for a specific leaf.
+ * Uses dynamic routing to fetch leaf data based on the leafId parameter.
  *
  * Key features:
- * - Fetches habit and associated calendar data
+ * - Fetches leaf and associated calendar data
  * - Handles loading states with skeleton UI
- * - Redirects to calendar if habit not found
- * - Renders HabitDetails component with edit/delete capabilities
+ * - Redirects to calendar if leaf not found
+ * - Renders LeafDetails component with edit/delete capabilities
  */
-export default function HabitPage() {
+export default function LeafPage() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const params = useParams();
   const router = useRouter();
-  const habitId = params.habitId as Id<"habits">;
+  const leafId = params.leafId as Id<"leaves">;
 
   // Always call hooks unconditionally
-  const habit = useQuery(api.habits.get, { id: habitId });
+  const leaf = useQuery(api.leaves.get, { id: leafId });
   const calendar = useQuery(
     api.calendars.get,
-    habit ? { id: habit.calendarId } : "skip",
+    leaf ? { id: leaf.calendarId } : "skip",
   );
 
   // Handle redirects in useEffect
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.replace("/");
-    } else if (habit === null) {
+    } else if (leaf === null) {
       router.replace("/calendar");
     }
-  }, [isLoading, isAuthenticated, habit, router]);
+  }, [isLoading, isAuthenticated, leaf, router]);
 
   // Show loading state while checking auth
   if (isLoading || (!isLoading && !isAuthenticated)) {
@@ -52,10 +52,10 @@ export default function HabitPage() {
 
   return (
     <div className="container mx-auto max-w-7xl">
-      {habit && calendar ? (
-        // Render habit details when data is available
-        <HabitDetails
-          habit={habit}
+      {leaf && calendar ? (
+        // Render leaf details when data is available
+        <LeafDetails
+          leaf={leaf}
           calendar={calendar}
           onDelete={() => router.replace("/calendar")}
         />

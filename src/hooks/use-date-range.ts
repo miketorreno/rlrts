@@ -2,7 +2,7 @@ import { endOfDay, format, startOfDay } from "date-fns";
 import { useMemo } from "react";
 
 /**
- * Custom hook for generating a date range for habit tracking
+ * Custom hook for generating a date range for leaf tracking
  * Provides today's date, a start date, and an array of dates in between
  */
 
@@ -40,7 +40,10 @@ const getDatesForRange = (daysBack: number) => {
  */
 export function useDateRange(daysBack: number = 40) {
   // Memoize the date range calculation to only recompute when daysBack changes
-  const { today, startDate, days } = useMemo(() => getDatesForRange(daysBack), [daysBack]);
+  const { today, startDate, days } = useMemo(
+    () => getDatesForRange(daysBack),
+    [daysBack],
+  );
 
   return {
     today,

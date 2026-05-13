@@ -24,14 +24,14 @@ import { Id } from "../../../convex/_generated/dataModel";
 
 /**
  * DayCell Component
- * Renders an interactive cell representing a single day in a habit tracking calendar.
+ * Renders an interactive cell representing a single day in a leaf tracking calendar.
  * Features a popover menu for updating completion counts and visual feedback for completion status.
  */
 
 /**
  * Props for the DayCell component
  * @interface DayCellProps
- * @property {Id<"habits">} habitId - Unique identifier for the habit
+ * @property {Id<"leaves">} leafId - Unique identifier for the leaf
  * @property {string} date - ISO date string representing the cell's date
  * @property {number} count - Number of completions for this date
  * @property {(count: number) => Promise<void>} onCountChange - Callback for updating completion count
@@ -43,7 +43,7 @@ import { Id } from "../../../convex/_generated/dataModel";
  * @property {boolean} [isUpdating] - Whether this cell is currently being updated
  */
 interface DayCellProps {
-  habitId: Id<"habits">;
+  leafId: Id<"leaves">;
   date: string; // ISO date string for the day this completion represents
   count: number; // Current number of completions for this date
   onCountChange: (count: number) => Promise<void>; // Callback when completion count changes
@@ -56,7 +56,7 @@ interface DayCellProps {
 }
 
 /**
- * DayCell component for displaying and managing daily habit completions
+ * DayCell component for displaying and managing daily leaf completions
  * Includes a clickable button that shows completion status and a popover menu for updating counts
  */
 export const DayCell = memo(
@@ -69,7 +69,7 @@ export const DayCell = memo(
     label,
     size = "medium",
     isUpdating = false,
-    habitId,
+    leafId,
   }: DayCellProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations("calendar");
@@ -185,7 +185,7 @@ export const DayCell = memo(
                     onDecrement={() => onCountChange(count - 1)}
                     variant="default"
                     disabled={isUpdating}
-                    habitId={habitId}
+                    leafId={leafId}
                   />
                 </div>
               </div>
@@ -205,7 +205,7 @@ export const DayCell = memo(
       prevProps.label === nextProps.label &&
       prevProps.size === nextProps.size &&
       prevProps.isUpdating === nextProps.isUpdating &&
-      prevProps.habitId === nextProps.habitId
+      prevProps.leafId === nextProps.leafId
     );
   },
 );

@@ -11,7 +11,7 @@ import { memo } from "react";
 
 /**
  * Type defining the available calendar view modes
- * monthRow: Horizontal layout with habits in rows
+ * monthRow: Horizontal layout with leaves in rows
  * monthGrid: Traditional calendar grid layout
  */
 export type CalendarView = "monthRow" | "monthGrid";
@@ -31,41 +31,43 @@ interface ViewControlsProps {
  * Uses tabs for intuitive switching between grid and row layouts.
  * Includes icons for better visual representation of each view.
  */
-export const ViewControls = memo(({ calendarView, onViewChange }: ViewControlsProps) => {
-  const t = useTranslations("calendar.views");
+export const ViewControls = memo(
+  ({ calendarView, onViewChange }: ViewControlsProps) => {
+    const t = useTranslations("calendar.views");
 
-  /**
-   * Handles tab value changes and triggers the view change callback
-   * Casts the string value to CalendarView type
-   */
-  const handleValueChange = (value: string) => {
-    onViewChange(value as CalendarView);
-  };
+    /**
+     * Handles tab value changes and triggers the view change callback
+     * Casts the string value to CalendarView type
+     */
+    const handleValueChange = (value: string) => {
+      onViewChange(value as CalendarView);
+    };
 
-  return (
-    <div className="mb-3 flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <Tabs value={calendarView} onValueChange={handleValueChange}>
-          <TabsList>
-            {/* Grid view tab with calendar icon */}
-            <TabsTrigger asChild value="monthGrid">
-              <button className="flex items-center">
-                <CalendarDays className="mr-2 h-4 w-4" />
-                {t("calendar")}
-              </button>
-            </TabsTrigger>
-            {/* Row view tab with horizontal grip icon */}
-            <TabsTrigger asChild value="monthRow">
-              <button className="flex items-center">
-                <GripHorizontal className="mr-2 h-4 w-4" />
-                {t("row")}
-              </button>
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+    return (
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Tabs value={calendarView} onValueChange={handleValueChange}>
+            <TabsList>
+              {/* Grid view tab with calendar icon */}
+              <TabsTrigger asChild value="monthGrid">
+                <button className="flex items-center">
+                  <CalendarDays className="mr-2 h-4 w-4" />
+                  {t("calendar")}
+                </button>
+              </TabsTrigger>
+              {/* Row view tab with horizontal grip icon */}
+              <TabsTrigger asChild value="monthRow">
+                <button className="flex items-center">
+                  <GripHorizontal className="mr-2 h-4 w-4" />
+                  {t("row")}
+                </button>
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 
 ViewControls.displayName = "ViewControls";

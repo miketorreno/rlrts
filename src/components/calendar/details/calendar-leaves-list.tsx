@@ -7,41 +7,41 @@ import { Id } from "../../../../convex/_generated/dataModel";
 
 // import { Id } from "@server/convex/_generated/dataModel";
 
-interface CalendarHabitsListProps {
-  habits:
+interface CalendarLeavesListProps {
+  leaves:
     | Array<{
-        _id: Id<"habits">;
+        _id: Id<"leaves">;
         name: string;
       }>
     | undefined;
 }
 
-export function CalendarHabitsList({ habits }: CalendarHabitsListProps) {
+export function CalendarLeavesList({ leaves }: CalendarLeavesListProps) {
   const router = useRouter();
 
   return (
     <Card className="mx-auto my-8 max-w-xl border p-2 shadow-md">
       <div className="p-4">
-        <h2 className="mb-6 text-lg font-semibold">Associated Habits</h2>
+        <h2 className="mb-6 text-lg font-semibold">Associated Leaves</h2>
         <div className="space-y-2">
-          {habits?.map((habit) => (
+          {leaves?.map((leaf) => (
             <div
-              key={habit._id}
+              key={leaf._id}
               className="flex items-center justify-between rounded-lg border p-3"
             >
-              <span>{habit.name}</span>
+              <span>{leaf.name}</span>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => router.push(`/habits/${habit._id}`)}
+                onClick={() => router.push(`/leaves/${leaf._id}`)}
               >
                 View Details
               </Button>
             </div>
           ))}
-          {habits?.length === 0 && (
+          {leaves?.length === 0 && (
             <p className="text-center text-sm text-muted-foreground">
-              No habits in this calendar yet.
+              No leaves in this calendar yet.
             </p>
           )}
         </div>
