@@ -7,7 +7,7 @@ import { TwigLeavesList } from "@/components/twig/details/twig-leaves-list";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
 
@@ -36,13 +36,13 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
   const [position, setPosition] = useState<number>(twig?.position ?? 1);
 
   // Update form fields when twig data changes
-  useEffect(() => {
-    if (twig) {
-      setName(twig.name);
-      setColorTheme(twig.colorTheme);
-      setPosition(twig.position ?? 1);
-    }
-  }, [twig]);
+  const [prevTwig, setPrevTwig] = useState(twig);
+  if (twig && twig !== prevTwig) {
+    setPrevTwig(twig);
+    setName(twig.name);
+    setColorTheme(twig.colorTheme);
+    setPosition(twig.position ?? 1);
+  }
 
   // Sort twigs by position to ensure correct order
   const sortedTwigs =

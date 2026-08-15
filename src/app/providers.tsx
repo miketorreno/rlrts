@@ -38,8 +38,8 @@ export function Providers({ children, locale, messages }: ProvidersProps) {
     <IntlProvider locale={locale} messages={messages}>
       <ClerkProvider
         publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string}
-        afterSignUpUrl="/twig"
-        afterSignInUrl="/twig"
+        signInForceRedirectUrl="/twig"
+        signUpForceRedirectUrl="/twig"
         afterSignOutUrl="/"
       >
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>

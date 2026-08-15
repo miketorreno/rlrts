@@ -1,7 +1,7 @@
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { api } from "../../convex/_generated/api";
-import { Doc, Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../convex/_generated/dataModel";
 
 // import { api } from "@server/convex/_generated/api";
 // import { Doc, Id } from "@server/convex/_generated/dataModel";
@@ -23,9 +23,6 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
  */
 export function useTwigData(startDate: Date, endDate: Date) {
   const { isAuthenticated } = useConvexAuth();
-  const [allCompletions, setAllCompletions] = useState<Doc<"completions">[]>(
-    [],
-  );
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // --- Database Queries ---
@@ -63,13 +60,6 @@ export function useTwigData(startDate: Date, endDate: Date) {
       : "skip",
   );
 
-  // Initialize allCompletions with first page
-  useEffect(() => {
-    if (completionsQuery?.completions) {
-      setAllCompletions(completionsQuery.completions);
-    }
-  }, [completionsQuery?.completions]);
-
   // Load more completions when available
   const nextPageQuery = useQuery(
     api.leaves.getCompletions,
@@ -83,13 +73,12 @@ export function useTwigData(startDate: Date, endDate: Date) {
       : "skip",
   );
 
-  // Append next page when loaded
-  useEffect(() => {
-    if (nextPageQuery?.completions) {
-      setAllCompletions((prev) => [...prev, ...nextPageQuery.completions]);
-      setIsLoadingMore(false);
-    }
-  }, [nextPageQuery?.completions]);
+  // Combine first page with any loaded next page
+  const allCompletions = useMemo(() => {
+    const firstPage = completionsQuery?.completions ?? [];
+    const nextPage = nextPageQuery?.completions ?? [];
+    return nextPage.length > 0 ? [...firstPage, ...nextPage] : firstPage;
+  }, [completionsQuery?.completions, nextPageQuery?.completions]);
 
   const loadMoreCompletions = useCallback(() => {
     if (!completionsQuery?.hasMore || isLoadingMore) return;

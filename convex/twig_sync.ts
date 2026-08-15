@@ -1,4 +1,3 @@
-/* eslint-disable check-file/filename-naming-convention */
 import { v } from "convex/values";
 import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";

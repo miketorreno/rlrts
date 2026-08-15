@@ -1,6 +1,6 @@
 "use client";
 
-import TwigCard from "@/components/twgis/card";
+import TwigCard from "@/components/twigs/card";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import Link from "next/link";
