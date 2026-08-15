@@ -46,10 +46,22 @@ export function AppHeader() {
           {/* Desktop navigation */}
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
             <Link
-              href="/about"
+              href="/trunks"
               className="text-xs font-medium hover:text-muted-foreground md:text-sm"
             >
-              {t("about")}
+              {t("trunks")}
+            </Link>
+            <Link
+              href="/limb"
+              className="text-xs font-medium hover:text-muted-foreground md:text-sm"
+            >
+              {t("limb")}
+            </Link>
+            <Link
+              href="/branch"
+              className="text-xs font-medium hover:text-muted-foreground md:text-sm"
+            >
+              {t("branch")}
             </Link>
             <Link
               href="/twig"
@@ -57,12 +69,18 @@ export function AppHeader() {
             >
               {t("twig")}
             </Link>
+            {/* <Link
+              href="/about"
+              className="text-xs font-medium hover:text-muted-foreground md:text-sm"
+            >
+              {t("about")}
+            </Link>
             <Link
               href="/pricing"
               className="text-xs font-medium hover:text-muted-foreground md:text-sm"
             >
               {t("pricing")}
-            </Link>
+            </Link> */}
           </nav>
 
           {/* Controls */}
@@ -116,11 +134,25 @@ export function AppHeader() {
           <div className="bg-background md:hidden">
             <div className="flex flex-col space-y-4">
               <Link
-                href="/about"
+                href="/trunks"
                 className="font-medium hover:text-muted-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t("about")}
+                {t("trunks")}
+              </Link>
+              <Link
+                href="/limb"
+                className="font-medium hover:text-muted-foreground"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t("limb")}
+              </Link>
+              <Link
+                href="/branch"
+                className="font-medium hover:text-muted-foreground"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t("branch")}
               </Link>
               <Link
                 href="/twig"
@@ -128,13 +160,6 @@ export function AppHeader() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {t("twig")}
-              </Link>
-              <Link
-                href="/pricing"
-                className="pb-4 font-medium hover:text-muted-foreground"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t("pricing")}
               </Link>
             </div>
           </div>

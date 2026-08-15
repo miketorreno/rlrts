@@ -30,7 +30,7 @@ export function RootWrapper({ children }: RootWrapperProps) {
           <MotionWrapper>{children}</MotionWrapper>
         </AnimatePresence>
 
-        <AppFooter />
+        {/* <AppFooter /> */}
 
         <Toaster />
       </div>
