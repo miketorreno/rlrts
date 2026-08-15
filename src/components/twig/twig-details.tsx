@@ -89,7 +89,7 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <>
       <TwigBackNavigation />
 
       <div className="text-center">
@@ -116,6 +116,6 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
         onConfirm={handleDelete}
         twigName={name}
       />
-    </div>
+    </>
   );
 }

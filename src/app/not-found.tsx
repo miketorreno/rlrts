@@ -69,14 +69,14 @@ export default function NotFound() {
       )}
     >
       {/* Background gradient overlay */}
-      <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent"></div>
+      {/* <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent"></div> */}
 
-      <main className="relative overflow-x-hidden">
-        <div className="flex min-h-screen w-full flex-col align-middle">
+      <main className="relative overflow-x-hidden bgs-amber-50">
+        <div className="flex items-center justify-center h-screen min-h-screen w-full flex-colss align-middless">
           {/* Main content with page transition animations */}
           <AnimatePresence mode="wait">
             <MotionWrapper>
-              <div>
+              <div className="bgs-white">
                 <h2>Not Found</h2>
                 <p>Could not find requested resource</p>
                 <Link href="/">Return Home</Link>

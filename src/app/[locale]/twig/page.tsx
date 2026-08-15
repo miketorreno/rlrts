@@ -52,7 +52,7 @@ export default function TwigPage() {
     !monthViewData.twigs || !monthViewData.leaves || !monthViewData.completions;
 
   return (
-    <div className="container mx-auto max-w-7xl pt-16">
+    <>
       <AuthenticationWrapper>
         <>
           {/* Yearly overview component showing leaf completion heatmap */}
@@ -82,6 +82,6 @@ export default function TwigPage() {
           </div>
         </>
       </AuthenticationWrapper>
-    </div>
+    </>
   );
 }

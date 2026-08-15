@@ -120,11 +120,15 @@ export default async function LocaleLayout({
       </noscript> */}
 
       {/* Background gradient overlay */}
-      <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent" />
+      {/* <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent" /> */}
 
       <Providers locale={locale} messages={messages}>
-        <main className="relative overflow-x-hidden">
-          <RootWrapper>{children}</RootWrapper>
+        <main className="relative overflow-x-hidden bgs-gray-100">
+          <RootWrapper>
+            <div className="container mx-auto max-w-5xl pt-16 px-4">
+              {children}
+            </div>
+          </RootWrapper>
         </main>
         <Toaster />
         {/* <SpeedInsights /> */}

@@ -5,6 +5,9 @@
   },
   "nav": {
     "home": "Home",
+    "trunks": "Trunks",
+    "limb": "Limb",
+    "branch": "Branch",
     "twig": "Twig",
     "about": "About",
     "pricing": "Pricing",

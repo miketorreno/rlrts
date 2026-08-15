@@ -194,14 +194,14 @@ export function TwigContainer({
       <AnimatePresence mode="wait" initial={false}>
         <MotionCard
           key={twigView}
-          className="space-y-8 border p-2 shadow-md"
+          className="space-y-8 p-2 shadow-md"
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           exit={{ y: 0 }}
           transition={{ duration: 1, ease: [0, 0.7, 0.1, 1] }}
         >
           {/* Controls for switching between month row and grid views */}
-          <ViewControls twigView={twigView} onViewChange={onViewChange} />
+          {/* <ViewControls twigView={twigView} onViewChange={onViewChange} /> */}
 
           {/* Container for all twig items */}
           <div className="flex w-full flex-col gap-4 md:px-8">
