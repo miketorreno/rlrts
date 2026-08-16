@@ -19,7 +19,9 @@ export function periodKey(cadence: TodoCadence, now: Date = new Date()): string 
   return format(periodStart(cadence, now), "yyyy-MM-dd");
 }
 
-export function useTodoPeriodRollover(resetPeriod: () => Promise<unknown>) {
+export function useTodoPeriodRollover(
+  resetPeriod: (args: { cadence: TodoCadence }) => Promise<unknown>,
+) {
   const resetRef = useRef(resetPeriod);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export function useTodoPeriodRollover(resetPeriod: () => Promise<unknown>) {
   useEffect(() => {
     let cancelled = false;
     const cadences: TodoCadence[] = ["daily", "weekly"];
-    let needsReset = false;
+    const changed: TodoCadence[] = [];
 
     for (const cadence of cadences) {
       const current = periodKey(cadence);
@@ -38,12 +40,14 @@ export function useTodoPeriodRollover(resetPeriod: () => Promise<unknown>) {
         window.localStorage.setItem(STORAGE_KEYS[cadence], current);
       } else if (stored !== current) {
         window.localStorage.setItem(STORAGE_KEYS[cadence], current);
-        needsReset = true;
+        changed.push(cadence);
       }
     }
 
-    if (needsReset && !cancelled) {
-      void resetRef.current();
+    if (!cancelled) {
+      for (const cadence of changed) {
+        void resetRef.current({ cadence });
+      }
     }
 
     return () => {

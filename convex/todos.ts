@@ -298,27 +298,32 @@ export const getXp = query({
 });
 
 export const resetPeriod = mutation({
-  args: {},
-  handler: async (ctx) => {
+  args: {
+    cadence: v.union(v.literal("daily"), v.literal("weekly")),
+  },
+  handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
+
+    const todos = await ctx.db
+      .query("todos")
+      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .collect();
+    const cadenceTodoIds = new Set(
+      todos.filter((todo) => todo.cadence === args.cadence).map((todo) => todo._id),
+    );
 
     const items = await ctx.db
       .query("todoItems")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .collect();
     for (const item of items) {
-      if (item.isCompleted) {
+      if (item.isCompleted && cadenceTodoIds.has(item.todoId)) {
         await ctx.db.patch(item._id, { isCompleted: false });
       }
     }
 
-    const todos = await ctx.db
-      .query("todos")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
-      .collect();
     const todoById = new Map(todos.map((todo) => [todo._id, todo]));
-
     const now = Date.now();
     const completions = await ctx.db
       .query("todoCompletions")
@@ -327,6 +332,7 @@ export const resetPeriod = mutation({
     for (const completion of completions) {
       const todo = todoById.get(completion.todoId);
       if (!todo) continue;
+      if (todo.cadence !== args.cadence) continue;
       if (completion.completedAt < periodStart(todo.cadence, now)) {
         await ctx.db.delete(completion._id);
       }
