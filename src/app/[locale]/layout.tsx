@@ -123,9 +123,9 @@ export default async function LocaleLayout({
       <div className="fixed inset-0 bg-linear-to-t from-muted/60 to-transparent" />
 
       <Providers locale={locale} messages={messages}>
-        <main className="relative overflow-x-hidden">
+        <div className="relative overflow-x-hidden">
           <RootWrapper>{children}</RootWrapper>
-        </main>
+        </div>
         <Toaster />
         {/* <SpeedInsights /> */}
         {/* <Analytics /> */}
