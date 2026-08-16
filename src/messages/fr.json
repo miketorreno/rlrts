@@ -334,6 +334,39 @@
         "cancel": "Annuler",
         "confirm": "Supprimer le tronc"
       }
+    },
+    "limb": {
+      "new": {
+        "title": "Créer une nouvelle branche",
+        "name": {
+          "label": "Nom de la branche",
+          "placeholder": "p. ex., Fitness, Finance, Projets..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer la branche"
+        }
+      },
+      "edit": {
+        "title": "Modifier la branche",
+        "name": {
+          "label": "Nom de la branche"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement la branche \"{name}\" et toutes ses sous-branches, brindilles et feuilles. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer la branche"
+      }
     }
   },
   "calendar": {
@@ -458,6 +491,11 @@
       "created": "Tronc créé avec succès",
       "updated": "Tronc mis à jour avec succès",
       "deleted": "Tronc supprimé avec succès"
+    },
+    "limb": {
+      "created": "Branche créée avec succès",
+      "updated": "Branche mise à jour avec succès",
+      "deleted": "Branche supprimée avec succès"
     }
   },
   "trunks": {
@@ -466,5 +504,14 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "viewLimbs": "Voir les branches →"
+  },
+  "limbs": {
+    "selectTrunk": "Sélectionner le tronc",
+    "noTrunks": "Aucun tronc pour le moment. Créez un tronc pour ajouter des branches.",
+    "emptyState": "Aucune branche pour le moment. Ajoutez votre première branche pour faire grandir votre arbre !",
+    "addLimb": "Ajouter une branche",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewBranches": "Voir les branches →"
   }
 }

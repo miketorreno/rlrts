@@ -334,6 +334,39 @@
         "cancel": "Abbrechen",
         "confirm": "Stamm löschen"
       }
+    },
+    "limb": {
+      "new": {
+        "title": "Neuen Ast erstellen",
+        "name": {
+          "label": "Astname",
+          "placeholder": "z.B. Fitness, Finanzen, Projekte..."
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "create": "Ast erstellen"
+        }
+      },
+      "edit": {
+        "title": "Ast bearbeiten",
+        "name": {
+          "label": "Astname"
+        },
+        "position": {
+          "label": "Anzeigereihenfolge",
+          "placeholder": "Position auswählen"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "save": "Änderungen speichern"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Bist du sicher?",
+        "description": "Dies wird den Ast \"{name}\" und alle seine Zweige und Blätter dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "confirm": "Ast löschen"
+      }
     }
   },
   "calendar": {
@@ -458,6 +491,11 @@
       "created": "Stamm erfolgreich erstellt",
       "updated": "Stamm erfolgreich aktualisiert",
       "deleted": "Stamm erfolgreich gelöscht"
+    },
+    "limb": {
+      "created": "Ast erfolgreich erstellt",
+      "updated": "Ast erfolgreich aktualisiert",
+      "deleted": "Ast erfolgreich gelöscht"
     }
   },
   "trunks": {
@@ -466,5 +504,14 @@
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "viewLimbs": "Äste anzeigen →"
+  },
+  "limbs": {
+    "selectTrunk": "Stamm auswählen",
+    "noTrunks": "Noch keine Stämme. Erstelle einen Stamm, um Äste hinzuzufügen.",
+    "emptyState": "Noch keine Äste. Füge deinen ersten Ast hinzu, um deinen Baum wachsen zu lassen!",
+    "addLimb": "Ast hinzufügen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "viewBranches": "Zweige anzeigen →"
   }
 }

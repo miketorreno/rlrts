@@ -336,6 +336,39 @@
         "cancel": "Cancel",
         "confirm": "Delete Trunk"
       }
+    },
+    "limb": {
+      "new": {
+        "title": "Create New Limb",
+        "name": {
+          "label": "Limb Name",
+          "placeholder": "e.g., Fitness, Finance, Projects..."
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Limb"
+        }
+      },
+      "edit": {
+        "title": "Edit Limb",
+        "name": {
+          "label": "Limb Name"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the limb \"{name}\" and all its branches, twigs, and leaves. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Limb"
+      }
     }
   },
   "twig": {
@@ -461,6 +494,11 @@
       "created": "Trunk created successfully",
       "updated": "Trunk updated successfully",
       "deleted": "Trunk deleted successfully"
+    },
+    "limb": {
+      "created": "Limb created successfully",
+      "updated": "Limb updated successfully",
+      "deleted": "Limb deleted successfully"
     }
   },
   "trunks": {
@@ -469,5 +507,14 @@
     "edit": "Edit",
     "delete": "Delete",
     "viewLimbs": "View limbs →"
+  },
+  "limbs": {
+    "selectTrunk": "Select trunk",
+    "noTrunks": "No trunks yet. Create a trunk to start adding limbs.",
+    "emptyState": "No limbs yet. Add your first limb to grow your tree!",
+    "addLimb": "Add Limb",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewBranches": "View branches →"
   }
 }

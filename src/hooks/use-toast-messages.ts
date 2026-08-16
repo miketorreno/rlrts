@@ -20,5 +20,10 @@ export function useToastMessages() {
       updated: () => toast.success(t("trunk.updated")),
       deleted: () => toast.success(t("trunk.deleted")),
     },
+    limb: {
+      created: () => toast.success(t("limb.created")),
+      updated: () => toast.success(t("limb.updated")),
+      deleted: () => toast.success(t("limb.deleted")),
+    },
   };
 }

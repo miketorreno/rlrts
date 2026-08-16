@@ -333,6 +333,39 @@
         "cancel": "Cancelar",
         "confirm": "Eliminar tronco"
       }
+    },
+    "limb": {
+      "new": {
+        "title": "Crear nueva rama",
+        "name": {
+          "label": "Nombre de la rama",
+          "placeholder": "p. ej., Ejercicio, Finanzas, Proyectos..."
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear rama"
+        }
+      },
+      "edit": {
+        "title": "Editar rama",
+        "name": {
+          "label": "Nombre de la rama"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente la rama \"{name}\" y todas las ramas, ramitas y hojas que contiene. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar rama"
+      }
     }
   },
   "calendar": {
@@ -457,6 +490,11 @@
       "created": "Tronco creado correctamente",
       "updated": "Tronco actualizado correctamente",
       "deleted": "Tronco eliminado correctamente"
+    },
+    "limb": {
+      "created": "Rama creada correctamente",
+      "updated": "Rama actualizada correctamente",
+      "deleted": "Rama eliminada correctamente"
     }
   },
   "trunks": {
@@ -465,5 +503,14 @@
     "edit": "Editar",
     "delete": "Eliminar",
     "viewLimbs": "Ver ramas →"
+  },
+  "limbs": {
+    "selectTrunk": "Seleccionar tronco",
+    "noTrunks": "Aún no hay troncos. Crea un tronco para empezar a añadir ramas.",
+    "emptyState": "Aún no hay ramas. ¡Agrega tu primera rama para hacer crecer tu árbol!",
+    "addLimb": "Añadir rama",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "viewBranches": "Ver ramas →"
   }
 }

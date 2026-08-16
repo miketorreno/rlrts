@@ -329,6 +329,39 @@
         "cancel": "取消",
         "confirm": "删除树干"
       }
+    },
+    "limb": {
+      "new": {
+        "title": "创建新树枝",
+        "name": {
+          "label": "树枝名称",
+          "placeholder": "例如：健身、财务、项目..."
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建树枝"
+        }
+      },
+      "edit": {
+        "title": "编辑树枝",
+        "name": {
+          "label": "树枝名称"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除树枝 \"{name}\" 及其内的所有分支、细枝和树叶。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除树枝"
+      }
     }
   },
   "calendar": {
@@ -453,6 +486,11 @@
       "created": "树干创建成功",
       "updated": "树干更新成功",
       "deleted": "树干删除成功"
+    },
+    "limb": {
+      "created": "树枝创建成功",
+      "updated": "树枝更新成功",
+      "deleted": "树枝删除成功"
     }
   },
   "trunks": {
@@ -461,5 +499,14 @@
     "edit": "编辑",
     "delete": "删除",
     "viewLimbs": "查看树枝 →"
+  },
+  "limbs": {
+    "selectTrunk": "选择树干",
+    "noTrunks": "还没有树干。先创建一个树干来添加树枝。",
+    "emptyState": "还没有树枝。添加你的第一根树枝来让树成长吧！",
+    "addLimb": "添加树枝",
+    "edit": "编辑",
+    "delete": "删除",
+    "viewBranches": "查看树枝 →"
   }
 }
