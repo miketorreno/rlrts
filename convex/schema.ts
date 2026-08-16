@@ -7,7 +7,34 @@ export default defineSchema({
     userId: v.string(),
     colorTheme: v.string(),
     position: v.optional(v.number()),
+    branchId: v.optional(v.id("branches")),
+  })
+    .index("by_user", ["userId"])
+    .index("by_branch", ["branchId"]),
+
+  trunks: defineTable({
+    name: v.string(),
+    userId: v.string(),
+    position: v.optional(v.number()),
   }).index("by_user", ["userId"]),
+
+  limbs: defineTable({
+    name: v.string(),
+    userId: v.string(),
+    trunkId: v.id("trunks"),
+    position: v.optional(v.number()),
+  })
+    .index("by_user", ["userId"])
+    .index("by_trunk", ["trunkId"]),
+
+  branches: defineTable({
+    name: v.string(),
+    userId: v.string(),
+    limbId: v.id("limbs"),
+    position: v.optional(v.number()),
+  })
+    .index("by_user", ["userId"])
+    .index("by_limb", ["limbId"]),
 
   leaves: defineTable({
     name: v.string(),
