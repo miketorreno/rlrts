@@ -113,19 +113,24 @@ export const remove = mutation({
 
     // Step 1 & 2 are handled by deleteTwigSubtree below
 
-    // Step 3: Update positions of remaining twigs
-    const allTwigs = await ctx.db
+    // Step 3: Update positions of remaining twigs in the deleted twig's scope
+    const siblingTwigs = await ctx.db
       .query("twigs")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .filter((q) =>
+        twig.branchId
+          ? q.eq(q.field("branchId"), twig.branchId)
+          : q.eq(q.field("branchId"), undefined),
+      )
       .collect();
 
-    const deletedPosition = twig.position ?? allTwigs.length;
+    const deletedPosition = twig.position ?? siblingTwigs.length;
 
-    // Decrement position of all twigs that were after the deleted one
-    for (const otherTwig of allTwigs) {
+    // Decrement position of sibling twigs that were after the deleted one
+    for (const otherTwig of siblingTwigs) {
       if (otherTwig._id === args.id) continue;
 
-      const currentPosition = otherTwig.position ?? allTwigs.length;
+      const currentPosition = otherTwig.position ?? siblingTwigs.length;
       if (currentPosition > deletedPosition) {
         await ctx.db.patch(otherTwig._id, {
           position: currentPosition - 1,
