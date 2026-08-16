@@ -11,6 +11,7 @@
 import type * as leaves from "../leaves.js";
 import type * as migrations from "../migrations.js";
 import type * as tree_utils from "../tree_utils.js";
+import type * as trunks from "../trunks.js";
 import type * as twig_sync from "../twig_sync.js";
 import type * as twigs from "../twigs.js";
 
@@ -24,6 +25,7 @@ declare const fullApi: ApiFromModules<{
   leaves: typeof leaves;
   migrations: typeof migrations;
   tree_utils: typeof tree_utils;
+  trunks: typeof trunks;
   twig_sync: typeof twig_sync;
   twigs: typeof twigs;
 }>;
