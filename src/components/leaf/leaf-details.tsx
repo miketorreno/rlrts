@@ -87,7 +87,7 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
   const updateLeaf = useMutation(api.leaves.update);
   const deleteLeaf = useMutation(api.leaves.remove);
   const markComplete = useMutation(api.leaves.markComplete);
-  const twigs = useQuery(api.twigs.list);
+  const twigs = useQuery(api.twigs.list, {});
   const leaves = useQuery(api.leaves.list, { twigId: selectedTwigId });
 
   /**

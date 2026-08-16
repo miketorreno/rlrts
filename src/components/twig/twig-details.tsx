@@ -24,7 +24,7 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   // Fetch twig and associated data
-  const twigs = useQuery(api.twigs.list);
+  const twigs = useQuery(api.twigs.list, {});
   const twig = twigs?.find((c) => c._id === twigId);
   const leaves = useQuery(api.leaves.list, { twigId });
 
