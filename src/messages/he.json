@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "בית",
-    "calendar": "יומן",
+    "trunks": "גזעים",
+    "limbs": "ענפים",
+    "branches": "ענפים",
+    "twig": "זרד",
     "about": "אודות",
     "pricing": "תמחור",
     "getStarted": "התחל עכשיו",

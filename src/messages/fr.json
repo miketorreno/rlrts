@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "Accueil",
-    "calendar": "Calendrier",
+    "trunks": "Troncs",
+    "limbs": "Branches",
+    "branches": "Branches",
+    "twig": "Brindille",
     "about": "À propos",
     "pricing": "Tarifs",
     "getStarted": "Commencer",

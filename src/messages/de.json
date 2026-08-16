@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "Startseite",
-    "calendar": "Kalender",
+    "trunks": "Stämme",
+    "limbs": "Äste",
+    "branches": "Zweige",
+    "twig": "Zweig",
     "about": "Über uns",
     "pricing": "Preise",
     "getStarted": "Loslegen",

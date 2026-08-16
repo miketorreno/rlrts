@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "الرئيسية",
-    "calendar": "التقويم",
+    "trunks": "جذوع",
+    "limbs": "فروع",
+    "branches": "فروع",
+    "twig": "غصن",
     "about": "حول",
     "pricing": "التسعير",
     "getStarted": "ابدأ الآن",

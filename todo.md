@@ -5,10 +5,10 @@
 - [ ] Design a new UI
   - [ ] bottom nav for mobile
   - [ ] sidebar for pc
-- [ ] Add `trunk`
-- [ ] Add `limbs`
-- [ ] Add `branches`
-- [ ] Edit `calendars`/`twigs` to include `branches`
+- [x] Add `trunk`
+- [x] Add `limbs`
+- [x] Add `branches`
+- [x] Edit `calendars`/`twigs` to include `branches`
 - [ ]
 
 ## Features

@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "होम",
-    "calendar": "कैलेंडर",
+    "trunks": "तने",
+    "limbs": "शाखाएं",
+    "branches": "शाखाएं",
+    "twig": "टहनी",
     "about": "हमारे बारे में",
     "pricing": "कीमतें",
     "getStarted": "शुरू करें",

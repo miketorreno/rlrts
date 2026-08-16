@@ -52,16 +52,16 @@ export function AppHeader() {
               {t("trunks")}
             </Link>
             <Link
-              href="/limb"
+              href="/limbs"
               className="text-xs font-medium hover:text-muted-foreground md:text-sm"
             >
-              {t("limb")}
+              {t("limbs")}
             </Link>
             <Link
-              href="/branch"
+              href="/branches"
               className="text-xs font-medium hover:text-muted-foreground md:text-sm"
             >
-              {t("branch")}
+              {t("branches")}
             </Link>
             <Link
               href="/twig"
@@ -141,18 +141,18 @@ export function AppHeader() {
                 {t("trunks")}
               </Link>
               <Link
-                href="/limb"
+                href="/limbs"
                 className="font-medium hover:text-muted-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t("limb")}
+                {t("limbs")}
               </Link>
               <Link
-                href="/branch"
+                href="/branches"
                 className="font-medium hover:text-muted-foreground"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t("branch")}
+                {t("branches")}
               </Link>
               <Link
                 href="/twig"

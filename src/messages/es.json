@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "Inicio",
-    "calendar": "Calendario",
+    "trunks": "Troncos",
+    "limbs": "Ramas",
+    "branches": "Ramas",
+    "twig": "Ramita",
     "about": "Acerca de",
     "pricing": "Precios",
     "getStarted": "Comenzar",

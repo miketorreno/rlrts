@@ -5,7 +5,10 @@
   },
   "nav": {
     "home": "首页",
-    "calendar": "日历",
+    "trunks": "树干",
+    "limbs": "树枝",
+    "branches": "树枝",
+    "twig": "细枝",
     "about": "关于",
     "pricing": "价格",
     "getStarted": "开始使用",
