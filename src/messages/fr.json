@@ -367,6 +367,39 @@
         "cancel": "Annuler",
         "confirm": "Supprimer la branche"
       }
+    },
+    "branch": {
+      "new": {
+        "title": "Créer une nouvelle branche",
+        "name": {
+          "label": "Nom de la branche",
+          "placeholder": "p. ex., Carrière, Projets, Lecture..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer la branche"
+        }
+      },
+      "edit": {
+        "title": "Modifier la branche",
+        "name": {
+          "label": "Nom de la branche"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement la branche \"{name}\" et toutes les brindilles et feuilles qu'elle contient. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer la branche"
+      }
     }
   },
   "calendar": {
@@ -496,6 +529,11 @@
       "created": "Branche créée avec succès",
       "updated": "Branche mise à jour avec succès",
       "deleted": "Branche supprimée avec succès"
+    },
+    "branch": {
+      "created": "Branche créée avec succès",
+      "updated": "Branche mise à jour avec succès",
+      "deleted": "Branche supprimée avec succès"
     }
   },
   "trunks": {
@@ -513,5 +551,15 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "viewBranches": "Voir les branches →"
+  },
+  "branches": {
+    "selectLimb": "Sélectionner la branche",
+    "noLimbs": "Aucune branche pour le moment. Créez une branche pour ajouter des brindilles.",
+    "emptyState": "Aucune branche pour le moment. Ajoutez votre première branche pour faire grandir votre arbre !",
+    "addBranch": "Ajouter une branche",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "addTwig": "Ajouter une brindille",
+    "emptyTwigs": "Aucune brindille dans cette branche pour le moment. Ajoutez-en une pour commencer le suivi !"
   }
 }
