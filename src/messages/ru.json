@@ -9,6 +9,7 @@
     "limbs": "Ветви",
     "branches": "Ветки",
     "twig": "Веточка",
+    "todos": "Задачи",
     "about": "О нас",
     "pricing": "Цены",
     "getStarted": "Начать бесплатно",
@@ -631,6 +632,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "Очки XP",
     "total": "Всего XP: {count}"
   }
 }

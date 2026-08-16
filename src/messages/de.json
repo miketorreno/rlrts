@@ -9,6 +9,7 @@
     "limbs": "Äste",
     "branches": "Zweige",
     "twig": "Zweig",
+    "todos": "Todos",
     "about": "Über uns",
     "pricing": "Preise",
     "getStarted": "Loslegen",
@@ -637,6 +638,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "XP-Punkte",
     "total": "Gesamt-XP: {count}"
   }
 }

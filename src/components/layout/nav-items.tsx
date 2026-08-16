@@ -1,6 +1,12 @@
 "use client";
 
-import { CalendarDays, GitBranch, Network, TreePine } from "lucide-react";
+import {
+  CalendarDays,
+  CheckSquare,
+  GitBranch,
+  Network,
+  TreePine,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -15,6 +21,7 @@ export const navItems: NavItem[] = [
   { href: "/limbs", labelKey: "nav.limbs", icon: GitBranch },
   { href: "/branches", labelKey: "nav.branches", icon: Network },
   { href: "/twig", labelKey: "nav.twig", icon: CalendarDays },
+  { href: "/todos", labelKey: "nav.todos", icon: CheckSquare },
 ];
 
 export type ResolvedNavItem = {

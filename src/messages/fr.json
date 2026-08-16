@@ -9,6 +9,7 @@
     "limbs": "Branches",
     "branches": "Branches",
     "twig": "Brindille",
+    "todos": "Todos",
     "about": "À propos",
     "pricing": "Tarifs",
     "getStarted": "Commencer",
@@ -637,6 +638,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "Points XP",
     "total": "XP total : {count}"
   }
 }

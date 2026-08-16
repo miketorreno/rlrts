@@ -9,6 +9,7 @@
     "limbs": "فروع",
     "branches": "فروع",
     "twig": "غصن",
+    "todos": "المهام",
     "about": "حول",
     "pricing": "التسعير",
     "getStarted": "ابدأ الآن",
@@ -627,6 +628,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "نقاط XP",
     "total": "إجمالي النقاط XP: {count}"
   }
 }

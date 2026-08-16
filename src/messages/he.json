@@ -9,6 +9,7 @@
     "limbs": "ענפים",
     "branches": "ענפים",
     "twig": "זרד",
+    "todos": "משימות",
     "about": "אודות",
     "pricing": "תמחור",
     "getStarted": "התחל עכשיו",
@@ -627,6 +628,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "נקודות XP",
     "total": "סה״כ XP: {count}"
   }
 }

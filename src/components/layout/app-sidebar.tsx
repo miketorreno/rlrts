@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { XIcon } from "@/components/ui/x-icon";
 
 import { useNavItems } from "@/components/layout/nav-items";
+import { XpBadge } from "@/components/todo/xp-badge";
 
 /**
  * AppSidebar Component
@@ -64,6 +65,10 @@ export function AppSidebar() {
           );
         })}
       </nav>
+
+      <div className="px-3 pb-4">
+        <XpBadge />
+      </div>
 
       {/* Spacer */}
       <div className="flex-1" />

@@ -9,6 +9,7 @@
     "limbs": "शाखाएं",
     "branches": "शाखाएं",
     "twig": "टहनी",
+    "todos": "कार्य",
     "about": "हमारे बारे में",
     "pricing": "कीमतें",
     "getStarted": "शुरू करें",
@@ -636,6 +637,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "XP अंक",
     "total": "कुल XP: {count}"
   }
 }

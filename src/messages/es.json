@@ -9,6 +9,7 @@
     "limbs": "Ramas",
     "branches": "Ramas",
     "twig": "Ramita",
+    "todos": "Todos",
     "about": "Acerca de",
     "pricing": "Precios",
     "getStarted": "Comenzar",
@@ -636,6 +637,7 @@
   },
   "xp": {
     "label": "XP",
+    "points": "Puntos XP",
     "total": "XP total: {count}"
   }
 }
