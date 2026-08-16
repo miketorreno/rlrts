@@ -55,4 +55,26 @@ export default defineSchema({
   })
     .index("by_leaf", ["leafId"])
     .index("by_user_and_date", ["userId", "completedAt"]),
+
+  todos: defineTable({
+    name: v.string(),
+    userId: v.string(),
+    cadence: v.union(v.literal("daily"), v.literal("weekly")),
+    xp: v.number(),
+    position: v.optional(v.number()),
+  }).index("by_user", ["userId"]),
+
+  todoItems: defineTable({
+    todoId: v.id("todos"),
+    userId: v.string(),
+    name: v.string(),
+    position: v.optional(v.number()),
+    isCompleted: v.boolean(),
+  }).index("by_todo", ["todoId"]),
+
+  todoCompletions: defineTable({
+    todoId: v.id("todos"),
+    userId: v.string(),
+    completedAt: v.number(),
+  }).index("by_user_and_date", ["userId", "completedAt"]),
 });
