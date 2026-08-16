@@ -402,6 +402,59 @@
         "cancel": "Cancel",
         "confirm": "Delete Branch"
       }
+    },
+    "todo": {
+      "new": {
+        "title": "Create New Todo",
+        "name": {
+          "label": "Todo Name",
+          "placeholder": "e.g., Morning routine"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "items": {
+          "label": "Initial Sub-tasks",
+          "placeholder": "e.g., Stretch, Drink water",
+          "add": "Add Sub-task",
+          "remove": "Remove sub-task"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Todo"
+        }
+      },
+      "edit": {
+        "title": "Edit Todo",
+        "name": {
+          "label": "Todo Name"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "items": {
+          "label": "Sub-tasks",
+          "addPlaceholder": "New sub-task name",
+          "add": "Add",
+          "remove": "Remove sub-task"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the todo \"{name}\" and all its sub-tasks. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Todo"
+      }
     }
   },
   "twig": {
@@ -537,6 +590,11 @@
       "created": "Branch created successfully",
       "updated": "Branch updated successfully",
       "deleted": "Branch deleted successfully"
+    },
+    "todo": {
+      "created": "Todo created successfully",
+      "updated": "Todo updated successfully",
+      "deleted": "Todo deleted successfully"
     }
   },
   "trunks": {
@@ -564,5 +622,21 @@
     "delete": "Delete",
     "addTwig": "Add Twig",
     "emptyTwigs": "No twigs in this branch yet. Add one to start tracking!"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "addTodo": "Add Todo",
+    "edit": "Edit",
+    "delete": "Delete",
+    "progress": "{done}/{total}",
+    "emptyDaily": "No daily todos yet. Add one to start earning XP!",
+    "emptyWeekly": "No weekly todos yet. Add one to start earning XP!",
+    "emptyAll": "No todos yet. Create your first todo to start earning XP!"
+  },
+  "xp": {
+    "label": "XP",
+    "total": "Total XP: {count}"
   }
 }

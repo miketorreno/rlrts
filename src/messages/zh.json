@@ -398,6 +398,59 @@
         "cancel": "取消",
         "confirm": "删除树枝"
       }
+    },
+    "todo": {
+      "new": {
+        "title": "创建新待办",
+        "name": {
+          "label": "待办名称",
+          "placeholder": "例如：晨间例行"
+        },
+        "cadence": {
+          "label": "频率"
+        },
+        "xp": {
+          "label": "XP奖励"
+        },
+        "items": {
+          "label": "初始子任务",
+          "placeholder": "例如：拉伸、喝水",
+          "add": "添加子任务",
+          "remove": "移除子任务"
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建待办"
+        }
+      },
+      "edit": {
+        "title": "编辑待办",
+        "name": {
+          "label": "待办名称"
+        },
+        "cadence": {
+          "label": "频率"
+        },
+        "xp": {
+          "label": "XP奖励"
+        },
+        "items": {
+          "label": "子任务",
+          "addPlaceholder": "新子任务的名称",
+          "add": "添加",
+          "remove": "移除子任务"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除待办\"{name}\"及其所有子任务。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除待办"
+      }
     }
   },
   "calendar": {
@@ -532,6 +585,11 @@
       "created": "树枝创建成功",
       "updated": "树枝更新成功",
       "deleted": "树枝删除成功"
+    },
+    "todo": {
+      "created": "待办创建成功",
+      "updated": "待办更新成功",
+      "deleted": "待办删除成功"
     }
   },
   "trunks": {
@@ -559,5 +617,21 @@
     "delete": "删除",
     "addTwig": "添加细枝",
     "emptyTwigs": "这个树枝里还没有细枝。添加一个开始追踪吧！"
+  },
+  "todo": {
+    "title": "待办事项",
+    "daily": "每日",
+    "weekly": "每周",
+    "addTodo": "添加待办",
+    "edit": "编辑",
+    "delete": "删除",
+    "progress": "{done}/{total}",
+    "emptyDaily": "还没有每日待办。添加一个开始赚取XP吧！",
+    "emptyWeekly": "还没有每周待办。添加一个开始赚取XP吧！",
+    "emptyAll": "还没有待办。创建你的第一个待办开始赚取XP吧！"
+  },
+  "xp": {
+    "label": "XP",
+    "total": "总XP：{count}"
   }
 }

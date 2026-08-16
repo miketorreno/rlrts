@@ -403,6 +403,59 @@
         "cancel": "Abbrechen",
         "confirm": "Zweig löschen"
       }
+    },
+    "todo": {
+      "new": {
+        "title": "Neues Todo erstellen",
+        "name": {
+          "label": "Todo-Name",
+          "placeholder": "z. B. Morgenroutine"
+        },
+        "cadence": {
+          "label": "Rhythmus"
+        },
+        "xp": {
+          "label": "XP-Belohnung"
+        },
+        "items": {
+          "label": "Erste Teilaufgaben",
+          "placeholder": "z. B. Dehnen, Wasser trinken",
+          "add": "Teilaufgabe hinzufügen",
+          "remove": "Teilaufgabe entfernen"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "create": "Todo erstellen"
+        }
+      },
+      "edit": {
+        "title": "Todo bearbeiten",
+        "name": {
+          "label": "Todo-Name"
+        },
+        "cadence": {
+          "label": "Rhythmus"
+        },
+        "xp": {
+          "label": "XP-Belohnung"
+        },
+        "items": {
+          "label": "Teilaufgaben",
+          "addPlaceholder": "Name der neuen Teilaufgabe",
+          "add": "Hinzufügen",
+          "remove": "Teilaufgabe entfernen"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "save": "Änderungen speichern"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Bist du sicher?",
+        "description": "Dies löscht das Todo \"{name}\" und alle seine Teilaufgaben dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "confirm": "Todo löschen"
+      }
     }
   },
   "calendar": {
@@ -537,6 +590,11 @@
       "created": "Zweig erfolgreich erstellt",
       "updated": "Zweig erfolgreich aktualisiert",
       "deleted": "Zweig erfolgreich gelöscht"
+    },
+    "todo": {
+      "created": "Todo erfolgreich erstellt",
+      "updated": "Todo erfolgreich aktualisiert",
+      "deleted": "Todo erfolgreich gelöscht"
     }
   },
   "trunks": {
@@ -564,5 +622,21 @@
     "delete": "Löschen",
     "addTwig": "Zweiglein hinzufügen",
     "emptyTwigs": "Noch keine Zweiglein in diesem Zweig. Füge eines hinzu, um mit dem Tracking zu beginnen!"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Täglich",
+    "weekly": "Wöchentlich",
+    "addTodo": "Todo hinzufügen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "progress": "{done}/{total}",
+    "emptyDaily": "Noch keine täglichen Todos. Füge eines hinzu, um XP zu sammeln!",
+    "emptyWeekly": "Noch keine wöchentlichen Todos. Füge eines hinzu, um XP zu sammeln!",
+    "emptyAll": "Noch keine Todos. Erstelle dein erstes Todo, um XP zu sammeln!"
+  },
+  "xp": {
+    "label": "XP",
+    "total": "Gesamt-XP: {count}"
   }
 }

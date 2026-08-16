@@ -402,6 +402,59 @@
         "cancel": "Cancelar",
         "confirm": "Eliminar rama"
       }
+    },
+    "todo": {
+      "new": {
+        "title": "Crear nuevo Todo",
+        "name": {
+          "label": "Nombre del Todo",
+          "placeholder": "p. ej., Rutina matutina"
+        },
+        "cadence": {
+          "label": "Cadencia"
+        },
+        "xp": {
+          "label": "Recompensa de XP"
+        },
+        "items": {
+          "label": "Sub-tareas iniciales",
+          "placeholder": "p. ej., Estirar, Beber agua",
+          "add": "Añadir sub-tarea",
+          "remove": "Eliminar sub-tarea"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear Todo"
+        }
+      },
+      "edit": {
+        "title": "Editar Todo",
+        "name": {
+          "label": "Nombre del Todo"
+        },
+        "cadence": {
+          "label": "Cadencia"
+        },
+        "xp": {
+          "label": "Recompensa de XP"
+        },
+        "items": {
+          "label": "Sub-tareas",
+          "addPlaceholder": "Nombre de la nueva sub-tarea",
+          "add": "Añadir",
+          "remove": "Eliminar sub-tarea"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente el todo \"{name}\" y todas sus sub-tareas. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar Todo"
+      }
     }
   },
   "calendar": {
@@ -536,6 +589,11 @@
       "created": "Rama creada correctamente",
       "updated": "Rama actualizada correctamente",
       "deleted": "Rama eliminada correctamente"
+    },
+    "todo": {
+      "created": "Todo creado correctamente",
+      "updated": "Todo actualizado correctamente",
+      "deleted": "Todo eliminado correctamente"
     }
   },
   "trunks": {
@@ -563,5 +621,21 @@
     "delete": "Eliminar",
     "addTwig": "Añadir ramita",
     "emptyTwigs": "Aún no hay ramitas en esta rama. ¡Añade una para empezar a hacer seguimiento!"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Diarias",
+    "weekly": "Semanales",
+    "addTodo": "Añadir Todo",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "progress": "{done}/{total}",
+    "emptyDaily": "Aún no hay tareas diarias. ¡Añade una para empezar a ganar XP!",
+    "emptyWeekly": "Aún no hay tareas semanales. ¡Añade una para empezar a ganar XP!",
+    "emptyAll": "Aún no hay tareas. ¡Crea tu primera tarea para empezar a ganar XP!"
+  },
+  "xp": {
+    "label": "XP",
+    "total": "XP total: {count}"
   }
 }
