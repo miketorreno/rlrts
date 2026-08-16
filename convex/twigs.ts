@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { deleteTwigSubtree } from "./tree_utils";
 
 /**
  *
@@ -80,27 +81,7 @@ export const remove = mutation({
       throw new Error("Twig not found");
     }
 
-    // Step 1 & 2: Delete leaves and their completions
-    const leaves = await ctx.db
-      .query("leaves")
-      .filter((q) => q.eq(q.field("twigId"), args.id))
-      .collect();
-
-    for (const leaf of leaves) {
-      // Delete all completions for this leaf first
-      await ctx.db
-        .query("completions")
-        .filter((q) => q.eq(q.field("leafId"), leaf._id))
-        .collect()
-        .then((completions) => {
-          return Promise.all(
-            completions.map((completion) => ctx.db.delete(completion._id)),
-          );
-        });
-
-      // Then delete the leaf itself
-      await ctx.db.delete(leaf._id);
-    }
+    // Step 1 & 2 are handled by deleteTwigSubtree below
 
     // Step 3: Update positions of remaining twigs
     const allTwigs = await ctx.db
@@ -122,8 +103,8 @@ export const remove = mutation({
       }
     }
 
-    // Step 4: Delete the twig
-    await ctx.db.delete(args.id);
+    // Step 4: Delete the twig and its subtree (leaves + completions)
+    await deleteTwigSubtree(ctx, args.id);
   },
 });
 
