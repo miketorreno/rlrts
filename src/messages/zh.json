@@ -296,6 +296,39 @@
       "title": "{duration}分钟计时器",
       "cancel": "取消计时器",
       "confirmCancel": "计时器仍在运行。确定要取消吗？"
+    },
+    "trunk": {
+      "new": {
+        "title": "创建新树干",
+        "name": {
+          "label": "树干名称",
+          "placeholder": "例如：健康、职业、学习..."
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建树干"
+        }
+      },
+      "edit": {
+        "title": "编辑树干",
+        "name": {
+          "label": "树干名称"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除树干 \"{name}\" 及其下所有内容（树枝和树叶）。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除树干"
+      }
     }
   },
   "calendar": {
@@ -415,6 +448,18 @@
       "created": "习惯创建成功",
       "updated": "习惯更新成功",
       "deleted": "习惯删除成功"
+    },
+    "trunk": {
+      "created": "树干创建成功",
+      "updated": "树干更新成功",
+      "deleted": "树干删除成功"
     }
+  },
+  "trunks": {
+    "emptyState": "还没有树干。创建你的第一个树干来开始构建你的树吧！",
+    "addTrunk": "添加树干",
+    "edit": "编辑",
+    "delete": "删除",
+    "viewLimbs": "查看树枝 →"
   }
 }

@@ -301,6 +301,39 @@
       "title": "{duration} Minuten Timer",
       "cancel": "Timer abbrechen",
       "confirmCancel": "Timer läuft noch. Sind Sie sicher, dass Sie abbrechen möchten?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Neuen Stamm erstellen",
+        "name": {
+          "label": "Stammname",
+          "placeholder": "z.B. Gesundheit, Karriere, Lernen..."
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "create": "Stamm erstellen"
+        }
+      },
+      "edit": {
+        "title": "Stamm bearbeiten",
+        "name": {
+          "label": "Stammname"
+        },
+        "position": {
+          "label": "Anzeigereihenfolge",
+          "placeholder": "Position auswählen"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "save": "Änderungen speichern"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Bist du sicher?",
+        "description": "Dies wird den Stamm \"{name}\" und alles darunter (Äste, Zweige und Blätter) dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "confirm": "Stamm löschen"
+      }
     }
   },
   "calendar": {
@@ -420,6 +453,18 @@
       "created": "Gewohnheit erfolgreich erstellt",
       "updated": "Gewohnheit erfolgreich aktualisiert",
       "deleted": "Gewohnheit erfolgreich gelöscht"
+    },
+    "trunk": {
+      "created": "Stamm erfolgreich erstellt",
+      "updated": "Stamm erfolgreich aktualisiert",
+      "deleted": "Stamm erfolgreich gelöscht"
     }
+  },
+  "trunks": {
+    "emptyState": "Noch keine Stämme. Erstelle deinen ersten Stamm, um deinen Baum aufzubauen!",
+    "addTrunk": "Stamm hinzufügen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "viewLimbs": "Äste anzeigen →"
   }
 }

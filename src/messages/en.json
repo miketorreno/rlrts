@@ -303,6 +303,39 @@
       "title": "{duration} Minute Timer",
       "cancel": "Cancel Timer",
       "confirmCancel": "Timer is still running. Are you sure you want to cancel?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Create New Trunk",
+        "name": {
+          "label": "Trunk Name",
+          "placeholder": "e.g., Health, Career, Learning..."
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Trunk"
+        }
+      },
+      "edit": {
+        "title": "Edit Trunk",
+        "name": {
+          "label": "Trunk Name"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the trunk \"{name}\" and everything under it (limbs, branches, twigs, leaves). This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Trunk"
+      }
     }
   },
   "twig": {
@@ -423,6 +456,18 @@
       "created": "Leaf created successfully",
       "updated": "Leaf updated successfully",
       "deleted": "Leaf deleted successfully"
+    },
+    "trunk": {
+      "created": "Trunk created successfully",
+      "updated": "Trunk updated successfully",
+      "deleted": "Trunk deleted successfully"
     }
+  },
+  "trunks": {
+    "emptyState": "No trunks yet. Create your first trunk to start building your tree!",
+    "addTrunk": "Add Trunk",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewLimbs": "View limbs →"
   }
 }

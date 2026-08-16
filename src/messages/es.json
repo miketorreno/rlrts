@@ -300,6 +300,39 @@
       "title": "Temporizador de {duration} minutos",
       "cancel": "Cancelar temporizador",
       "confirmCancel": "El temporizador aún está en marcha. ¿Seguro que quieres cancelar?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Crear nuevo tronco",
+        "name": {
+          "label": "Nombre del tronco",
+          "placeholder": "p. ej., Salud, Carrera, Aprendizaje..."
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear tronco"
+        }
+      },
+      "edit": {
+        "title": "Editar tronco",
+        "name": {
+          "label": "Nombre del tronco"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente el tronco \"{name}\" y todo lo que contiene (ramas, ramitas y hojas). Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar tronco"
+      }
     }
   },
   "calendar": {
@@ -419,6 +452,18 @@
       "created": "Hábito creado",
       "updated": "Hábito actualizado",
       "deleted": "Hábito eliminado"
+    },
+    "trunk": {
+      "created": "Tronco creado correctamente",
+      "updated": "Tronco actualizado correctamente",
+      "deleted": "Tronco eliminado correctamente"
     }
+  },
+  "trunks": {
+    "emptyState": "Aún no hay troncos. ¡Crea tu primer tronco para empezar a construir tu árbol!",
+    "addTrunk": "Añadir tronco",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "viewLimbs": "Ver ramas →"
   }
 }

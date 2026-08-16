@@ -301,6 +301,39 @@
       "title": "Minuteur de {duration} minutes",
       "cancel": "Annuler le Minuteur",
       "confirmCancel": "Le minuteur est toujours en cours. Êtes-vous sûr de vouloir annuler ?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Créer un nouveau tronc",
+        "name": {
+          "label": "Nom du tronc",
+          "placeholder": "p. ex., Santé, Carrière, Apprentissage..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer le tronc"
+        }
+      },
+      "edit": {
+        "title": "Modifier le tronc",
+        "name": {
+          "label": "Nom du tronc"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement le tronc \"{name}\" et tout ce qu’il contient (branches, brindilles et feuilles). Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer le tronc"
+      }
     }
   },
   "calendar": {
@@ -420,6 +453,18 @@
       "created": "Habitude créée avec succès",
       "updated": "Habitude mise à jour avec succès",
       "deleted": "Habitude supprimée avec succès"
+    },
+    "trunk": {
+      "created": "Tronc créé avec succès",
+      "updated": "Tronc mis à jour avec succès",
+      "deleted": "Tronc supprimé avec succès"
     }
+  },
+  "trunks": {
+    "emptyState": "Aucun tronc pour le moment. Créez votre premier tronc pour commencer à construire votre arbre !",
+    "addTrunk": "Ajouter un tronc",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewLimbs": "Voir les branches →"
   }
 }
