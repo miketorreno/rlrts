@@ -8,7 +8,9 @@
  * @module
  */
 
+import type * as branches from "../branches.js";
 import type * as leaves from "../leaves.js";
+import type * as limbs from "../limbs.js";
 import type * as migrations from "../migrations.js";
 import type * as tree_utils from "../tree_utils.js";
 import type * as trunks from "../trunks.js";
@@ -22,7 +24,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  branches: typeof branches;
   leaves: typeof leaves;
+  limbs: typeof limbs;
   migrations: typeof migrations;
   tree_utils: typeof tree_utils;
   trunks: typeof trunks;
