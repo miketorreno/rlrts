@@ -3,6 +3,7 @@ import { internal } from "./_generated/api";
 import { Doc, Id } from "./_generated/dataModel";
 import { internalMutation, mutation, query } from "./_generated/server";
 import { deleteLeafAndCompletions } from "./tree_utils";
+import { streakMultiplier } from "./xp";
 
 /**
  * Key features:
@@ -52,6 +53,7 @@ export const create = mutation({
     name: v.string(),
     twigId: v.id("twigs"),
     timerDuration: v.optional(v.number()),
+    xp: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -79,6 +81,7 @@ export const create = mutation({
       userId: identity.subject,
       twigId: args.twigId,
       timerDuration: args.timerDuration,
+      xp: args.xp,
       position: maxPosition + 1,
     });
   },
@@ -157,6 +160,81 @@ export const markComplete = mutation({
           ctx.db.insert("completions", completion),
         ),
       );
+
+      // Record XP for this habit completion
+      if ((leaf.xp ?? 0) > 0) {
+        const baseAmount = leaf.xp!;
+        const today = new Date().toISOString().split("T")[0];
+        const yesterday = new Date(Date.now() - 86400000)
+          .toISOString()
+          .split("T")[0];
+
+        let profile = await ctx.db
+          .query("xpProfiles")
+          .filter((q) => q.eq(q.field("userId"), identity.subject))
+          .first();
+
+        // Reset streak if gap is too long
+        if (profile) {
+          if (
+            profile.lastCompletionDate !== today &&
+            profile.lastCompletionDate !== yesterday
+          ) {
+            await ctx.db.patch(profile._id, { currentStreak: 0 });
+            profile = { ...profile, currentStreak: 0 };
+          }
+        }
+
+        if (!profile) {
+          await ctx.db.insert("xpProfiles", {
+            userId: identity.subject,
+            lifetimeXp: baseAmount,
+            currentStreak: 1,
+            longestStreak: 1,
+            lastCompletionDate: today,
+          });
+          await ctx.db.insert("xpEvents", {
+            userId: identity.subject,
+            source: "habit",
+            sourceId: args.leafId,
+            amount: baseAmount,
+            baseAmount,
+            streakAtTime: 1,
+            createdAt: Date.now(),
+          });
+        } else {
+          const alreadyCompletedToday =
+            profile.lastCompletionDate === today;
+          const multiplier = streakMultiplier(profile.currentStreak);
+          const amount = Math.round(baseAmount * multiplier);
+
+          if (alreadyCompletedToday) {
+            await ctx.db.patch(profile._id, {
+              lifetimeXp: profile.lifetimeXp + amount,
+            });
+          } else {
+            await ctx.db.patch(profile._id, {
+              lifetimeXp: profile.lifetimeXp + amount,
+              currentStreak: profile.currentStreak + 1,
+              longestStreak: Math.max(
+                profile.longestStreak,
+                profile.currentStreak + 1,
+              ),
+              lastCompletionDate: today,
+            });
+          }
+
+          await ctx.db.insert("xpEvents", {
+            userId: identity.subject,
+            source: "habit",
+            sourceId: args.leafId,
+            amount,
+            baseAmount,
+            streakAtTime: profile.currentStreak,
+            createdAt: Date.now(),
+          });
+        }
+      }
     }
 
     return null;
@@ -241,6 +319,7 @@ export const update = mutation({
     timerDuration: v.optional(v.number()),
     twigId: v.id("twigs"),
     position: v.optional(v.number()),
+    xp: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -310,6 +389,7 @@ export const update = mutation({
         name: args.name,
         timerDuration: args.timerDuration,
         twigId: args.twigId,
+        xp: args.xp,
         position: newPosition,
       });
       return;
@@ -320,6 +400,7 @@ export const update = mutation({
       name: args.name,
       timerDuration: args.timerDuration,
       twigId: args.twigId,
+      xp: args.xp,
       ...(args.position !== undefined && { position: args.position }),
     });
   },
