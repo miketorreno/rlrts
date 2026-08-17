@@ -58,12 +58,23 @@ export const recordHabitXp = mutation({
     const baseAmount = leaf.xp ?? 0;
     if (baseAmount <= 0) return;
 
-    const existingProfile = await ctx.db
+    // Update streak before recording XP
+    let profile = await ctx.db
       .query("xpProfiles")
       .filter((q) => q.eq(q.field("userId"), identity.subject))
       .first();
 
-    if (!existingProfile) {
+    if (profile) {
+      const today = new Date().toISOString().split("T")[0];
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+
+      if (profile.lastCompletionDate !== today && profile.lastCompletionDate !== yesterday) {
+        await ctx.db.patch(profile._id, { currentStreak: 0 });
+        profile = { ...profile, currentStreak: 0 };
+      }
+    }
+
+    if (!profile) {
       await ctx.db.insert("xpProfiles", {
         userId: identity.subject,
         lifetimeXp: baseAmount,
@@ -84,15 +95,22 @@ export const recordHabitXp = mutation({
     }
 
     const today = new Date().toISOString().split("T")[0];
-    const multiplier = streakMultiplier(existingProfile.currentStreak);
+    const alreadyCompletedToday = profile.lastCompletionDate === today;
+    const multiplier = streakMultiplier(profile.currentStreak);
     const amount = Math.round(baseAmount * multiplier);
 
-    await ctx.db.patch(existingProfile._id, {
-      lifetimeXp: existingProfile.lifetimeXp + amount,
-      currentStreak: existingProfile.currentStreak + 1,
-      longestStreak: Math.max(existingProfile.longestStreak, existingProfile.currentStreak + 1),
-      lastCompletionDate: today,
-    });
+    if (alreadyCompletedToday) {
+      await ctx.db.patch(profile._id, {
+        lifetimeXp: profile.lifetimeXp + amount,
+      });
+    } else {
+      await ctx.db.patch(profile._id, {
+        lifetimeXp: profile.lifetimeXp + amount,
+        currentStreak: profile.currentStreak + 1,
+        longestStreak: Math.max(profile.longestStreak, profile.currentStreak + 1),
+        lastCompletionDate: today,
+      });
+    }
 
     await ctx.db.insert("xpEvents", {
       userId: identity.subject,
@@ -100,7 +118,7 @@ export const recordHabitXp = mutation({
       sourceId: args.leafId,
       amount,
       baseAmount,
-      streakAtTime: existingProfile.currentStreak,
+      streakAtTime: profile.currentStreak,
       createdAt: Date.now(),
     });
   },
