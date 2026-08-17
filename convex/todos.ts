@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { Doc } from "./_generated/dataModel";
 import { MutationCtx, mutation, query } from "./_generated/server";
+import { streakMultiplier } from "./xp";
 
 function periodStart(cadence: "daily" | "weekly", now: number): number {
   const date = new Date(now);
@@ -40,6 +41,77 @@ async function recomputeCompletion(
         userId,
         completedAt: Date.now(),
       });
+
+      // Record XP for this completion
+      const today = new Date().toISOString().split("T")[0];
+      const yesterday = new Date(Date.now() - 86400000)
+        .toISOString()
+        .split("T")[0];
+
+      let profile = await ctx.db
+        .query("xpProfiles")
+        .filter((q) => q.eq(q.field("userId"), userId))
+        .first();
+
+      // Reset streak if gap is too long
+      if (profile) {
+        if (
+          profile.lastCompletionDate !== today &&
+          profile.lastCompletionDate !== yesterday
+        ) {
+          await ctx.db.patch(profile._id, { currentStreak: 0 });
+          profile = { ...profile, currentStreak: 0 };
+        }
+      }
+
+      if (!profile) {
+        const profileId = await ctx.db.insert("xpProfiles", {
+          userId,
+          lifetimeXp: todo.xp,
+          currentStreak: 1,
+          longestStreak: 1,
+          lastCompletionDate: today,
+        });
+        await ctx.db.insert("xpEvents", {
+          userId,
+          source: "todo",
+          sourceId: todo._id,
+          amount: todo.xp,
+          baseAmount: todo.xp,
+          streakAtTime: 1,
+          createdAt: Date.now(),
+        });
+      } else {
+        const alreadyCompletedToday = profile.lastCompletionDate === today;
+        const multiplier = streakMultiplier(profile.currentStreak);
+        const amount = Math.round(todo.xp * multiplier);
+
+        if (alreadyCompletedToday) {
+          await ctx.db.patch(profile._id, {
+            lifetimeXp: profile.lifetimeXp + amount,
+          });
+        } else {
+          await ctx.db.patch(profile._id, {
+            lifetimeXp: profile.lifetimeXp + amount,
+            currentStreak: profile.currentStreak + 1,
+            longestStreak: Math.max(
+              profile.longestStreak,
+              profile.currentStreak + 1,
+            ),
+            lastCompletionDate: today,
+          });
+        }
+
+        await ctx.db.insert("xpEvents", {
+          userId,
+          source: "todo",
+          sourceId: todo._id,
+          amount,
+          baseAmount: todo.xp,
+          streakAtTime: profile.currentStreak,
+          createdAt: Date.now(),
+        });
+      }
     }
   } else {
     for (const completion of currentPeriodCompletions) {
