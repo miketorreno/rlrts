@@ -232,6 +232,9 @@
           "placeholder": "Select duration (optional)",
           "noTimer": "No Timer"
         },
+        "xp": {
+          "label": "XP Reward"
+        },
         "actions": {
           "cancel": "Cancel",
           "create": "Add Leaf"
@@ -254,6 +257,9 @@
           "label": "Timer Duration",
           "placeholder": "Select duration",
           "noTimer": "No Timer"
+        },
+        "xp": {
+          "label": "XP Reward"
         },
         "actions": {
           "back": "Go Back",
@@ -639,6 +645,9 @@
   "xp": {
     "label": "XP",
     "points": "XP points",
-    "total": "Total XP: {count}"
+    "total": "Total XP: {count}",
+    "level": "Level {level}",
+    "streak": "Streak: {count}",
+    "nextLevel": "Next level at {xp} XP"
   }
 }

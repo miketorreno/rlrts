@@ -400,6 +400,60 @@
         "confirm": "删除树枝"
       }
     },
+    "leaf": {
+      "new": {
+        "title": "Add New Leaf",
+        "name": {
+          "label": "Leaf Name",
+          "placeholder": "e.g., Exercise, Meditate, Write..."
+        },
+        "timer": {
+          "label": "Timer Duration",
+          "placeholder": "Select duration (optional)",
+          "noTimer": "No Timer"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Add Leaf"
+        }
+      },
+      "edit": {
+        "title": "Edit Leaf",
+        "name": {
+          "label": "Name"
+        },
+        "twig": {
+          "label": "Twig",
+          "placeholder": "Select twig"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "timer": {
+          "label": "Timer Duration",
+          "placeholder": "Select duration",
+          "noTimer": "No Timer"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "actions": {
+          "back": "Go Back",
+          "save": "Save Changes",
+          "delete": "Delete"
+        },
+        "deleteConfirm": {
+          "title": "Delete Leaf",
+          "description": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete"
+        }
+      }
+    },
     "todo": {
       "new": {
         "title": "创建新待办",
@@ -634,6 +688,9 @@
   "xp": {
     "label": "XP",
     "points": "XP 点数",
-    "total": "总XP：{count}"
+    "total": "总XP：{count}",
+    "level": "Level {level}",
+    "streak": "Streak: {count}",
+    "nextLevel": "Next level at {xp} XP"
   }
 }

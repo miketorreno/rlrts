@@ -3,11 +3,11 @@
 import { useConvexAuth, useQuery } from "convex/react";
 import { Flame, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { api } from "../../../convex/_generated/api";
 
-// TODO: Replace hardcoded strings with useTranslations("xp") once Task 8 adds i18n keys
-
 export function XpBadge() {
+  const t = useTranslations("xp");
   const { isAuthenticated } = useConvexAuth();
   const profile = useQuery(
     api.xp.getXpProfile,
@@ -28,15 +28,15 @@ export function XpBadge() {
       <div className="flex items-center gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-md bg-yellow-500/10 px-2 py-1 text-sm font-semibold text-yellow-600 dark:text-yellow-400">
           <Sparkles className="size-4 shrink-0" aria-hidden="true" />
-          Lv.{profile.level}
+          {t("level", { level: profile.level })}
         </span>
         <span className="text-xs text-muted-foreground">
-          {profile.lifetimeXp.toLocaleString()} XP
+          {t("total", { count: profile.lifetimeXp.toLocaleString() })}
         </span>
         {profile.currentStreak > 0 && (
           <span className="inline-flex items-center gap-1 text-xs text-orange-500">
             <Flame className="size-3" />
-            {profile.currentStreak}
+            {t("streak", { count: profile.currentStreak })}
           </span>
         )}
       </div>

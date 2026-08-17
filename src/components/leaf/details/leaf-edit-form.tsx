@@ -212,7 +212,7 @@ export function LeafEditForm({
 
           {/* XP per completion */}
           <div>
-            <Label htmlFor="edit-leaf-xp">XP per completion</Label>
+            <Label htmlFor="edit-leaf-xp">{t("leaf.edit.xp.label")}</Label>
             <Input
               id="edit-leaf-xp"
               type="number"

@@ -9,6 +9,7 @@ import { SingleMonthTwig } from "@/components/leaf/details/single-month-twig";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
@@ -72,6 +73,7 @@ function getTwigSize() {
 export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
   // Core hooks and state management
   const router = useRouter();
+  const tXp = useTranslations("xp");
   const { toast } = useToast();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [name, setName] = useState(leaf.name);
@@ -232,7 +234,7 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
           )}
           {xp > 0 && (
             <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-sm font-medium text-primary">
-              {xp} XP
+              {tXp("total", { count: xp })}
             </span>
           )}
         </h1>
