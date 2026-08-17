@@ -351,6 +351,10 @@ export const removeItem = mutation({
   },
 });
 
+/**
+ * @deprecated Use xp.getXpProfile instead. This query is kept for backward
+ * compatibility but will be removed in a future release.
+ */
 export const getXp = query({
   args: {},
   handler: async (ctx) => {
