@@ -38,6 +38,7 @@ export function BranchList({
   branches,
 }: BranchListProps) {
   const t = useTranslations("branches");
+  const tNav = useTranslations("nav");
   const toastMessages = useToastMessages();
 
   const [newOpen, setNewOpen] = useState(false);
@@ -96,49 +97,51 @@ export function BranchList({
   let content;
   if (limbs === undefined) {
     content = (
-      <Card className="border p-2 shadow-md">
-        <div className="flex flex-col gap-4 p-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center justify-between gap-4">
-              <Skeleton className="h-6 w-40" />
-              <div className="flex gap-2">
-                <Skeleton className="h-7 w-28" />
-                <Skeleton className="h-7 w-16" />
-                <Skeleton className="h-7 w-16" />
+      <div className="flex flex-col gap-3">
+        {[1, 2, 3].map((i) => (
+          <Card key={i} className="rounded-xl border p-3 shadow-sm">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col gap-2">
+                <Skeleton className="h-5 w-40" />
+              </div>
+              <div className="flex gap-1">
+                <Skeleton className="h-8 w-8 rounded-md" />
+                <Skeleton className="h-8 w-8 rounded-md" />
               </div>
             </div>
-          ))}
-        </div>
-      </Card>
+          </Card>
+        ))}
+      </div>
     );
   } else if (!selectedLimbId) {
     content = (
-      <div className="flex flex-col items-center justify-center space-y-4 py-16">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
         <p className="text-sm text-muted-foreground">{t("noLimbs")}</p>
       </div>
     );
   } else if (branches === undefined) {
     content = (
-      <Card className="border p-2 shadow-md">
-        <div className="flex flex-col gap-4 p-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center justify-between gap-4">
-              <Skeleton className="h-6 w-40" />
-              <div className="flex gap-2">
-                <Skeleton className="h-7 w-28" />
-                <Skeleton className="h-7 w-16" />
-                <Skeleton className="h-7 w-16" />
+      <div className="flex flex-col gap-3">
+        {[1, 2, 3].map((i) => (
+          <Card key={i} className="rounded-xl border p-3 shadow-sm">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col gap-2">
+                <Skeleton className="h-5 w-40" />
+              </div>
+              <div className="flex gap-1">
+                <Skeleton className="h-8 w-8 rounded-md" />
+                <Skeleton className="h-8 w-8 rounded-md" />
               </div>
             </div>
-          ))}
-        </div>
-      </Card>
+          </Card>
+        ))}
+      </div>
     );
   } else if (sortedBranches.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center space-y-4 py-16">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
         <p className="text-sm text-muted-foreground">{t("emptyState")}</p>
-        <Button variant="default" onClick={() => setNewOpen(true)}>
+        <Button variant="outline" onClick={() => setNewOpen(true)}>
           <PlusCircle className="h-4 w-4" />
           {t("addBranch")}
         </Button>
@@ -147,7 +150,19 @@ export function BranchList({
   } else {
     content = (
       <>
-        <div className="flex flex-col gap-4">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg font-semibold">{tNav("branches")}</h1>
+            <span className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              {sortedBranches.length}
+            </span>
+          </div>
+          <Button onClick={() => setNewOpen(true)}>
+            <PlusCircle className="h-4 w-4" />
+            {t("addBranch")}
+          </Button>
+        </div>
+        <div className="flex flex-col gap-3">
           {sortedBranches.map((branch) => (
             <BranchItem
               key={branch._id}
@@ -156,12 +171,6 @@ export function BranchList({
             />
           ))}
         </div>
-        <div className="flex justify-center py-16">
-          <Button variant="default" onClick={() => setNewOpen(true)}>
-            <PlusCircle className="h-4 w-4" />
-            {t("addBranch")}
-          </Button>
-        </div>
       </>
     );
   }
@@ -169,7 +178,7 @@ export function BranchList({
   return (
     <>
       {limbs && limbs.length > 0 && (
-        <div className="mb-6">
+        <div className="mb-4">
           <Label>{t("selectLimb")}</Label>
           <Select
             value={selectedLimbId ?? undefined}
