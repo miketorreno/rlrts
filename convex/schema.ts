@@ -40,6 +40,7 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     twigId: v.id("twigs"),
+    xp: v.optional(v.number()),
     timerDuration: v.optional(v.number()),
     position: v.optional(v.number()),
     scheduledTimer: v.optional(v.id("_scheduled_functions")),
@@ -77,4 +78,24 @@ export default defineSchema({
     userId: v.string(),
     completedAt: v.number(),
   }).index("by_user_and_date", ["userId", "completedAt"]),
+
+  xpEvents: defineTable({
+    userId: v.string(),
+    source: v.union(v.literal("todo"), v.literal("habit")),
+    sourceId: v.string(),
+    amount: v.number(),
+    baseAmount: v.number(),
+    streakAtTime: v.number(),
+    createdAt: v.number(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_source", ["userId", "source"]),
+
+  xpProfiles: defineTable({
+    userId: v.string(),
+    lifetimeXp: v.number(),
+    currentStreak: v.number(),
+    longestStreak: v.number(),
+    lastCompletionDate: v.optional(v.string()),
+  }).index("by_user", ["userId"]),
 });
