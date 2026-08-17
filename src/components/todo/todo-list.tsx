@@ -18,7 +18,6 @@ import { api } from "../../../convex/_generated/api";
 import { Doc, Id } from "../../../convex/_generated/dataModel";
 
 interface TodoListData {
-  completions: Doc<"todoCompletions">[];
   items: Doc<"todoItems">[];
   todos: Doc<"todos">[];
 }
@@ -31,7 +30,7 @@ const CADENCES: TodoCadence[] = ["daily", "weekly"];
 
 export function TodoList({ data }: TodoListProps) {
   const t = useTranslations("todo");
-  const tXp = useTranslations("xp");
+  const tNav = useTranslations("nav");
   const toastMessages = useToastMessages();
 
   const [newOpen, setNewOpen] = useState(false);
@@ -83,15 +82,6 @@ export function TodoList({ data }: TodoListProps) {
       map.set(item.todoId, list);
     }
     return map;
-  }, [data]);
-
-  const totalXp = useMemo(() => {
-    if (!data) return 0;
-    const xpByTodo = new Map(data.todos.map((todo) => [todo._id, todo.xp]));
-    return data.completions.reduce(
-      (sum, completion) => sum + (xpByTodo.get(completion.todoId) ?? 0),
-      0,
-    );
   }, [data]);
 
   const openCreate = useCallback((cadence: TodoCadence) => {
@@ -161,26 +151,25 @@ export function TodoList({ data }: TodoListProps) {
   let content;
   if (data === undefined) {
     content = (
-      <Card className="border p-2 shadow-md">
-        <div className="flex flex-col gap-4 p-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center justify-between gap-4">
-              <Skeleton className="h-6 w-40" />
-              <div className="flex gap-2">
-                <Skeleton className="h-7 w-28" />
-                <Skeleton className="h-7 w-16" />
-                <Skeleton className="h-7 w-16" />
+      <div className="flex flex-col gap-3">
+        {[1, 2, 3].map((i) => (
+          <Card key={i} className="rounded-xl border p-3 shadow-sm">
+            <div className="flex items-center justify-between gap-3">
+              <Skeleton className="h-5 w-40" />
+              <div className="flex gap-1">
+                <Skeleton className="h-8 w-8 rounded-md" />
+                <Skeleton className="h-8 w-8 rounded-md" />
               </div>
             </div>
-          ))}
-        </div>
-      </Card>
+          </Card>
+        ))}
+      </div>
     );
   } else if (sortedTodos.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center space-y-4 py-16">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
         <p className="text-sm text-muted-foreground">{t("emptyAll")}</p>
-        <Button variant="default" onClick={() => openCreate("daily")}>
+        <Button variant="outline" onClick={() => openCreate("daily")}>
           <PlusCircle className="h-4 w-4" />
           {t("addTodo")}
         </Button>
@@ -211,7 +200,7 @@ export function TodoList({ data }: TodoListProps) {
                 </span>
               </button>
               {!isCollapsed && (
-                <div className="mt-2 flex flex-col gap-4 pb-4">
+                <div className="mt-2 flex flex-col gap-3 pb-4">
                   {sectionTodos.length === 0 ? (
                     <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-8">
                       <p className="text-sm text-muted-foreground">
@@ -247,14 +236,14 @@ export function TodoList({ data }: TodoListProps) {
 
   return (
     <>
-      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-xl font-semibold">{t("title")}</h1>
-          <span className="rounded-md bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">
-            {tXp("total", { count: totalXp })}
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-semibold">{tNav("todos")}</h1>
+          <span className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+            {sortedTodos.length}
           </span>
         </div>
-        <Button variant="default" onClick={() => openCreate("daily")}>
+        <Button onClick={() => openCreate("daily")}>
           <PlusCircle className="h-4 w-4" />
           {t("addTodo")}
         </Button>
