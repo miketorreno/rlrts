@@ -82,6 +82,8 @@ interface LeafEditFormProps {
   onTwigChange: (twigId: Id<"twigs">) => void;
   position: number;
   onPositionChange: (position: number) => void;
+  xp: number;
+  onXpChange: (xp: number) => void;
   twigs:
     | Array<{
         _id: Id<"twigs">;
@@ -107,6 +109,8 @@ export function LeafEditForm({
   onTwigChange,
   position,
   onPositionChange,
+  xp,
+  onXpChange,
   twigs,
   leaves,
   onSave,
@@ -204,6 +208,18 @@ export function LeafEditForm({
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          {/* XP per completion */}
+          <div>
+            <Label htmlFor="edit-leaf-xp">XP per completion</Label>
+            <Input
+              id="edit-leaf-xp"
+              type="number"
+              min={0}
+              value={xp}
+              onChange={(e) => onXpChange(parseInt(e.target.value) || 0)}
+            />
           </div>
 
           {/* Action buttons for saving or deleting the leaf */}

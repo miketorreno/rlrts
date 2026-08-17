@@ -38,6 +38,7 @@ interface LeafDetailsProps {
     timerDuration?: number;
     twigId: Id<"twigs">;
     position?: number;
+    xp?: number;
   };
   twig: {
     _id: Id<"twigs">;
@@ -81,6 +82,7 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
     leaf.twigId,
   );
   const [position, setPosition] = useState<number>(leaf.position ?? 1);
+  const [xp, setXp] = useState<number>(leaf.xp ?? 0);
   const [twigSize, setTwigSize] = useState(getTwigSize());
 
   // Convex API mutations and queries
@@ -184,6 +186,7 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
         timerDuration,
         twigId: selectedTwigId,
         position,
+        xp,
       });
       toast({ description: "Leaf updated successfully" });
       router.push("/twig");
@@ -218,13 +221,18 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
     <>
       <LeafBackNavigation />
 
-      {/* Leaf header with name and timer duration */}
+      {/* Leaf header with name, timer duration, and XP */}
       <div className="text-center">
         <h1 className="mb-8 text-2xl font-bold">
           {name}
           {timerDuration && (
             <span className="ml-2 text-muted-foreground">
               ({timerDuration}m)
+            </span>
+          )}
+          {xp > 0 && (
+            <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-sm font-medium text-primary">
+              {xp} XP
             </span>
           )}
         </h1>
@@ -279,6 +287,8 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
         onTwigChange={setSelectedTwigId}
         position={position}
         onPositionChange={setPosition}
+        xp={xp}
+        onXpChange={setXp}
         twigs={twigs}
         leaves={leaves}
         onSave={handleSave}
