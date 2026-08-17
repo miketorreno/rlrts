@@ -177,7 +177,20 @@ export function TodoList({ data }: TodoListProps) {
     );
   } else {
     content = (
-      <div className="flex flex-col gap-2">
+      <>
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg font-semibold">{tNav("todos")}</h1>
+            <span className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              {sortedTodos.length}
+            </span>
+          </div>
+          <Button onClick={() => openCreate("daily")}>
+            <PlusCircle className="h-4 w-4" />
+            {t("addTodo")}
+          </Button>
+        </div>
+        <div className="flex flex-col gap-2">
         {CADENCES.map((cadence) => {
           const sectionTodos = groupedTodos[cadence];
           const isCollapsed = collapsed[cadence];
@@ -231,23 +244,12 @@ export function TodoList({ data }: TodoListProps) {
           );
         })}
       </div>
+      </>
     );
   }
 
   return (
     <>
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <h1 className="text-lg font-semibold">{tNav("todos")}</h1>
-          <span className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-            {sortedTodos.length}
-          </span>
-        </div>
-        <Button onClick={() => openCreate("daily")}>
-          <PlusCircle className="h-4 w-4" />
-          {t("addTodo")}
-        </Button>
-      </div>
       {content}
       <NewTodoDialog
         isOpen={newOpen}
