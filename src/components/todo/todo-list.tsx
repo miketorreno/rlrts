@@ -191,7 +191,7 @@ export function TodoList({ data }: TodoListProps) {
           </Button>
         </div>
         <div className="flex flex-col gap-2">
-        {CADENCES.map((cadence) => {
+          {CADENCES.map((cadence) => {
           const sectionTodos = groupedTodos[cadence];
           const isCollapsed = collapsed[cadence];
           return (

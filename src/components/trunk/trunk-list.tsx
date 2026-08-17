@@ -83,10 +83,7 @@ export function TrunkList({ trunks }: TrunkListProps) {
         {[1, 2, 3].map((i) => (
           <Card key={i} className="rounded-xl border p-3 shadow-sm">
             <div className="flex items-center justify-between gap-3">
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-5 w-40" />
-                <Skeleton className="h-4 w-24" />
-              </div>
+              <Skeleton className="h-5 w-40" />
               <div className="flex gap-1">
                 <Skeleton className="h-8 w-8 rounded-md" />
                 <Skeleton className="h-8 w-8 rounded-md" />
