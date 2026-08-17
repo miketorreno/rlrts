@@ -15,5 +15,25 @@ export function useToastMessages() {
       updated: () => toast.success(t("leaf.updated")),
       deleted: () => toast.success(t("leaf.deleted")),
     },
+    trunk: {
+      created: () => toast.success(t("trunk.created")),
+      updated: () => toast.success(t("trunk.updated")),
+      deleted: () => toast.success(t("trunk.deleted")),
+    },
+    limb: {
+      created: () => toast.success(t("limb.created")),
+      updated: () => toast.success(t("limb.updated")),
+      deleted: () => toast.success(t("limb.deleted")),
+    },
+    branch: {
+      created: () => toast.success(t("branch.created")),
+      updated: () => toast.success(t("branch.updated")),
+      deleted: () => toast.success(t("branch.deleted")),
+    },
+    todo: {
+      created: () => toast.success(t("todo.created")),
+      updated: () => toast.success(t("todo.updated")),
+      deleted: () => toast.success(t("todo.deleted")),
+    },
   };
 }

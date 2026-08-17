@@ -84,8 +84,8 @@ export function LeafActivityTwig({
               data={twigData}
               showWeekdayLabels={true}
               blockRadius={20}
-              hideColorLegend={true}
-              hideTotalCount={true}
+              showColorLegend={false}
+              showTotalCount={false}
               weekStart={0} // Start week on Sunday
               blockSize={twigSize.blockSize}
               blockMargin={twigSize.blockMargin}

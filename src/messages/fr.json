@@ -5,7 +5,11 @@
   },
   "nav": {
     "home": "Accueil",
-    "calendar": "Calendrier",
+    "trunks": "Troncs",
+    "limbs": "Branches",
+    "branches": "Branches",
+    "twig": "Brindille",
+    "todos": "Todos",
     "about": "À propos",
     "pricing": "Tarifs",
     "getStarted": "Commencer",
@@ -301,6 +305,158 @@
       "title": "Minuteur de {duration} minutes",
       "cancel": "Annuler le Minuteur",
       "confirmCancel": "Le minuteur est toujours en cours. Êtes-vous sûr de vouloir annuler ?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Créer un nouveau tronc",
+        "name": {
+          "label": "Nom du tronc",
+          "placeholder": "p. ex., Santé, Carrière, Apprentissage..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer le tronc"
+        }
+      },
+      "edit": {
+        "title": "Modifier le tronc",
+        "name": {
+          "label": "Nom du tronc"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement le tronc \"{name}\" et tout ce qu’il contient (branches, brindilles et feuilles). Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer le tronc"
+      }
+    },
+    "limb": {
+      "new": {
+        "title": "Créer une nouvelle branche",
+        "name": {
+          "label": "Nom de la branche",
+          "placeholder": "p. ex., Fitness, Finance, Projets..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer la branche"
+        }
+      },
+      "edit": {
+        "title": "Modifier la branche",
+        "name": {
+          "label": "Nom de la branche"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement la branche \"{name}\" et toutes ses sous-branches, brindilles et feuilles. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer la branche"
+      }
+    },
+    "branch": {
+      "new": {
+        "title": "Créer une nouvelle branche",
+        "name": {
+          "label": "Nom de la branche",
+          "placeholder": "p. ex., Carrière, Projets, Lecture..."
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer la branche"
+        }
+      },
+      "edit": {
+        "title": "Modifier la branche",
+        "name": {
+          "label": "Nom de la branche"
+        },
+        "position": {
+          "label": "Ordre d'affichage",
+          "placeholder": "Sélectionner la position"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement la branche \"{name}\" et toutes les brindilles et feuilles qu'elle contient. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer la branche"
+      }
+    },
+    "todo": {
+      "new": {
+        "title": "Créer un nouveau todo",
+        "name": {
+          "label": "Nom du todo",
+          "placeholder": "p. ex., Routine matinale"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "Récompense XP"
+        },
+        "items": {
+          "label": "Sous-tâches initiales",
+          "placeholder": "p. ex., Étirements, Boire de l'eau",
+          "add": "Ajouter une sous-tâche",
+          "remove": "Supprimer la sous-tâche"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "create": "Créer le todo"
+        }
+      },
+      "edit": {
+        "title": "Modifier le todo",
+        "name": {
+          "label": "Nom du todo"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "Récompense XP"
+        },
+        "items": {
+          "label": "Sous-tâches",
+          "addPlaceholder": "Nom de la nouvelle sous-tâche",
+          "add": "Ajouter",
+          "remove": "Supprimer la sous-tâche"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "save": "Enregistrer les modifications"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cela supprimera définitivement le todo \"{name}\" et toutes ses sous-tâches. Cette action est irréversible.",
+        "cancel": "Annuler",
+        "confirm": "Supprimer le todo"
+      }
     }
   },
   "calendar": {
@@ -420,6 +576,69 @@
       "created": "Habitude créée avec succès",
       "updated": "Habitude mise à jour avec succès",
       "deleted": "Habitude supprimée avec succès"
+    },
+    "trunk": {
+      "created": "Tronc créé avec succès",
+      "updated": "Tronc mis à jour avec succès",
+      "deleted": "Tronc supprimé avec succès"
+    },
+    "limb": {
+      "created": "Branche créée avec succès",
+      "updated": "Branche mise à jour avec succès",
+      "deleted": "Branche supprimée avec succès"
+    },
+    "branch": {
+      "created": "Branche créée avec succès",
+      "updated": "Branche mise à jour avec succès",
+      "deleted": "Branche supprimée avec succès"
+    },
+    "todo": {
+      "created": "Todo créé avec succès",
+      "updated": "Todo modifié avec succès",
+      "deleted": "Todo supprimé avec succès"
     }
+  },
+  "trunks": {
+    "emptyState": "Aucun tronc pour le moment. Créez votre premier tronc pour commencer à construire votre arbre !",
+    "addTrunk": "Ajouter un tronc",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewLimbs": "Voir les branches →"
+  },
+  "limbs": {
+    "selectTrunk": "Sélectionner le tronc",
+    "noTrunks": "Aucun tronc pour le moment. Créez un tronc pour ajouter des branches.",
+    "emptyState": "Aucune branche pour le moment. Ajoutez votre première branche pour faire grandir votre arbre !",
+    "addLimb": "Ajouter une branche",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewBranches": "Voir les branches →"
+  },
+  "branches": {
+    "selectLimb": "Sélectionner la branche",
+    "noLimbs": "Aucune branche pour le moment. Créez une branche pour ajouter des brindilles.",
+    "emptyState": "Aucune branche pour le moment. Ajoutez votre première branche pour faire grandir votre arbre !",
+    "addBranch": "Ajouter une branche",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "addTwig": "Ajouter une brindille",
+    "emptyTwigs": "Aucune brindille dans cette branche pour le moment. Ajoutez-en une pour commencer le suivi !"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Quotidien",
+    "weekly": "Hebdomadaire",
+    "addTodo": "Ajouter un todo",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "progress": "{done}/{total}",
+    "emptyDaily": "Aucun todo quotidien pour le moment. Ajoutez-en un pour gagner de l'XP !",
+    "emptyWeekly": "Aucun todo hebdomadaire pour le moment. Ajoutez-en un pour gagner de l'XP !",
+    "emptyAll": "Aucun todo pour le moment. Créez votre premier todo pour gagner de l'XP !"
+  },
+  "xp": {
+    "label": "XP",
+    "points": "Points XP",
+    "total": "XP total : {count}"
   }
 }

@@ -6,9 +6,10 @@
   "nav": {
     "home": "Home",
     "trunks": "Trunks",
-    "limb": "Limb",
-    "branch": "Branch",
+    "limbs": "Limbs",
+    "branches": "Branches",
     "twig": "Twig",
+    "todos": "Todos",
     "about": "About",
     "pricing": "Pricing",
     "getStarted": "Get Started",
@@ -303,6 +304,158 @@
       "title": "{duration} Minute Timer",
       "cancel": "Cancel Timer",
       "confirmCancel": "Timer is still running. Are you sure you want to cancel?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Create New Trunk",
+        "name": {
+          "label": "Trunk Name",
+          "placeholder": "e.g., Health, Career, Learning..."
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Trunk"
+        }
+      },
+      "edit": {
+        "title": "Edit Trunk",
+        "name": {
+          "label": "Trunk Name"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the trunk \"{name}\" and everything under it (limbs, branches, twigs, leaves). This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Trunk"
+      }
+    },
+    "limb": {
+      "new": {
+        "title": "Create New Limb",
+        "name": {
+          "label": "Limb Name",
+          "placeholder": "e.g., Fitness, Finance, Projects..."
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Limb"
+        }
+      },
+      "edit": {
+        "title": "Edit Limb",
+        "name": {
+          "label": "Limb Name"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the limb \"{name}\" and all its branches, twigs, and leaves. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Limb"
+      }
+    },
+    "branch": {
+      "new": {
+        "title": "Create New Branch",
+        "name": {
+          "label": "Branch Name",
+          "placeholder": "e.g., Career, Projects, Reading..."
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Branch"
+        }
+      },
+      "edit": {
+        "title": "Edit Branch",
+        "name": {
+          "label": "Branch Name"
+        },
+        "position": {
+          "label": "Display Order",
+          "placeholder": "Select position"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the branch \"{name}\" and all twigs and leaves inside it. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Branch"
+      }
+    },
+    "todo": {
+      "new": {
+        "title": "Create New Todo",
+        "name": {
+          "label": "Todo Name",
+          "placeholder": "e.g., Morning routine"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "items": {
+          "label": "Initial Sub-tasks",
+          "placeholder": "e.g., Stretch, Drink water",
+          "add": "Add Sub-task",
+          "remove": "Remove sub-task"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "create": "Create Todo"
+        }
+      },
+      "edit": {
+        "title": "Edit Todo",
+        "name": {
+          "label": "Todo Name"
+        },
+        "cadence": {
+          "label": "Cadence"
+        },
+        "xp": {
+          "label": "XP Reward"
+        },
+        "items": {
+          "label": "Sub-tasks",
+          "addPlaceholder": "New sub-task name",
+          "add": "Add",
+          "remove": "Remove sub-task"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "deleteConfirm": {
+        "title": "Are you sure?",
+        "description": "This will permanently delete the todo \"{name}\" and all its sub-tasks. This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Todo"
+      }
     }
   },
   "twig": {
@@ -423,6 +576,69 @@
       "created": "Leaf created successfully",
       "updated": "Leaf updated successfully",
       "deleted": "Leaf deleted successfully"
+    },
+    "trunk": {
+      "created": "Trunk created successfully",
+      "updated": "Trunk updated successfully",
+      "deleted": "Trunk deleted successfully"
+    },
+    "limb": {
+      "created": "Limb created successfully",
+      "updated": "Limb updated successfully",
+      "deleted": "Limb deleted successfully"
+    },
+    "branch": {
+      "created": "Branch created successfully",
+      "updated": "Branch updated successfully",
+      "deleted": "Branch deleted successfully"
+    },
+    "todo": {
+      "created": "Todo created successfully",
+      "updated": "Todo updated successfully",
+      "deleted": "Todo deleted successfully"
     }
+  },
+  "trunks": {
+    "emptyState": "No trunks yet. Create your first trunk to start building your tree!",
+    "addTrunk": "Add Trunk",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewLimbs": "View limbs →"
+  },
+  "limbs": {
+    "selectTrunk": "Select trunk",
+    "noTrunks": "No trunks yet. Create a trunk to start adding limbs.",
+    "emptyState": "No limbs yet. Add your first limb to grow your tree!",
+    "addLimb": "Add Limb",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewBranches": "View branches →"
+  },
+  "branches": {
+    "selectLimb": "Select limb",
+    "noLimbs": "No limbs yet. Create a limb to start adding branches.",
+    "emptyState": "No branches yet. Add your first branch to grow your tree!",
+    "addBranch": "Add Branch",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addTwig": "Add Twig",
+    "emptyTwigs": "No twigs in this branch yet. Add one to start tracking!"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "addTodo": "Add Todo",
+    "edit": "Edit",
+    "delete": "Delete",
+    "progress": "{done}/{total}",
+    "emptyDaily": "No daily todos yet. Add one to start earning XP!",
+    "emptyWeekly": "No weekly todos yet. Add one to start earning XP!",
+    "emptyAll": "No todos yet. Create your first todo to start earning XP!"
+  },
+  "xp": {
+    "label": "XP",
+    "points": "XP points",
+    "total": "Total XP: {count}"
   }
 }

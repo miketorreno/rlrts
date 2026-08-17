@@ -109,10 +109,11 @@ export function CompleteTimer({
    * Effect to manage the countdown timer and completion
    * Updates every second and triggers completion callback when timer ends
    */
+  const displayTimeLeft = leaf?.timerEnd ? timeLeft : null;
+
   useEffect(() => {
     // Reset timer state if no timer end is set
     if (!leaf?.timerEnd) {
-      setTimeLeft(null);
       hasCompletedRef.current = false;
       return;
     }
@@ -165,14 +166,14 @@ export function CompleteTimer({
       size="sm"
       className="h-6 w-full text-xs"
       onClick={() =>
-        !timeLeft
+        !displayTimeLeft
           ? handleStartTimer(timerDuration * 60 * 1000)
           : handleStopTimer()
       }
       disabled={disabled || isScheduling}
     >
-      {timeLeft !== null && timeLeft > 0 ? (
-        `${Math.ceil(timeLeft / 1000)}s`
+      {displayTimeLeft !== null && displayTimeLeft > 0 ? (
+        `${Math.ceil(displayTimeLeft / 1000)}s`
       ) : isScheduling ? (
         t("scheduling")
       ) : count > 0 ? (

@@ -24,7 +24,7 @@ export function MotionWrapper({ children }: MotionWrapperProps) {
   const pathname = usePathname();
 
   return (
-    <motion.main
+    <motion.div
       key={pathname}
       className="flex-1"
       // Initial state when component mounts
@@ -37,6 +37,6 @@ export function MotionWrapper({ children }: MotionWrapperProps) {
       transition={{ duration: 1, ease: [0, 0.7, 0.1, 1] }}
     >
       {children}
-    </motion.main>
+    </motion.div>
   );
 }

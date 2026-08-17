@@ -2,6 +2,7 @@ import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { Doc, Id } from "./_generated/dataModel";
 import { internalMutation, mutation, query } from "./_generated/server";
+import { deleteLeafAndCompletions } from "./tree_utils";
 
 /**
  * Key features:
@@ -343,18 +344,8 @@ export const remove = mutation({
       throw new Error("Not authorized");
     }
 
-    // Delete all completions for this leaf
-    const completions = await ctx.db
-      .query("completions")
-      .filter((q) => q.eq(q.field("leafId"), args.id))
-      .collect();
-
-    await Promise.all(
-      completions.map((completion) => ctx.db.delete(completion._id)),
-    );
-
-    // Delete the leaf
-    await ctx.db.delete(args.id);
+    // Delete the leaf and its completions
+    await deleteLeafAndCompletions(ctx, args.id);
   },
 });
 

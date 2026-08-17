@@ -11,7 +11,14 @@ const intlMiddleware = createMiddleware({
 });
 
 // Define protected routes
-const isProtectedRoute = createRouteMatcher(["/twig(.*)", "/leaves(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+  "/twig(.*)",
+  "/leaves(.*)",
+  "/trunks(.*)",
+  "/limbs(.*)",
+  "/branches(.*)",
+  "/todos(.*)",
+]);
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { pathname } = req.nextUrl;

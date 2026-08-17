@@ -5,7 +5,11 @@
   },
   "nav": {
     "home": "首页",
-    "calendar": "日历",
+    "trunks": "树干",
+    "limbs": "树枝",
+    "branches": "树枝",
+    "twig": "细枝",
+    "todos": "待办事项",
     "about": "关于",
     "pricing": "价格",
     "getStarted": "开始使用",
@@ -296,6 +300,158 @@
       "title": "{duration}分钟计时器",
       "cancel": "取消计时器",
       "confirmCancel": "计时器仍在运行。确定要取消吗？"
+    },
+    "trunk": {
+      "new": {
+        "title": "创建新树干",
+        "name": {
+          "label": "树干名称",
+          "placeholder": "例如：健康、职业、学习..."
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建树干"
+        }
+      },
+      "edit": {
+        "title": "编辑树干",
+        "name": {
+          "label": "树干名称"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除树干 \"{name}\" 及其下所有内容（树枝和树叶）。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除树干"
+      }
+    },
+    "limb": {
+      "new": {
+        "title": "创建新树枝",
+        "name": {
+          "label": "树枝名称",
+          "placeholder": "例如：健身、财务、项目..."
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建树枝"
+        }
+      },
+      "edit": {
+        "title": "编辑树枝",
+        "name": {
+          "label": "树枝名称"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除树枝 \"{name}\" 及其内的所有分支、细枝和树叶。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除树枝"
+      }
+    },
+    "branch": {
+      "new": {
+        "title": "创建新树枝",
+        "name": {
+          "label": "树枝名称",
+          "placeholder": "例如：职业、项目、阅读..."
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建树枝"
+        }
+      },
+      "edit": {
+        "title": "编辑树枝",
+        "name": {
+          "label": "树枝名称"
+        },
+        "position": {
+          "label": "显示顺序",
+          "placeholder": "选择位置"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除树枝 \"{name}\" 及其内的所有细枝和树叶。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除树枝"
+      }
+    },
+    "todo": {
+      "new": {
+        "title": "创建新待办",
+        "name": {
+          "label": "待办名称",
+          "placeholder": "例如：晨间例行"
+        },
+        "cadence": {
+          "label": "频率"
+        },
+        "xp": {
+          "label": "XP奖励"
+        },
+        "items": {
+          "label": "初始子任务",
+          "placeholder": "例如：拉伸、喝水",
+          "add": "添加子任务",
+          "remove": "移除子任务"
+        },
+        "actions": {
+          "cancel": "取消",
+          "create": "创建待办"
+        }
+      },
+      "edit": {
+        "title": "编辑待办",
+        "name": {
+          "label": "待办名称"
+        },
+        "cadence": {
+          "label": "频率"
+        },
+        "xp": {
+          "label": "XP奖励"
+        },
+        "items": {
+          "label": "子任务",
+          "addPlaceholder": "新子任务的名称",
+          "add": "添加",
+          "remove": "移除子任务"
+        },
+        "actions": {
+          "cancel": "取消",
+          "save": "保存更改"
+        }
+      },
+      "deleteConfirm": {
+        "title": "你确定吗？",
+        "description": "这将永久删除待办\"{name}\"及其所有子任务。此操作无法撤销。",
+        "cancel": "取消",
+        "confirm": "删除待办"
+      }
     }
   },
   "calendar": {
@@ -415,6 +571,69 @@
       "created": "习惯创建成功",
       "updated": "习惯更新成功",
       "deleted": "习惯删除成功"
+    },
+    "trunk": {
+      "created": "树干创建成功",
+      "updated": "树干更新成功",
+      "deleted": "树干删除成功"
+    },
+    "limb": {
+      "created": "树枝创建成功",
+      "updated": "树枝更新成功",
+      "deleted": "树枝删除成功"
+    },
+    "branch": {
+      "created": "树枝创建成功",
+      "updated": "树枝更新成功",
+      "deleted": "树枝删除成功"
+    },
+    "todo": {
+      "created": "待办创建成功",
+      "updated": "待办更新成功",
+      "deleted": "待办删除成功"
     }
+  },
+  "trunks": {
+    "emptyState": "还没有树干。创建你的第一个树干来开始构建你的树吧！",
+    "addTrunk": "添加树干",
+    "edit": "编辑",
+    "delete": "删除",
+    "viewLimbs": "查看树枝 →"
+  },
+  "limbs": {
+    "selectTrunk": "选择树干",
+    "noTrunks": "还没有树干。先创建一个树干来添加树枝。",
+    "emptyState": "还没有树枝。添加你的第一根树枝来让树成长吧！",
+    "addLimb": "添加树枝",
+    "edit": "编辑",
+    "delete": "删除",
+    "viewBranches": "查看树枝 →"
+  },
+  "branches": {
+    "selectLimb": "选择树枝",
+    "noLimbs": "还没有树枝。先创建一个树枝来添加细枝。",
+    "emptyState": "还没有树枝。添加你的第一根树枝来让树成长吧！",
+    "addBranch": "添加树枝",
+    "edit": "编辑",
+    "delete": "删除",
+    "addTwig": "添加细枝",
+    "emptyTwigs": "这个树枝里还没有细枝。添加一个开始追踪吧！"
+  },
+  "todo": {
+    "title": "待办事项",
+    "daily": "每日",
+    "weekly": "每周",
+    "addTodo": "添加待办",
+    "edit": "编辑",
+    "delete": "删除",
+    "progress": "{done}/{total}",
+    "emptyDaily": "还没有每日待办。添加一个开始赚取XP吧！",
+    "emptyWeekly": "还没有每周待办。添加一个开始赚取XP吧！",
+    "emptyAll": "还没有待办。创建你的第一个待办开始赚取XP吧！"
+  },
+  "xp": {
+    "label": "XP",
+    "points": "XP 点数",
+    "total": "总XP：{count}"
   }
 }

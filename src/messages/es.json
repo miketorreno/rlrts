@@ -5,7 +5,11 @@
   },
   "nav": {
     "home": "Inicio",
-    "calendar": "Calendario",
+    "trunks": "Troncos",
+    "limbs": "Ramas",
+    "branches": "Ramas",
+    "twig": "Ramita",
+    "todos": "Todos",
     "about": "Acerca de",
     "pricing": "Precios",
     "getStarted": "Comenzar",
@@ -300,6 +304,158 @@
       "title": "Temporizador de {duration} minutos",
       "cancel": "Cancelar temporizador",
       "confirmCancel": "El temporizador aún está en marcha. ¿Seguro que quieres cancelar?"
+    },
+    "trunk": {
+      "new": {
+        "title": "Crear nuevo tronco",
+        "name": {
+          "label": "Nombre del tronco",
+          "placeholder": "p. ej., Salud, Carrera, Aprendizaje..."
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear tronco"
+        }
+      },
+      "edit": {
+        "title": "Editar tronco",
+        "name": {
+          "label": "Nombre del tronco"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente el tronco \"{name}\" y todo lo que contiene (ramas, ramitas y hojas). Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar tronco"
+      }
+    },
+    "limb": {
+      "new": {
+        "title": "Crear nueva rama",
+        "name": {
+          "label": "Nombre de la rama",
+          "placeholder": "p. ej., Ejercicio, Finanzas, Proyectos..."
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear rama"
+        }
+      },
+      "edit": {
+        "title": "Editar rama",
+        "name": {
+          "label": "Nombre de la rama"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente la rama \"{name}\" y todas las ramas, ramitas y hojas que contiene. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar rama"
+      }
+    },
+    "branch": {
+      "new": {
+        "title": "Crear nueva rama",
+        "name": {
+          "label": "Nombre de la rama",
+          "placeholder": "p. ej., Carrera, Proyectos, Lectura..."
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear rama"
+        }
+      },
+      "edit": {
+        "title": "Editar rama",
+        "name": {
+          "label": "Nombre de la rama"
+        },
+        "position": {
+          "label": "Orden de visualización",
+          "placeholder": "Seleccionar posición"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente la rama \"{name}\" y todas las ramitas y hojas que contiene. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar rama"
+      }
+    },
+    "todo": {
+      "new": {
+        "title": "Crear nuevo Todo",
+        "name": {
+          "label": "Nombre del Todo",
+          "placeholder": "p. ej., Rutina matutina"
+        },
+        "cadence": {
+          "label": "Cadencia"
+        },
+        "xp": {
+          "label": "Recompensa de XP"
+        },
+        "items": {
+          "label": "Sub-tareas iniciales",
+          "placeholder": "p. ej., Estirar, Beber agua",
+          "add": "Añadir sub-tarea",
+          "remove": "Eliminar sub-tarea"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "create": "Crear Todo"
+        }
+      },
+      "edit": {
+        "title": "Editar Todo",
+        "name": {
+          "label": "Nombre del Todo"
+        },
+        "cadence": {
+          "label": "Cadencia"
+        },
+        "xp": {
+          "label": "Recompensa de XP"
+        },
+        "items": {
+          "label": "Sub-tareas",
+          "addPlaceholder": "Nombre de la nueva sub-tarea",
+          "add": "Añadir",
+          "remove": "Eliminar sub-tarea"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "deleteConfirm": {
+        "title": "¿Estás seguro?",
+        "description": "Esto eliminará permanentemente el todo \"{name}\" y todas sus sub-tareas. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar Todo"
+      }
     }
   },
   "calendar": {
@@ -419,6 +575,69 @@
       "created": "Hábito creado",
       "updated": "Hábito actualizado",
       "deleted": "Hábito eliminado"
+    },
+    "trunk": {
+      "created": "Tronco creado correctamente",
+      "updated": "Tronco actualizado correctamente",
+      "deleted": "Tronco eliminado correctamente"
+    },
+    "limb": {
+      "created": "Rama creada correctamente",
+      "updated": "Rama actualizada correctamente",
+      "deleted": "Rama eliminada correctamente"
+    },
+    "branch": {
+      "created": "Rama creada correctamente",
+      "updated": "Rama actualizada correctamente",
+      "deleted": "Rama eliminada correctamente"
+    },
+    "todo": {
+      "created": "Todo creado correctamente",
+      "updated": "Todo actualizado correctamente",
+      "deleted": "Todo eliminado correctamente"
     }
+  },
+  "trunks": {
+    "emptyState": "Aún no hay troncos. ¡Crea tu primer tronco para empezar a construir tu árbol!",
+    "addTrunk": "Añadir tronco",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "viewLimbs": "Ver ramas →"
+  },
+  "limbs": {
+    "selectTrunk": "Seleccionar tronco",
+    "noTrunks": "Aún no hay troncos. Crea un tronco para empezar a añadir ramas.",
+    "emptyState": "Aún no hay ramas. ¡Agrega tu primera rama para hacer crecer tu árbol!",
+    "addLimb": "Añadir rama",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "viewBranches": "Ver ramas →"
+  },
+  "branches": {
+    "selectLimb": "Seleccionar rama",
+    "noLimbs": "Aún no hay ramas. Crea una rama para empezar a añadir más.",
+    "emptyState": "Aún no hay ramas. ¡Agrega tu primera rama para hacer crecer tu árbol!",
+    "addBranch": "Añadir rama",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "addTwig": "Añadir ramita",
+    "emptyTwigs": "Aún no hay ramitas en esta rama. ¡Añade una para empezar a hacer seguimiento!"
+  },
+  "todo": {
+    "title": "Todos",
+    "daily": "Diarias",
+    "weekly": "Semanales",
+    "addTodo": "Añadir Todo",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "progress": "{done}/{total}",
+    "emptyDaily": "Aún no hay tareas diarias. ¡Añade una para empezar a ganar XP!",
+    "emptyWeekly": "Aún no hay tareas semanales. ¡Añade una para empezar a ganar XP!",
+    "emptyAll": "Aún no hay tareas. ¡Crea tu primera tarea para empezar a ganar XP!"
+  },
+  "xp": {
+    "label": "XP",
+    "points": "Puntos XP",
+    "total": "XP total: {count}"
   }
 }
