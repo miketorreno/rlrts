@@ -17,7 +17,7 @@ import { NewTwigDialog } from "@/components/twig/twig-dialogs";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
-import { PlusCircle } from "lucide-react";
+import { Pencil, PlusCircle, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -75,7 +75,7 @@ function BranchTwigs({ branchId }: { branchId: Id<"branches"> }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 border-t pt-4">
+    <div className="flex flex-col gap-2 border-t pt-3 mt-3">
       <div className="flex flex-col gap-1">{twigsContent}</div>
       <div className="flex justify-center">
         <Button variant="outline" size="sm" onClick={() => setNewOpen(true)}>
@@ -105,7 +105,6 @@ interface BranchItemProps {
 }
 
 export function BranchItem({ branch, onEdit }: BranchItemProps) {
-  const t = useTranslations("branches");
   const tDialogs = useTranslations("dialogs");
   const toastMessages = useToastMessages();
 
@@ -128,25 +127,31 @@ export function BranchItem({ branch, onEdit }: BranchItemProps) {
 
   return (
     <>
-      <Card className="border p-2 shadow-md">
-        <div className="flex flex-col gap-4 p-4">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <h2 className="text-lg font-semibold">{branch.name}</h2>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <Button variant="outline" size="sm" onClick={onEdit}>
-                {t("edit")}
-              </Button>
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => setDeleteOpen(true)}
-              >
-                {t("delete")}
-              </Button>
-            </div>
+      <Card className="rounded-xl border p-3 shadow-sm transition-colors hover:bg-muted/50">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <h2 className="truncate text-base font-medium">{branch.name}</h2>
           </div>
-          <BranchTwigs branchId={branch._id} />
+          <div className="flex shrink-0 items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              onClick={onEdit}
+            >
+              <Pencil className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-destructive"
+              onClick={() => setDeleteOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
+        <BranchTwigs branchId={branch._id} />
       </Card>
 
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>

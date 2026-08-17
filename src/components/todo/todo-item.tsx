@@ -78,35 +78,41 @@ export function TodoItem({ items, onEdit, todo }: TodoItemProps) {
 
   return (
     <>
-      <Card className="border p-2 shadow-md">
-        <div className="flex flex-col gap-3 p-4">
-          <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-lg font-semibold">{todo.name}</h2>
-              <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
-                {t(todo.cadence)}
-              </span>
-              <span className="rounded-md bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">
-                {tXp("label")} {todo.xp}
-              </span>
+      <Card className="rounded-xl border p-3 shadow-sm transition-colors hover:bg-muted/50">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <h2 className="truncate text-base font-medium">{todo.name}</h2>
             </div>
-            <div className="flex flex-wrap items-center justify-start gap-2">
-              <span className="text-sm text-muted-foreground">
-                {t("progress", { done: completedCount, total: items.length })}
-              </span>
-              <Button variant="outline" size="sm" onClick={onEdit}>
-                <Pencil />
-                {t("edit")}
+            <div className="flex shrink-0 items-center gap-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={onEdit}
+              >
+                <Pencil className="h-4 w-4" />
               </Button>
               <Button
-                variant="destructive"
-                size="sm"
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 text-destructive"
                 onClick={() => setDeleteOpen(true)}
               >
-                <Trash2 />
-                {t("delete")}
+                <Trash2 className="h-4 w-4" />
               </Button>
             </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
+              {t(todo.cadence)}
+            </span>
+            <span className="rounded-md bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">
+              {tXp("label")} {todo.xp}
+            </span>
+            <span className="text-sm text-muted-foreground">
+              {t("progress", { done: completedCount, total: items.length })}
+            </span>
           </div>
           {sortedItems.length > 0 && (
             <ul className="flex flex-col gap-1.5">
