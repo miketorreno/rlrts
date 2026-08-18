@@ -4,6 +4,7 @@ import {
   CalendarDays,
   CheckSquare,
   GitBranch,
+  LayoutDashboard,
   Network,
   TreePine,
 } from "lucide-react";
@@ -18,6 +19,7 @@ export type NavItem = {
 };
 
 export const navItems: NavItem[] = [
+  { href: "/dashboard", labelKey: "nav.dashboard", icon: LayoutDashboard, tooltipKey: "nav.dashboard" },
   { href: "/trunks", labelKey: "nav.trunks", icon: TreePine, tooltipKey: "nav.trunks" },
   { href: "/limbs", labelKey: "nav.limbs", icon: GitBranch, tooltipKey: "nav.limbs" },
   { href: "/branches", labelKey: "nav.branches", icon: Network, tooltipKey: "nav.branches" },

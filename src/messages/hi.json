@@ -4,6 +4,7 @@
     "description": "अपनी आदतों को ट्रैक करें और अपना जीवन बेहतर बनाएं"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "होम",
     "trunks": "तने",
     "limbs": "शाखाएं",

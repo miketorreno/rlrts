@@ -4,6 +4,7 @@
     "description": "Suivez vos habitudes et améliorez votre vie"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "Accueil",
     "trunks": "Troncs",
     "limbs": "Branches",

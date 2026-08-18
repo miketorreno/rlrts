@@ -4,6 +4,7 @@
     "description": "Verfolge deine Gewohnheiten und verbessere dein Leben"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "Startseite",
     "trunks": "Stämme",
     "limbs": "Äste",

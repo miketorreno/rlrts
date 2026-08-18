@@ -4,6 +4,7 @@
     "description": "Rastrea tus hábitos, mejora tu vida"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "Inicio",
     "trunks": "Troncos",
     "limbs": "Ramas",
