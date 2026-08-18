@@ -649,5 +649,21 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "level": "Level",
+    "currentStreak": "Current Streak",
+    "longestStreak": "Longest Streak",
+    "todaysProgress": "Today's Progress",
+    "habitsCompleted": "Habits",
+    "todosCompleted": "Todos",
+    "days": "days",
+    "trunks": "Trunks",
+    "limbs": "Limbs",
+    "branches": "Branches",
+    "twigs": "Twigs",
+    "leaves": "Leaves",
+    "todos": "Todos"
   }
 }
