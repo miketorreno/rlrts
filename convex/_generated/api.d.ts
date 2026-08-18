@@ -17,6 +17,7 @@ import type * as tree_utils from "../tree_utils.js";
 import type * as trunks from "../trunks.js";
 import type * as twig_sync from "../twig_sync.js";
 import type * as twigs from "../twigs.js";
+import type * as xp from "../xp.js";
 
 import type {
   ApiFromModules,
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   trunks: typeof trunks;
   twig_sync: typeof twig_sync;
   twigs: typeof twigs;
+  xp: typeof xp;
 }>;
 
 /**

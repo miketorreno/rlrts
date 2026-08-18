@@ -42,6 +42,40 @@ export const getXpProfile = query({
   },
 });
 
+export const getRecentEvents = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const events = await ctx.db
+      .query("xpEvents")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .order("desc")
+      .take(10);
+
+    return Promise.all(
+      events.map(async (event) => {
+        let sourceName = "Unknown";
+        if (event.source === "habit") {
+          const leaf = await ctx.db
+            .query("leaves")
+            .filter((q) => q.eq(q.field("_id"), event.sourceId))
+            .first();
+          if (leaf) sourceName = leaf.name;
+        } else {
+          const todo = await ctx.db
+            .query("todos")
+            .filter((q) => q.eq(q.field("_id"), event.sourceId))
+            .first();
+          if (todo) sourceName = todo.name;
+        }
+        return { ...event, sourceName };
+      }),
+    );
+  },
+});
+
 export const recordHabitXp = mutation({
   args: {
     leafId: v.id("leaves"),
