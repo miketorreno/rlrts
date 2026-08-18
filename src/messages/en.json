@@ -664,6 +664,9 @@
     "branches": "Branches",
     "twigs": "Twigs",
     "leaves": "Leaves",
-    "todos": "Todos"
+    "todos": "Todos",
+    "weeklyCompletions": "Weekly Completions",
+    "monthlyProgress": "Monthly Progress",
+    "recentActivity": "Recent Activity"
   }
 }

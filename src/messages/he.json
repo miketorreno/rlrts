@@ -687,5 +687,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "לוח בקרה",
+    "level": "רמה",
+    "currentStreak": "רצף נוכחי",
+    "longestStreak": "הרצף הארוך ביותר",
+    "todaysProgress": "התקדמות היום",
+    "habitsCompleted": "הרגלים",
+    "todosCompleted": "משימות",
+    "days": "ימים",
+    "trunks": "גזעים",
+    "limbs": "ענפים",
+    "branches": "ענפים",
+    "twigs": "זרדים",
+    "leaves": "עלים",
+    "todos": "משימות",
+    "weeklyCompletions": "השלמות שבועיות",
+    "monthlyProgress": "התקדמות חודשית",
+    "recentActivity": "פעילות אחרונה"
   }
 }

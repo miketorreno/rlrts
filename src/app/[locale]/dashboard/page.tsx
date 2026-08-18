@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { HeroStats } from "@/components/dashboard/hero-stats";
 import { EntityCounts } from "@/components/dashboard/entity-counts";
+import { CompletionCharts } from "@/components/dashboard/completion-charts";
+import { ActivityFeed } from "@/components/dashboard/activity-feed";
 
 export default function DashboardPage() {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -27,6 +29,8 @@ export default function DashboardPage() {
       <h1 className="text-2xl font-bold">{t("title")}</h1>
       <HeroStats />
       <EntityCounts />
+      <CompletionCharts />
+      <ActivityFeed />
     </div>
   );
 }

@@ -696,5 +696,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "level": "Nivel",
+    "currentStreak": "Racha actual",
+    "longestStreak": "Racha más larga",
+    "todaysProgress": "Progreso de hoy",
+    "habitsCompleted": "Hábitos",
+    "todosCompleted": "Tareas",
+    "days": "días",
+    "trunks": "Troncos",
+    "limbs": "Ramas",
+    "branches": "Ramas",
+    "twigs": "Ramas",
+    "leaves": "Hojas",
+    "todos": "Tareas",
+    "weeklyCompletions": "Completiones semanales",
+    "monthlyProgress": "Progreso mensual",
+    "recentActivity": "Actividad reciente"
   }
 }

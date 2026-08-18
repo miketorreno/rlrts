@@ -696,5 +696,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "level": "स्तर",
+    "currentStreak": "वर्तमान स्ट्रीक",
+    "longestStreak": "सबसे लंबी स्ट्रीक",
+    "todaysProgress": "आज की प्रगति",
+    "habitsCompleted": "आदतें",
+    "todosCompleted": "कार्य",
+    "days": "दिन",
+    "trunks": "तने",
+    "limbs": "शाखाएं",
+    "branches": "शाखाएं",
+    "twigs": "टहनी",
+    "leaves": "पत्तियां",
+    "todos": "कार्य",
+    "weeklyCompletions": "साप्ताहिक पूर्णताएं",
+    "monthlyProgress": "मासिक प्रगति",
+    "recentActivity": "हालिया गतिविधि"
   }
 }

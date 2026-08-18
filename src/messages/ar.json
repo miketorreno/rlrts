@@ -687,5 +687,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "level": "المستوى",
+    "currentStreak": "السلسلة الحالية",
+    "longestStreak": "أطول سلسلة",
+    "todaysProgress": "تقدم اليوم",
+    "habitsCompleted": "العادات",
+    "todosCompleted": "المهام",
+    "days": "أيام",
+    "trunks": "جذوع",
+    "limbs": "فروع",
+    "branches": "فروع",
+    "twigs": "غصون",
+    "leaves": "أوراق",
+    "todos": "المهام",
+    "weeklyCompletions": "الإكمالات الأسبوعية",
+    "monthlyProgress": "التقدم الشهري",
+    "recentActivity": "النشاط الأخير"
   }
 }

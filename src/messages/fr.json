@@ -697,5 +697,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "level": "Niveau",
+    "currentStreak": "Série actuelle",
+    "longestStreak": "Plus longue série",
+    "todaysProgress": "Progrès du jour",
+    "habitsCompleted": "Habitudes",
+    "todosCompleted": "Tâches",
+    "days": "jours",
+    "trunks": "Troncs",
+    "limbs": "Branches",
+    "branches": "Branches",
+    "twigs": "Brindilles",
+    "leaves": "Feuilles",
+    "todos": "Tâches",
+    "weeklyCompletions": "Complétions hebdomadaires",
+    "monthlyProgress": "Progrès mensuel",
+    "recentActivity": "Activité récente"
   }
 }

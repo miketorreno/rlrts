@@ -692,5 +692,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "level": "等级",
+    "currentStreak": "当前连续",
+    "longestStreak": "最长连续",
+    "todaysProgress": "今日进度",
+    "habitsCompleted": "习惯",
+    "todosCompleted": "待办",
+    "days": "天",
+    "trunks": "树干",
+    "limbs": "树枝",
+    "branches": "树枝",
+    "twigs": "细枝",
+    "leaves": "叶子",
+    "todos": "待办事项",
+    "weeklyCompletions": "每周完成",
+    "monthlyProgress": "每月进度",
+    "recentActivity": "最近活动"
   }
 }
