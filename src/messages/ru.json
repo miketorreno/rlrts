@@ -4,6 +4,7 @@
     "description": "Отслеживайте свои привычки и улучшайте свою жизнь"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "Главная",
     "trunks": "Стволы",
     "limbs": "Ветви",
@@ -154,7 +155,11 @@
       "free": {
         "name": "Бесплатный",
         "description": "Идеально для обычных пользователей",
-        "features": ["До 3 календарей", "До 3 привычек на календарь", "История за 90 дней"],
+        "features": [
+          "До 3 календарей",
+          "До 3 привычек на календарь",
+          "История за 90 дней"
+        ],
         "cta": "Начать бесплатно",
         "noCreditCard": "Кредитная карта не требуется"
       },
@@ -691,5 +696,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "Панель",
+    "level": "Уровень",
+    "currentStreak": "Текущая серия",
+    "longestStreak": "Самая длинная серия",
+    "todaysProgress": "Прогресс сегодня",
+    "habitsCompleted": "Привычки",
+    "todosCompleted": "Задачи",
+    "days": "дней",
+    "trunks": "Стволы",
+    "limbs": "Ветви",
+    "branches": "Ветки",
+    "twigs": "Веточки",
+    "leaves": "Листья",
+    "todos": "Задачи",
+    "weeklyCompletions": "Еженедельные выполнения",
+    "monthlyProgress": "Ежемесячный прогресс",
+    "recentActivity": "Недавняя активность"
   }
 }

@@ -4,6 +4,7 @@
     "description": "Verfolge deine Gewohnheiten und verbessere dein Leben"
   },
   "nav": {
+    "dashboard": "Dashboard",
     "home": "Startseite",
     "trunks": "Stämme",
     "limbs": "Äste",
@@ -697,5 +698,24 @@
     "level": "Level {level}",
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "level": "Level",
+    "currentStreak": "Aktuelle Serie",
+    "longestStreak": "Längste Serie",
+    "todaysProgress": "Fortschritt heute",
+    "habitsCompleted": "Gewohnheiten",
+    "todosCompleted": "Aufgaben",
+    "days": "Tage",
+    "trunks": "Stämme",
+    "limbs": "Äste",
+    "branches": "Zweige",
+    "twigs": "Zweige",
+    "leaves": "Blätter",
+    "todos": "Aufgaben",
+    "weeklyCompletions": "Wöchentliche Abschlüsse",
+    "monthlyProgress": "Monatlicher Fortschritt",
+    "recentActivity": "Letzte Aktivität"
   }
 }

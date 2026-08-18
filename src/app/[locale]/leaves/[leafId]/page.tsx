@@ -1,7 +1,6 @@
 "use client";
 
 import { LeafDetails } from "@/components/leaf/leaf-details";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useConvexAuth, useQuery } from "convex/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -50,40 +49,13 @@ export default function LeafPage() {
   return (
     <div className="container mx-auto max-w-7xl">
       {leaf && twig ? (
-        // Render leaf details when data is available
         <LeafDetails
           leaf={leaf}
           twig={twig}
           onDelete={() => router.replace("/twig")}
         />
       ) : (
-        // Show skeleton loading state while data is being fetched
-        <>
-          {/* Back button skeleton */}
-          <div className="flex items-center gap-2 p-2">
-            <Skeleton className="h-10 w-24" />
-          </div>
-
-          {/* Main content skeleton */}
-          <div className="mx-auto max-w-5xl p-6">
-            <div className="flex flex-col items-center">
-              <Skeleton className="mb-8 h-8 w-48" />
-              <Skeleton className="mb-8 h-[150px] w-[600px]" />
-            </div>
-          </div>
-
-          {/* Form skeleton */}
-          <div className="mx-auto max-w-xl p-4">
-            <div className="space-y-4">
-              <Skeleton className="h-10 w-full" />
-              <Skeleton className="h-10 w-full" />
-              <div className="flex gap-2">
-                <Skeleton className="h-10 w-24" />
-                <Skeleton className="h-10 flex-1" />
-              </div>
-            </div>
-          </div>
-        </>
+        null
       )}
     </div>
   );
