@@ -10,8 +10,17 @@ import { levelFromXp, xpInCurrentLevel } from "@/lib/xp";
 export function HeroStats() {
   const t = useTranslations("dashboard");
   const profile = useQuery(api.xp.getXpProfile, {});
-  const leaves = useQuery(api.leaves.list, {});
   const todos = useQuery(api.todos.list, {});
+
+  const todayMs = new Date().getTime();
+  const startOfDayMs = new Date(todayMs);
+  startOfDayMs.setHours(0, 0, 0, 0);
+  const endOfDayMs = new Date(todayMs);
+  endOfDayMs.setHours(23, 59, 59, 999);
+  const todayCompletions = useQuery(api.leaves.getCompletions, {
+    startDate: startOfDayMs.getTime(),
+    endDate: endOfDayMs.getTime(),
+  });
 
   const level = profile?.level ?? 0;
   const lifetimeXp = profile?.lifetimeXp ?? 0;
@@ -22,10 +31,9 @@ export function HeroStats() {
   const progressPercent = xpForNext > 0 ? Math.min((xpInLevel / xpForNext) * 100, 100) : 0;
 
   const today = new Date().toISOString().split("T")[0];
-  const habitsDone = leaves?.filter((leaf) => {
-    // Count leaves that were completed today (this is a simplification)
-    return false;
-  }).length ?? 0;
+  const habitsDone = todayCompletions
+    ? new Set(todayCompletions.completions.map((c) => c.leafId)).size
+    : 0;
 
   const todosDone = todos?.completions?.filter((c) => {
     const cDate = new Date(c.completedAt).toISOString().split("T")[0];

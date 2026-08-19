@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Leaf, CheckSquare } from "lucide-react";
 
 export function ActivityFeed() {
@@ -34,7 +35,11 @@ export function ActivityFeed() {
       </CardHeader>
       <CardContent>
         {!events ? (
-          <p className="text-sm text-muted-foreground">Loading...</p>
+          <div className="space-y-3">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="h-12 w-full rounded-xl" />
+            ))}
+          </div>
         ) : events.length === 0 ? (
           <p className="text-sm text-muted-foreground">No recent activity</p>
         ) : (
