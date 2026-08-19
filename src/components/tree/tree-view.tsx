@@ -36,13 +36,13 @@ export function TreeView() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tree View</CardTitle>
+        <CardTitle>{t("treeView")}</CardTitle>
       </CardHeader>
       <CardContent>
         {isEmpty ? (
           <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed py-12">
             <p className="text-sm text-muted-foreground">
-              {t("emptyState")}
+              {t("emptyTree")}
             </p>
           </div>
         ) : (
@@ -55,7 +55,7 @@ export function TreeView() {
               <>
                 <div className="my-3 border-t" />
                 <p className="mb-2 text-xs font-medium uppercase text-muted-foreground">
-                  Root Twigs
+                  {t("rootTwigs")}
                 </p>
                 {rootTwigs.map((twig) => (
                   <TreeNode key={twig.id} node={twig} />

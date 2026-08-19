@@ -657,7 +657,11 @@
     "addTrunk": "הוסף גזע",
     "edit": "ערוך",
     "delete": "מחק",
-    "viewLimbs": "הצג ענפים ←"
+    "viewLimbs": "הצג ענפים ←",
+    "treeView": "תצוגת עץ",
+    "listView": "תצוגת רשימה",
+    "emptyTree": "עדיין אין פריטים. צור גזעים, ענפים ועanches כדי לראות את העץ שלך.",
+    "rootTwigs": "זרדים שורשיים"
   },
   "limbs": {
     "selectTrunk": "בחר גזע",
