@@ -105,8 +105,7 @@ export function MonthGridView({
             : 0;
 
           return (
-            // TODO: 2025-01-07 - empty classes are unacceptable
-            <div key={leaf._id} className="">
+            <div key={leaf._id}>
               {/* Leaf header with name and timer duration */}
               <div className="flex justify-center pt-8">
                 <div className="flex items-baseline pb-2">
