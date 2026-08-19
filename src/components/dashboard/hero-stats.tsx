@@ -3,9 +3,11 @@
 import { useTranslations } from "next-intl";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Flame, Trophy, CheckCircle } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Award, Flame, Trophy, CheckCircle } from "lucide-react";
 import { levelFromXp, xpInCurrentLevel } from "@/lib/xp";
+import NumberFlow from "@number-flow/react";
+import { motion } from "framer-motion";
 
 export function HeroStats() {
   const t = useTranslations("dashboard");
@@ -42,76 +44,112 @@ export function HeroStats() {
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-muted-foreground">
-            {t("level")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="text-3xl font-bold">{level}</div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-            <div
-              className="h-full rounded-full bg-primary transition-all"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-          <p className="text-xs text-muted-foreground">
-            {lifetimeXp.toLocaleString()} XP
-          </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-muted-foreground">
-            {t("currentStreak")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-2">
-            <Flame className="h-6 w-6 text-orange-500" />
-            <span className="text-3xl font-bold">{currentStreak}</span>
-            <span className="text-sm text-muted-foreground">{t("days")}</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-muted-foreground">
-            {t("longestStreak")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-2">
-            <Trophy className="h-6 w-6 text-yellow-500" />
-            <span className="text-3xl font-bold">{longestStreak}</span>
-            <span className="text-sm text-muted-foreground">{t("days")}</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-muted-foreground">
-            {t("todaysProgress")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-2">
-            <CheckCircle className="h-6 w-6 text-green-500" />
-            <div className="space-y-1">
-              <p className="text-sm">
-                {t("habitsCompleted")}: {habitsDone}
-              </p>
-              <p className="text-sm">
-                {t("todosCompleted")}: {todosDone}
+      {/* Level & XP Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0 }}
+      >
+        <Card className="bg-gradient-to-br from-violet-600 to-indigo-600 text-white border-0 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="bg-white/20 rounded-full p-2">
+                <Award className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="mt-4">
+              <NumberFlow value={level} className="text-3xl font-bold" />
+              <p className="text-white/80 text-sm mt-1">{t("level")}</p>
+            </div>
+            <div className="mt-3">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-white/30">
+                <motion.div
+                  className="h-full rounded-full bg-white"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progressPercent}%` }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                />
+              </div>
+              <p className="text-white/70 text-xs mt-1">
+                {lifetimeXp.toLocaleString()} XP
               </p>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Current Streak Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <Card className="bg-gradient-to-br from-orange-500 to-red-500 text-white border-0 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="bg-white/20 rounded-full p-2">
+                <Flame className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="mt-4">
+              <NumberFlow value={currentStreak} className="text-3xl font-bold" />
+              <p className="text-white/80 text-sm mt-1">
+                {t("currentStreak")} &middot; {t("days")}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Longest Streak Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Card className="bg-gradient-to-br from-amber-400 to-yellow-500 text-white border-0 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="bg-white/20 rounded-full p-2">
+                <Trophy className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="mt-4">
+              <NumberFlow value={longestStreak} className="text-3xl font-bold" />
+              <p className="text-white/80 text-sm mt-1">
+                {t("longestStreak")} &middot; {t("days")}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Today's Progress Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <Card className="bg-gradient-to-br from-emerald-500 to-green-600 text-white border-0 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="bg-white/20 rounded-full p-2">
+                <CheckCircle className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="mt-4">
+              <NumberFlow value={habitsDone} className="text-3xl font-bold" />
+              <p className="text-white/80 text-sm mt-1">
+                {t("habitsCompleted")}
+              </p>
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              <NumberFlow value={todosDone} className="text-lg font-semibold" />
+              <span className="text-white/70 text-sm">{t("todosCompleted")}</span>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }
