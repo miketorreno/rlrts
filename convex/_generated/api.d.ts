@@ -13,6 +13,7 @@ import type * as leaves from "../leaves.js";
 import type * as limbs from "../limbs.js";
 import type * as migrations from "../migrations.js";
 import type * as todos from "../todos.js";
+import type * as tree from "../tree.js";
 import type * as tree_utils from "../tree_utils.js";
 import type * as trunks from "../trunks.js";
 import type * as twig_sync from "../twig_sync.js";
@@ -31,6 +32,7 @@ declare const fullApi: ApiFromModules<{
   limbs: typeof limbs;
   migrations: typeof migrations;
   todos: typeof todos;
+  tree: typeof tree;
   tree_utils: typeof tree_utils;
   trunks: typeof trunks;
   twig_sync: typeof twig_sync;

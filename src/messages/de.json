@@ -658,7 +658,11 @@
     "addTrunk": "Stamm hinzufügen",
     "edit": "Bearbeiten",
     "delete": "Löschen",
-    "viewLimbs": "Äste anzeigen →"
+    "viewLimbs": "Äste anzeigen →",
+    "treeView": "Baumansicht",
+    "listView": "Listenansicht",
+    "emptyTree": "Noch keine Einträge. Erstelle Stämme, Äste und Zweige, um deinen Baum zu sehen.",
+    "rootTwigs": "Wurzelzweige"
   },
   "limbs": {
     "selectTrunk": "Stamm auswählen",

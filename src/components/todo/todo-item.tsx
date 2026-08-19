@@ -13,11 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToastMessages } from "@/hooks/use-toast-messages";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { api } from "../../../convex/_generated/api";
+import { streakMultiplier } from "@/lib/xp";
 import { Doc, Id } from "../../../convex/_generated/dataModel";
 
 interface TodoItemProps {
@@ -38,6 +39,10 @@ export function TodoItem({ items, onEdit, todo }: TodoItemProps) {
 
   const toggleItem = useMutation(api.todos.toggleItem);
   const removeTodo = useMutation(api.todos.remove);
+
+  const xpProfile = useQuery(api.xp.getXpProfile);
+  const multiplier = streakMultiplier(xpProfile?.currentStreak ?? 0);
+  const effectiveXp = todo.xp * multiplier;
 
   const sortedItems = useMemo(
     () =>
@@ -108,7 +113,12 @@ export function TodoItem({ items, onEdit, todo }: TodoItemProps) {
               {t(todo.cadence)}
             </span>
             <span className="rounded-md bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">
-              {tXp("label")} {todo.xp}
+              {tXp("label")} {todo.xp > 0 ? effectiveXp : 0}
+              {todo.xp > 0 && multiplier > 1 && (
+                <span className="ml-1 text-yellow-700 dark:text-yellow-300">
+                  (x{multiplier.toFixed(1)})
+                </span>
+              )}
             </span>
             <span className="text-sm text-muted-foreground">
               {t("progress", { done: completedCount, total: items.length })}

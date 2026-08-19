@@ -52,7 +52,6 @@ export function ImportExport() {
         onOpenChange={setShowImportExportDialog}
       >
         <DialogTrigger asChild>
-          {/* TODO: 2025-01-04 - remove or add md:hidden back one day */}
           <Button variant="outline" className="flex">
             <ArrowUpDown className="h-4 w-4 bg-transparent" />
             {t("button")}

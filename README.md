@@ -39,13 +39,14 @@ git clone https://github.com/miketorreno/rlrts.git
 cd rlrts
 
 # Install dependencies
-npm install
+pnpm install
 
 # Set up environment variables
 cp .env.example .env.local
 
 # Start the development server
-npm run dev
+pnpm dev
+# In a second terminal, run: npx convex dev
 ```
 
 Visit `http://localhost:3000` to see the app running.

@@ -658,7 +658,11 @@
     "addTrunk": "Ajouter un tronc",
     "edit": "Modifier",
     "delete": "Supprimer",
-    "viewLimbs": "Voir les branches →"
+    "viewLimbs": "Voir les branches →",
+    "treeView": "Vue arbre",
+    "listView": "Vue liste",
+    "emptyTree": "Aucun élément pour le moment. Créez des troncs, des branches et des rameaux pour voir votre arbre.",
+    "rootTwigs": "Rameaux racines"
   },
   "limbs": {
     "selectTrunk": "Sélectionner le tronc",

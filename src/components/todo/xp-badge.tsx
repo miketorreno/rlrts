@@ -5,6 +5,7 @@ import { Flame, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { api } from "../../../convex/_generated/api";
+import { streakMultiplier } from "@/lib/xp";
 
 export function XpBadge() {
   const t = useTranslations("xp");
@@ -33,12 +34,22 @@ export function XpBadge() {
         <span className="text-xs text-muted-foreground">
           {t("total", { count: profile.lifetimeXp.toLocaleString() })}
         </span>
-        {profile.currentStreak > 0 && (
-          <span className="inline-flex items-center gap-1 text-xs text-orange-500">
-            <Flame className="size-3" />
-            {t("streak", { count: profile.currentStreak })}
-          </span>
-        )}
+        {profile.currentStreak > 0 && (() => {
+          const multiplier = streakMultiplier(profile.currentStreak);
+          return (
+            <>
+              <span className="inline-flex items-center gap-1 text-xs text-orange-500">
+                <Flame className="size-3" />
+                {t("streak", { count: profile.currentStreak })}
+              </span>
+              {multiplier > 1 && (
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
+                  x{multiplier.toFixed(1)}
+                </span>
+              )}
+            </>
+          );
+        })()}
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
         <motion.div

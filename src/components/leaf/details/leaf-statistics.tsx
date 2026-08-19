@@ -1,7 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { streakMultiplier } from "@/lib/xp";
 import NumberFlow from "@number-flow/react";
+import { TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 
 // import { Id } from "@server/convex/_generated/dataModel";
@@ -134,6 +136,8 @@ export function LeafStatistics({
     );
   })();
 
+  const multiplier = streakMultiplier(currentStreak);
+
   return (
     <div className="flex flex-col gap-8">
       <motion.div
@@ -144,26 +148,46 @@ export function LeafStatistics({
         <Card className="w-[800px] border p-2 shadow-md">
           <div className="p-4">
             <h2 className="mb-4 text-lg font-semibold">Statistics</h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <p className="text-sm text-muted-foreground">Current Streak</p>
-              <p className="text-2xl font-bold">
-                <NumberFlow value={currentStreak} />
-              </p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              <div>
+                <p className="text-sm text-muted-foreground">Current Streak</p>
+                <p className="text-2xl font-bold">
+                  <NumberFlow value={currentStreak} />
+                </p>
+              </div>
 
-              <p className="text-sm text-muted-foreground">Off Days</p>
-              <p className="text-2xl font-bold">
-                <NumberFlow value={offStreak} />
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">Off Days</p>
+                <p className="text-2xl font-bold">
+                  <NumberFlow value={offStreak} />
+                </p>
+              </div>
 
-              <p className="text-sm text-muted-foreground">This Month</p>
-              <p className="text-2xl font-bold">
-                <NumberFlow value={thisMonthCompletions} />
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">This Month</p>
+                <p className="text-2xl font-bold">
+                  <NumberFlow value={thisMonthCompletions} />
+                </p>
+              </div>
 
-              <p className="text-sm text-muted-foreground">Total Completions</p>
-              <p className="text-2xl font-bold">
-                <NumberFlow value={totalCompletions} />
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  Total Completions
+                </p>
+                <p className="text-2xl font-bold">
+                  <NumberFlow value={totalCompletions} />
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-1">
+                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Multiplier</p>
+                </div>
+                <p className="text-2xl font-bold">
+                  {multiplier > 1 ? `x${multiplier.toFixed(1)}` : "1.0x"}
+                </p>
+              </div>
             </div>
 
             {/* Visual analytics section */}

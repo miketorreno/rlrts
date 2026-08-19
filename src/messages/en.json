@@ -610,7 +610,11 @@
     "addTrunk": "Add Trunk",
     "edit": "Edit",
     "delete": "Delete",
-    "viewLimbs": "View limbs →"
+    "viewLimbs": "View limbs →",
+    "treeView": "Tree View",
+    "listView": "List View",
+    "emptyTree": "No items yet. Create trunks, limbs, and branches to see your tree.",
+    "rootTwigs": "Root Twigs"
   },
   "limbs": {
     "selectTrunk": "Select trunk",

@@ -657,7 +657,11 @@
     "addTrunk": "添加树干",
     "edit": "编辑",
     "delete": "删除",
-    "viewLimbs": "查看树枝 →"
+    "viewLimbs": "查看树枝 →",
+    "treeView": "树形视图",
+    "listView": "列表视图",
+    "emptyTree": "还没有项目。创建树干、树枝和分支来查看你的树。",
+    "rootTwigs": "根细枝"
   },
   "limbs": {
     "selectTrunk": "选择树干",
