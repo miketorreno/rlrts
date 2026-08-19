@@ -720,6 +720,7 @@
     "todos": "Tareas",
     "weeklyCompletions": "Completiones semanales",
     "monthlyProgress": "Progreso mensual",
-    "recentActivity": "Actividad reciente"
+    "recentActivity": "Actividad reciente",
+    "noActivity": "Sin actividad reciente"
   }
 }

@@ -721,6 +721,7 @@
     "todos": "Aufgaben",
     "weeklyCompletions": "Wöchentliche Abschlüsse",
     "monthlyProgress": "Monatlicher Fortschritt",
-    "recentActivity": "Letzte Aktivität"
+    "recentActivity": "Letzte Aktivität",
+    "noActivity": "Keine letzte Aktivität"
   }
 }

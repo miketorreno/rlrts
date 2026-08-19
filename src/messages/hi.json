@@ -720,6 +720,7 @@
     "todos": "कार्य",
     "weeklyCompletions": "साप्ताहिक पूर्णताएं",
     "monthlyProgress": "मासिक प्रगति",
-    "recentActivity": "हालिया गतिविधि"
+    "recentActivity": "हालिया गतिविधि",
+    "noActivity": "कोई हालिया गतिविधि नहीं"
   }
 }

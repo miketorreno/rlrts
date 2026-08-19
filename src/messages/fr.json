@@ -721,6 +721,7 @@
     "todos": "Tâches",
     "weeklyCompletions": "Complétions hebdomadaires",
     "monthlyProgress": "Progrès mensuel",
-    "recentActivity": "Activité récente"
+    "recentActivity": "Activité récente",
+    "noActivity": "Aucune activité récente"
   }
 }

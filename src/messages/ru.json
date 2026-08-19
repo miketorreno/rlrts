@@ -719,6 +719,7 @@
     "todos": "Задачи",
     "weeklyCompletions": "Еженедельные выполнения",
     "monthlyProgress": "Ежемесячный прогресс",
-    "recentActivity": "Недавняя активность"
+    "recentActivity": "Недавняя активность",
+    "noActivity": "Нет недавней активности"
   }
 }

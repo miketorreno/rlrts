@@ -720,6 +720,7 @@
     "todos": "משימות",
     "weeklyCompletions": "השלמות שבועיות",
     "monthlyProgress": "התקדמות חודשית",
-    "recentActivity": "פעילות אחרונה"
+    "recentActivity": "פעילות אחרונה",
+    "noActivity": "אין פעילות אחרונה"
   }
 }

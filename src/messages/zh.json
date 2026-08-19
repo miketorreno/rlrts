@@ -720,6 +720,7 @@
     "todos": "待办事项",
     "weeklyCompletions": "每周完成",
     "monthlyProgress": "每月进度",
-    "recentActivity": "最近活动"
+    "recentActivity": "最近活动",
+    "noActivity": "无最近活动"
   }
 }

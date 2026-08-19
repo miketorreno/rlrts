@@ -673,6 +673,7 @@
     "todos": "Todos",
     "weeklyCompletions": "Weekly Completions",
     "monthlyProgress": "Monthly Progress",
-    "recentActivity": "Recent Activity"
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity"
   }
 }

@@ -720,6 +720,7 @@
     "todos": "المهام",
     "weeklyCompletions": "الإكمالات الأسبوعية",
     "monthlyProgress": "التقدم الشهري",
-    "recentActivity": "النشاط الأخير"
+    "recentActivity": "النشاط الأخير",
+    "noActivity": "لا يوجد نشاط حديث"
   }
 }
