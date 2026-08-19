@@ -651,7 +651,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
-  "dashboard": {
+    "dashboard": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
     "title": "Dashboard",
     "level": "Level",
     "currentStreak": "Current Streak",
@@ -668,6 +673,7 @@
     "todos": "Todos",
     "weeklyCompletions": "Weekly Completions",
     "monthlyProgress": "Monthly Progress",
-    "recentActivity": "Recent Activity"
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity"
   }
 }

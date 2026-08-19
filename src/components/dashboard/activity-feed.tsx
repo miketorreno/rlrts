@@ -3,9 +3,10 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery } from "convex/react";
+import { motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Leaf, CheckSquare } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function ActivityFeed() {
   const t = useTranslations("dashboard");
@@ -32,24 +33,29 @@ export function ActivityFeed() {
           {t("recentActivity")}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="max-h-[400px] overflow-y-auto">
         {!events ? (
-          <p className="text-sm text-muted-foreground">Loading...</p>
-        ) : events.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No recent activity</p>
-        ) : (
           <div className="space-y-3">
-            {events.map((event) => (
-              <div
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="h-12 w-full rounded-xl" />
+            ))}
+          </div>
+        ) : events.length === 0 ? (
+          <p className="text-sm text-muted-foreground">{t("noActivity")}</p>
+        ) : (
+          <div>
+            {events.map((event, index) => (
+              <motion.div
                 key={event._id}
-                className="flex items-center justify-between gap-3"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="flex items-center justify-between py-3 border-b last:border-0"
               >
                 <div className="flex items-center gap-3">
-                  {event.source === "habit" ? (
-                    <Leaf className="h-4 w-4 text-green-500" />
-                  ) : (
-                    <CheckSquare className="h-4 w-4 text-blue-500" />
-                  )}
+                  <div
+                    className={`h-2 w-2 rounded-full ${event.source === "habit" ? "bg-green-500" : "bg-blue-500"}`}
+                  />
                   <div>
                     <p className="text-sm font-medium">{event.sourceName}</p>
                     <p className="text-xs text-muted-foreground">
@@ -57,10 +63,10 @@ export function ActivityFeed() {
                     </p>
                   </div>
                 </div>
-                <span className="text-sm font-semibold text-primary">
+                <span className="text-xs font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">
                   +{event.amount} XP
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

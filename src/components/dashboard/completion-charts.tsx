@@ -42,7 +42,7 @@ const chartOptions = {
       ticks: { font: { size: 12 } },
     },
     y: {
-      grid: { color: "rgba(0, 0, 0, 0.1)" },
+      grid: { color: "rgba(128, 128, 128, 0.2)" },
       beginAtZero: true,
       ticks: { font: { size: 12 }, stepSize: 1 },
     },

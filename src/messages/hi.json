@@ -699,6 +699,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "सुप्रभात",
+      "afternoon": "नमस्कार",
+      "evening": "शुभ संध्या"
+    },
     "title": "डैशबोर्ड",
     "level": "स्तर",
     "currentStreak": "वर्तमान स्ट्रीक",
@@ -715,6 +720,7 @@
     "todos": "कार्य",
     "weeklyCompletions": "साप्ताहिक पूर्णताएं",
     "monthlyProgress": "मासिक प्रगति",
-    "recentActivity": "हालिया गतिविधि"
+    "recentActivity": "हालिया गतिविधि",
+    "noActivity": "कोई हालिया गतिविधि नहीं"
   }
 }
