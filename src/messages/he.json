@@ -699,6 +699,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "בוקר טוב",
+      "afternoon": "אחר הצהריים טוב",
+      "evening": "ערב טוב"
+    },
     "title": "לוח בקרה",
     "level": "רמה",
     "currentStreak": "רצף נוכחי",

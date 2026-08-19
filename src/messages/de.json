@@ -700,6 +700,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "Guten Morgen",
+      "afternoon": "Guten Tag",
+      "evening": "Guten Abend"
+    },
     "title": "Dashboard",
     "level": "Level",
     "currentStreak": "Aktuelle Serie",

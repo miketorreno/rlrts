@@ -698,6 +698,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "Доброе утро",
+      "afternoon": "Добрый день",
+      "evening": "Добрый вечер"
+    },
     "title": "Панель",
     "level": "Уровень",
     "currentStreak": "Текущая серия",

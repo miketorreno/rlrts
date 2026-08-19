@@ -699,6 +699,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "Buenos días",
+      "afternoon": "Buenas tardes",
+      "evening": "Buenas noches"
+    },
     "title": "Panel",
     "level": "Nivel",
     "currentStreak": "Racha actual",

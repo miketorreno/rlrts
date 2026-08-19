@@ -699,6 +699,11 @@
     "nextLevel": "Next level at {xp} XP"
   },
   "dashboard": {
+    "greeting": {
+      "morning": "早上好",
+      "afternoon": "下午好",
+      "evening": "晚上好"
+    },
     "title": "仪表板",
     "level": "等级",
     "currentStreak": "当前连续",

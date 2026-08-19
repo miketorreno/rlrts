@@ -651,7 +651,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
-  "dashboard": {
+    "dashboard": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
     "title": "Dashboard",
     "level": "Level",
     "currentStreak": "Current Streak",
