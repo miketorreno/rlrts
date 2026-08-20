@@ -1,6 +1,7 @@
 "use client";
 
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "@/i18n/routing";
 import { useEffect, useMemo } from "react";
 import { useTranslations, useLocale } from "next-intl";
@@ -17,17 +18,19 @@ function getGreetingKey(hour: number): "morning" | "afternoon" | "evening" {
 }
 
 export default function DashboardPage() {
-  const { isAuthenticated, isLoading } = useConvexAuth();
+  const { isAuthenticated, isLoading: authLoading } = useConvexAuth();
   const router = useRouter();
   const t = useTranslations("dashboard");
   const locale = useLocale();
   const { user } = useUser();
 
+  const stats = useQuery(api.dashboard.getDashboardStats);
+
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!authLoading && !isAuthenticated) {
       router.replace("/");
     }
-  }, [isLoading, isAuthenticated, router]);
+  }, [authLoading, isAuthenticated, router]);
 
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
@@ -45,7 +48,7 @@ export default function DashboardPage() {
 
   const firstName = user?.firstName ?? "";
 
-  if (isLoading || (!isLoading && !isAuthenticated)) {
+  if (authLoading || !isAuthenticated || stats === undefined) {
     return null;
   }
 
@@ -59,16 +62,19 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">{formattedDate}</p>
       </div>
 
-      <HeroStats />
+      <HeroStats xpProfile={stats.xpProfile} todayProgress={stats.todayProgress} />
 
-      <EntityCounts />
+      <EntityCounts counts={stats.counts} />
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
-          <CompletionCharts />
+          <CompletionCharts
+            todayCompletions={[]}
+            todoCompletions={[]}
+          />
         </div>
         <div className="space-y-6">
-          <ActivityFeed />
+          <ActivityFeed recentEvents={stats.recentEvents} />
         </div>
       </div>
     </div>

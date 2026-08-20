@@ -2,8 +2,6 @@
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getChartRGBValues } from "@/lib/colors";
 import {
@@ -49,19 +47,18 @@ const chartOptions = {
   },
 };
 
-export function CompletionCharts() {
+interface CompletionChartsProps {
+  todayCompletions: Array<{ leafId: string; completedAt: number }>;
+  todoCompletions: Array<{ todoId: string; completedAt: number }>;
+}
+
+export function CompletionCharts({ todayCompletions, todoCompletions }: CompletionChartsProps) {
   const t = useTranslations("dashboard");
 
-  const dateRange = useMemo(() => {
-    const now = new Date().getTime();
-    return {
-      startDate: now - 28 * 24 * 60 * 60 * 1000,
-      endDate: now,
-    };
-  }, []);
-
-  const habitCompletions = useQuery(api.leaves.getCompletions, dateRange);
-  const todoData = useQuery(api.todos.list, {});
+  const allCompletions = useMemo(
+    () => [...todayCompletions, ...todoCompletions],
+    [todayCompletions, todoCompletions],
+  );
 
   const { weeklyLabels, habitDaily, todoDaily } = useMemo(() => {
     const now = new Date();
@@ -77,29 +74,24 @@ export function CompletionCharts() {
         d.toLocaleDateString("default", { month: "short", day: "numeric" }),
       );
       hDaily.push(
-        habitCompletions?.completions.filter(
+        todayCompletions.filter(
           (c) => new Date(c.completedAt).toISOString().split("T")[0] === key,
-        ).length ?? 0,
+        ).length,
       );
       tDaily.push(
-        todoData?.completions.filter(
+        todoCompletions.filter(
           (c) => new Date(c.completedAt).toISOString().split("T")[0] === key,
-        ).length ?? 0,
+        ).length,
       );
     }
 
     return { weeklyLabels: labels, habitDaily: hDaily, todoDaily: tDaily };
-  }, [habitCompletions, todoData]);
+  }, [todayCompletions, todoCompletions]);
 
   const { monthlyLabels, monthlyCounts } = useMemo(() => {
     const monthlyMap: Record<string, number> = {};
 
-    habitCompletions?.completions.forEach((c) => {
-      const d = new Date(c.completedAt);
-      const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-      monthlyMap[k] = (monthlyMap[k] ?? 0) + 1;
-    });
-    todoData?.completions.forEach((c) => {
+    allCompletions.forEach((c) => {
       const d = new Date(c.completedAt);
       const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       monthlyMap[k] = (monthlyMap[k] ?? 0) + 1;
@@ -115,7 +107,7 @@ export function CompletionCharts() {
     const counts = sorted.map(([, v]) => v);
 
     return { monthlyLabels: labels, monthlyCounts: counts };
-  }, [habitCompletions, todoData]);
+  }, [allCompletions]);
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

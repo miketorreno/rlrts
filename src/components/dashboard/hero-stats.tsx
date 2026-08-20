@@ -1,46 +1,41 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Flame, Trophy, CheckCircle } from "lucide-react";
-import { levelFromXp, xpInCurrentLevel } from "@/lib/xp";
 import NumberFlow from "@number-flow/react";
 import { motion } from "framer-motion";
 
-export function HeroStats() {
+interface HeroStatsProps {
+  xpProfile: {
+    level: number;
+    lifetimeXp: number;
+    currentStreak: number;
+    longestStreak: number;
+    xpForNextLevel: number;
+    xpInCurrentLevel: number;
+  };
+  todayProgress: {
+    habitsDone: number;
+    totalHabits: number;
+    todosDone: number;
+    totalTodos: number;
+  };
+}
+
+export function HeroStats({ xpProfile, todayProgress }: HeroStatsProps) {
   const t = useTranslations("dashboard");
-  const profile = useQuery(api.xp.getXpProfile, {});
-  const todos = useQuery(api.todos.list, {});
 
-  const todayMs = new Date().getTime();
-  const startOfDayMs = new Date(todayMs);
-  startOfDayMs.setHours(0, 0, 0, 0);
-  const endOfDayMs = new Date(todayMs);
-  endOfDayMs.setHours(23, 59, 59, 999);
-  const todayCompletions = useQuery(api.leaves.getCompletions, {
-    startDate: startOfDayMs.getTime(),
-    endDate: endOfDayMs.getTime(),
-  });
-
-  const level = profile?.level ?? 0;
-  const lifetimeXp = profile?.lifetimeXp ?? 0;
-  const currentStreak = profile?.currentStreak ?? 0;
-  const longestStreak = profile?.longestStreak ?? 0;
-  const xpInLevel = profile ? xpInCurrentLevel(lifetimeXp) : 0;
-  const xpForNext = profile ? profile.xpForNextLevel - levelFromXp(lifetimeXp) * levelFromXp(lifetimeXp) * 100 : 100;
+  const level = xpProfile.level;
+  const lifetimeXp = xpProfile.lifetimeXp;
+  const currentStreak = xpProfile.currentStreak;
+  const longestStreak = xpProfile.longestStreak;
+  const xpInLevel = xpProfile.xpInCurrentLevel;
+  const xpForNext = xpProfile.xpForNextLevel;
   const progressPercent = xpForNext > 0 ? Math.min((xpInLevel / xpForNext) * 100, 100) : 0;
 
-  const today = new Date().toISOString().split("T")[0];
-  const habitsDone = todayCompletions
-    ? new Set(todayCompletions.completions.map((c) => c.leafId)).size
-    : 0;
-
-  const todosDone = todos?.completions?.filter((c) => {
-    const cDate = new Date(c.completedAt).toISOString().split("T")[0];
-    return cDate === today;
-  }).length ?? 0;
+  const habitsDone = todayProgress.habitsDone;
+  const todosDone = todayProgress.todosDone;
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">

@@ -9,6 +9,7 @@
  */
 
 import type * as branches from "../branches.js";
+import type * as dashboard from "../dashboard.js";
 import type * as leaves from "../leaves.js";
 import type * as limbs from "../limbs.js";
 import type * as migrations from "../migrations.js";
@@ -28,6 +29,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   branches: typeof branches;
+  dashboard: typeof dashboard;
   leaves: typeof leaves;
   limbs: typeof limbs;
   migrations: typeof migrations;

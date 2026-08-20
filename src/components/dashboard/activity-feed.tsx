@@ -2,15 +2,23 @@
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { useQuery } from "convex/react";
 import { motion } from "framer-motion";
-import { api } from "../../../convex/_generated/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 
-export function ActivityFeed() {
+interface Event {
+  _id: string;
+  source: string;
+  sourceName: string;
+  amount: number;
+  createdAt: number;
+}
+
+interface ActivityFeedProps {
+  recentEvents: Event[];
+}
+
+export function ActivityFeed({ recentEvents }: ActivityFeedProps) {
   const t = useTranslations("dashboard");
-  const events = useQuery(api.xp.getRecentEvents, {});
 
   const now = useMemo(() => new Date().getTime(), []);
 
@@ -34,17 +42,11 @@ export function ActivityFeed() {
         </CardTitle>
       </CardHeader>
       <CardContent className="max-h-[400px] overflow-y-auto">
-        {!events ? (
-          <div className="space-y-3">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className="h-12 w-full rounded-xl" />
-            ))}
-          </div>
-        ) : events.length === 0 ? (
+        {recentEvents.length === 0 ? (
           <p className="text-sm text-muted-foreground">{t("noActivity")}</p>
         ) : (
           <div>
-            {events.map((event, index) => (
+            {recentEvents.map((event, index) => (
               <motion.div
                 key={event._id}
                 initial={{ opacity: 0, x: -10 }}
