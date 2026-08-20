@@ -69,8 +69,8 @@ export default function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
           <CompletionCharts
-            todayCompletions={[]}
-            todoCompletions={[]}
+            todayCompletions={stats.chartCompletions ?? []}
+            todoCompletions={stats.chartTodoCompletions ?? []}
           />
         </div>
         <div className="space-y-6">

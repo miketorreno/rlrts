@@ -34,7 +34,7 @@ export const getDashboardStats = query({
     const endOfDayMs = startOfDayMs + 86400000 - 1;
     const chartRangeStart = Date.now() - 28 * 24 * 60 * 60 * 1000;
 
-    const [xpProfile, trunks, limbs, branches, twigs, leaves, todayCompletions, todoData, recentEvents] =
+    const [xpProfile, trunks, limbs, branches, twigs, leaves, todayCompletions, chartCompletions, chartTodoCompletions, todoData, recentEvents] =
       await Promise.all([
         ctx.db.query("xpProfiles").filter((q) => q.eq(q.field("userId"), userId)).first(),
         ctx.db.query("trunks").filter((q) => q.eq(q.field("userId"), userId)).collect(),
@@ -46,6 +46,18 @@ export const getDashboardStats = query({
           .query("completions")
           .withIndex("by_user_and_date", (q) =>
             q.eq("userId", userId).gte("completedAt", startOfDayMs).lte("completedAt", endOfDayMs),
+          )
+          .collect(),
+        ctx.db
+          .query("completions")
+          .withIndex("by_user_and_date", (q) =>
+            q.eq("userId", userId).gte("completedAt", chartRangeStart),
+          )
+          .collect(),
+        ctx.db
+          .query("todoCompletions")
+          .withIndex("by_user_and_date", (q) =>
+            q.eq("userId", userId).gte("completedAt", chartRangeStart),
           )
           .collect(),
         (async () => {
@@ -121,6 +133,8 @@ export const getDashboardStats = query({
         todosDone: todosDoneToday,
         totalTodos: todoData.todos.length,
       },
+      chartCompletions,
+      chartTodoCompletions,
       recentEvents: recentEvents,
     };
   },
