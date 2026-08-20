@@ -743,5 +743,35 @@
   "common": {
     "deleted": "{name} deleted",
     "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "Willkommen bei Goal Streak! Richte deine erste Gewohnheitskette ein",
+    "step1": "Stamm erstellen",
+    "step2": "Ast hinzufügen",
+    "step3": "Zweig hinzufügen",
+    "step4": "Zweig hinzufügen (Zeitplan)",
+    "step5": "Blatt hinzufügen (Gewohnheit)",
+    "skip": "Überspringen",
+    "done": "Loslegen!",
+    "progress": "Schritt {current} von {total}",
+    "trunkName": "Stammname",
+    "trunkPlaceholder": "z.B. Gesundheit, Karriere, Lernen...",
+    "trunkDescription": "Ein Stamm ist eine übergeordnete Kategorie für deine Gewohnheiten.",
+    "limbName": "Astname",
+    "limbPlaceholder": "z.B. Fitness, Finanzen, Projekte...",
+    "limbDescription": "Ein Ast gruppiert verwandte Gewohnheiten unter einem Stamm.",
+    "branchName": "Zweigname",
+    "branchPlaceholder": "z.B. Morgenroutine, Wöchentliche Überprüfung...",
+    "branchDescription": "Ein Zweig ist eine Untergruppe innerhalb eines Asts.",
+    "twigName": "Zweigname",
+    "twigPlaceholder": "z.B. Tägliches Training, 30 Min. lesen...",
+    "twigDescription": "Ein Zweig repräsentiert einen wiederkehrenden Zeitplan für Gewohnheiten.",
+    "colorTheme": "Farbschema",
+    "leafName": "Blattname",
+    "leafPlaceholder": "z.B. Liegestütze, Meditation, Tagebuch...",
+    "leafDescription": "Ein Blatt ist die tatsächliche Gewohnheit, die du verfolgen möchtest.",
+    "createAndNext": "Erstellen & Weiter",
+    "skipMessage": "Du hast den vorherigen Schritt übersprungen. Gehe zurück, um ihn zu erstellen.",
+    "goBack": "Zurück"
   }
 }

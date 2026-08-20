@@ -742,5 +742,35 @@
   "common": {
     "deleted": "{name} deleted",
     "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "مرحبًا بك في Goal Streak! أنشئ سلسلة العادات الأولى الخاصة بك",
+    "step1": "إنشاء جذع",
+    "step2": "إضافة غصن",
+    "step3": "إضافة فرع",
+    "step4": "إضافة عرق (جدول)",
+    "step5": "إضافة ورقة (عادة)",
+    "skip": "تخطي الآن",
+    "done": "ابدأ!",
+    "progress": "الخطوة {current} من {total}",
+    "trunkName": "اسم الجذع",
+    "trunkPlaceholder": "مثال: الصحة، المmary، التعلم...",
+    "trunkDescription": "الجذع هو فئة أعلى لعاداتك.",
+    "limbName": "اسم الغصن",
+    "limbPlaceholder": "مثال: اللياقة، المال، المشاريع...",
+    "limbDescription": "يجمع الغصن العادات المتشابهة تحت جذع.",
+    "branchName": "اسم الفرع",
+    "branchPlaceholder": "مثال: الروتين الصباحي، المراجعة الأسبوعية...",
+    "branchDescription": "الفرع هو مجموعة فرعية داخل غصن.",
+    "twigName": "اسم العرق",
+    "twigPlaceholder": "مثال: التمرين اليومي، القراءة 30 دقيقة...",
+    "twigDescription": "يمثل العرق جدولًا زمنيًا متكررًا للعادات.",
+    "colorTheme": "سمة اللون",
+    "leafName": "اسم الورقة",
+    "leafPlaceholder": "مثال: تمارين الضغط، التأمل، اليوميات...",
+    "leafDescription": "الورقة هي العادة الفعلية التي تريد تتبعها.",
+    "createAndNext": "إنشاء والمتابعة",
+    "skipMessage": "لقد تخطيت الخطوة السابقة. عد لإنشائها.",
+    "goBack": "رجوع"
   }
 }

@@ -743,5 +743,35 @@
   "common": {
     "deleted": "{name} deleted",
     "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "Bienvenue sur Goal Streak ! Configurez votre première chaîne d'habitudes",
+    "step1": "Créer un Tronc",
+    "step2": "Ajouter une Branche",
+    "step3": "Ajouter une Brindille",
+    "step4": "Ajouter un Rameau (horaire)",
+    "step5": "Ajouter une Feuille (habitude)",
+    "skip": "Passer pour l'instant",
+    "done": "Commencer !",
+    "progress": "Étape {current} sur {total}",
+    "trunkName": "Nom du tronc",
+    "trunkPlaceholder": "ex. Santé, Carrière, Apprentissage...",
+    "trunkDescription": "Un tronc est une catégorie de premier niveau pour vos habitudes.",
+    "limbName": "Nom de la branche",
+    "limbPlaceholder": "ex. Fitness, Finances, Projets...",
+    "limbDescription": "Une branche regroupe les habitudes similaires sous un tronc.",
+    "branchName": "Nom de la brindille",
+    "branchPlaceholder": "ex. Routine matinale, Revue hebdomadaire...",
+    "branchDescription": "Une brindille est un sous-groupe au sein d'une branche.",
+    "twigName": "Nom du rameau",
+    "twigPlaceholder": "ex. Exercice quotidien, Lire 30 min...",
+    "twigDescription": "Un rameau représente un calendrier récurrent pour les habitudes.",
+    "colorTheme": "Thème de couleur",
+    "leafName": "Nom de la feuille",
+    "leafPlaceholder": "ex. Pompes, Méditation, Journal...",
+    "leafDescription": "Une feuille est l'habitude que vous souhaitez suivre.",
+    "createAndNext": "Créer et Suivant",
+    "skipMessage": "Vous avez ignoré l'étape précédente. Retournez pour la créer.",
+    "goBack": "Retour"
   }
 }

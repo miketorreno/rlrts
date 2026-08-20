@@ -110,5 +110,6 @@ export default defineSchema({
     currentStreak: v.number(),
     longestStreak: v.number(),
     lastCompletionDate: v.optional(v.string()),
+    onboardingCompleted: v.optional(v.boolean()),
   }).index("by_user", ["userId"]),
 });

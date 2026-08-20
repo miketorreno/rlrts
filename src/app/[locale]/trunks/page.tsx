@@ -1,5 +1,6 @@
 "use client";
 
+import { OnboardingWizard } from "@/components/onboarding/onboarding-wizard";
 import { TrunkList } from "@/components/trunk/trunk-list";
 import { TreeView } from "@/components/tree/tree-view";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,6 +17,10 @@ export default function TrunksPage() {
   const router = useRouter();
   const t = useTranslations("trunks");
   const trunks = useQuery(api.trunks.list, isAuthenticated ? {} : "skip");
+  const onboardingStatus = useQuery(
+    api.xp.getOnboardingStatus,
+    isAuthenticated ? {} : "skip",
+  );
   const [view, setView] = useState<TrunkView>("tree");
 
   useEffect(() => {
@@ -26,6 +31,16 @@ export default function TrunksPage() {
 
   if (isLoading || (!isLoading && !isAuthenticated)) {
     return null;
+  }
+
+  const showOnboarding =
+    onboardingStatus &&
+    !onboardingStatus.onboardingCompleted &&
+    trunks &&
+    trunks.length === 0;
+
+  if (showOnboarding) {
+    return <OnboardingWizard />;
   }
 
   return (
