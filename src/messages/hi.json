@@ -738,5 +738,9 @@
     "monthlyProgress": "मासिक प्रगति",
     "recentActivity": "हालिया गतिविधि",
     "noActivity": "कोई हालिया गतिविधि नहीं"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }

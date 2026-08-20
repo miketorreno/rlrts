@@ -737,5 +737,9 @@
     "monthlyProgress": "Ежемесячный прогресс",
     "recentActivity": "Недавняя активность",
     "noActivity": "Нет недавней активности"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }

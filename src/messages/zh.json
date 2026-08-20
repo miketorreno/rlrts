@@ -738,5 +738,9 @@
     "monthlyProgress": "每月进度",
     "recentActivity": "最近活动",
     "noActivity": "无最近活动"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }

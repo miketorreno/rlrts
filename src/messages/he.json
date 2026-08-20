@@ -738,5 +738,9 @@
     "monthlyProgress": "התקדמות חודשית",
     "recentActivity": "פעילות אחרונה",
     "noActivity": "אין פעילות אחרונה"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }

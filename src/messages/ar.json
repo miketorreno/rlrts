@@ -738,5 +738,9 @@
     "monthlyProgress": "التقدم الشهري",
     "recentActivity": "النشاط الأخير",
     "noActivity": "لا يوجد نشاط حديث"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }

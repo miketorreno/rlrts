@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { NewTwigDialog } from "@/components/twig/twig-dialogs";
 import { useToastMessages } from "@/hooks/use-toast-messages";
+import { useUndoDelete } from "@/hooks/use-undo-delete";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
 import { Pencil, PlusCircle, Trash2 } from "lucide-react";
@@ -106,24 +107,29 @@ interface BranchItemProps {
 
 export function BranchItem({ branch, onEdit }: BranchItemProps) {
   const tDialogs = useTranslations("dialogs");
-  const toastMessages = useToastMessages();
+  const { undoableDelete } = useUndoDelete();
 
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const removeBranch = useMutation(api.branches.remove);
+  const createBranch = useMutation(api.branches.create);
 
   const handleDelete = useCallback(async () => {
     setDeleting(true);
+    setDeleteOpen(false);
     try {
-      await removeBranch({ id: branch._id });
-      toastMessages.branch.deleted();
-      setDeleteOpen(false);
+      await undoableDelete(
+        async () => { await removeBranch({ id: branch._id }); },
+        branch,
+        branch.name,
+        async (item) => { await createBranch({ name: item.name, limbId: item.limbId }); },
+      );
     } catch (error) {
       console.error(error);
     } finally {
       setDeleting(false);
     }
-  }, [removeBranch, branch._id, toastMessages]);
+  }, [removeBranch, createBranch, branch, undoableDelete]);
 
   return (
     <>

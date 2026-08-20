@@ -661,7 +661,7 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
-    "errors": {
+  "errors": {
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",
     "retry": "Try Again",
@@ -691,5 +691,9 @@
     "monthlyProgress": "Monthly Progress",
     "recentActivity": "Recent Activity",
     "noActivity": "No recent activity"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
   }
 }
