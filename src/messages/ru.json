@@ -701,6 +701,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Что-то пошло не так",
+    "description": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова.",
+    "retry": "Попробовать снова",
+    "dashboardError": "Не удалось загрузить данные панели"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Доброе утро",

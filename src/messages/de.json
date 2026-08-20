@@ -703,6 +703,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen",
+    "dashboardError": "Dashboard-Daten konnten nicht geladen werden"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Guten Morgen",

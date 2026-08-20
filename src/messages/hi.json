@@ -702,6 +702,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "कुछ गलत हो गया",
+    "description": "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+    "retry": "पुनः प्रयास करें",
+    "dashboardError": "डैशबोर्ड डेटा लोड करने में विफल"
+  },
   "dashboard": {
     "greeting": {
       "morning": "सुप्रभात",

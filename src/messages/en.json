@@ -655,7 +655,13 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
-    "dashboard": {
+    "errors": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try Again",
+    "dashboardError": "Failed to load dashboard data"
+  },
+  "dashboard": {
     "greeting": {
       "morning": "Good morning",
       "afternoon": "Good afternoon",

@@ -702,6 +702,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "حدث خطأ ما",
+    "description": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "retry": "حاول مرة أخرى",
+    "dashboardError": "فشل في تحميل بيانات لوحة التحكم"
+  },
   "dashboard": {
     "greeting": {
       "morning": "صباح الخير",

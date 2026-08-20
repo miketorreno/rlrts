@@ -702,6 +702,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "משהו השתבש",
+    "description": "אירעה שגיאה לא צפויה. אנא נסה שוב.",
+    "retry": "נסה שוב",
+    "dashboardError": "טעינת נתוני לוח המחוונים נכשלה"
+  },
   "dashboard": {
     "greeting": {
       "morning": "בוקר טוב",

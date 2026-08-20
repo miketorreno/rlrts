@@ -702,6 +702,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Algo salió mal",
+    "description": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+    "retry": "Intentar de nuevo",
+    "dashboardError": "No se pudieron cargar los datos del panel"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Buenos días",

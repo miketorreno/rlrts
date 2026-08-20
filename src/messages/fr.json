@@ -703,6 +703,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Une erreur s'est produite",
+    "description": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+    "retry": "Réessayer",
+    "dashboardError": "Échec du chargement des données du tableau de bord"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Bonjour",
