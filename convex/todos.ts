@@ -3,7 +3,7 @@ import { Doc } from "./_generated/dataModel";
 import { MutationCtx, mutation, query } from "./_generated/server";
 import { streakMultiplier } from "./xp";
 
-function periodStart(cadence: "daily" | "weekly", now: number): number {
+export function periodStart(cadence: "daily" | "weekly", now: number): number {
   const date = new Date(now);
   date.setHours(0, 0, 0, 0);
   if (cadence === "weekly") {
