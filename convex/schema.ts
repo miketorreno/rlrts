@@ -45,6 +45,14 @@ export default defineSchema({
     position: v.optional(v.number()),
     scheduledTimer: v.optional(v.id("_scheduled_functions")),
     timerEnd: v.optional(v.number()),
+    reminderTime: v.optional(
+      v.object({
+        hour: v.number(),
+        minute: v.number(),
+      }),
+    ),
+    scheduledReminder: v.optional(v.id("_scheduled_functions")),
+    reminderNextFire: v.optional(v.number()),
   })
     .index("by_user", ["userId"])
     .index("by_twig", ["twigId"])

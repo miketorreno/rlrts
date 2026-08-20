@@ -1,6 +1,7 @@
 "use client";
 
 import { IntlProvider } from "@/components/intl-provider";
+import { useReminderNotifications } from "@/hooks/use-reminder-notifications";
 import { ClerkProvider, useAuth } from "@clerk/nextjs";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
@@ -26,6 +27,11 @@ interface ProvidersProps extends PropsWithChildren {
   messages: AbstractIntlMessages; // Translation messages for the current locale
 }
 
+function ReminderNotifications() {
+  useReminderNotifications();
+  return null;
+}
+
 /**
  * Providers component that establishes the context hierarchy:
  * 1. IntlProvider - Handles translations and localization
@@ -44,6 +50,7 @@ export function Providers({ children, locale, messages }: ProvidersProps) {
       >
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ReminderNotifications />
             {children}
           </ThemeProvider>
         </ConvexProviderWithClerk>

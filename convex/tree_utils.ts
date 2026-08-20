@@ -5,6 +5,16 @@ export async function deleteLeafAndCompletions(
   ctx: MutationCtx,
   leafId: Id<"leaves">,
 ): Promise<void> {
+  const leaf = await ctx.db.get(leafId);
+  if (leaf) {
+    if (leaf.scheduledTimer) {
+      await ctx.scheduler.cancel(leaf.scheduledTimer);
+    }
+    if (leaf.scheduledReminder) {
+      await ctx.scheduler.cancel(leaf.scheduledReminder);
+    }
+  }
+
   const completions = await ctx.db
     .query("completions")
     .filter((q) => q.eq(q.field("leafId"), leafId))

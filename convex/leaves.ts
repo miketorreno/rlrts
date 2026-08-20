@@ -541,3 +541,167 @@ export const incrementLeafCount = internalMutation({
     });
   },
 });
+
+/**
+ * Computes the next occurrence timestamp for a given hour/minute.
+ * If the time has already passed today, schedules for tomorrow.
+ */
+function computeNextReminderTime(hour: number, minute: number): number {
+  const now = new Date();
+  const next = new Date();
+  next.setHours(hour, minute, 0, 0);
+  if (next.getTime() <= now.getTime()) {
+    next.setDate(next.getDate() + 1);
+  }
+  return next.getTime();
+}
+
+export const sendReminder = internalMutation({
+  args: {
+    leafId: v.id("leaves"),
+    hour: v.number(),
+    minute: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf) return;
+
+    if (
+      !leaf.reminderTime ||
+      leaf.reminderTime.hour !== args.hour ||
+      leaf.reminderTime.minute !== args.minute
+    ) {
+      return;
+    }
+
+    const nextFire = computeNextReminderTime(args.hour, args.minute);
+
+    const scheduledId = await ctx.scheduler.runAfter(
+      nextFire - Date.now(),
+      internal.leaves.sendReminder,
+      {
+        leafId: args.leafId,
+        hour: args.hour,
+        minute: args.minute,
+      },
+    );
+
+    await ctx.db.patch(args.leafId, {
+      scheduledReminder: scheduledId,
+      reminderNextFire: nextFire,
+    });
+  },
+});
+
+export const scheduleReminder = mutation({
+  args: {
+    leafId: v.id("leaves"),
+    hour: v.number(),
+    minute: v.number(),
+  },
+  handler: async (ctx, args): Promise<Id<"_scheduled_functions">> => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf || leaf.userId !== identity.subject) {
+      throw new Error("Leaf not found");
+    }
+
+    if (leaf.scheduledReminder) {
+      await ctx.scheduler.cancel(leaf.scheduledReminder);
+    }
+
+    const nextFire = computeNextReminderTime(args.hour, args.minute);
+
+    const scheduledId = await ctx.scheduler.runAfter(
+      nextFire - Date.now(),
+      internal.leaves.sendReminder,
+      {
+        leafId: args.leafId,
+        hour: args.hour,
+        minute: args.minute,
+      },
+    );
+
+    await ctx.db.patch(args.leafId, {
+      reminderTime: { hour: args.hour, minute: args.minute },
+      scheduledReminder: scheduledId,
+      reminderNextFire: nextFire,
+    });
+
+    return scheduledId;
+  },
+});
+
+export const cancelReminder = mutation({
+  args: { leafId: v.id("leaves") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf || leaf.userId !== identity.subject) {
+      throw new Error("Leaf not found");
+    }
+
+    if (leaf.scheduledReminder) {
+      await ctx.scheduler.cancel(leaf.scheduledReminder);
+    }
+
+    await ctx.db.patch(args.leafId, {
+      reminderTime: undefined,
+      scheduledReminder: undefined,
+      reminderNextFire: undefined,
+    });
+  },
+});
+
+/**
+ * Query: leaves due for a reminder right now.
+ * Client polls this to trigger browser notifications.
+ */
+export const getDueReminders = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+
+    const now = Date.now();
+    const leaves = await ctx.db
+      .query("leaves")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .collect();
+
+    return leaves
+      .filter(
+        (leaf) =>
+          leaf.reminderTime !== undefined &&
+          leaf.reminderNextFire !== undefined &&
+          leaf.reminderNextFire <= now,
+      )
+      .map((leaf) => ({
+        leafId: leaf._id,
+        leafName: leaf.name,
+        reminderTime: leaf.reminderTime!,
+      }));
+  },
+});
+
+export const markReminderDelivered = mutation({
+  args: { leafId: v.id("leaves") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const leaf = await ctx.db.get(args.leafId);
+    if (!leaf || leaf.userId !== identity.subject) return;
+
+    if (leaf.reminderTime) {
+      const nextFire = computeNextReminderTime(
+        leaf.reminderTime.hour,
+        leaf.reminderTime.minute,
+      );
+      await ctx.db.patch(args.leafId, { reminderNextFire: nextFire });
+    }
+  },
+});

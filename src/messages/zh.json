@@ -446,6 +446,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
