@@ -36,12 +36,12 @@ export const getDashboardStats = query({
 
     const [xpProfile, trunks, limbs, branches, twigs, leaves, todayCompletions, chartCompletions, chartTodoCompletions, todoData, recentEvents] =
       await Promise.all([
-        ctx.db.query("xpProfiles").filter((q) => q.eq(q.field("userId"), userId)).first(),
-        ctx.db.query("trunks").filter((q) => q.eq(q.field("userId"), userId)).collect(),
-        ctx.db.query("limbs").filter((q) => q.eq(q.field("userId"), userId)).collect(),
-        ctx.db.query("branches").filter((q) => q.eq(q.field("userId"), userId)).collect(),
-        ctx.db.query("twigs").filter((q) => q.eq(q.field("userId"), userId)).collect(),
-        ctx.db.query("leaves").filter((q) => q.eq(q.field("userId"), userId)).collect(),
+        ctx.db.query("xpProfiles").withIndex("by_user", (q) => q.eq("userId", userId)).first(),
+        ctx.db.query("trunks").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
+        ctx.db.query("limbs").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
+        ctx.db.query("branches").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
+        ctx.db.query("twigs").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
+        ctx.db.query("leaves").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
         ctx.db
           .query("completions")
           .withIndex("by_user_and_date", (q) =>
@@ -61,9 +61,9 @@ export const getDashboardStats = query({
           )
           .collect(),
         (async () => {
-          const todos = await ctx.db.query("todos").filter((q) => q.eq(q.field("userId"), userId)).collect();
-          const items = await ctx.db.query("todoItems").filter((q) => q.eq(q.field("userId"), userId)).collect();
-          const completions = await ctx.db.query("todoCompletions").filter((q) => q.eq(q.field("userId"), userId)).collect();
+          const todos = await ctx.db.query("todos").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
+          const items = await ctx.db.query("todoItems").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
+          const completions = await ctx.db.query("todoCompletions").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
           return { todos, items, completions };
         })(),
         (async () => {

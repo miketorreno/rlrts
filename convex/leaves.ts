@@ -28,7 +28,7 @@ export const list = query({
 
     let q = ctx.db
       .query("leaves")
-      .filter((q) => q.eq(q.field("userId"), identity.subject));
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject));
 
     if (args.twigId) {
       q = q.filter((q) => q.eq(q.field("twigId"), args.twigId));
@@ -171,7 +171,7 @@ export const markComplete = mutation({
 
         let profile = await ctx.db
           .query("xpProfiles")
-          .filter((q) => q.eq(q.field("userId"), identity.subject))
+          .withIndex("by_user", (q) => q.eq("userId", identity.subject))
           .first();
 
         // Reset streak if gap is too long

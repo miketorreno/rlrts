@@ -46,6 +46,7 @@ export default defineSchema({
     scheduledTimer: v.optional(v.id("_scheduled_functions")),
     timerEnd: v.optional(v.number()),
   })
+    .index("by_user", ["userId"])
     .index("by_twig", ["twigId"])
     .index("scheduledTimer", ["scheduledTimer"]),
 
@@ -71,13 +72,17 @@ export default defineSchema({
     name: v.string(),
     position: v.optional(v.number()),
     isCompleted: v.boolean(),
-  }).index("by_todo", ["todoId"]),
+  })
+    .index("by_user", ["userId"])
+    .index("by_todo", ["todoId"]),
 
   todoCompletions: defineTable({
     todoId: v.id("todos"),
     userId: v.string(),
     completedAt: v.number(),
-  }).index("by_user_and_date", ["userId", "completedAt"]),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_and_date", ["userId", "completedAt"]),
 
   xpEvents: defineTable({
     userId: v.string(),
