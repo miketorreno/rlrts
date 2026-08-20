@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useMutation } from "convex/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -57,52 +58,62 @@ export function OnboardingWizard() {
           <CardTitle>{t(`step${step}`)}</CardTitle>
         </CardHeader>
         <CardContent>
-          {step === 1 && (
-            <StepCreateTrunk
-              onComplete={(id: string) => {
-                setTrunkId(id);
-                handleNext();
-              }}
-              onSkip={handleSkip}
-            />
-          )}
-          {step === 2 && (
-            <StepCreateLimb
-              trunkId={trunkId}
-              onComplete={(id: string) => {
-                setLimbId(id);
-                handleNext();
-              }}
-              onSkip={handleSkip}
-            />
-          )}
-          {step === 3 && (
-            <StepCreateBranch
-              limbId={limbId}
-              onComplete={(id: string) => {
-                setBranchId(id);
-                handleNext();
-              }}
-              onSkip={handleSkip}
-            />
-          )}
-          {step === 4 && (
-            <StepCreateTwig
-              branchId={branchId}
-              onComplete={(id: string) => {
-                setTwigId(id);
-                handleNext();
-              }}
-              onSkip={handleSkip}
-            />
-          )}
-          {step === 5 && (
-            <StepCreateLeaf
-              twigId={twigId}
-              onSkip={handleSkip}
-              onComplete={handleComplete}
-            />
-          )}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              {step === 1 && (
+                <StepCreateTrunk
+                  onComplete={(id: string) => {
+                    setTrunkId(id);
+                    handleNext();
+                  }}
+                  onSkip={handleSkip}
+                />
+              )}
+              {step === 2 && (
+                <StepCreateLimb
+                  trunkId={trunkId}
+                  onComplete={(id: string) => {
+                    setLimbId(id);
+                    handleNext();
+                  }}
+                  onSkip={handleSkip}
+                />
+              )}
+              {step === 3 && (
+                <StepCreateBranch
+                  limbId={limbId}
+                  onComplete={(id: string) => {
+                    setBranchId(id);
+                    handleNext();
+                  }}
+                  onSkip={handleSkip}
+                />
+              )}
+              {step === 4 && (
+                <StepCreateTwig
+                  branchId={branchId}
+                  onComplete={(id: string) => {
+                    setTwigId(id);
+                    handleNext();
+                  }}
+                  onSkip={handleSkip}
+                />
+              )}
+              {step === 5 && (
+                <StepCreateLeaf
+                  twigId={twigId}
+                  onSkip={handleSkip}
+                  onComplete={handleComplete}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
         </CardContent>
       </Card>
     </div>

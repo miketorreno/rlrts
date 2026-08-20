@@ -52,6 +52,8 @@ export const create = mutation({
   args: {
     name: v.string(),
     twigId: v.id("twigs"),
+    description: v.optional(v.string()),
+    targetCount: v.optional(v.number()),
     timerDuration: v.optional(v.number()),
     xp: v.optional(v.number()),
   },
@@ -80,6 +82,8 @@ export const create = mutation({
       name: args.name,
       userId: identity.subject,
       twigId: args.twigId,
+      description: args.description,
+      targetCount: args.targetCount,
       timerDuration: args.timerDuration,
       xp: args.xp,
       position: maxPosition + 1,

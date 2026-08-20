@@ -6,6 +6,7 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     colorTheme: v.string(),
+    type: v.optional(v.union(v.literal("once"), v.literal("many"))),
     position: v.optional(v.number()),
     branchId: v.optional(v.id("branches")),
   })
@@ -15,6 +16,7 @@ export default defineSchema({
   trunks: defineTable({
     name: v.string(),
     userId: v.string(),
+    color: v.optional(v.string()),
     position: v.optional(v.number()),
   }).index("by_user", ["userId"]),
 
@@ -22,6 +24,7 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     trunkId: v.id("trunks"),
+    description: v.optional(v.string()),
     position: v.optional(v.number()),
   })
     .index("by_user", ["userId"])
@@ -40,6 +43,8 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     twigId: v.id("twigs"),
+    description: v.optional(v.string()),
+    targetCount: v.optional(v.number()),
     xp: v.optional(v.number()),
     timerDuration: v.optional(v.number()),
     position: v.optional(v.number()),

@@ -723,7 +723,17 @@
     "leafPlaceholder": "e.g., Push-ups, Meditation, Journal...",
     "leafDescription": "A leaf is the actual habit you want to track.",
     "createAndNext": "Create & Next",
-    "skipMessage": "You skipped the previous step. Go back to create it.",
-    "goBack": "Go Back"
+    "skipMessage": "You skipped the previous step.",
+    "continueWithout": "Continue without",
+    "trunkColor": "Color",
+    "limbDescriptionLabel": "Description (optional)",
+    "limbDescriptionPlaceholder": "e.g., Fitness goals, Work tasks...",
+    "twigType": "Type",
+    "twigTypeOnce": "One-time",
+    "twigTypeMany": "Repeatable",
+    "leafDescriptionLabel": "Description (optional)",
+    "leafDescriptionPlaceholder": "e.g., Do 20 push-ups, 10 min meditation...",
+    "leafTargetCount": "Daily target (optional)",
+    "leafTargetCountPlaceholder": "e.g., 3"
   }
 }
