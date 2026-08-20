@@ -588,7 +588,6 @@ export const sendReminder = internalMutation({
 
     await ctx.db.patch(args.leafId, {
       scheduledReminder: scheduledId,
-      reminderNextFire: nextFire,
     });
   },
 });
