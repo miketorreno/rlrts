@@ -5,6 +5,7 @@
  * - Associated twig
  * - Position within twig
  * - Timer duration for leaf tracking
+ * - Reminder time for browser notifications
  */
 "use client";
 
@@ -58,6 +59,9 @@ const TIMER_VALUES = [
   { key: "2hour", value: 120 },
 ];
 
+const HOURS = Array.from({ length: 24 }, (_, i) => i);
+const MINUTES = [0, 15, 30, 45];
+
 /**
  * Props interface for LeafEditForm
  * @property name - Current leaf name
@@ -72,6 +76,8 @@ const TIMER_VALUES = [
  * @property leaves - Leaves in current twig
  * @property onSave - Save changes callback
  * @property onDelete - Delete leaf callback
+ * @property reminderTime - Optional reminder time (hour + minute)
+ * @property onReminderTimeChange - Callback for reminder time updates
  */
 interface LeafEditFormProps {
   name: string;
@@ -98,6 +104,10 @@ interface LeafEditFormProps {
     | undefined;
   onSave: () => void;
   onDelete: () => void;
+  reminderTime: { hour: number; minute: number } | undefined;
+  onReminderTimeChange: (
+    time: { hour: number; minute: number } | undefined,
+  ) => void;
 }
 
 export function LeafEditForm({
@@ -115,6 +125,8 @@ export function LeafEditForm({
   leaves,
   onSave,
   onDelete,
+  reminderTime,
+  onReminderTimeChange,
 }: LeafEditFormProps) {
   const t = useTranslations("dialogs");
 
@@ -220,6 +232,85 @@ export function LeafEditForm({
               value={xp}
               onChange={(e) => onXpChange(parseInt(e.target.value) || 0)}
             />
+          </div>
+
+          {/* Reminder time picker */}
+          <div>
+            <Label>{t("leaf.edit.reminder.label")}</Label>
+            <Select
+              value={reminderTime ? "enabled" : "disabled"}
+              onValueChange={(value) => {
+                if (value === "enabled") {
+                  onReminderTimeChange({
+                    hour: reminderTime?.hour ?? 9,
+                    minute: reminderTime?.minute ?? 0,
+                  });
+                } else {
+                  onReminderTimeChange(undefined);
+                }
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="disabled">
+                  {t("leaf.edit.reminder.disabled")}
+                </SelectItem>
+                <SelectItem value="enabled">
+                  {t("leaf.edit.reminder.enabled")}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+
+            {reminderTime && (
+              <div className="mt-2 flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  {t("leaf.edit.reminder.at")}
+                </span>
+                <Select
+                  value={reminderTime.hour.toString()}
+                  onValueChange={(value) =>
+                    onReminderTimeChange({
+                      ...reminderTime,
+                      hour: parseInt(value),
+                    })
+                  }
+                >
+                  <SelectTrigger className="w-[70px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-40">
+                    {HOURS.map((h) => (
+                      <SelectItem key={h} value={h.toString()}>
+                        {h.toString().padStart(2, "0")}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <span className="text-sm">:</span>
+                <Select
+                  value={reminderTime.minute.toString()}
+                  onValueChange={(value) =>
+                    onReminderTimeChange({
+                      ...reminderTime,
+                      minute: parseInt(value),
+                    })
+                  }
+                >
+                  <SelectTrigger className="w-[70px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {MINUTES.map((m) => (
+                      <SelectItem key={m} value={m.toString()}>
+                        {m.toString().padStart(2, "0")}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
 
           {/* Action buttons for saving or deleting the leaf */}

@@ -445,6 +445,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -701,6 +707,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Что-то пошло не так",
+    "description": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова.",
+    "retry": "Попробовать снова",
+    "dashboardError": "Не удалось загрузить данные панели"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Доброе утро",
@@ -725,5 +737,39 @@
     "monthlyProgress": "Ежемесячный прогресс",
     "recentActivity": "Недавняя активность",
     "noActivity": "Нет недавней активности"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "Добро пожаловать в Goal Streak! Настройте свою первую цепочку привычек",
+    "step1": "Создать ствол",
+    "step2": "Добавить ветку",
+    "step3": "Добавить сучок",
+    "step4": "Добавить побег (расписание)",
+    "step5": "Добавить лист (привычка)",
+    "skip": "Пропустить пока",
+    "done": "Начать!",
+    "progress": "Шаг {current} из {total}",
+    "trunkName": "Название ствола",
+    "trunkPlaceholder": "напр., Здоровье, Карьера, Обучение...",
+    "trunkDescription": "Ствол — это категория верхнего уровня для ваших привычек.",
+    "limbName": "Название ветки",
+    "limbPlaceholder": "напр., Фитнес, Финансы, Проекты...",
+    "limbDescription": "Ветка группирует связанные привычки под стволом.",
+    "branchName": "Название сучка",
+    "branchPlaceholder": "напр., Утренняя рутина, Еженедельный обзор...",
+    "branchDescription": "Сучок — это подгруппа внутри ветки.",
+    "twigName": "Название побега",
+    "twigPlaceholder": "напр., Ежедневные упражнения, Чтение 30 мин...",
+    "twigDescription": "Побег представляет повторяющееся расписание для привычек.",
+    "colorTheme": "Цветовая тема",
+    "leafName": "Название листа",
+    "leafPlaceholder": "напр., Отжимания, Медитация, Дневник...",
+    "leafDescription": "Лист — это сама привычка, которую вы хотите отслеживать.",
+    "createAndNext": "Создать и Далее",
+    "skipMessage": "Вы пропустили предыдущий шаг. Вернитесь, чтобы создать его.",
+    "goBack": "Назад"
   }
 }

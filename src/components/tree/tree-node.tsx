@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,7 +12,7 @@ import {
   Network,
   TreePine,
 } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useTreeContext } from "@/components/tree/tree-context";
 import type { TreeNode } from "../../../convex/tree";
 
 const typeIcons = {
@@ -21,6 +22,14 @@ const typeIcons = {
   twig: CalendarDays,
   leaf: Leaf,
 } as const;
+
+const typeLabels: Record<TreeNode["type"], string> = {
+  trunk: "Trunk",
+  limb: "Limb",
+  branch: "Branch",
+  twig: "Twig",
+  leaf: "Leaf",
+};
 
 const typeLinks: Record<TreeNode["type"], string> = {
   trunk: "/trunks",
@@ -57,22 +66,151 @@ function colorClass(colorTheme: string | undefined): string {
 interface TreeNodeProps {
   node: TreeNode;
   defaultExpanded?: boolean;
+  depth: number;
+  posInSet: number;
+  setSize: number;
+  parentId: string | null;
 }
 
-export function TreeNode({ node, defaultExpanded = false }: TreeNodeProps) {
+export function TreeNode({
+  node,
+  defaultExpanded = false,
+  depth,
+  posInSet,
+  setSize,
+  parentId,
+}: TreeNodeProps) {
   const [expanded, setExpanded] = useState(defaultExpanded);
   const hasChildren = node.children.length > 0;
   const Icon = typeIcons[node.type];
+  const rowRef = useRef<HTMLDivElement>(null);
+  const { activeNodeId, setActiveNodeId, registerNode, unregisterNode } = useTreeContext();
+  const isActive = activeNodeId === node.id;
+  const defaultActiveRef = useRef(false);
+
+  useEffect(() => {
+    registerNode(node.id, { depth, parentId, posInSet, setSize });
+    return () => unregisterNode(node.id);
+  }, [node.id, depth, parentId, posInSet, setSize, registerNode, unregisterNode]);
+
+  // Set first registered node as active on mount
+  useEffect(() => {
+    if (!defaultActiveRef.current) {
+      defaultActiveRef.current = true;
+      setActiveNodeId(node.id);
+    }
+  }, [node.id, setActiveNodeId]);
 
   const toggle = useCallback(() => setExpanded((prev) => !prev), []);
 
+  useEffect(() => {
+    if (isActive && rowRef.current) {
+      rowRef.current.focus();
+    }
+  }, [isActive]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const allTreeItems = Array.from(
+        document.querySelectorAll<HTMLElement>('[role="treeitem"]'),
+      );
+
+      const currentIdx = allTreeItems.indexOf(rowRef.current!);
+      if (currentIdx === -1) return;
+
+      function focusAndActivate(el: HTMLElement) {
+        const id = el.dataset.nodeId;
+        if (id) setActiveNodeId(id);
+        el.focus();
+      }
+
+      switch (e.key) {
+        case "ArrowDown": {
+          e.preventDefault();
+          const next = allTreeItems[currentIdx + 1];
+          if (next) focusAndActivate(next);
+          break;
+        }
+        case "ArrowUp": {
+          e.preventDefault();
+          const prev = allTreeItems[currentIdx - 1];
+          if (prev) focusAndActivate(prev);
+          break;
+        }
+        case "ArrowRight": {
+          e.preventDefault();
+          if (hasChildren && !expanded) {
+            setExpanded(true);
+          } else if (hasChildren && expanded) {
+            const next = allTreeItems[currentIdx + 1];
+            if (next) focusAndActivate(next);
+          }
+          break;
+        }
+        case "ArrowLeft": {
+          e.preventDefault();
+          if (hasChildren && expanded) {
+            setExpanded(false);
+          } else if (parentId) {
+            const parentEl = allTreeItems.find(
+              (el) => el.dataset.nodeId === parentId,
+            );
+            if (parentEl) focusAndActivate(parentEl);
+          }
+          break;
+        }
+        case "Home": {
+          e.preventDefault();
+          const first = allTreeItems[0];
+          if (first) focusAndActivate(first);
+          break;
+        }
+        case "End": {
+          e.preventDefault();
+          const last = allTreeItems[allTreeItems.length - 1];
+          if (last) focusAndActivate(last);
+          break;
+        }
+        case "Enter": {
+          e.preventDefault();
+          const link = rowRef.current?.querySelector<HTMLAnchorElement>("a[href]");
+          if (link) link.click();
+          break;
+        }
+        case " ": {
+          e.preventDefault();
+          if (hasChildren) {
+            setExpanded((prev) => !prev);
+          }
+          break;
+        }
+      }
+    },
+    [hasChildren, expanded, parentId, setActiveNodeId],
+  );
+
   return (
-    <div>
-      <div className="group flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-muted/50">
+    <div
+      role="treeitem"
+      aria-level={depth + 1}
+      aria-setsize={setSize}
+      aria-posinset={posInSet}
+      aria-expanded={hasChildren ? expanded : undefined}
+      aria-selected={false}
+      aria-label={`${typeLabels[node.type]}: ${node.name}`}
+      data-node-id={node.id}
+    >
+      <div
+        ref={rowRef}
+        tabIndex={isActive ? 0 : -1}
+        onKeyDown={handleKeyDown}
+        className="group flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+      >
         <button
           type="button"
           onClick={toggle}
           aria-expanded={hasChildren ? expanded : undefined}
+          tabIndex={-1}
           className={cn(
             "flex shrink-0 items-center justify-center rounded-sm p-0.5 transition-colors hover:bg-muted",
             !hasChildren && "invisible",
@@ -104,7 +242,8 @@ export function TreeNode({ node, defaultExpanded = false }: TreeNodeProps) {
 
         <Link
           href={`${typeLinks[node.type]}/${node.id}`}
-          className="hidden shrink-0 rounded-md px-2 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground group-hover:inline-block"
+          tabIndex={-1}
+          className="shrink-0 rounded-md px-2 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground opacity-0 pointer-events-none group-hover:inline-block group-focus-within:opacity-100 group-focus-within:pointer-events-auto focus:opacity-100 focus:pointer-events-auto focus:outline-none focus:ring-2 focus:ring-ring"
         >
           View
         </Link>
@@ -119,9 +258,17 @@ export function TreeNode({ node, defaultExpanded = false }: TreeNodeProps) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
             className="overflow-hidden ps-6"
+            role="group"
           >
-            {node.children.map((child) => (
-              <TreeNode key={child.id} node={child} />
+            {node.children.map((child, i) => (
+              <TreeNode
+                key={child.id}
+                node={child}
+                depth={depth + 1}
+                posInSet={i + 1}
+                setSize={node.children.length}
+                parentId={node.id}
+              />
             ))}
           </motion.div>
         ) : null}

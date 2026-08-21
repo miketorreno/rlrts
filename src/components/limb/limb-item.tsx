@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useToastMessages } from "@/hooks/use-toast-messages";
+import { useUndoDelete } from "@/hooks/use-undo-delete";
 import { useMutation } from "convex/react";
 import { Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -27,24 +27,29 @@ interface LimbItemProps {
 
 export function LimbItem({ limb, onEdit }: LimbItemProps) {
   const tDialogs = useTranslations("dialogs");
-  const toastMessages = useToastMessages();
+  const { undoableDelete } = useUndoDelete();
 
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const removeLimb = useMutation(api.limbs.remove);
+  const createLimb = useMutation(api.limbs.create);
 
   const handleDelete = useCallback(async () => {
     setDeleting(true);
+    setDeleteOpen(false);
     try {
-      await removeLimb({ id: limb._id });
-      toastMessages.limb.deleted();
-      setDeleteOpen(false);
+      await undoableDelete(
+        async () => { await removeLimb({ id: limb._id }); },
+        limb,
+        limb.name,
+        async (item) => { await createLimb({ name: item.name, trunkId: item.trunkId }); },
+      );
     } catch (error) {
       console.error(error);
     } finally {
       setDeleting(false);
     }
-  }, [removeLimb, limb._id, toastMessages]);
+  }, [removeLimb, createLimb, limb, undoableDelete]);
 
   return (
     <>

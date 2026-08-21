@@ -39,6 +39,7 @@ export const list = query({
 export const create = mutation({
   args: {
     name: v.string(),
+    color: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -58,6 +59,7 @@ export const create = mutation({
     return await ctx.db.insert("trunks", {
       name: args.name,
       userId: identity.subject,
+      color: args.color,
       position: maxPosition + 1,
     });
   },

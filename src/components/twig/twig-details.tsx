@@ -5,6 +5,7 @@ import { TwigDeleteDialog } from "@/components/twig/details/twig-delete-dialog";
 import { TwigEditForm } from "@/components/twig/details/twig-edit-form";
 import { TwigLeavesList } from "@/components/twig/details/twig-leaves-list";
 import { useToast } from "@/hooks/use-toast";
+import { useUndoDelete } from "@/hooks/use-undo-delete";
 import { useRouter } from "@/i18n/routing";
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
@@ -21,6 +22,7 @@ interface TwigDetailsProps {
 export function TwigDetails({ twigId }: TwigDetailsProps) {
   const router = useRouter();
   const { toast } = useToast();
+  const { undoableDelete } = useUndoDelete();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   // Fetch twig and associated data
@@ -51,6 +53,7 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
   // Mutations
   const updateTwig = useMutation(api.twigs.update);
   const deleteTwig = useMutation(api.twigs.remove);
+  const createTwig = useMutation(api.twigs.create);
 
   if (!twig) return null;
 
@@ -74,18 +77,22 @@ export function TwigDetails({ twigId }: TwigDetailsProps) {
   };
 
   const handleDelete = async () => {
-    try {
-      setShowDeleteAlert(false);
-      router.replace("/twig");
-      await new Promise((resolve) => setTimeout(resolve, 0));
-      await deleteTwig({ id: twigId });
-      toast({ description: "Twig deleted", variant: "destructive" });
-    } catch (error) {
-      toast({
-        description: `Failed to delete twig: ${error instanceof Error ? error.message : "Unknown error"}`,
-        variant: "destructive",
-      });
-    }
+    setShowDeleteAlert(false);
+    router.replace("/twig");
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await undoableDelete(
+      async () => { await deleteTwig({ id: twigId }); },
+      twig,
+      name,
+      async (item) => {
+        const newId = await createTwig({
+          name: item.name,
+          colorTheme: item.colorTheme,
+          branchId: item.branchId,
+        });
+        router.push(`/twigs/${newId}`);
+      },
+    );
   };
 
   return (

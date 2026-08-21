@@ -446,6 +446,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -702,6 +708,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "Algo salió mal",
+    "description": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+    "retry": "Intentar de nuevo",
+    "dashboardError": "No se pudieron cargar los datos del panel"
+  },
   "dashboard": {
     "greeting": {
       "morning": "Buenos días",
@@ -726,5 +738,39 @@
     "monthlyProgress": "Progreso mensual",
     "recentActivity": "Actividad reciente",
     "noActivity": "Sin actividad reciente"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "¡Bienvenido a Goal Streak! Configura tu primera cadena de hábitos",
+    "step1": "Crear un Tronco",
+    "step2": "Agregar una Rama",
+    "step3": "Agregar unarama",
+    "step4": "Agregar un Ramo (horario)",
+    "step5": "Agregar una Hoja (hábito)",
+    "skip": "Omitir por ahora",
+    "done": "¡Comenzar!",
+    "progress": "Paso {current} de {total}",
+    "trunkName": "Nombre del tronco",
+    "trunkPlaceholder": "ej. Salud, Carrera, Aprendizaje...",
+    "trunkDescription": "Un tronco es una categoría de nivel superior para tus hábitos.",
+    "limbName": "Nombre de la rama",
+    "limbPlaceholder": "ej. Fitness, Finanzas, Proyectos...",
+    "limbDescription": "Una rama agrupa hábitos relacionados bajo un tronco.",
+    "branchName": "Nombre de larama",
+    "branchPlaceholder": "ej. Rutina matutina, Revisión semanal...",
+    "branchDescription": "Larama es un subgrupo dentro de una rama.",
+    "twigName": "Nombre del ramo",
+    "twigPlaceholder": "ej. Ejercicio diario, Leer 30 min...",
+    "twigDescription": "Un ramo representa un horario recurrente para hábitos.",
+    "colorTheme": "Tema de color",
+    "leafName": "Nombre de la hoja",
+    "leafPlaceholder": "ej. Flexiones, Meditación, Diario...",
+    "leafDescription": "Una hoja es el hábito real que quieres rastrear.",
+    "createAndNext": "Crear y Siguiente",
+    "skipMessage": "Omitiste el paso anterior. Vuelve para crearlo.",
+    "goBack": "Volver"
   }
 }

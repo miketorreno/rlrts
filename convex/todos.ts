@@ -3,7 +3,7 @@ import { Doc } from "./_generated/dataModel";
 import { MutationCtx, mutation, query } from "./_generated/server";
 import { streakMultiplier } from "./xp";
 
-function periodStart(cadence: "daily" | "weekly", now: number): number {
+export function periodStart(cadence: "daily" | "weekly", now: number): number {
   const date = new Date(now);
   date.setHours(0, 0, 0, 0);
   if (cadence === "weekly") {
@@ -50,7 +50,7 @@ async function recomputeCompletion(
 
       let profile = await ctx.db
         .query("xpProfiles")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .first();
 
       // Reset streak if gap is too long
@@ -127,15 +127,15 @@ export const list = query({
 
     const todos = await ctx.db
       .query("todos")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     const items = await ctx.db
       .query("todoItems")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     const completions = await ctx.db
       .query("todoCompletions")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     return {
@@ -161,7 +161,7 @@ export const create = mutation({
 
     const existingTodos = await ctx.db
       .query("todos")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     const maxPosition = existingTodos.reduce(
@@ -228,7 +228,7 @@ export const remove = mutation({
 
     const items = await ctx.db
       .query("todoItems")
-      .filter((q) => q.eq(q.field("todoId"), args.id))
+      .withIndex("by_todo", (q) => q.eq("todoId", args.id))
       .collect();
     for (const item of items) {
       await ctx.db.delete(item._id);
@@ -244,7 +244,7 @@ export const remove = mutation({
 
     const allTodos = await ctx.db
       .query("todos")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     const deletedPosition = todo.position ?? allTodos.length + 1;
@@ -383,7 +383,7 @@ export const resetPeriod = mutation({
 
     const todos = await ctx.db
       .query("todos")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     const cadenceTodoIds = new Set(
       todos.filter((todo) => todo.cadence === args.cadence).map((todo) => todo._id),
@@ -391,7 +391,7 @@ export const resetPeriod = mutation({
 
     const items = await ctx.db
       .query("todoItems")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     for (const item of items) {
       if (item.isCompleted && cadenceTodoIds.has(item.todoId)) {

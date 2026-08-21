@@ -18,23 +18,23 @@ export const getFullTree = query({
     const [trunks, limbs, branches, twigs, leaves] = await Promise.all([
       ctx.db
         .query("trunks")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .collect(),
       ctx.db
         .query("limbs")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .collect(),
       ctx.db
         .query("branches")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .collect(),
       ctx.db
         .query("twigs")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .collect(),
       ctx.db
         .query("leaves")
-        .filter((q) => q.eq(q.field("userId"), userId))
+        .withIndex("by_user", (q) => q.eq("userId", userId))
         .collect(),
     ]);
 

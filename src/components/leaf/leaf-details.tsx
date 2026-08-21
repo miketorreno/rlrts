@@ -40,6 +40,7 @@ interface LeafDetailsProps {
     twigId: Id<"twigs">;
     position?: number;
     xp?: number;
+    reminderTime?: { hour: number; minute: number };
   };
   twig: {
     _id: Id<"twigs">;
@@ -85,12 +86,17 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
   );
   const [position, setPosition] = useState<number>(leaf.position ?? 1);
   const [xp, setXp] = useState<number>(leaf.xp ?? 0);
+  const [reminderTime, setReminderTime] = useState<
+    { hour: number; minute: number } | undefined
+  >(leaf.reminderTime);
   const [twigSize, setTwigSize] = useState(getTwigSize());
 
   // Convex API mutations and queries
   const updateLeaf = useMutation(api.leaves.update);
   const deleteLeaf = useMutation(api.leaves.remove);
   const markComplete = useMutation(api.leaves.markComplete);
+  const scheduleReminder = useMutation(api.leaves.scheduleReminder);
+  const cancelReminder = useMutation(api.leaves.cancelReminder);
   const twigs = useQuery(api.twigs.list, {});
   const leaves = useQuery(api.leaves.list, { twigId: selectedTwigId });
 
@@ -190,6 +196,18 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
         position,
         xp,
       });
+
+      // Handle reminder scheduling
+      if (reminderTime) {
+        await scheduleReminder({
+          leafId: leaf._id,
+          hour: reminderTime.hour,
+          minute: reminderTime.minute,
+        });
+      } else if (leaf.reminderTime) {
+        await cancelReminder({ leafId: leaf._id });
+      }
+
       toast({ description: "Leaf updated successfully" });
       router.push("/twig");
     } catch (error) {
@@ -295,6 +313,8 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
         leaves={leaves}
         onSave={handleSave}
         onDelete={() => setShowDeleteAlert(true)}
+        reminderTime={reminderTime}
+        onReminderTimeChange={setReminderTime}
       />
 
       <LeafDeleteDialog

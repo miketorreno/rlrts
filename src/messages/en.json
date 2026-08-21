@@ -262,6 +262,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -655,7 +661,13 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
-    "dashboard": {
+  "errors": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try Again",
+    "dashboardError": "Failed to load dashboard data"
+  },
+  "dashboard": {
     "greeting": {
       "morning": "Good morning",
       "afternoon": "Good afternoon",
@@ -679,5 +691,49 @@
     "monthlyProgress": "Monthly Progress",
     "recentActivity": "Recent Activity",
     "noActivity": "No recent activity"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "Welcome to Goal Streak! Let's set up your first habit chain",
+    "step1": "Create a Trunk",
+    "step2": "Add a Limb",
+    "step3": "Add a Branch",
+    "step4": "Add a Twig (schedule)",
+    "step5": "Add a Leaf (habit)",
+    "skip": "Skip for now",
+    "done": "Get Started!",
+    "progress": "Step {current} of {total}",
+    "trunkName": "Trunk Name",
+    "trunkPlaceholder": "e.g., Health, Career, Learning...",
+    "trunkDescription": "A trunk is a top-level category for your habits.",
+    "limbName": "Limb Name",
+    "limbPlaceholder": "e.g., Fitness, Finance, Projects...",
+    "limbDescription": "A limb groups related habits under a trunk.",
+    "branchName": "Branch Name",
+    "branchPlaceholder": "e.g., Morning Routine, Weekly Review...",
+    "branchDescription": "A branch is a sub-group within a limb.",
+    "twigName": "Twig Name",
+    "twigPlaceholder": "e.g., Daily Exercise, Read 30 min...",
+    "twigDescription": "A twig represents a recurring schedule for habits.",
+    "colorTheme": "Color Theme",
+    "leafName": "Leaf Name",
+    "leafPlaceholder": "e.g., Push-ups, Meditation, Journal...",
+    "leafDescription": "A leaf is the actual habit you want to track.",
+    "createAndNext": "Create & Next",
+    "skipMessage": "You skipped the previous step.",
+    "continueWithout": "Continue without",
+    "trunkColor": "Color",
+    "limbDescriptionLabel": "Description (optional)",
+    "limbDescriptionPlaceholder": "e.g., Fitness goals, Work tasks...",
+    "twigType": "Type",
+    "twigTypeOnce": "One-time",
+    "twigTypeMany": "Repeatable",
+    "leafDescriptionLabel": "Description (optional)",
+    "leafDescriptionPlaceholder": "e.g., Do 20 push-ups, 10 min meditation...",
+    "leafTargetCount": "Daily target (optional)",
+    "leafTargetCountPlaceholder": "e.g., 3"
   }
 }

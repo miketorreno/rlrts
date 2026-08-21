@@ -6,6 +6,7 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     colorTheme: v.string(),
+    type: v.optional(v.union(v.literal("once"), v.literal("many"))),
     position: v.optional(v.number()),
     branchId: v.optional(v.id("branches")),
   })
@@ -15,6 +16,7 @@ export default defineSchema({
   trunks: defineTable({
     name: v.string(),
     userId: v.string(),
+    color: v.optional(v.string()),
     position: v.optional(v.number()),
   }).index("by_user", ["userId"]),
 
@@ -22,6 +24,7 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     trunkId: v.id("trunks"),
+    description: v.optional(v.string()),
     position: v.optional(v.number()),
   })
     .index("by_user", ["userId"])
@@ -40,12 +43,23 @@ export default defineSchema({
     name: v.string(),
     userId: v.string(),
     twigId: v.id("twigs"),
+    description: v.optional(v.string()),
+    targetCount: v.optional(v.number()),
     xp: v.optional(v.number()),
     timerDuration: v.optional(v.number()),
     position: v.optional(v.number()),
     scheduledTimer: v.optional(v.id("_scheduled_functions")),
     timerEnd: v.optional(v.number()),
+    reminderTime: v.optional(
+      v.object({
+        hour: v.number(),
+        minute: v.number(),
+      }),
+    ),
+    scheduledReminder: v.optional(v.id("_scheduled_functions")),
+    reminderNextFire: v.optional(v.number()),
   })
+    .index("by_user", ["userId"])
     .index("by_twig", ["twigId"])
     .index("scheduledTimer", ["scheduledTimer"]),
 
@@ -71,13 +85,17 @@ export default defineSchema({
     name: v.string(),
     position: v.optional(v.number()),
     isCompleted: v.boolean(),
-  }).index("by_todo", ["todoId"]),
+  })
+    .index("by_user", ["userId"])
+    .index("by_todo", ["todoId"]),
 
   todoCompletions: defineTable({
     todoId: v.id("todos"),
     userId: v.string(),
     completedAt: v.number(),
-  }).index("by_user_and_date", ["userId", "completedAt"]),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_and_date", ["userId", "completedAt"]),
 
   xpEvents: defineTable({
     userId: v.string(),
@@ -97,5 +115,6 @@ export default defineSchema({
     currentStreak: v.number(),
     longestStreak: v.number(),
     lastCompletionDate: v.optional(v.string()),
+    onboardingCompleted: v.optional(v.boolean()),
   }).index("by_user", ["userId"]),
 });

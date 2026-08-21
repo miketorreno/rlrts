@@ -52,6 +52,7 @@ export const create = mutation({
   args: {
     name: v.string(),
     colorTheme: v.string(),
+    type: v.optional(v.union(v.literal("once"), v.literal("many"))),
     branchId: v.optional(v.id("branches")),
   },
   handler: async (ctx, args) => {
@@ -82,6 +83,7 @@ export const create = mutation({
       name: args.name,
       userId: identity.subject,
       colorTheme: args.colorTheme,
+      type: args.type,
       branchId: args.branchId,
       position: existingTwigs.length + 1,
     });

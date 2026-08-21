@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useToastMessages } from "@/hooks/use-toast-messages";
+import { useUndoDelete } from "@/hooks/use-undo-delete";
 import { useMutation } from "convex/react";
 import { Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -27,24 +27,29 @@ interface TrunkItemProps {
 
 export function TrunkItem({ trunk, onEdit }: TrunkItemProps) {
   const tDialogs = useTranslations("dialogs");
-  const toastMessages = useToastMessages();
+  const { undoableDelete } = useUndoDelete();
 
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const removeTrunk = useMutation(api.trunks.remove);
+  const createTrunk = useMutation(api.trunks.create);
 
   const handleDelete = useCallback(async () => {
     setDeleting(true);
+    setDeleteOpen(false);
     try {
-      await removeTrunk({ id: trunk._id });
-      toastMessages.trunk.deleted();
-      setDeleteOpen(false);
+      await undoableDelete(
+        async () => { await removeTrunk({ id: trunk._id }); },
+        trunk,
+        trunk.name,
+        async (item) => { await createTrunk({ name: item.name }); },
+      );
     } catch (error) {
       console.error(error);
     } finally {
       setDeleting(false);
     }
-  }, [removeTrunk, trunk._id, toastMessages]);
+  }, [removeTrunk, createTrunk, trunk, undoableDelete]);
 
   return (
     <>

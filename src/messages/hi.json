@@ -446,6 +446,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -702,6 +708,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "कुछ गलत हो गया",
+    "description": "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+    "retry": "पुनः प्रयास करें",
+    "dashboardError": "डैशबोर्ड डेटा लोड करने में विफल"
+  },
   "dashboard": {
     "greeting": {
       "morning": "सुप्रभात",
@@ -726,5 +738,39 @@
     "monthlyProgress": "मासिक प्रगति",
     "recentActivity": "हालिया गतिविधि",
     "noActivity": "कोई हालिया गतिविधि नहीं"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "Goal Streak में आपका स्वागत है! अपनी पहली आदत श्रृंखला सेट करें",
+    "step1": "तना बनाएं",
+    "step2": "शाखा जोड़ें",
+    "step3": "टहनी जोड़ें",
+    "step4": "पत्ती जोड़ें (समय-सारणी)",
+    "step5": "पत्ता जोड़ें (आदत)",
+    "skip": "अभी के लिए छोड़ें",
+    "done": "शुरू करें!",
+    "progress": "चरण {current} / {total}",
+    "trunkName": "तने का नाम",
+    "trunkPlaceholder": "जैसे, स्वास्थ्य, करियर, सीखना...",
+    "trunkDescription": "तना आपकी आदतों के लिए एक शीर्ष स्तरीय श्रेणी है।",
+    "limbName": "शाखा का नाम",
+    "limbPlaceholder": "जैसे, फिटनेस, वित्त, प्रोजेक्ट...",
+    "limbDescription": "शाखा तने के अंतर्गत संबंधित आदतों को समूहित करती है।",
+    "branchName": "टहनी का नाम",
+    "branchPlaceholder": "जैसे, सुबह की दिनचर्या, साप्ताहिक समीक्षा...",
+    "branchDescription": "टहनी शाखा के भीतर एक उप-समूह है।",
+    "twigName": "पत्ती का नाम",
+    "twigPlaceholder": "जैसे, दैनिक व्यायाम, 30 मिनट पढ़ें...",
+    "twigDescription": "पत्ती आदतों के लिए एक आवर्ती समय-सारणी का प्रतिनिधित्व करती है।",
+    "colorTheme": "रंग विषय",
+    "leafName": "पत्ते का नाम",
+    "leafPlaceholder": "जैसे, पुश-अप, ध्यान, डायरी...",
+    "leafDescription": "पत्ता वह वास्तविक आदत है जिसे आप ट्रैक करना चाहते हैं।",
+    "createAndNext": "बनाएं और आगे बढ़ें",
+    "skipMessage": "आपने पिछला चरण छोड़ दिया। इसे बनाने के लिए वापस जाएं।",
+    "goBack": "वापस जाएं"
   }
 }

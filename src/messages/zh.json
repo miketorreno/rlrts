@@ -446,6 +446,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -702,6 +708,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "出了点问题",
+    "description": "发生了意外错误。请重试。",
+    "retry": "重试",
+    "dashboardError": "加载仪表盘数据失败"
+  },
   "dashboard": {
     "greeting": {
       "morning": "早上好",
@@ -726,5 +738,39 @@
     "monthlyProgress": "每月进度",
     "recentActivity": "最近活动",
     "noActivity": "无最近活动"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "欢迎使用 Goal Streak！设置你的第一个习惯链",
+    "step1": "创建主干",
+    "step2": "添加分支",
+    "step3": "添加枝干",
+    "step4": "添加枝条（计划）",
+    "step5": "添加叶子（习惯）",
+    "skip": "暂时跳过",
+    "done": "开始使用！",
+    "progress": "第 {current} 步，共 {total} 步",
+    "trunkName": "主干名称",
+    "trunkPlaceholder": "例如：健康、事业、学习...",
+    "trunkDescription": "主干是你习惯的顶层分类。",
+    "limbName": "分支名称",
+    "limbPlaceholder": "例如：健身、财务、项目...",
+    "limbDescription": "分支将相关的习惯归类在主干下。",
+    "branchName": "枝干名称",
+    "branchPlaceholder": "例如：晨间例程、每周回顾...",
+    "branchDescription": "枝干是分支内的子分组。",
+    "twigName": "枝条名称",
+    "twigPlaceholder": "例如：每日锻炼、阅读30分钟...",
+    "twigDescription": "枝条代表习惯的重复时间表。",
+    "colorTheme": "颜色主题",
+    "leafName": "叶子名称",
+    "leafPlaceholder": "例如：俯卧撑、冥想、日记...",
+    "leafDescription": "叶子是你想要追踪的实际习惯。",
+    "createAndNext": "创建并继续",
+    "skipMessage": "你跳过了上一步。返回以创建它。",
+    "goBack": "返回"
   }
 }

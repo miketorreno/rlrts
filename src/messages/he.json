@@ -446,6 +446,12 @@
         "xp": {
           "label": "XP Reward"
         },
+        "reminder": {
+          "label": "Reminder",
+          "enabled": "Daily reminder",
+          "disabled": "No reminder",
+          "at": "at"
+        },
         "actions": {
           "back": "Go Back",
           "save": "Save Changes",
@@ -702,6 +708,12 @@
     "streak": "Streak: {count}",
     "nextLevel": "Next level at {xp} XP"
   },
+  "errors": {
+    "title": "משהו השתבש",
+    "description": "אירעה שגיאה לא צפויה. אנא נסה שוב.",
+    "retry": "נסה שוב",
+    "dashboardError": "טעינת נתוני לוח המחוונים נכשלה"
+  },
   "dashboard": {
     "greeting": {
       "morning": "בוקר טוב",
@@ -726,5 +738,39 @@
     "monthlyProgress": "התקדמות חודשית",
     "recentActivity": "פעילות אחרונה",
     "noActivity": "אין פעילות אחרונה"
+  },
+  "common": {
+    "deleted": "{name} deleted",
+    "undo": "Undo"
+  },
+  "onboarding": {
+    "title": "ברוכים הבאים ל-Goal Streak! בנו את שרשרת ההרגלים הראשונה שלכם",
+    "step1": "צרו גזע",
+    "step2": "הוסיפו ענף",
+    "step3": "הוסיפו עANCH",
+    "step4": "הוסיפו twig (לוח זמנים)",
+    "step5": "הוסיפו עלה (הרגל)",
+    "skip": "דלג לעת עתה",
+    "done": "התחילו!",
+    "progress": "שלב {current} מתוך {total}",
+    "trunkName": "שם הגזע",
+    "trunkPlaceholder": "למשל, בריאות, קריירה, למידה...",
+    "trunkDescription": "גזע הוא קטגוריה ברמה העליונה להרגלים שלכם.",
+    "limbName": "שם הענף",
+    "limbPlaceholder": "למשל, כושר, פיננסים, פרויקטים...",
+    "limbDescription": "ענף מקבץ הרגלים דומים תחת גזע.",
+    "branchName": "שם העANCH",
+    "branchPlaceholder": "למשל, שגרת בוקר, סקירה שבועית...",
+    "branchDescription": "עANCH הוא תת-קבוצה בתוך ענף.",
+    "twigName": "שם ה twig",
+    "twigPlaceholder": "למשל, אימון יומי, קריאה 30 דקות...",
+    "twigDescription": "twig מייצג לוח זמנים חוזר להרגלים.",
+    "colorTheme": "ערכת נושא",
+    "leafName": "שם העלה",
+    "leafPlaceholder": "למשל, כפיפות מצח, מדיטציה, יומן...",
+    "leafDescription": "עלה הוא ההרגל בפועל שברצונכם לעקוב אחריו.",
+    "createAndNext": "צרו והמשך",
+    "skipMessage": "דילגתם על השלב הקודם. חזרו כדי ליצור אותו.",
+    "goBack": "חזרה"
   }
 }

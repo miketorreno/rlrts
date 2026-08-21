@@ -158,6 +158,46 @@ export const recordHabitXp = mutation({
   },
 });
 
+export const getOnboardingStatus = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const profile = await ctx.db
+      .query("xpProfiles")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .first();
+
+    return { onboardingCompleted: profile?.onboardingCompleted === true };
+  },
+});
+
+export const completeOnboarding = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const profile = await ctx.db
+      .query("xpProfiles")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .first();
+
+    if (!profile) {
+      await ctx.db.insert("xpProfiles", {
+        userId: identity.subject,
+        lifetimeXp: 0,
+        currentStreak: 0,
+        longestStreak: 0,
+        onboardingCompleted: true,
+      });
+    } else {
+      await ctx.db.patch(profile._id, { onboardingCompleted: true });
+    }
+  },
+});
+
 export async function updateStreak(
   ctx: MutationCtx,
   userId: string,
