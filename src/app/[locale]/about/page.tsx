@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,25 +8,42 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
-// import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Show } from "@clerk/nextjs";
 import { CheckCircle2 } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import NextLink from "next/link";
 
-// About page component that provides information about the Goal Streak application
-// Includes sections for app description, features, project info, and the Seinfeld Strategy
+const TECH_STACK = [
+  { name: "Next.js 16", variant: "default" as const },
+  { name: "Convex", variant: "secondary" as const },
+  { name: "Clerk", variant: "outline" as const },
+  { name: "Tailwind v4", variant: "secondary" as const },
+  { name: "TypeScript", variant: "outline" as const },
+  { name: "shadcn/ui", variant: "default" as const },
+  { name: "next-intl", variant: "secondary" as const },
+  { name: "Framer Motion", variant: "outline" as const },
+];
+
+const FEATURE_KEYS = [
+  "visualTracking",
+  "multiHabit",
+  "customThemes",
+  "timedTasks",
+  "activityGrid",
+  "flexibleDuration",
+  "responsiveDesign",
+  "themeSupport",
+  "i18nSupport",
+  "openSource",
+] as const;
 
 export default function AboutPage() {
-  const locale = useLocale();
   const t = useTranslations("about");
-  const isRTL = locale === "he" || locale === "ar";
 
   return (
-    // Main container with responsive width and vertical spacing
     <div className="container mx-auto w-full max-w-3xl space-y-8 py-16">
-      {/* Introduction Card: Overview of Goal Streak */}
+      {/* Introduction Card */}
       <Card className="p-4 shadow">
         <CardHeader>
           <h1 className="font-heading text-4xl font-bold">{t("title")}</h1>
@@ -43,7 +61,7 @@ export default function AboutPage() {
         </CardContent>
       </Card>
 
-      {/* Features Card: List of key application capabilities */}
+      {/* Features Card */}
       <Card className="p-4 shadow">
         <CardHeader>
           <h2 className="font-heading text-2xl font-bold">
@@ -51,131 +69,60 @@ export default function AboutPage() {
           </h2>
         </CardHeader>
         <CardContent>
-          {/* Feature list with primary headings and muted descriptions */}
           <ul className="space-y-4 text-muted-foreground">
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.visualTracking.title")}
-                </strong>
-                <p>{t("features.visualTracking.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.multiHabit.title")}
-                </strong>
-                <p>{t("features.multiHabit.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.customThemes.title")}
-                </strong>
-                <p>{t("features.customThemes.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.timedTasks.title")}
-                </strong>
-                <p>{t("features.timedTasks.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.activityGrid.title")}
-                </strong>
-                <p>{t("features.activityGrid.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.flexibleDuration.title")}
-                </strong>
-                <p>{t("features.flexibleDuration.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.responsiveDesign.title")}
-                </strong>
-                <p>{t("features.responsiveDesign.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.themeSupport.title")}
-                </strong>
-                <p>{t("features.themeSupport.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.i18nSupport.title")}
-                </strong>
-                <p>{t("features.i18nSupport.description")}</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
-              <div>
-                <strong className="text-primary">
-                  {t("features.openSource.title")}
-                </strong>
-                <p>{t("features.openSource.description")}</p>
-              </div>
-            </li>
+            {FEATURE_KEYS.map((key) => (
+              <li key={key} className="flex gap-3">
+                <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
+                <div>
+                  <strong className="text-primary">
+                    {t(`features.${key}.title`)}
+                  </strong>
+                  <p>{t(`features.${key}.description`)}</p>
+                </div>
+              </li>
+            ))}
           </ul>
         </CardContent>
       </Card>
 
-      {/* Open Source Card: Project information and creator introduction */}
-      {/* <Card className="p-4 shadow">
+      {/* Tech Stack Card */}
+      <Card className="p-4 shadow">
+        <CardHeader>
+          <h2 className="font-heading text-2xl font-bold">Tech Stack</h2>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-2">
+            {TECH_STACK.map((tech) => (
+              <Badge key={tech.name} variant={tech.variant}>
+                {tech.name}
+              </Badge>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Team / Creator Card */}
+      <Card className="p-4 shadow">
         <CardHeader>
           <h2 className="font-heading text-2xl font-bold">
             {t("openSourceProject.title")}
           </h2>
         </CardHeader>
-        <CardContent>
-          <p className="mb-4 text-muted-foreground">
+        <CardContent className="space-y-4">
+          <p className="text-muted-foreground">
             {t("openSourceProject.description")}
           </p>
-          <div className="flex items-end">
-            <div
-              className={`mt-4 rounded-3xl ${isRTL ? "rounded-bl-none" : "rounded-br-none"} bg-muted p-4`}
-            >
+          <div className="flex items-end gap-2">
+            <div className="rounded-3xl rounded-br-none bg-muted p-4">
               <p className="italic text-muted-foreground">
                 {t("openSourceProject.creatorQuote")}
               </p>
             </div>
-
-            <Avatar
-              className={`relative top-6 ${isRTL ? "mr-2" : "ml-2"} h-12 w-12`}
-            >
+            <Avatar size="lg">
               <AvatarImage src="https://avatars.githubusercontent.com/u/8214158?s=100" />
               <AvatarFallback>IA</AvatarFallback>
             </Avatar>
           </div>
-        </CardContent>
-        <CardContent>
           <div className="flex justify-center">
             <a
               href="https://www.buymeacoffee.com/ilyaizen"
@@ -203,9 +150,9 @@ export default function AboutPage() {
             </NextLink>
           </Button>
         </CardFooter>
-      </Card> */}
+      </Card>
 
-      {/* Seinfeld Strategy Card: Explanation of the methodology */}
+      {/* Seinfeld Strategy Card */}
       <Card className="p-4 shadow">
         <CardHeader>
           <h2 className="font-heading text-2xl font-bold">
@@ -213,7 +160,6 @@ export default function AboutPage() {
           </h2>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Visual representation of the "Never miss twice" concept */}
           <div className="relative aspect-video w-full md:w-2/3">
             <Image
               src="/never-miss-twice.jpg"
@@ -223,36 +169,24 @@ export default function AboutPage() {
               className="rounded object-cover"
             />
           </div>
-
-          <div className="">
-            {/* Strategy explanation and origin story */}
+          <div>
             <p className="text-muted-foreground">
               {t("seinfeldStrategy.description")}
             </p>
-
-            {/* Direct quote from the strategy's origin */}
-            <blockquote
-              className={`my-6 ${isRTL ? "border-r-2 pr-6" : "border-l-2 pl-6"} italic text-muted-foreground`}
-            >
+            <blockquote className="my-6 border-l-2 pl-6 italic text-muted-foreground rtl:border-r-2 rtl:border-l-0 rtl:pl-0 rtl:pr-6">
               {t("seinfeldStrategy.quote")}
             </blockquote>
-
-            {/* Detailed breakdown of why the strategy is successful */}
             <h3 className="mb-6 mt-6 text-xl font-bold">
               {t("seinfeldStrategy.whyItWorks.title")}
             </h3>
             <p className="text-muted-foreground">
               {t("seinfeldStrategy.whyItWorks.description")}
             </p>
-
-            {/* Key principles summary box */}
             <div className="mt-6 rounded-3xl bg-muted p-4">
               <h4 className="flex justify-center font-bold">
                 {t("seinfeldStrategy.whyItWorks.principles.title")}
               </h4>
-              <ul
-                className={`mt-2 list-disc ${isRTL ? "pr-6" : "pl-6"} text-muted-foreground`}
-              >
+              <ul className="mt-2 list-disc pl-6 text-muted-foreground rtl:pl-0 rtl:pr-6">
                 {[0, 1, 2, 3].map((index) => (
                   <li key={index}>
                     {t(`seinfeldStrategy.whyItWorks.principles.items.${index}`)}
@@ -262,7 +196,6 @@ export default function AboutPage() {
             </div>
           </div>
         </CardContent>
-        {/* Attribution footer */}
         <CardFooter>
           <p className="text-sm text-muted-foreground">
             {t.rich("seinfeldStrategy.attribution", {
@@ -281,36 +214,18 @@ export default function AboutPage() {
         </CardFooter>
       </Card>
 
-      {/* Call-to-action buttons - different options for signed-in vs signed-out users */}
+      {/* CTA */}
       <div className="flex justify-center">
         <Show when="signed-in">
           <Button asChild size="lg">
-            <Link href="/twig" locale={locale}>
-              {t("goToTwig")}
-            </Link>
+            <Link href="/twig">{t("goToTwig")}</Link>
           </Button>
         </Show>
-        {/* <SignedIn>
-          <Button asChild size="lg">
-            <Link href="/twig" locale={locale}>
-              {t("goToTwig")}
-            </Link>
-          </Button>
-        </SignedIn> */}
         <Show when="signed-out">
           <Button asChild size="lg">
-            <Link href="/pricing" locale={locale}>
-              {t("getStarted")}
-            </Link>
+            <Link href="/pricing">{t("getStarted")}</Link>
           </Button>
         </Show>
-        {/* <SignedOut>
-          <Button asChild size="lg">
-            <Link href="/pricing" locale={locale}>
-              {t("getStarted")}
-            </Link>
-          </Button>
-        </SignedOut> */}
       </div>
     </div>
   );
