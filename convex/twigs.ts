@@ -29,7 +29,7 @@ export const list = query({
 
     let q = ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject));
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject));
 
     if (args.branchId) {
       q = q.filter((q) => q.eq(q.field("branchId"), args.branchId));
@@ -71,7 +71,7 @@ export const create = mutation({
     // (scope = the branch if branchId is set, else root-level twigs)
     const existingTwigs = await ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .filter((q) =>
         args.branchId
           ? q.eq(q.field("branchId"), args.branchId)
@@ -118,7 +118,7 @@ export const remove = mutation({
     // Step 3: Update positions of remaining twigs in the deleted twig's scope
     const siblingTwigs = await ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .filter((q) =>
         twig.branchId
           ? q.eq(q.field("branchId"), twig.branchId)
@@ -188,7 +188,7 @@ export const update = mutation({
     // Siblings are the twigs sharing the twig's NEW scope (branchId)
     const siblings = await ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .filter((q) =>
         args.branchId
           ? q.eq(q.field("branchId"), args.branchId)
@@ -221,7 +221,7 @@ export const update = mutation({
       // Close the gap left behind in the old scope
       const oldSiblings = await ctx.db
         .query("twigs")
-        .filter((q) => q.eq(q.field("userId"), identity.subject))
+        .withIndex("by_user", (q) => q.eq("userId", identity.subject))
         .filter((q) =>
           twig.branchId
             ? q.eq(q.field("branchId"), twig.branchId)

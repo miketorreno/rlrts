@@ -28,7 +28,8 @@ export default defineSchema({
     position: v.optional(v.number()),
   })
     .index("by_user", ["userId"])
-    .index("by_trunk", ["trunkId"]),
+    .index("by_trunk", ["trunkId"])
+    .index("by_user_and_trunk", ["userId", "trunkId"]),
 
   branches: defineTable({
     name: v.string(),
@@ -37,7 +38,8 @@ export default defineSchema({
     position: v.optional(v.number()),
   })
     .index("by_user", ["userId"])
-    .index("by_limb", ["limbId"]),
+    .index("by_limb", ["limbId"])
+    .index("by_user_and_limb", ["userId", "limbId"]),
 
   leaves: defineTable({
     name: v.string(),
@@ -61,6 +63,7 @@ export default defineSchema({
   })
     .index("by_user", ["userId"])
     .index("by_twig", ["twigId"])
+    .index("by_user_and_twig", ["userId", "twigId"])
     .index("scheduledTimer", ["scheduledTimer"]),
 
   completions: defineTable({
