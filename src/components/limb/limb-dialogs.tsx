@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -17,11 +17,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
-
-/**
- * Dialog components for managing limbs.
- * Provides a name-only create dialog and an edit dialog with name and position (reorder) fields.
- */
 
 interface NewLimbDialogProps {
   isOpen: boolean;
@@ -46,16 +41,18 @@ export const NewLimbDialog = ({
         <DialogHeader>
           <DialogTitle>{t("limb.new.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="limb-name">{t("limb.new.name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="limb-name">
+              {t("limb.new.name.label")}
+            </FieldLabel>
             <Input
               id="limb-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
               placeholder={t("limb.new.name.placeholder")}
             />
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -68,7 +65,7 @@ export const NewLimbDialog = ({
               {t("limb.new.actions.create")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );
@@ -103,17 +100,19 @@ export const EditLimbDialog = ({
         <DialogHeader>
           <DialogTitle>{t("limb.edit.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="edit-limb-name">{t("limb.edit.name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="edit-limb-name">
+              {t("limb.edit.name.label")}
+            </FieldLabel>
             <Input
               id="edit-limb-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
-          </div>
-          <div>
-            <Label>{t("limb.edit.position.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("limb.edit.position.label")}</FieldLabel>
             <Select
               value={position.toString()}
               onValueChange={(value) => onPositionChange(parseInt(value))}
@@ -129,7 +128,7 @@ export const EditLimbDialog = ({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -142,7 +141,7 @@ export const EditLimbDialog = ({
               {t("limb.edit.actions.save")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );

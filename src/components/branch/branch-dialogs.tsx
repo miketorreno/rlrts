@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -17,11 +17,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
-
-/**
- * Dialog components for managing branches.
- * Provides a name-only create dialog and an edit dialog with name and position (reorder) fields.
- */
 
 interface NewBranchDialogProps {
   isOpen: boolean;
@@ -46,16 +41,18 @@ export const NewBranchDialog = ({
         <DialogHeader>
           <DialogTitle>{t("branch.new.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="branch-name">{t("branch.new.name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="branch-name">
+              {t("branch.new.name.label")}
+            </FieldLabel>
             <Input
               id="branch-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
               placeholder={t("branch.new.name.placeholder")}
             />
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -68,7 +65,7 @@ export const NewBranchDialog = ({
               {t("branch.new.actions.create")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );
@@ -103,19 +100,19 @@ export const EditBranchDialog = ({
         <DialogHeader>
           <DialogTitle>{t("branch.edit.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="edit-branch-name">
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="edit-branch-name">
               {t("branch.edit.name.label")}
-            </Label>
+            </FieldLabel>
             <Input
               id="edit-branch-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
-          </div>
-          <div>
-            <Label>{t("branch.edit.position.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("branch.edit.position.label")}</FieldLabel>
             <Select
               value={position.toString()}
               onValueChange={(value) => onPositionChange(parseInt(value))}
@@ -133,7 +130,7 @@ export const EditBranchDialog = ({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -146,7 +143,7 @@ export const EditBranchDialog = ({
               {t("branch.edit.actions.save")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );

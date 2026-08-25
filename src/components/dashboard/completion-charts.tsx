@@ -116,13 +116,13 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
         {
           label: t("habitsCompleted"),
           data: habitDaily,
-          backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
+          backgroundColor: `rgb(${getChartRGBValues("bg-emerald-500", 500)})`,
           borderRadius: 2,
         },
         {
           label: t("todosCompleted"),
           data: todoDaily,
-          backgroundColor: `rgb(${getChartRGBValues("bg-blue-500", 500)})`,
+          backgroundColor: `rgb(${getChartRGBValues("bg-amber-500", 500)})`,
           borderRadius: 2,
         },
       ],
@@ -161,8 +161,8 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
         {
           label: t("title"),
           data: monthlyCounts,
-          borderColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
-          backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 300)} / 0.2)`,
+          borderColor: `rgb(${getChartRGBValues("bg-emerald-500", 500)})`,
+          backgroundColor: `rgb(${getChartRGBValues("bg-emerald-500", 300)} / 0.2)`,
           borderWidth: 2,
           tension: 0.4,
           fill: true,
@@ -176,7 +176,7 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <Card>
+      <Card className="hover:shadow-md transition-all duration-300">
         <CardHeader>
           <CardTitle className="text-sm text-muted-foreground">
             {t("weeklyCompletions")}
@@ -187,7 +187,7 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="hover:shadow-md transition-all duration-300">
         <CardHeader>
           <CardTitle className="text-sm text-muted-foreground">
             {t("monthlyProgress")}

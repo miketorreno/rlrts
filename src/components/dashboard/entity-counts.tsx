@@ -3,7 +3,8 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import NumberFlow from "@number-flow/react";
 import { Layers, GitBranch, Sprout, CalendarDays, Leaf, ListTodo } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -24,15 +25,15 @@ interface EntityChipProps {
 
 function EntityChip({ icon: Icon, count, label }: EntityChipProps) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="flex items-center gap-2 rounded-xl border bg-card px-4 py-3 snap-start whitespace-nowrap hover:bg-muted transition-colors"
-    >
-      <Icon className="h-4 w-4 text-muted-foreground" />
-      <NumberFlow value={count} className="text-lg font-bold" />
-      <span className="text-sm text-muted-foreground">{label}</span>
-    </motion.div>
+    <Card className="hover:shadow-md transition-all duration-300 snap-start shrink-0">
+      <CardContent className="flex items-center gap-3 p-4">
+        <Icon className="h-4 w-4 text-muted-foreground" />
+        <Badge variant="secondary" className="tabular-nums">
+          <NumberFlow value={count} className="font-bold" />
+        </Badge>
+        <span className="text-sm text-muted-foreground">{label}</span>
+      </CardContent>
+    </Card>
   );
 }
 

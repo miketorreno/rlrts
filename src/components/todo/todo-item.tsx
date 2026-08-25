@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useMutation, useQuery } from "convex/react";
 import { Pencil, Trash2 } from "lucide-react";
@@ -129,12 +130,10 @@ export function TodoItem({ items, onEdit, todo }: TodoItemProps) {
               {sortedItems.map((item) => (
                 <li key={item._id}>
                   <label className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
+                    <Checkbox
                       checked={item.isCompleted}
                       disabled={toggling}
-                      onChange={() => handleToggle(item._id)}
-                      className="h-4 w-4 accent-primary"
+                      onCheckedChange={() => handleToggle(item._id)}
                     />
                     <span
                       className={
