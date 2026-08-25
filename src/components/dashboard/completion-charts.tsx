@@ -109,6 +109,71 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
     return { monthlyLabels: labels, monthlyCounts: counts };
   }, [allCompletions]);
 
+  const barData = useMemo(
+    () => ({
+      labels: weeklyLabels,
+      datasets: [
+        {
+          label: t("habitsCompleted"),
+          data: habitDaily,
+          backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
+          borderRadius: 2,
+        },
+        {
+          label: t("todosCompleted"),
+          data: todoDaily,
+          backgroundColor: `rgb(${getChartRGBValues("bg-blue-500", 500)})`,
+          borderRadius: 2,
+        },
+      ],
+    }),
+    [weeklyLabels, habitDaily, todoDaily, t],
+  );
+
+  const barOptions = useMemo(
+    () => ({
+      ...chartOptions,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top" as const,
+          labels: { font: { size: 12 } },
+        },
+      },
+      scales: {
+        x: {
+          ...chartOptions.scales.x,
+          stacked: true,
+        },
+        y: {
+          ...chartOptions.scales.y,
+          stacked: true,
+        },
+      },
+    }),
+    [],
+  );
+
+  const lineData = useMemo(
+    () => ({
+      labels: monthlyLabels,
+      datasets: [
+        {
+          label: t("title"),
+          data: monthlyCounts,
+          borderColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
+          backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 300)} / 0.2)`,
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+        },
+      ],
+    }),
+    [monthlyLabels, monthlyCounts, t],
+  );
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <Card>
@@ -118,45 +183,7 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
           </CardTitle>
         </CardHeader>
         <CardContent className="h-[240px]">
-          <Bar
-            data={{
-              labels: weeklyLabels,
-              datasets: [
-                {
-                  label: t("habitsCompleted"),
-                  data: habitDaily,
-                  backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
-                  borderRadius: 2,
-                },
-                {
-                  label: t("todosCompleted"),
-                  data: todoDaily,
-                  backgroundColor: `rgb(${getChartRGBValues("bg-blue-500", 500)})`,
-                  borderRadius: 2,
-                },
-              ],
-            }}
-            options={{
-              ...chartOptions,
-              plugins: {
-                legend: {
-                  display: true,
-                  position: "top",
-                  labels: { font: { size: 12 } },
-                },
-              },
-              scales: {
-                x: {
-                  ...chartOptions.scales.x,
-                  stacked: true,
-                },
-                y: {
-                  ...chartOptions.scales.y,
-                  stacked: true,
-                },
-              },
-            }}
-          />
+          <Bar data={barData} options={barOptions} />
         </CardContent>
       </Card>
 
@@ -167,25 +194,7 @@ export function CompletionCharts({ todayCompletions, todoCompletions }: Completi
           </CardTitle>
         </CardHeader>
         <CardContent className="h-[240px]">
-          <Line
-            data={{
-              labels: monthlyLabels,
-              datasets: [
-                {
-                  label: t("title"),
-                  data: monthlyCounts,
-                  borderColor: `rgb(${getChartRGBValues("bg-green-500", 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues("bg-green-500", 300)} / 0.2)`,
-                  borderWidth: 2,
-                  tension: 0.4,
-                  fill: true,
-                  pointRadius: 4,
-                  pointHoverRadius: 6,
-                },
-              ],
-            }}
-            options={chartOptions}
-          />
+          <Line data={lineData} options={chartOptions} />
         </CardContent>
       </Card>
     </div>

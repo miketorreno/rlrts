@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,22 +17,27 @@ interface ActivityFeedProps {
   recentEvents: Event[];
 }
 
+function formatTimeAgo(now: number, timestamp: number): string {
+  const diff = now - timestamp;
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  return new Date(timestamp).toLocaleDateString();
+}
+
 export function ActivityFeed({ recentEvents }: ActivityFeedProps) {
   const t = useTranslations("dashboard");
 
   const now = useMemo(() => new Date().getTime(), []);
 
-  function formatTime(timestamp: number): string {
-    const diff = now - timestamp;
-    const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return "Just now";
-    if (minutes < 60) return `${minutes}m ago`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
-    const days = Math.floor(hours / 24);
-    if (days < 7) return `${days}d ago`;
-    return new Date(timestamp).toLocaleDateString();
-  }
+  const formatTime = useCallback(
+    (timestamp: number) => formatTimeAgo(now, timestamp),
+    [now],
+  );
 
   return (
     <Card>
