@@ -95,7 +95,8 @@ export default defineSchema({
     completedAt: v.number(),
   })
     .index("by_user", ["userId"])
-    .index("by_user_and_date", ["userId", "completedAt"]),
+    .index("by_user_and_date", ["userId", "completedAt"])
+    .index("by_todo", ["todoId"]),
 
   xpEvents: defineTable({
     userId: v.string(),

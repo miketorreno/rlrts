@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { query, mutation, type MutationCtx } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 export function streakMultiplier(streak: number): number {
   return Math.min(1 + streak * 0.1, 1.5);
@@ -13,7 +14,7 @@ export const getXpProfile = query({
 
     const profile = await ctx.db
       .query("xpProfiles")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .first();
 
     if (!profile) {
@@ -58,16 +59,10 @@ export const getRecentEvents = query({
       events.map(async (event) => {
         let sourceName = "Unknown";
         if (event.source === "habit") {
-          const leaf = await ctx.db
-            .query("leaves")
-            .filter((q) => q.eq(q.field("_id"), event.sourceId))
-            .first();
+          const leaf = await ctx.db.get(event.sourceId as Id<"leaves">);
           if (leaf) sourceName = leaf.name;
         } else {
-          const todo = await ctx.db
-            .query("todos")
-            .filter((q) => q.eq(q.field("_id"), event.sourceId))
-            .first();
+          const todo = await ctx.db.get(event.sourceId as Id<"todos">);
           if (todo) sourceName = todo.name;
         }
         return { ...event, sourceName };
@@ -95,7 +90,7 @@ export const recordHabitXp = mutation({
     // Update streak before recording XP
     let profile = await ctx.db
       .query("xpProfiles")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .first();
 
     if (profile) {
@@ -204,7 +199,7 @@ export async function updateStreak(
 ) {
   const profile = await ctx.db
     .query("xpProfiles")
-    .filter((q) => q.eq(q.field("userId"), userId))
+    .withIndex("by_user", (q) => q.eq("userId", userId))
     .first();
 
   if (!profile) return;

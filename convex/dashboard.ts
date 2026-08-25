@@ -1,4 +1,5 @@
 import { query } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 export const getDashboardStats = query({
   args: {},
@@ -76,16 +77,10 @@ export const getDashboardStats = query({
             events.map(async (event) => {
               let sourceName = "Unknown";
               if (event.source === "habit") {
-                const leaf = await ctx.db
-                  .query("leaves")
-                  .filter((q) => q.eq(q.field("_id"), event.sourceId))
-                  .first();
+                const leaf = await ctx.db.get(event.sourceId as Id<"leaves">);
                 if (leaf) sourceName = leaf.name;
               } else {
-                const todo = await ctx.db
-                  .query("todos")
-                  .filter((q) => q.eq(q.field("_id"), event.sourceId))
-                  .first();
+                const todo = await ctx.db.get(event.sourceId as Id<"todos">);
                 if (todo) sourceName = todo.name;
               }
               return { ...event, sourceName };
