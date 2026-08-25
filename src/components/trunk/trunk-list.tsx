@@ -6,11 +6,11 @@ import {
 } from "@/components/trunk/trunk-dialogs";
 import { TrunkItem } from "@/components/trunk/trunk-item";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useMutation } from "convex/react";
-import { PlusCircle } from "lucide-react";
+import { TreePine, PlusCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -81,27 +81,29 @@ export function TrunkList({ trunks }: TrunkListProps) {
     content = (
       <div className="flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="rounded-xl border p-3 shadow-sm">
-            <div className="flex items-center justify-between gap-3">
-              <Skeleton className="h-5 w-40" />
-              <div className="flex gap-1">
-                <Skeleton className="h-8 w-8 rounded-md" />
-                <Skeleton className="h-8 w-8 rounded-md" />
-              </div>
-            </div>
-          </Card>
+          <Skeleton key={i} className="h-16 w-full rounded-xl" />
         ))}
       </div>
     );
   } else if (sortedTrunks.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
-        <p className="text-sm text-muted-foreground">{t("emptyState")}</p>
-        <Button variant="outline" onClick={() => setNewOpen(true)}>
-          <PlusCircle className="h-4 w-4" />
-          {t("addTrunk")}
-        </Button>
-      </div>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <TreePine className="size-6" />
+          </EmptyMedia>
+          <EmptyTitle>{t("emptyState")}</EmptyTitle>
+          <EmptyDescription>
+            Foundations for your habit hierarchy.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => setNewOpen(true)}>
+            <PlusCircle className="h-4 w-4" />
+            {t("addTrunk")}
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   } else {
     content = (

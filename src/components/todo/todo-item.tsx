@@ -10,12 +10,19 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useMutation, useQuery } from "convex/react";
-import { Pencil, Trash2 } from "lucide-react";
+import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -84,72 +91,76 @@ export function TodoItem({ items, onEdit, todo }: TodoItemProps) {
 
   return (
     <>
-      <Card className="rounded-xl border p-3 shadow-sm transition-colors hover:bg-muted/50">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <h2 className="truncate text-base font-medium">{todo.name}</h2>
+      <Card className="rounded-xl shadow-sm transition-colors hover:bg-muted/50">
+        <CardHeader>
+          <CardTitle className="truncate">{todo.name}</CardTitle>
+          <CardAction>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onEdit}>
+                  <Pencil className="h-4 w-4" />
+                  {tDialogs("todo.edit.title")}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  variant="destructive"
+                  onClick={() => setDeleteOpen(true)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  {tDialogs("todo.deleteConfirm.title")}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="secondary">
+                {t(todo.cadence)}
+              </Badge>
+              <Badge variant="yellow">
+                {tXp("label")} {todo.xp > 0 ? effectiveXp : 0}
+                {todo.xp > 0 && multiplier > 1 && (
+                  <span className="ml-1">
+                    (x{multiplier.toFixed(1)})
+                  </span>
+                )}
+              </Badge>
+              <span className="text-sm text-muted-foreground">
+                {t("progress", { done: completedCount, total: items.length })}
+              </span>
             </div>
-            <div className="flex shrink-0 items-center gap-1">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                onClick={onEdit}
-              >
-                <Pencil className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 text-destructive"
-                onClick={() => setDeleteOpen(true)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </div>
+            {sortedItems.length > 0 && (
+              <ul className="flex flex-col gap-1.5">
+                {sortedItems.map((item) => (
+                  <li key={item._id}>
+                    <label className="flex items-center gap-2">
+                      <Checkbox
+                        checked={item.isCompleted}
+                        disabled={toggling}
+                        onCheckedChange={() => handleToggle(item._id)}
+                      />
+                      <span
+                        className={
+                          item.isCompleted
+                            ? "text-sm text-muted-foreground line-through"
+                            : "text-sm"
+                        }
+                      >
+                        {item.name}
+                      </span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
-              {t(todo.cadence)}
-            </span>
-            <span className="rounded-md bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">
-              {tXp("label")} {todo.xp > 0 ? effectiveXp : 0}
-              {todo.xp > 0 && multiplier > 1 && (
-                <span className="ml-1 text-yellow-700 dark:text-yellow-300">
-                  (x{multiplier.toFixed(1)})
-                </span>
-              )}
-            </span>
-            <span className="text-sm text-muted-foreground">
-              {t("progress", { done: completedCount, total: items.length })}
-            </span>
-          </div>
-          {sortedItems.length > 0 && (
-            <ul className="flex flex-col gap-1.5">
-              {sortedItems.map((item) => (
-                <li key={item._id}>
-                  <label className="flex items-center gap-2">
-                    <Checkbox
-                      checked={item.isCompleted}
-                      disabled={toggling}
-                      onCheckedChange={() => handleToggle(item._id)}
-                    />
-                    <span
-                      className={
-                        item.isCompleted
-                          ? "text-sm text-muted-foreground line-through"
-                          : "text-sm"
-                      }
-                    >
-                      {item.name}
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        </CardContent>
       </Card>
 
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
