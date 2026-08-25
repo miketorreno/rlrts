@@ -1,18 +1,9 @@
-/**
- * LeafEditForm - A client-side form component for editing leaf properties
- * Provides functionality to modify:
- * - Leaf name
- * - Associated twig
- * - Position within twig
- * - Timer duration for leaf tracking
- * - Reminder time for browser notifications
- */
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -23,28 +14,6 @@ import {
 import { useTranslations } from "next-intl";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-// import { Id } from "@server/convex/_generated/dataModel";
-
-/**
- * LeafEditForm - A client-side form component for editing leaf properties
- * Provides functionality to modify:
- * - Leaf name
- * - Associated twig
- * - Position within twig
- * - Timer duration for leaf tracking
- */
-
-/**
- * LeafEditForm - A client-side form component for editing leaf properties
- * Provides functionality to modify:
- * - Leaf name
- * - Associated twig
- * - Position within twig
- * - Timer duration for leaf tracking
- */
-
-// Predefined timer duration options in minutes
-// Each option has a translation key and its corresponding value in minutes
 const TIMER_VALUES = [
   { key: "1min", value: 1 },
   { key: "2min", value: 2 },
@@ -62,23 +31,6 @@ const TIMER_VALUES = [
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const MINUTES = [0, 15, 30, 45];
 
-/**
- * Props interface for LeafEditForm
- * @property name - Current leaf name
- * @property onNameChange - Callback for leaf name updates
- * @property timerDuration - Optional timer duration in minutes
- * @property onTimerDurationChange - Callback for timer duration updates
- * @property selectedTwigId - ID of currently selected twig
- * @property onTwigChange - Callback for twig selection changes
- * @property position - Leaf's position in the twig
- * @property onPositionChange - Callback for position updates
- * @property twigs - Available twigs list
- * @property leaves - Leaves in current twig
- * @property onSave - Save changes callback
- * @property onDelete - Delete leaf callback
- * @property reminderTime - Optional reminder time (hour + minute)
- * @property onReminderTimeChange - Callback for reminder time updates
- */
 interface LeafEditFormProps {
   name: string;
   onNameChange: (name: string) => void;
@@ -131,28 +83,29 @@ export function LeafEditForm({
   const t = useTranslations("dialogs");
 
   return (
-    <Card className="mx-auto my-8 max-w-xl border p-2 shadow-md">
-      <div className="p-4">
-        <h2 className="mb-6 text-lg font-semibold">{t("leaf.edit.title")}</h2>
-        <div className="space-y-4">
-          {/* Name input field for leaf */}
-          <div>
-            <Label htmlFor="edit-leaf-name">{t("leaf.edit.name.label")}</Label>
+    <Card className="mx-auto my-8 max-w-xl">
+      <CardHeader>
+        <CardTitle>{t("leaf.edit.title")}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="edit-leaf-name">
+              {t("leaf.edit.name.label")}
+            </FieldLabel>
             <Input
               id="edit-leaf-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
-          </div>
+          </Field>
 
-          {/* Twig selection with automatic position adjustment */}
-          <div>
-            <Label>{t("leaf.edit.twig.label")}</Label>
+          <Field>
+            <FieldLabel>{t("leaf.edit.twig.label")}</FieldLabel>
             <Select
               value={selectedTwigId}
               onValueChange={(value) => {
                 onTwigChange(value as Id<"twigs">);
-                // When twig changes, move leaf to end of new twig
                 const twigLeaves = leaves?.length ?? 0;
                 onPositionChange(twigLeaves + 1);
               }}
@@ -168,11 +121,10 @@ export function LeafEditForm({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
 
-          {/* Position selector - dynamically updates based on leaves count */}
-          <div>
-            <Label>{t("leaf.edit.position.label")}</Label>
+          <Field>
+            <FieldLabel>{t("leaf.edit.position.label")}</FieldLabel>
             <Select
               value={position.toString()}
               onValueChange={(value) => onPositionChange(parseInt(value))}
@@ -190,11 +142,10 @@ export function LeafEditForm({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
 
-          {/* Timer duration selector with predefined options */}
-          <div>
-            <Label>{t("leaf.edit.timer.label")}</Label>
+          <Field>
+            <FieldLabel>{t("leaf.edit.timer.label")}</FieldLabel>
             <Select
               value={timerDuration?.toString() ?? "none"}
               onValueChange={(value) =>
@@ -220,11 +171,12 @@ export function LeafEditForm({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
 
-          {/* XP per completion */}
-          <div>
-            <Label htmlFor="edit-leaf-xp">{t("leaf.edit.xp.label")}</Label>
+          <Field>
+            <FieldLabel htmlFor="edit-leaf-xp">
+              {t("leaf.edit.xp.label")}
+            </FieldLabel>
             <Input
               id="edit-leaf-xp"
               type="number"
@@ -232,11 +184,10 @@ export function LeafEditForm({
               value={xp}
               onChange={(e) => onXpChange(parseInt(e.target.value) || 0)}
             />
-          </div>
+          </Field>
 
-          {/* Reminder time picker */}
-          <div>
-            <Label>{t("leaf.edit.reminder.label")}</Label>
+          <Field>
+            <FieldLabel>{t("leaf.edit.reminder.label")}</FieldLabel>
             <Select
               value={reminderTime ? "enabled" : "disabled"}
               onValueChange={(value) => {
@@ -264,7 +215,7 @@ export function LeafEditForm({
             </Select>
 
             {reminderTime && (
-              <div className="mt-2 flex items-center gap-2">
+              <div className="flex items-center gap-2 pt-2">
                 <span className="text-sm text-muted-foreground">
                   {t("leaf.edit.reminder.at")}
                 </span>
@@ -311,9 +262,8 @@ export function LeafEditForm({
                 </Select>
               </div>
             )}
-          </div>
+          </Field>
 
-          {/* Action buttons for saving or deleting the leaf */}
           <div className="flex gap-2 pt-4">
             <Button variant="destructive" onClick={onDelete}>
               {t("leaf.edit.actions.delete")}
@@ -322,8 +272,8 @@ export function LeafEditForm({
               {t("leaf.edit.actions.save")}
             </Button>
           </div>
-        </div>
-      </div>
+        </FieldGroup>
+      </CardContent>
     </Card>
   );
 }
