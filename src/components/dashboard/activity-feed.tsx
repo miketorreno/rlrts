@@ -2,8 +2,9 @@
 
 import { useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 interface Event {
   _id: string;
@@ -40,7 +41,7 @@ export function ActivityFeed({ recentEvents }: ActivityFeedProps) {
   );
 
   return (
-    <Card>
+    <Card className="hover:shadow-md transition-all duration-300">
       <CardHeader>
         <CardTitle className="text-sm text-muted-foreground">
           {t("recentActivity")}
@@ -52,28 +53,30 @@ export function ActivityFeed({ recentEvents }: ActivityFeedProps) {
         ) : (
           <div>
             {recentEvents.map((event, index) => (
-              <motion.div
-                key={event._id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-center justify-between py-3 border-b last:border-0"
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`h-2 w-2 rounded-full ${event.source === "habit" ? "bg-green-500" : "bg-blue-500"}`}
-                  />
-                  <div>
-                    <p className="text-sm font-medium">{event.sourceName}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {formatTime(event.createdAt)}
-                    </p>
+              <div key={event._id}>
+                <div className="flex items-center justify-between py-3">
+                  <div className="flex items-center gap-3">
+                    <Badge
+                      variant="outline"
+                      className={
+                        event.source === "habit"
+                          ? "border-emerald-500 text-emerald-600 dark:text-emerald-400"
+                          : "border-amber-500 text-amber-600 dark:text-amber-400"
+                      }
+                    >
+                      {event.source}
+                    </Badge>
+                    <div>
+                      <p className="text-sm font-medium">{event.sourceName}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatTime(event.createdAt)}
+                      </p>
+                    </div>
                   </div>
+                  <Badge variant="secondary">+{event.amount} XP</Badge>
                 </div>
-                <span className="text-xs font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                  +{event.amount} XP
-                </span>
-              </motion.div>
+                {index < recentEvents.length - 1 && <Separator />}
+              </div>
             ))}
           </div>
         )}
