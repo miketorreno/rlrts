@@ -14,7 +14,6 @@ import { Id } from "../../../../convex/_generated/dataModel";
 
 interface LeafStatisticsProps {
   leafId: Id<"leaves">;
-  colorTheme: string;
   completions:
     | Array<{
         leafId: Id<"leaves">;
@@ -25,7 +24,6 @@ interface LeafStatisticsProps {
 
 export function LeafStatistics({
   leafId,
-  colorTheme,
   completions,
 }: LeafStatisticsProps) {
   const totalCompletions =
@@ -176,7 +174,6 @@ export function LeafStatistics({
             )}
 
             <LeafAnalytics
-              colorTheme={colorTheme}
               completions={completions?.filter((c) => c.leafId === leafId)}
             />
           </CardContent>

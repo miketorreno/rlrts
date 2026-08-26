@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getChartRGBValues } from "@/lib/colors";
 import {
   ArcElement,
   BarElement,
@@ -86,7 +85,6 @@ const chartOptions = {
 };
 
 interface LeafAnalyticsProps {
-  colorTheme: string;
   completions:
     | Array<{
         leafId: Id<"leaves">;
@@ -95,7 +93,7 @@ interface LeafAnalyticsProps {
     | undefined;
 }
 
-export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
+export function LeafAnalytics({ completions }: LeafAnalyticsProps) {
   function calculateStreakHistory(
     completions: LeafAnalyticsProps["completions"],
   ) {
@@ -288,8 +286,8 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                 {
                   label: "Active Streaks",
                   data: streakData.activeData,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 600)})`,
+                  backgroundColor: "var(--chart-1)",
+                  borderColor: "var(--chart-5)",
                   borderWidth: 1,
                   borderRadius: {
                     topLeft: 4,
@@ -303,8 +301,8 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                 {
                   label: "Off Days",
                   data: streakData.offData,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)} / 0.2)`,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)} / 0.5)`,
+                  backgroundColor: "color-mix(in oklch, var(--chart-1) 20%, transparent)",
+                  borderColor: "color-mix(in oklch, var(--chart-1) 50%, transparent)",
                   borderWidth: 2,
                   borderRadius: {
                     topLeft: 20,
@@ -361,12 +359,12 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
               datasets: [
                 {
                   data: weeklyData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
-                  pointBackgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
+                  pointBackgroundColor: "var(--chart-1)",
                   pointRadius: 4,
                   pointHoverRadius: 6,
                 },
@@ -383,8 +381,8 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
               datasets: [
                 {
                   data: monthlyData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
@@ -402,12 +400,12 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
               datasets: [
                 {
                   data: timeData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
-                  pointBackgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
+                  pointBackgroundColor: "var(--chart-1)",
                   pointRadius: 4,
                   pointHoverRadius: 6,
                 },

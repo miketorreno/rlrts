@@ -288,7 +288,6 @@ export function LeafDetails({ leaf, twig }: LeafDetailsProps) {
 
           <LeafStatistics
             leafId={leaf._id}
-            colorTheme={twig.colorTheme}
             completions={completions?.completions}
           />
         </div>
