@@ -113,6 +113,9 @@
         "description": "Un outil construit pour la communauté, par la communauté"
       }
     },
+    "techStack": {
+      "title": "Stack technique"
+    },
     "openSourceProject": {
       "title": "Projet Open Source",
       "description": "Le Calendrier de Suivi est open source pour encourager la transparence et la collaboration. Les contributions et innovations des utilisateurs sont les bienvenues, aidant à améliorer continuellement l'outil et à le rendre encore plus efficace pour tous.",

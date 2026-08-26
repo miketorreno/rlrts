@@ -96,7 +96,9 @@ export default function AboutPage() {
       {/* Tech Stack */}
       <Card>
         <CardHeader>
-          <CardTitle className="font-heading text-2xl">Tech Stack</CardTitle>
+          <CardTitle className="font-heading text-2xl">
+            {t("techStack.title")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">

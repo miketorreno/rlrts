@@ -113,6 +113,9 @@
         "description": "由社区为社区打造的工具"
       }
     },
+    "techStack": {
+      "title": "技术栈"
+    },
     "openSourceProject": {
       "title": "开源项目",
       "description": "习惯追踪日历是开源的，以鼓励透明度和协作。欢迎用户的贡献和创新，帮助持续改进工具，使其对每个人都更加有效。",

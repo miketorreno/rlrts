@@ -113,6 +113,9 @@
         "description": "Construido por la comunidad para la comunidad"
       }
     },
+    "techStack": {
+      "title": "Stack tecnológico"
+    },
     "openSourceProject": {
       "title": "Proyecto de código abierto",
       "description": "El Calendario de Hábitos es de código abierto para fomentar la transparencia y la colaboración. Las contribuciones e innovaciones de los usuarios son bienvenidas, ayudando a mejorar continuamente la herramienta para que sea más efectiva para todos.",
