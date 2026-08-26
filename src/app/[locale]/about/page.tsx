@@ -6,10 +6,12 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/routing";
 import { Show } from "@clerk/nextjs";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ExternalLink, Heart } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -42,42 +44,48 @@ export default function AboutPage() {
   const t = useTranslations("about");
 
   return (
-    <div className="container mx-auto w-full max-w-3xl space-y-8 py-16">
-      {/* Introduction Card */}
-      <Card className="p-4 shadow">
+    <div className="container mx-auto w-full max-w-3xl space-y-6 px-4 py-16">
+      {/* Introduction */}
+      <div className="space-y-4 text-center">
+        <h1 className="font-heading text-4xl font-bold md:text-5xl">
+          {t("title")}
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          {t("intro")}
+        </p>
+      </div>
+
+      <Separator />
+
+      {/* What It Is */}
+      <Card>
         <CardHeader>
-          <h1 className="font-heading text-4xl font-bold">{t("title")}</h1>
+          <CardTitle className="font-heading text-2xl">
+            {t("whatItIs.title")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">{t("intro")}</p>
-        </CardContent>
-        <CardContent>
-          <h2 className="font-heading text-2xl font-bold">
-            {t("whatItIs.title")}
-          </h2>
-          <p className="pt-6 text-muted-foreground">
-            {t("whatItIs.description")}
-          </p>
+          <p className="text-muted-foreground">{t("whatItIs.description")}</p>
         </CardContent>
       </Card>
 
-      {/* Features Card */}
-      <Card className="p-4 shadow">
+      {/* Features */}
+      <Card>
         <CardHeader>
-          <h2 className="font-heading text-2xl font-bold">
+          <CardTitle className="font-heading text-2xl">
             {t("features.title")}
-          </h2>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-4 text-muted-foreground">
             {FEATURE_KEYS.map((key) => (
               <li key={key} className="flex gap-3">
-                <CheckCircle2 className="h-6 w-6 shrink-0 text-green-500" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <div>
-                  <strong className="text-primary">
+                  <strong className="text-foreground">
                     {t(`features.${key}.title`)}
                   </strong>
-                  <p>{t(`features.${key}.description`)}</p>
+                  <p className="text-sm">{t(`features.${key}.description`)}</p>
                 </div>
               </li>
             ))}
@@ -85,10 +93,10 @@ export default function AboutPage() {
         </CardContent>
       </Card>
 
-      {/* Tech Stack Card */}
-      <Card className="p-4 shadow">
+      {/* Tech Stack */}
+      <Card>
         <CardHeader>
-          <h2 className="font-heading text-2xl font-bold">Tech Stack</h2>
+          <CardTitle className="font-heading text-2xl">Tech Stack</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
@@ -101,18 +109,18 @@ export default function AboutPage() {
         </CardContent>
       </Card>
 
-      {/* Team / Creator Card */}
-      <Card className="p-4 shadow">
+      {/* Team / Creator */}
+      <Card>
         <CardHeader>
-          <h2 className="font-heading text-2xl font-bold">
+          <CardTitle className="font-heading text-2xl">
             {t("openSourceProject.title")}
-          </h2>
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-muted-foreground">
             {t("openSourceProject.description")}
           </p>
-          <div className="flex items-end gap-2">
+          <div className="flex items-end gap-3">
             <div className="rounded-3xl rounded-br-none bg-muted p-4">
               <p className="italic text-muted-foreground">
                 {t("openSourceProject.creatorQuote")}
@@ -140,24 +148,25 @@ export default function AboutPage() {
           </div>
         </CardContent>
         <CardFooter className="flex gap-4">
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="outline" size="lg" className="gap-2">
             <NextLink
               href="https://github.com/ilyaizen/streak-calendar"
               target="_blank"
               rel="noopener noreferrer"
             >
+              <ExternalLink className="h-4 w-4" />
               {t("openSourceProject.viewOnGithub")}
             </NextLink>
           </Button>
         </CardFooter>
       </Card>
 
-      {/* Seinfeld Strategy Card */}
-      <Card className="p-4 shadow">
+      {/* Seinfeld Strategy */}
+      <Card>
         <CardHeader>
-          <h2 className="font-heading text-2xl font-bold">
+          <CardTitle className="font-heading text-2xl">
             {t("seinfeldStrategy.title")}
-          </h2>
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="relative aspect-video w-full md:w-2/3">
@@ -176,19 +185,19 @@ export default function AboutPage() {
             <blockquote className="my-6 border-l-2 pl-6 italic text-muted-foreground rtl:border-r-2 rtl:border-l-0 rtl:pl-0 rtl:pr-6">
               {t("seinfeldStrategy.quote")}
             </blockquote>
-            <h3 className="mb-6 mt-6 text-xl font-bold">
+            <h3 className="mb-4 text-xl font-bold">
               {t("seinfeldStrategy.whyItWorks.title")}
             </h3>
             <p className="text-muted-foreground">
               {t("seinfeldStrategy.whyItWorks.description")}
             </p>
-            <div className="mt-6 rounded-3xl bg-muted p-4">
-              <h4 className="flex justify-center font-bold">
+            <div className="mt-6 rounded-2xl bg-muted p-4">
+              <h4 className="mb-2 flex justify-center font-bold">
                 {t("seinfeldStrategy.whyItWorks.principles.title")}
               </h4>
-              <ul className="mt-2 list-disc pl-6 text-muted-foreground rtl:pl-0 rtl:pr-6">
+              <ul className="space-y-1 pl-6 text-muted-foreground rtl:pl-0 rtl:pr-6">
                 {[0, 1, 2, 3].map((index) => (
-                  <li key={index}>
+                  <li key={index} className="list-disc">
                     {t(`seinfeldStrategy.whyItWorks.principles.items.${index}`)}
                   </li>
                 ))}
@@ -215,15 +224,20 @@ export default function AboutPage() {
       </Card>
 
       {/* CTA */}
-      <div className="flex justify-center">
+      <div className="flex justify-center pt-4">
         <Show when="signed-in">
-          <Button asChild size="lg">
-            <Link href="/twig">{t("goToTwig")}</Link>
+          <Button asChild size="lg" className="gap-2">
+            <Link href="/twig">
+              <Heart className="h-4 w-4" />
+              {t("goToTwig")}
+            </Link>
           </Button>
         </Show>
         <Show when="signed-out">
-          <Button asChild size="lg">
-            <Link href="/pricing">{t("getStarted")}</Link>
+          <Button asChild size="lg" className="gap-2">
+            <Link href="/pricing">
+              {t("getStarted")}
+            </Link>
           </Button>
         </Show>
       </div>

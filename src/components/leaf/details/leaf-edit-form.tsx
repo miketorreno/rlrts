@@ -1,8 +1,20 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldSeparator,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -11,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { useTranslations } from "next-intl";
 import { Id } from "../../../../convex/_generated/dataModel";
 
@@ -81,11 +94,15 @@ export function LeafEditForm({
   onReminderTimeChange,
 }: LeafEditFormProps) {
   const t = useTranslations("dialogs");
+  const hasReminder = !!reminderTime;
 
   return (
     <Card className="mx-auto my-8 max-w-xl">
       <CardHeader>
         <CardTitle>{t("leaf.edit.title")}</CardTitle>
+        <CardDescription>
+          Configure your habit&apos;s schedule, timer, and reminders.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
@@ -144,6 +161,8 @@ export function LeafEditForm({
             </Select>
           </Field>
 
+          <FieldSeparator>Schedule</FieldSeparator>
+
           <Field>
             <FieldLabel>{t("leaf.edit.timer.label")}</FieldLabel>
             <Select
@@ -171,6 +190,9 @@ export function LeafEditForm({
                 ))}
               </SelectContent>
             </Select>
+            <FieldDescription>
+              Optional timer to track focused sessions.
+            </FieldDescription>
           </Field>
 
           <Field>
@@ -186,39 +208,41 @@ export function LeafEditForm({
             />
           </Field>
 
-          <Field>
-            <FieldLabel>{t("leaf.edit.reminder.label")}</FieldLabel>
-            <Select
-              value={reminderTime ? "enabled" : "disabled"}
-              onValueChange={(value) => {
-                if (value === "enabled") {
-                  onReminderTimeChange({
-                    hour: reminderTime?.hour ?? 9,
-                    minute: reminderTime?.minute ?? 0,
-                  });
-                } else {
-                  onReminderTimeChange(undefined);
-                }
-              }}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="disabled">
-                  {t("leaf.edit.reminder.disabled")}
-                </SelectItem>
-                <SelectItem value="enabled">
-                  {t("leaf.edit.reminder.enabled")}
-                </SelectItem>
-              </SelectContent>
-            </Select>
+          <FieldSeparator>Reminders</FieldSeparator>
 
-            {reminderTime && (
-              <div className="flex items-center gap-2 pt-2">
-                <span className="text-sm text-muted-foreground">
-                  {t("leaf.edit.reminder.at")}
+          <Field orientation="horizontal">
+            <FieldLabel htmlFor="reminder-toggle">
+              <div className="flex flex-col gap-0.5">
+                <span>{t("leaf.edit.reminder.label")}</span>
+                <span className="font-normal text-muted-foreground text-xs">
+                  {hasReminder
+                    ? `${t("leaf.edit.reminder.enabled")}`
+                    : t("leaf.edit.reminder.disabled")}
                 </span>
+              </div>
+            </FieldLabel>
+            <div className="ml-auto">
+              <Switch
+                id="reminder-toggle"
+                checked={hasReminder}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    onReminderTimeChange({
+                      hour: reminderTime?.hour ?? 9,
+                      minute: reminderTime?.minute ?? 0,
+                    });
+                  } else {
+                    onReminderTimeChange(undefined);
+                  }
+                }}
+              />
+            </div>
+          </Field>
+
+          {hasReminder && (
+            <Field>
+              <FieldLabel>{t("leaf.edit.reminder.at")}</FieldLabel>
+              <div className="flex items-center gap-2">
                 <Select
                   value={reminderTime.hour.toString()}
                   onValueChange={(value) =>
@@ -239,7 +263,7 @@ export function LeafEditForm({
                     ))}
                   </SelectContent>
                 </Select>
-                <span className="text-sm">:</span>
+                <span className="text-muted-foreground text-sm">:</span>
                 <Select
                   value={reminderTime.minute.toString()}
                   onValueChange={(value) =>
@@ -261,10 +285,12 @@ export function LeafEditForm({
                   </SelectContent>
                 </Select>
               </div>
-            )}
-          </Field>
+            </Field>
+          )}
 
-          <div className="flex gap-2 pt-4">
+          <FieldSeparator />
+
+          <div className="flex gap-2 pt-2">
             <Button variant="destructive" onClick={onDelete}>
               {t("leaf.edit.actions.delete")}
             </Button>

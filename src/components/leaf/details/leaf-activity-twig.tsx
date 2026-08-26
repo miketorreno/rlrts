@@ -8,8 +8,6 @@ import { useRef } from "react";
 import { ActivityCalendar } from "react-activity-calendar";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-// import { Id } from "@server/convex/_generated/dataModel";
-
 /**
  * A client-side component that renders a GitHub-style activity twig for leaf tracking.
  * Uses react-activity-twig under the hood with custom styling and animations.

@@ -14,9 +14,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
 
-// import { api } from "@server/convex/_generated/api";
-// import { Id } from "@server/convex/_generated/dataModel";
-
 /**
  * LeafDetails Component
  * A comprehensive view for managing and displaying leaf details including:

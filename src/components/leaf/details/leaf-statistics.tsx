@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { streakMultiplier } from "@/lib/xp";
 import NumberFlow from "@number-flow/react";
-import { TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Flame, TrendingUp, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { LeafAnalytics } from "./leaf-analytics";
@@ -115,60 +116,49 @@ export function LeafStatistics({
   const monthProgress = Math.min((thisMonthCompletions / daysInMonth) * 100, 100);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="w-full max-w-4xl">
+        <Card className="w-full">
           <CardHeader>
-            <CardTitle>Statistics</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Statistics
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Current Streak</p>
-                <Badge variant="secondary" className="text-lg font-bold">
-                  <NumberFlow value={currentStreak} />
-                  {currentStreak > 0 && (
-                    <TrendingUp className="ml-1 h-3 w-3 text-green-500" />
-                  )}
-                </Badge>
-              </div>
-
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Off Days</p>
-                <Badge variant="secondary" className="text-lg font-bold">
-                  <NumberFlow value={offStreak} />
-                </Badge>
-              </div>
-
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">This Month</p>
-                <Badge variant="secondary" className="text-lg font-bold">
-                  <NumberFlow value={thisMonthCompletions} />
-                </Badge>
-              </div>
-
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">
-                  Total Completions
-                </p>
-                <Badge variant="secondary" className="text-lg font-bold">
-                  <NumberFlow value={totalCompletions} />
-                </Badge>
-              </div>
-
-              <div className="space-y-1">
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">Multiplier</p>
-                </div>
-                <Badge variant="secondary" className="text-lg font-bold">
-                  {multiplier > 1 ? `x${multiplier.toFixed(1)}` : "1.0x"}
-                </Badge>
-              </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+              <StatCard
+                icon={<Flame className="h-4 w-4" />}
+                label="Current Streak"
+                value={currentStreak}
+                highlight={currentStreak > 0}
+              />
+              <StatCard
+                label="Off Days"
+                value={offStreak}
+                variant={offStreak > 0 ? "destructive" : "secondary"}
+              />
+              <StatCard
+                label="This Month"
+                value={thisMonthCompletions}
+                highlight={thisMonthCompletions > 0}
+              />
+              <StatCard
+                label="Total"
+                value={totalCompletions}
+              />
+              <StatCard
+                icon={<Zap className="h-4 w-4" />}
+                label="Multiplier"
+                value={multiplier}
+                suffix="x"
+                decimals={1}
+                highlight={multiplier > 1}
+              />
             </div>
 
             {monthProgress > 0 && (
@@ -177,7 +167,7 @@ export function LeafStatistics({
                   <span className="text-muted-foreground">
                     Monthly completion rate
                   </span>
-                  <span className="font-medium">
+                  <span className="font-medium text-primary">
                     {Math.round(monthProgress)}%
                   </span>
                 </div>
@@ -195,3 +185,42 @@ export function LeafStatistics({
     </div>
   );
 }
+
+function StatCard({
+  icon,
+  label,
+  value,
+  suffix,
+  highlight,
+  variant = "secondary",
+  decimals = 0,
+}: {
+  icon?: React.ReactNode;
+  label: string;
+  value: number;
+  suffix?: string;
+  highlight?: boolean;
+  variant?: "secondary" | "destructive";
+  decimals?: number;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center gap-1">
+        {icon}
+        <p className="text-muted-foreground text-xs">{label}</p>
+      </div>
+      <Badge
+        variant={variant}
+        className={cn(
+          "w-full justify-center text-lg font-bold",
+          highlight && "bg-primary/10 text-primary",
+        )}
+      >
+        {decimals > 0 ? value.toFixed(decimals) : <NumberFlow value={value} />}
+        {suffix && <span className="ml-0.5 text-xs font-normal">{suffix}</span>}
+      </Badge>
+    </div>
+  );
+}
+
+

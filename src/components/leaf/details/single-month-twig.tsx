@@ -10,8 +10,6 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-// import { Id } from "@server/convex/_generated/dataModel";
-
 /**
  * SingleMonthTwig - A twig component that displays and tracks leaf completions for a single month
  * Features:

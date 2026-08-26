@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { Show, SignUpButton } from "@clerk/nextjs";
 import NumberFlow from "@number-flow/react";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
@@ -117,7 +117,7 @@ export default function PricingPage() {
   const tTiers = useTranslations("pricing.tiers");
 
   return (
-    <section className="flex flex-col items-center gap-10 py-16">
+    <section className="flex flex-col items-center gap-10 px-4 py-16">
       {/* Header */}
       <div className="space-y-7 text-center">
         <div className="space-y-4">
@@ -128,22 +128,23 @@ export default function PricingPage() {
       </div>
 
       {/* Pricing Cards */}
-      <div className="container mx-auto grid max-w-5xl gap-8 px-4 md:grid-cols-2">
-        {PRICING_TIERS.map((tier, idx) => (
+      <div className="container mx-auto grid max-w-4xl gap-6 md:grid-cols-2 md:gap-8">
+        {PRICING_TIERS.map((tier) => (
           <div key={tier.name} className="relative">
             {tier.isComingSoon && (
               <Badge
                 variant="default"
-                className="absolute -top-3 left-1/2 z-50 -translate-x-1/2"
+                className="absolute -top-3 left-1/2 z-50 -translate-x-1/2 gap-1"
               >
+                <Sparkles className="h-3 w-3" />
                 {t("comingSoon")}
               </Badge>
             )}
 
             <Card
-              className={`relative flex flex-col overflow-hidden border transition-all duration-300 ${
+              className={`relative flex flex-col overflow-hidden transition-all duration-300 ${
                 tier.isComingSoon
-                  ? "border-2 border-primary opacity-60 shadow-lg hover:shadow-xl"
+                  ? "border-2 border-primary/60 opacity-70 shadow-lg hover:shadow-xl"
                   : "shadow hover:shadow-lg"
               }`}
             >
@@ -191,7 +192,7 @@ export default function PricingPage() {
                 <ul className="space-y-3">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-green-500" />
+                      <Check className="h-4 w-4 shrink-0 text-primary" />
                       <span>{tTiers(`${tier.name}.features.${i}`)}</span>
                     </li>
                   ))}
