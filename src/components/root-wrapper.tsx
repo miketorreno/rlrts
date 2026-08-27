@@ -28,14 +28,18 @@ export function RootWrapper({ children }: RootWrapperProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <SidebarProvider>
-        <AppHeader />
         <AppSidebar />
-        <SidebarInset className="pb-20 md:pb-0">
-          <AnimatePresence mode="wait">
-            <MotionWrapper>{children}</MotionWrapper>
-          </AnimatePresence>
+        <SidebarInset className="min-w-0">
+          <AppHeader />
+          <div className="flex-1 overflow-hidden pb-20 md:pb-0">
+            <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+              <AnimatePresence mode="wait">
+                <MotionWrapper>{children}</MotionWrapper>
+              </AnimatePresence>
+            </div>
+          </div>
+          <BottomNav />
         </SidebarInset>
-        <BottomNav />
         <Toaster />
       </SidebarProvider>
     </ThemeProvider>
