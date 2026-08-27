@@ -70,7 +70,7 @@ export const create = mutation({
     // Get max position for this twig
     const leaves = await ctx.db
       .query("leaves")
-      .filter((q) => q.eq(q.field("twigId"), args.twigId))
+      .withIndex("by_twig", (q) => q.eq("twigId", args.twigId))
       .collect();
 
     const maxPosition = leaves.reduce(
@@ -122,7 +122,7 @@ export const markComplete = mutation({
 
     const existingCompletions = await ctx.db
       .query("completions")
-      .filter((q) => q.eq(q.field("leafId"), args.leafId))
+      .withIndex("by_leaf", (q) => q.eq("leafId", args.leafId))
       .filter((q) =>
         q.and(
           q.gte(q.field("completedAt"), startOfDay),

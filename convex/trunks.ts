@@ -22,7 +22,7 @@ export const list = query({
 
     const trunks = await ctx.db
       .query("trunks")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     return trunks.sort(
@@ -48,7 +48,7 @@ export const create = mutation({
     // Position is determined by the max existing position + 1
     const existingTrunks = await ctx.db
       .query("trunks")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     const maxPosition = existingTrunks.reduce(
@@ -92,7 +92,7 @@ export const remove = mutation({
     // Step 2: Update positions of remaining trunks
     const allTrunks = await ctx.db
       .query("trunks")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     const deletedPosition = trunk.position ?? allTrunks.length + 1;
@@ -138,7 +138,7 @@ export const update = mutation({
 
     const allTrunks = await ctx.db
       .query("trunks")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     // Handle position updates if position changed

@@ -122,7 +122,7 @@ export const DayCell = memo(
                     sizeClasses[size],
                     count === 0 ? "bg-muted" : "bg-transparent",
                     disabled
-                      ? "cursor-not-allowed !bg-zinc-100 dark:!bg-zinc-800"
+                      ? "cursor-not-allowed !bg-background"
                       : "",
                     "relative p-0",
                   )}

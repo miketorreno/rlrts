@@ -6,7 +6,7 @@ import {
 } from "@/components/branch/branch-dialogs";
 import { BranchItem } from "@/components/branch/branch-item";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -18,7 +18,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { useMutation } from "convex/react";
-import { PlusCircle } from "lucide-react";
+import { CalendarDays, PlusCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -99,53 +99,51 @@ export function BranchList({
     content = (
       <div className="flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="rounded-xl border p-3 shadow-sm">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-5 w-40" />
-              </div>
-              <div className="flex gap-1">
-                <Skeleton className="h-8 w-8 rounded-md" />
-                <Skeleton className="h-8 w-8 rounded-md" />
-              </div>
-            </div>
-          </Card>
+          <Skeleton key={i} className="h-16 w-full rounded-xl" />
         ))}
       </div>
     );
   } else if (!selectedLimbId) {
     content = (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
-        <p className="text-sm text-muted-foreground">{t("noLimbs")}</p>
-      </div>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <CalendarDays className="size-6" />
+          </EmptyMedia>
+          <EmptyTitle>{t("noLimbs")}</EmptyTitle>
+          <EmptyDescription>
+            Select a category to view its schedules.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   } else if (branches === undefined) {
     content = (
       <div className="flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="rounded-xl border p-3 shadow-sm">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-5 w-40" />
-              </div>
-              <div className="flex gap-1">
-                <Skeleton className="h-8 w-8 rounded-md" />
-                <Skeleton className="h-8 w-8 rounded-md" />
-              </div>
-            </div>
-          </Card>
+          <Skeleton key={i} className="h-16 w-full rounded-xl" />
         ))}
       </div>
     );
   } else if (sortedBranches.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
-        <p className="text-sm text-muted-foreground">{t("emptyState")}</p>
-        <Button variant="outline" onClick={() => setNewOpen(true)}>
-          <PlusCircle className="h-4 w-4" />
-          {t("addBranch")}
-        </Button>
-      </div>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <CalendarDays className="size-6" />
+          </EmptyMedia>
+          <EmptyTitle>{t("emptyState")}</EmptyTitle>
+          <EmptyDescription>
+            Schedules determine when habits appear.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => setNewOpen(true)}>
+            <PlusCircle className="h-4 w-4" />
+            {t("addBranch")}
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   } else {
     content = (

@@ -20,7 +20,7 @@ async function recomputeCompletion(
 ) {
   const items = await ctx.db
     .query("todoItems")
-    .filter((q) => q.eq(q.field("todoId"), todo._id))
+    .withIndex("by_todo", (q) => q.eq("todoId", todo._id))
     .collect();
 
   const allDone = items.length > 0 && items.every((item) => item.isCompleted);
@@ -28,10 +28,8 @@ async function recomputeCompletion(
   const periodStartMs = periodStart(todo.cadence, Date.now());
   const currentPeriodCompletions = await ctx.db
     .query("todoCompletions")
-    .withIndex("by_user_and_date", (q) =>
-      q.eq("userId", userId).gte("completedAt", periodStartMs),
-    )
-    .filter((q) => q.eq(q.field("todoId"), todo._id))
+    .withIndex("by_todo", (q) => q.eq("todoId", todo._id))
+    .filter((q) => q.gte(q.field("completedAt"), periodStartMs))
     .collect();
 
   if (allDone) {
@@ -236,7 +234,7 @@ export const remove = mutation({
 
     const completions = await ctx.db
       .query("todoCompletions")
-      .filter((q) => q.eq(q.field("todoId"), args.id))
+      .withIndex("by_todo", (q) => q.eq("todoId", args.id))
       .collect();
     for (const completion of completions) {
       await ctx.db.delete(completion._id);
@@ -309,7 +307,7 @@ export const addItem = mutation({
 
     const items = await ctx.db
       .query("todoItems")
-      .filter((q) => q.eq(q.field("todoId"), args.todoId))
+      .withIndex("by_todo", (q) => q.eq("todoId", args.todoId))
       .collect();
 
     const maxPosition = items.reduce(
@@ -362,7 +360,7 @@ export const getXp = query({
     if (!identity) throw new Error("Not authenticated");
     const completions = await ctx.db
       .query("todoCompletions")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     let xp = 0;
     for (const c of completions) {
@@ -403,7 +401,7 @@ export const resetPeriod = mutation({
     const now = Date.now();
     const completions = await ctx.db
       .query("todoCompletions")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
     for (const completion of completions) {
       const todo = todoById.get(completion.todoId);

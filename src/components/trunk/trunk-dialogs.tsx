@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -17,11 +17,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
-
-/**
- * Dialog components for managing trunks.
- * Provides a name-only create dialog and an edit dialog with name and position (reorder) fields.
- */
 
 interface NewTrunkDialogProps {
   isOpen: boolean;
@@ -46,16 +41,18 @@ export const NewTrunkDialog = ({
         <DialogHeader>
           <DialogTitle>{t("trunk.new.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="trunk-name">{t("trunk.new.name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="trunk-name">
+              {t("trunk.new.name.label")}
+            </FieldLabel>
             <Input
               id="trunk-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
               placeholder={t("trunk.new.name.placeholder")}
             />
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -68,7 +65,7 @@ export const NewTrunkDialog = ({
               {t("trunk.new.actions.create")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );
@@ -103,17 +100,19 @@ export const EditTrunkDialog = ({
         <DialogHeader>
           <DialogTitle>{t("trunk.edit.title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="edit-trunk-name">{t("trunk.edit.name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="edit-trunk-name">
+              {t("trunk.edit.name.label")}
+            </FieldLabel>
             <Input
               id="edit-trunk-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
-          </div>
-          <div>
-            <Label>{t("trunk.edit.position.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("trunk.edit.position.label")}</FieldLabel>
             <Select
               value={position.toString()}
               onValueChange={(value) => onPositionChange(parseInt(value))}
@@ -129,7 +128,7 @@ export const EditTrunkDialog = ({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -142,7 +141,7 @@ export const EditTrunkDialog = ({
               {t("trunk.edit.actions.save")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );

@@ -24,12 +24,12 @@ export const exportTwigsAndLeaves = query({
 
     const twigs = await ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     const allLeaves = await ctx.db
       .query("leaves")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     // Build the export structure without _id fields
@@ -63,7 +63,7 @@ export const exportCompletions = query({
       // Get all leaves first to map IDs to names
       const leaves = await ctx.db
         .query("leaves")
-        .filter((q) => q.eq(q.field("userId"), identity.subject))
+        .withIndex("by_user", (q) => q.eq("userId", identity.subject))
         .collect();
 
       const leafIdToName = new Map(leaves.map((l) => [l._id, l.name]));
@@ -146,7 +146,7 @@ export const importData = mutation({
 
     const existingTwigs = await ctx.db
       .query("twigs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .collect();
 
     // Continue with the rest of the import using cleanedTwigs
@@ -169,7 +169,7 @@ export const importData = mutation({
 
         const existingLeaves = await ctx.db
           .query("leaves")
-          .filter((q) => q.eq(q.field("twigId"), twigId))
+          .withIndex("by_twig", (q) => q.eq("twigId", twigId))
           .collect();
 
         const sortedLeaves = [...twigData.leaves].sort(
@@ -201,7 +201,7 @@ export const importData = mutation({
           // Process completions in batches of 100
           const existingCompletions = await ctx.db
             .query("completions")
-            .filter((q) => q.eq(q.field("leafId"), leafId))
+            .withIndex("by_leaf", (q) => q.eq("leafId", leafId))
             .collect();
 
           const existingCompletionTimes = new Set(

@@ -6,12 +6,12 @@ import {
 } from "@/components/todo/todo-dialogs";
 import { TodoItem } from "@/components/todo/todo-item";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToastMessages } from "@/hooks/use-toast-messages";
 import { TodoCadence, useTodoPeriodRollover } from "@/lib/todos";
 import { useMutation } from "convex/react";
-import { ChevronDown, PlusCircle } from "lucide-react";
+import { CheckSquare, ChevronDown, PlusCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { api } from "../../../convex/_generated/api";
@@ -153,27 +153,29 @@ export function TodoList({ data }: TodoListProps) {
     content = (
       <div className="flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="rounded-xl border p-3 shadow-sm">
-            <div className="flex items-center justify-between gap-3">
-              <Skeleton className="h-5 w-40" />
-              <div className="flex gap-1">
-                <Skeleton className="h-8 w-8 rounded-md" />
-                <Skeleton className="h-8 w-8 rounded-md" />
-              </div>
-            </div>
-          </Card>
+          <Skeleton key={i} className="h-24 w-full rounded-xl" />
         ))}
       </div>
     );
   } else if (sortedTodos.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed py-16">
-        <p className="text-sm text-muted-foreground">{t("emptyAll")}</p>
-        <Button variant="outline" onClick={() => openCreate("daily")}>
-          <PlusCircle className="h-4 w-4" />
-          {t("addTodo")}
-        </Button>
-      </div>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <CheckSquare className="size-6" />
+          </EmptyMedia>
+          <EmptyTitle>{t("emptyAll")}</EmptyTitle>
+          <EmptyDescription>
+            Daily and weekly checklists to track completion.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => openCreate("daily")}>
+            <PlusCircle className="h-4 w-4" />
+            {t("addTodo")}
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   } else {
     content = (
@@ -215,19 +217,23 @@ export function TodoList({ data }: TodoListProps) {
               {!isCollapsed && (
                 <div className="mt-2 flex flex-col gap-3 pb-4">
                   {sectionTodos.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-8">
-                      <p className="text-sm text-muted-foreground">
-                        {t(cadence === "daily" ? "emptyDaily" : "emptyWeekly")}
-                      </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => openCreate(cadence)}
-                      >
-                        <PlusCircle className="h-4 w-4" />
-                        {t("addTodo")}
-                      </Button>
-                    </div>
+                    <Empty>
+                      <EmptyHeader>
+                        <EmptyTitle>
+                          {t(cadence === "daily" ? "emptyDaily" : "emptyWeekly")}
+                        </EmptyTitle>
+                      </EmptyHeader>
+                      <EmptyContent>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => openCreate(cadence)}
+                        >
+                          <PlusCircle className="h-4 w-4" />
+                          {t("addTodo")}
+                        </Button>
+                      </EmptyContent>
+                    </Empty>
                   ) : (
                     sectionTodos.map((todo) => (
                       <TodoItem

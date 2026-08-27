@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { api } from "../../../convex/_generated/api";
 import { streakMultiplier } from "@/lib/xp";
+import { Badge } from "@/components/ui/badge";
 
 export function XpBadge() {
   const t = useTranslations("xp");
@@ -27,10 +28,10 @@ export function XpBadge() {
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-yellow-500/10 px-2 py-1 text-sm font-semibold text-yellow-600 dark:text-yellow-400">
+        <Badge variant="yellow" className="gap-1.5">
           <Sparkles className="size-4 shrink-0" aria-hidden="true" />
           {t("level", { level: profile.level })}
-        </span>
+        </Badge>
         <span className="text-xs text-muted-foreground">
           {t("total", { count: profile.lifetimeXp.toLocaleString() })}
         </span>

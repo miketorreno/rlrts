@@ -1,4 +1,5 @@
 import { query } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 export const getDashboardStats = query({
   args: {},
@@ -34,7 +35,7 @@ export const getDashboardStats = query({
     const endOfDayMs = startOfDayMs + 86400000 - 1;
     const chartRangeStart = Date.now() - 28 * 24 * 60 * 60 * 1000;
 
-    const [xpProfile, trunks, limbs, branches, twigs, leaves, todayCompletions, chartCompletions, chartTodoCompletions, todoData, recentEvents] =
+    const [xpProfile, trunks, limbs, branches, twigs, leaves, todayCompletions, chartCompletions, chartTodoCompletions, todos, recentEvents] =
       await Promise.all([
         ctx.db.query("xpProfiles").withIndex("by_user", (q) => q.eq("userId", userId)).first(),
         ctx.db.query("trunks").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
@@ -60,12 +61,7 @@ export const getDashboardStats = query({
             q.eq("userId", userId).gte("completedAt", chartRangeStart),
           )
           .collect(),
-        (async () => {
-          const todos = await ctx.db.query("todos").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
-          const items = await ctx.db.query("todoItems").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
-          const completions = await ctx.db.query("todoCompletions").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
-          return { todos, items, completions };
-        })(),
+        ctx.db.query("todos").withIndex("by_user", (q) => q.eq("userId", userId)).collect(),
         (async () => {
           const events = await ctx.db
             .query("xpEvents")
@@ -76,16 +72,10 @@ export const getDashboardStats = query({
             events.map(async (event) => {
               let sourceName = "Unknown";
               if (event.source === "habit") {
-                const leaf = await ctx.db
-                  .query("leaves")
-                  .filter((q) => q.eq(q.field("_id"), event.sourceId))
-                  .first();
+                const leaf = await ctx.db.get(event.sourceId as Id<"leaves">);
                 if (leaf) sourceName = leaf.name;
               } else {
-                const todo = await ctx.db
-                  .query("todos")
-                  .filter((q) => q.eq(q.field("_id"), event.sourceId))
-                  .first();
+                const todo = await ctx.db.get(event.sourceId as Id<"todos">);
                 if (todo) sourceName = todo.name;
               }
               return { ...event, sourceName };
@@ -105,7 +95,7 @@ export const getDashboardStats = query({
 
     const todayKey = new Date().toISOString().split("T")[0];
     const uniqueHabitsDone = new Set(todayCompletions.map((c) => c.leafId)).size;
-    const todosDoneToday = todoData.completions.filter((c) => {
+    const todosDoneToday = chartTodoCompletions.filter((c) => {
       const cDate = new Date(c.completedAt).toISOString().split("T")[0];
       return cDate === todayKey;
     }).length;
@@ -125,13 +115,13 @@ export const getDashboardStats = query({
         branches: branches.length,
         twigs: twigs.length,
         leaves: leaves.length,
-        todos: todoData.todos.length,
+        todos: todos.length,
       },
       todayProgress: {
         habitsDone: uniqueHabitsDone,
         totalHabits: leaves.length,
         todosDone: todosDoneToday,
-        totalTodos: todoData.todos.length,
+        totalTodos: todos.length,
       },
       chartCompletions,
       chartTodoCompletions,

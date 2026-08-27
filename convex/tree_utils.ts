@@ -17,7 +17,7 @@ export async function deleteLeafAndCompletions(
 
   const completions = await ctx.db
     .query("completions")
-    .filter((q) => q.eq(q.field("leafId"), leafId))
+    .withIndex("by_leaf", (q) => q.eq("leafId", leafId))
     .collect();
   await Promise.all(completions.map((c) => ctx.db.delete(c._id)));
   await ctx.db.delete(leafId);
@@ -26,7 +26,7 @@ export async function deleteLeafAndCompletions(
 export async function deleteTwigSubtree(ctx: MutationCtx, twigId: Id<"twigs">): Promise<void> {
   const leaves = await ctx.db
     .query("leaves")
-    .filter((q) => q.eq(q.field("twigId"), twigId))
+    .withIndex("by_twig", (q) => q.eq("twigId", twigId))
     .collect();
   for (const leaf of leaves) await deleteLeafAndCompletions(ctx, leaf._id);
   await ctx.db.delete(twigId);
@@ -35,7 +35,7 @@ export async function deleteTwigSubtree(ctx: MutationCtx, twigId: Id<"twigs">): 
 export async function deleteBranchSubtree(ctx: MutationCtx, branchId: Id<"branches">): Promise<void> {
   const twigs = await ctx.db
     .query("twigs")
-    .filter((q) => q.eq(q.field("branchId"), branchId))
+    .withIndex("by_branch", (q) => q.eq("branchId", branchId))
     .collect();
   for (const twig of twigs) await deleteTwigSubtree(ctx, twig._id);
   await ctx.db.delete(branchId);
@@ -44,7 +44,7 @@ export async function deleteBranchSubtree(ctx: MutationCtx, branchId: Id<"branch
 export async function deleteLimbSubtree(ctx: MutationCtx, limbId: Id<"limbs">): Promise<void> {
   const branches = await ctx.db
     .query("branches")
-    .filter((q) => q.eq(q.field("limbId"), limbId))
+    .withIndex("by_limb", (q) => q.eq("limbId", limbId))
     .collect();
   for (const branch of branches) await deleteBranchSubtree(ctx, branch._id);
   await ctx.db.delete(limbId);
@@ -53,7 +53,7 @@ export async function deleteLimbSubtree(ctx: MutationCtx, limbId: Id<"limbs">): 
 export async function deleteTrunkSubtree(ctx: MutationCtx, trunkId: Id<"trunks">): Promise<void> {
   const limbs = await ctx.db
     .query("limbs")
-    .filter((q) => q.eq(q.field("trunkId"), trunkId))
+    .withIndex("by_trunk", (q) => q.eq("trunkId", trunkId))
     .collect();
   for (const limb of limbs) await deleteLimbSubtree(ctx, limb._id);
   await ctx.db.delete(trunkId);

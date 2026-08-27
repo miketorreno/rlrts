@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -70,18 +70,18 @@ export const NewTodoDialog = ({
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="todo-name">{t("name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="todo-name">{t("name.label")}</FieldLabel>
             <Input
               id="todo-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
               placeholder={t("name.placeholder")}
             />
-          </div>
-          <div>
-            <Label>{t("cadence.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("cadence.label")}</FieldLabel>
             <Select
               value={cadence}
               onValueChange={(value) => onCadenceChange(value as TodoCadence)}
@@ -94,9 +94,9 @@ export const NewTodoDialog = ({
                 <SelectItem value="weekly">{tTodo("weekly")}</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div>
-            <Label htmlFor="todo-xp">{t("xp.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="todo-xp">{t("xp.label")}</FieldLabel>
             <Input
               id="todo-xp"
               type="number"
@@ -104,9 +104,9 @@ export const NewTodoDialog = ({
               value={xp}
               onChange={(e) => onXpChange(parseInt(e.target.value) || 0)}
             />
-          </div>
-          <div>
-            <Label>{t("items.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("items.label")}</FieldLabel>
             <div className="flex flex-col gap-2">
               {items.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
@@ -130,7 +130,7 @@ export const NewTodoDialog = ({
                 {t("items.add")}
               </Button>
             </div>
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -143,7 +143,7 @@ export const NewTodoDialog = ({
               {t("actions.create")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );
@@ -194,17 +194,19 @@ export const EditTodoDialog = ({
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="edit-todo-name">{t("name.label")}</Label>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="edit-todo-name">
+              {t("name.label")}
+            </FieldLabel>
             <Input
               id="edit-todo-name"
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
             />
-          </div>
-          <div>
-            <Label>{t("cadence.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("cadence.label")}</FieldLabel>
             <Select
               value={cadence}
               onValueChange={(value) => onCadenceChange(value as TodoCadence)}
@@ -217,9 +219,9 @@ export const EditTodoDialog = ({
                 <SelectItem value="weekly">{tTodo("weekly")}</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div>
-            <Label htmlFor="edit-todo-xp">{t("xp.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="edit-todo-xp">{t("xp.label")}</FieldLabel>
             <Input
               id="edit-todo-xp"
               type="number"
@@ -227,9 +229,9 @@ export const EditTodoDialog = ({
               value={xp}
               onChange={(e) => onXpChange(parseInt(e.target.value) || 0)}
             />
-          </div>
-          <div>
-            <Label>{t("items.label")}</Label>
+          </Field>
+          <Field>
+            <FieldLabel>{t("items.label")}</FieldLabel>
             <div className="flex flex-col gap-2">
               {items.map((item) => (
                 <div key={item._id} className="flex items-center gap-2">
@@ -267,7 +269,7 @@ export const EditTodoDialog = ({
                 </Button>
               </div>
             </div>
-          </div>
+          </Field>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -280,7 +282,7 @@ export const EditTodoDialog = ({
               {t("actions.save")}
             </Button>
           </div>
-        </div>
+        </FieldGroup>
       </DialogContent>
     </Dialog>
   );

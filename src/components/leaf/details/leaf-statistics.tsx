@@ -1,29 +1,19 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { streakMultiplier } from "@/lib/xp";
 import NumberFlow from "@number-flow/react";
-import { TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Flame, TrendingUp, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-
-// import { Id } from "@server/convex/_generated/dataModel";
 
 import { LeafAnalytics } from "./leaf-analytics";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-/**
- * LeafStatistics Component
- * Displays statistical information about a leaf's completion patterns including:
- * - Current streak
- * - Days since last completion (off streak)
- * - Monthly completions
- * - Total completions
- * Also renders a visual analytics component for the leaf data
- */
-
 interface LeafStatisticsProps {
   leafId: Id<"leaves">;
-  colorTheme: string;
   completions:
     | Array<{
         leafId: Id<"leaves">;
@@ -34,14 +24,11 @@ interface LeafStatisticsProps {
 
 export function LeafStatistics({
   leafId,
-  colorTheme,
   completions,
 }: LeafStatisticsProps) {
-  // Calculate total number of times this leaf was completed
   const totalCompletions =
     completions?.filter((c) => c.leafId === leafId).length ?? 0;
 
-  // Calculate completions for the current month only
   const thisMonthCompletions =
     completions?.filter((c) => {
       const date = new Date(c.completedAt);
@@ -53,17 +40,9 @@ export function LeafStatistics({
       );
     }).length ?? 0;
 
-  /**
-   * Calculates the current streak of consecutive days the leaf was completed
-   * A streak is broken if:
-   * 1. No completions exist
-   * 2. Neither today nor yesterday has a completion
-   * 3. There's a gap of more than 1 day between completions
-   */
   const currentStreak = (() => {
     if (!completions) return 0;
 
-    // Convert completion timestamps to date strings (YYYY-MM-DD format) and sort
     const dates = completions
       .filter((c) => c.leafId === leafId)
       .map((c) => new Date(c.completedAt).toISOString().split("T")[0])
@@ -76,15 +55,12 @@ export function LeafStatistics({
       .toISOString()
       .split("T")[0];
 
-    // Remove duplicate dates to ensure accurate streak counting
     const uniqueDates = [...new Set(dates)];
 
-    // Break streak if neither today nor yesterday has a completion
     if (!uniqueDates.includes(today) && !uniqueDates.includes(yesterday)) {
       return 0;
     }
 
-    // Count consecutive days backwards from the most recent completion
     let streak = 0;
     for (let i = uniqueDates.length - 1; i >= 0; i--) {
       const date = new Date(uniqueDates[i]);
@@ -95,7 +71,6 @@ export function LeafStatistics({
           (prevDate.getTime() - date.getTime()) / (1000 * 60 * 60 * 24),
         );
 
-        // Break if there's a gap larger than 1 day
         if (dayDiff > 1) break;
       }
 
@@ -105,10 +80,6 @@ export function LeafStatistics({
     return streak;
   })();
 
-  /**
-   * Calculates the number of days since the last leaf completion
-   * If there's a current streak or no completions, starts counting from the beginning of the month
-   */
   const offStreak = (() => {
     if (!completions || currentStreak > 0) return 0;
 
@@ -117,7 +88,6 @@ export function LeafStatistics({
       .map((c) => new Date(c.completedAt).toISOString().split("T")[0])
       .sort();
 
-    // If no completions exist, count days since start of month
     if (dates.length === 0) {
       const today = new Date();
       const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -128,7 +98,6 @@ export function LeafStatistics({
       );
     }
 
-    // Calculate days since last completion
     const lastCompletionDate = new Date(dates[dates.length - 1]);
     const today = new Date();
     return Math.floor(
@@ -137,68 +106,118 @@ export function LeafStatistics({
   })();
 
   const multiplier = streakMultiplier(currentStreak);
+  const daysInMonth = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    0,
+  ).getDate();
+  const monthProgress = Math.min((thisMonthCompletions / daysInMonth) * 100, 100);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="w-[800px] border p-2 shadow-md">
-          <div className="p-4">
-            <h2 className="mb-4 text-lg font-semibold">Statistics</h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              <div>
-                <p className="text-sm text-muted-foreground">Current Streak</p>
-                <p className="text-2xl font-bold">
-                  <NumberFlow value={currentStreak} />
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm text-muted-foreground">Off Days</p>
-                <p className="text-2xl font-bold">
-                  <NumberFlow value={offStreak} />
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm text-muted-foreground">This Month</p>
-                <p className="text-2xl font-bold">
-                  <NumberFlow value={thisMonthCompletions} />
-                </p>
-              </div>
-
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Total Completions
-                </p>
-                <p className="text-2xl font-bold">
-                  <NumberFlow value={totalCompletions} />
-                </p>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">Multiplier</p>
-                </div>
-                <p className="text-2xl font-bold">
-                  {multiplier > 1 ? `x${multiplier.toFixed(1)}` : "1.0x"}
-                </p>
-              </div>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Statistics
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+              <StatCard
+                icon={<Flame className="h-4 w-4" />}
+                label="Current Streak"
+                value={currentStreak}
+                highlight={currentStreak > 0}
+              />
+              <StatCard
+                label="Off Days"
+                value={offStreak}
+                variant={offStreak > 0 ? "destructive" : "secondary"}
+              />
+              <StatCard
+                label="This Month"
+                value={thisMonthCompletions}
+                highlight={thisMonthCompletions > 0}
+              />
+              <StatCard
+                label="Total"
+                value={totalCompletions}
+              />
+              <StatCard
+                icon={<Zap className="h-4 w-4" />}
+                label="Multiplier"
+                value={multiplier}
+                suffix="x"
+                decimals={1}
+                highlight={multiplier > 1}
+              />
             </div>
 
-            {/* Visual analytics section */}
+            {monthProgress > 0 && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    Monthly completion rate
+                  </span>
+                  <span className="font-medium text-primary">
+                    {Math.round(monthProgress)}%
+                  </span>
+                </div>
+                <Progress value={monthProgress} className="h-2" />
+              </div>
+            )}
 
             <LeafAnalytics
-              colorTheme={colorTheme}
               completions={completions?.filter((c) => c.leafId === leafId)}
             />
-          </div>
+          </CardContent>
         </Card>
       </motion.div>
     </div>
   );
 }
+
+function StatCard({
+  icon,
+  label,
+  value,
+  suffix,
+  highlight,
+  variant = "secondary",
+  decimals = 0,
+}: {
+  icon?: React.ReactNode;
+  label: string;
+  value: number;
+  suffix?: string;
+  highlight?: boolean;
+  variant?: "secondary" | "destructive";
+  decimals?: number;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center gap-1">
+        {icon}
+        <p className="text-muted-foreground text-xs">{label}</p>
+      </div>
+      <Badge
+        variant={variant}
+        className={cn(
+          "w-full justify-center text-lg font-bold",
+          highlight && "bg-primary/10 text-primary",
+        )}
+      >
+        {decimals > 0 ? value.toFixed(decimals) : <NumberFlow value={value} />}
+        {suffix && <span className="ml-0.5 text-xs font-normal">{suffix}</span>}
+      </Badge>
+    </div>
+  );
+}
+
+

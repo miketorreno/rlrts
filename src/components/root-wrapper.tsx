@@ -8,8 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "next-themes";
 
-import { SidebarProvider, useSidebar } from "@/components/sidebar-provider";
-import { cn } from "@/lib/utils";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset } from "@/components/ui/sidebar";
 
 /**
  * Root application wrapper component that provides core functionality:
@@ -24,34 +24,23 @@ interface RootWrapperProps {
   children: React.ReactNode;
 }
 
-function MainContent({ children }: { children: React.ReactNode }) {
-  const { isOpen } = useSidebar();
-
-  return (
-    <main
-      className={cn(
-        "flex-1 pb-20 transition-all duration-300 md:pb-0",
-        isOpen ? "md:ps-64" : "md:ps-16",
-      )}
-    >
-      <AnimatePresence mode="wait">
-        <MotionWrapper>{children}</MotionWrapper>
-      </AnimatePresence>
-    </main>
-  );
-}
-
 export function RootWrapper({ children }: RootWrapperProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full flex-col">
+        <AppSidebar />
+        <SidebarInset className="min-w-0">
           <AppHeader />
-          <AppSidebar />
-          <MainContent>{children}</MainContent>
+          <div className="flex-1 overflow-hidden pb-20 md:pb-0">
+            <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+              <AnimatePresence mode="wait">
+                <MotionWrapper>{children}</MotionWrapper>
+              </AnimatePresence>
+            </div>
+          </div>
           <BottomNav />
-          <Toaster />
-        </div>
+        </SidebarInset>
+        <Toaster />
       </SidebarProvider>
     </ThemeProvider>
   );

@@ -26,7 +26,7 @@ export const list = query({
 
     let q = ctx.db
       .query("limbs")
-      .filter((q) => q.eq(q.field("userId"), identity.subject));
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject));
 
     if (args.trunkId) {
       q = q.filter((q) => q.eq(q.field("trunkId"), args.trunkId));
@@ -64,7 +64,7 @@ export const create = mutation({
     // Position is determined by the max existing position + 1 among the trunk's limbs
     const existingLimbs = await ctx.db
       .query("limbs")
-      .filter((q) => q.eq(q.field("trunkId"), args.trunkId))
+      .withIndex("by_trunk", (q) => q.eq("trunkId", args.trunkId))
       .collect();
 
     const maxPosition = existingLimbs.reduce(
@@ -109,12 +109,11 @@ export const remove = mutation({
     // Step 2: Update positions of remaining limbs within the same trunk
     const allLimbs = await ctx.db
       .query("limbs")
-      .filter((q) => q.eq(q.field("trunkId"), limb.trunkId))
+      .withIndex("by_trunk", (q) => q.eq("trunkId", limb.trunkId))
       .collect();
 
     const deletedPosition = limb.position ?? allLimbs.length + 1;
 
-    // Decrement position of all limbs that were after the deleted one
     for (const otherLimb of allLimbs) {
       if (otherLimb._id === args.id) continue;
 
@@ -155,7 +154,7 @@ export const update = mutation({
 
     const allLimbs = await ctx.db
       .query("limbs")
-      .filter((q) => q.eq(q.field("trunkId"), limb.trunkId))
+      .withIndex("by_trunk", (q) => q.eq("trunkId", limb.trunkId))
       .collect();
 
     // Handle position updates if position changed

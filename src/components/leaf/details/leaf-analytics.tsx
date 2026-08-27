@@ -1,6 +1,12 @@
 "use client";
 
-import { getChartRGBValues } from "@/lib/colors";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   ArcElement,
   BarElement,
@@ -18,15 +24,6 @@ import {
 import { Bar, Line } from "react-chartjs-2";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-// import { Id } from "@server/convex/_generated/dataModel";
-
-/**
- * LeafAnalytics Component
- * A comprehensive analytics dashboard that visualizes leaf tracking data through various charts.
- * Uses Chart.js for rendering different visualizations of leaf completion patterns.
- */
-
-// Register required Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -41,7 +38,6 @@ ChartJS.register(
   Filler,
 );
 
-// Global chart configuration with responsive design and mobile optimizations
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
@@ -59,65 +55,50 @@ const chartOptions = {
         maxRotation: 45,
         minRotation: 45,
         font: {
-          size: window?.innerWidth < 640 ? 8 : 12,
+          size: 10,
         },
       },
-      offset: window?.innerWidth < 640 ? false : true,
+      offset: true,
     },
     y: {
       grid: {
-        color: "rgba(0, 0, 0, 0.1)",
+        color: "rgb(0 0 0 / 0.06)",
       },
       beginAtZero: true,
       ticks: {
         font: {
-          size: window?.innerWidth < 640 ? 8 : 12,
+          size: 10,
         },
-        padding: window?.innerWidth < 640 ? 0 : 8,
+        padding: 8,
       },
-      offset: window?.innerWidth < 640 ? false : true,
+      offset: true,
     },
   },
   layout: {
-    padding:
-      window?.innerWidth < 640
-        ? {
-            left: 0,
-            right: 0,
-            top: 5,
-            bottom: 0,
-          }
-        : {
-            left: 10,
-            right: 10,
-            top: 10,
-            bottom: 10,
-          },
+    padding: {
+      left: 10,
+      right: 10,
+      top: 10,
+      bottom: 10,
+    },
   },
 };
 
 interface LeafAnalyticsProps {
-  colorTheme: string; // Theme color for chart styling
   completions:
     | Array<{
         leafId: Id<"leaves">;
-        completedAt: number; // Unix timestamp of completion
+        completedAt: number;
       }>
     | undefined;
 }
 
-export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
-  /**
-   * Calculates streak history including both active streaks and off periods
-   * @param completions - Array of leaf completion records
-   * @returns Object containing labels and data for active/off streaks
-   */
+export function LeafAnalytics({ completions }: LeafAnalyticsProps) {
   function calculateStreakHistory(
     completions: LeafAnalyticsProps["completions"],
   ) {
     if (!completions) return { labels: [], activeData: [], offData: [] };
 
-    // Convert timestamps to date strings and sort chronologically
     const dates = completions
       .map((c) => new Date(c.completedAt).toISOString().split("T")[0])
       .sort();
@@ -128,11 +109,9 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
     if (uniqueDates.length === 0)
       return { labels: [], activeData: [], offData: [] };
 
-    // Initialize streak tracking
     let currentStreak = 1;
     let streakStartDate = uniqueDates[0];
 
-    // Check for initial off-streak before first completion
     const firstCompletionDate = new Date(uniqueDates[0]);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -147,7 +126,6 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
       });
     }
 
-    // Calculate streaks by analyzing consecutive dates
     for (let i = 1; i < uniqueDates.length; i++) {
       const curr = new Date(uniqueDates[i]);
       const prev = new Date(uniqueDates[i - 1]);
@@ -158,13 +136,11 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
       if (dayDiff === 1) {
         currentStreak++;
       } else {
-        // Add the active streak
         streaks.push({
           date: streakStartDate,
           length: currentStreak,
           type: "active",
         });
-        // Add the off streak if there was a gap
         if (dayDiff > 1) {
           streaks.push({
             date: new Date(prev.getTime() + 86400000)
@@ -178,14 +154,12 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
         streakStartDate = uniqueDates[i];
       }
     }
-    // Add the final active streak
     streaks.push({
       date: streakStartDate,
       length: currentStreak,
       type: "active",
     });
 
-    // Check if there's a final off-streak after the last completion
     const lastCompletionDate = new Date(uniqueDates[uniqueDates.length - 1]);
     const daysSinceLastCompletion = Math.floor(
       (today.getTime() - lastCompletionDate.getTime()) / (1000 * 60 * 60 * 24),
@@ -200,7 +174,6 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
       });
     }
 
-    // Get last 10 streaks for better visibility
     const lastStreaks = streaks.slice(-10);
 
     return {
@@ -217,28 +190,11 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
     };
   }
 
-  /**
-   * Analyzes completion patterns by day of week
-   * @param completions - Array of leaf completion records
-   * @returns Object containing labels and completion counts for each day
-   */
   function calculateWeeklyPattern(
     completions: LeafAnalyticsProps["completions"],
   ) {
     if (!completions) return { labels: [], data: [] };
 
-    const days =
-      window?.innerWidth < 640
-        ? ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        : [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ];
     const counts = new Array(7).fill(0);
 
     completions.forEach((c) => {
@@ -247,16 +203,11 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
     });
 
     return {
-      labels: days,
+      labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       data: counts,
     };
   }
 
-  /**
-   * Aggregates completions by month to show long-term progress
-   * @param completions - Array of leaf completion records
-   * @returns Object containing labels and monthly completion counts
-   */
   function calculateMonthlyProgress(
     completions: LeafAnalyticsProps["completions"],
   ) {
@@ -275,7 +226,6 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
     const sortedEntries = Object.entries(monthlyData).sort(([a], [b]) =>
       a.localeCompare(b),
     );
-    const isMobile = window?.innerWidth < 640;
 
     return {
       labels: sortedEntries.map(([month]) => {
@@ -284,27 +234,20 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
           "default",
           { month: "short" },
         );
-        return isMobile ? monthStr : `${monthStr} ${year}`;
+        return `${monthStr} ${year}`;
       }),
       data: sortedEntries.map(([, count]) => count),
     };
   }
 
-  /**
-   * Analyzes completion patterns by time of day
-   * Categorizes completions into Morning (6am-12pm), Afternoon (12pm-6pm),
-   * Evening (6pm-12am), and Night (12am-6am)
-   * @param completions - Array of leaf completion records
-   * @returns Object containing labels and completion counts for each time period
-   */
   function calculateTimeOfDay(completions: LeafAnalyticsProps["completions"]) {
     if (!completions) return { labels: [], data: [] };
 
     const timeSlots = {
-      Morning: 0, // 6am-12pm
-      Afternoon: 0, // 12pm-6pm
-      Evening: 0, // 6pm-12am
-      Night: 0, // 12am-6am
+      Morning: 0,
+      Afternoon: 0,
+      Evening: 0,
+      Night: 0,
     };
 
     completions.forEach((c) => {
@@ -321,20 +264,21 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
     };
   }
 
-  // Calculate data for all charts
   const streakData = calculateStreakHistory(completions);
   const weeklyData = calculateWeeklyPattern(completions);
   const monthlyData = calculateMonthlyProgress(completions);
   const timeData = calculateTimeOfDay(completions);
 
   return (
-    <div className="w-full">
-      <h2 className="mb-4 text-lg font-semibold">Analysis</h2>
-      {/* Grid layout for analytics charts with responsive design */}
+    <div className="w-full space-y-4">
+      <div className="space-y-1">
+        <CardTitle className="text-base">Analysis</CardTitle>
+        <CardDescription>
+          Insights into your habit patterns over time.
+        </CardDescription>
+      </div>
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-        {/* Streak History Chart */}
-        <div className="h-[200px] w-full max-w-[300px] rounded-lg border p-2 pb-6 sm:h-[240px] sm:max-w-none sm:p-4 sm:pb-8">
-          <h3 className="mb-2 text-sm text-muted-foreground">Streak History</h3>
+        <ChartCard title="Streak History" description="Active vs rest periods">
           <Bar
             data={{
               labels: streakData.labels,
@@ -342,8 +286,8 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                 {
                   label: "Active Streaks",
                   data: streakData.activeData,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 600)})`,
+                  backgroundColor: "var(--chart-1)",
+                  borderColor: "var(--chart-5)",
                   borderWidth: 1,
                   borderRadius: {
                     topLeft: 4,
@@ -357,8 +301,8 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                 {
                   label: "Off Days",
                   data: streakData.offData,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)} / 0.2)`,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)} / 0.5)`,
+                  backgroundColor: "color-mix(in oklch, var(--chart-1) 20%, transparent)",
+                  borderColor: "color-mix(in oklch, var(--chart-1) 50%, transparent)",
                   borderWidth: 2,
                   borderRadius: {
                     topLeft: 20,
@@ -381,7 +325,7 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                   position: "top",
                   labels: {
                     font: {
-                      size: window?.innerWidth < 640 ? 8 : 12,
+                      size: 10,
                     },
                   },
                 },
@@ -391,7 +335,7 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                   ...chartOptions.scales.x,
                   stacked: true,
                   title: {
-                    display: window?.innerWidth >= 640,
+                    display: true,
                     text: "Start Date",
                   },
                 },
@@ -399,30 +343,28 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
                   ...chartOptions.scales.y,
                   stacked: false,
                   title: {
-                    display: window?.innerWidth >= 640,
+                    display: true,
                     text: "Days",
                   },
                 },
               },
             }}
           />
-        </div>
+        </ChartCard>
 
-        {/* Weekly Pattern Chart */}
-        <div className="h-[200px] w-full max-w-[300px] rounded-lg border p-2 pb-6 sm:h-[240px] sm:max-w-none sm:p-4 sm:pb-8">
-          <h3 className="mb-2 text-sm text-muted-foreground">Weekly Pattern</h3>
+        <ChartCard title="Weekly Pattern" description="Completions by day of week">
           <Line
             data={{
               labels: weeklyData.labels,
               datasets: [
                 {
                   data: weeklyData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
-                  pointBackgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
+                  pointBackgroundColor: "var(--chart-1)",
                   pointRadius: 4,
                   pointHoverRadius: 6,
                 },
@@ -430,21 +372,17 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
             }}
             options={chartOptions}
           />
-        </div>
+        </ChartCard>
 
-        {/* Monthly Progress Chart */}
-        <div className="h-[200px] w-full max-w-[300px] rounded-lg border p-2 pb-6 sm:h-[240px] sm:max-w-none sm:p-4 sm:pb-8">
-          <h3 className="mb-2 text-sm text-muted-foreground">
-            Monthly Progress
-          </h3>
+        <ChartCard title="Monthly Progress" description="Completions per month">
           <Line
             data={{
               labels: monthlyData.labels,
               datasets: [
                 {
                   data: monthlyData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
@@ -453,23 +391,21 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
             }}
             options={chartOptions}
           />
-        </div>
+        </ChartCard>
 
-        {/* Time of Day Chart */}
-        <div className="h-[200px] w-full max-w-[300px] rounded-lg border p-2 pb-6 sm:h-[240px] sm:max-w-none sm:p-4 sm:pb-8">
-          <h3 className="mb-2 text-sm text-muted-foreground">Time of Day</h3>
+        <ChartCard title="Time of Day" description="When you complete habits">
           <Line
             data={{
               labels: timeData.labels,
               datasets: [
                 {
                   data: timeData.data,
-                  borderColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
-                  backgroundColor: `rgb(${getChartRGBValues(colorTheme, 300)} / 0.2)`,
+                  borderColor: "var(--chart-1)",
+                  backgroundColor: "color-mix(in oklch, var(--chart-2) 20%, transparent)",
                   borderWidth: 2,
                   tension: 0.4,
                   fill: true,
-                  pointBackgroundColor: `rgb(${getChartRGBValues(colorTheme, 500)})`,
+                  pointBackgroundColor: "var(--chart-1)",
                   pointRadius: 4,
                   pointHoverRadius: 6,
                 },
@@ -477,8 +413,30 @@ export function LeafAnalytics({ colorTheme, completions }: LeafAnalyticsProps) {
             }}
             options={chartOptions}
           />
-        </div>
+        </ChartCard>
       </div>
     </div>
+  );
+}
+
+function ChartCard({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm text-muted-foreground">{title}</CardTitle>
+        {description && (
+          <CardDescription className="text-xs">{description}</CardDescription>
+        )}
+      </CardHeader>
+      <CardContent className="h-[200px] sm:h-[240px]">{children}</CardContent>
+    </Card>
   );
 }

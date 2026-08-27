@@ -26,7 +26,7 @@ export const list = query({
 
     let q = ctx.db
       .query("branches")
-      .filter((q) => q.eq(q.field("userId"), identity.subject));
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject));
 
     if (args.limbId) {
       q = q.filter((q) => q.eq(q.field("limbId"), args.limbId));
@@ -63,7 +63,7 @@ export const create = mutation({
     // Position is determined by the max existing position + 1 among the limb's branches
     const existingBranches = await ctx.db
       .query("branches")
-      .filter((q) => q.eq(q.field("limbId"), args.limbId))
+      .withIndex("by_limb", (q) => q.eq("limbId", args.limbId))
       .collect();
 
     const maxPosition = existingBranches.reduce(
@@ -107,12 +107,11 @@ export const remove = mutation({
     // Step 2: Update positions of remaining branches within the same limb
     const allBranches = await ctx.db
       .query("branches")
-      .filter((q) => q.eq(q.field("limbId"), branch.limbId))
+      .withIndex("by_limb", (q) => q.eq("limbId", branch.limbId))
       .collect();
 
     const deletedPosition = branch.position ?? allBranches.length + 1;
 
-    // Decrement position of all branches that were after the deleted one
     for (const otherBranch of allBranches) {
       if (otherBranch._id === args.id) continue;
 
@@ -153,7 +152,7 @@ export const update = mutation({
 
     const allBranches = await ctx.db
       .query("branches")
-      .filter((q) => q.eq(q.field("limbId"), branch.limbId))
+      .withIndex("by_limb", (q) => q.eq("limbId", branch.limbId))
       .collect();
 
     // Handle position updates if position changed

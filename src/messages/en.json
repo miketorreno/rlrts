@@ -113,6 +113,9 @@
         "description": "A tool built for the community, by the community"
       }
     },
+    "techStack": {
+      "title": "Tech Stack"
+    },
     "openSourceProject": {
       "title": "Open Source Project",
       "description": "Goal Streak is open source to encourage transparency and collaboration. Contributions and innovations from users are welcome, helping to continuously improve the tool and make it even more effective for everyone.",
