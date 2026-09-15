@@ -1,6 +1,13 @@
-# RLRTS
+# Streaks
 
 A productivity tool for habit tracking, task timing, and progress visualization. It supports multiple calendars and habits, featuring GitHub-style activity grids for tracking achievements.
+
+<table>
+<tr>
+<th><img src="public/streaks-mobile.png" /></th>
+<th><img src="public/streaks-details.png" /></th>
+</tr>
+</table>
 
 ## Features
 
